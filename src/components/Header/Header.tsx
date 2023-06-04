@@ -34,9 +34,7 @@ const Header = () => {
         <div className="button_container flexdiv">
           <NavLink
             className={({ isActive }) =>
-              isActive 
-              ? "headertab active" 
-              : "headertab inactive"
+              isActive ? "headertab active" : "headertab inactive"
             }
             to="/profiles"
           >
