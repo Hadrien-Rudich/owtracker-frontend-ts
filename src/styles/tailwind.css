@@ -1,0 +1,234 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+  font-family: "Big Noodle Titling";
+  src: url("/styles/big_noodle_titling.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.bg-image2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-image: url("/images/Desktop_Outro_Characters.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.4;
+}
+
+.bg-image {
+  background-image: url("/images/Desktop_Outro_Sky.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+body {
+  font-family: "Big Noodle Titling", sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  /* font-family: 'Roboto', sans-serif; */
+  /* background-image: url('/images/Desktop_Outro_Characters.png'); */
+  /* font-weight: bolder;  */
+  font-size: 1rem;
+  /* letter-spacing: 0.1rem; */
+  opacity: 1;
+}
+
+.containerbox {
+  @apply flex flex-col items-center justify-center content-center sm:gap-10 gap-5
+  sm:w-80 sm:py-10 w-60 py-5
+  bg-mainColor shadow-lg rounded-sm;
+}
+
+.hamburgermenucontainer {
+  @apply md:hidden flex absolute 
+  xxs:top-1 xs:top-[0.4rem] sm:top-2 md:top-0 top-[0.05rem]
+  xxs:right-[0.8rem] sm:right-[1rem] right-[0.65rem];
+}
+
+.hamburgericon {
+  @apply sm:w-20 xs:w-[4.5rem] w-16
+  sm:h-20  xs:h-[4.5rem] h-16 
+  drop-shadow-lg;
+}
+
+.hamburger {
+  @apply absolute z-30 right-[-0.65rem]
+  duration-500 py-4 w-screen
+  rounded-t-none rounded-sm;
+}
+
+.hamburger.active {
+  @apply xs:top-[4.25rem] sm:top-[5.5rem] top-[3.9rem] 
+  xxs:right-[-0.8rem] sm:right-[-1rem] right-[-0.65rem]
+  ease-out shadow-lg bg-activeColor;
+}
+
+.hamburger.inactive {
+  @apply top-[-10rem] ease-in
+  xxs:right-[-0.8rem] sm:right-[-1rem] right-[-0.65rem]
+
+  bg-mainColor;
+}
+
+.accountdropdowncontainer {
+  @apply hidden md:flex absolute
+xxs:top-1 xs:top-[0.4rem] sm:top-2 md:top-0 top-[0.05rem]
+right-0;
+}
+
+.accounticon {
+  @apply relative z-40 w-32 h-20;
+}
+
+.accountdropdown {
+  @apply absolute w-32 h-32 z-10
+  rounded-t-none rounded-r-none rounded-sm duration-500;
+}
+
+.accountdropdown.active {
+  @apply top-0 ease-out shadow-lg bg-activeColor;
+}
+
+.accountdropdown.inactive {
+  @apply top-[-300px] ease-in bg-mainColor;
+}
+
+.accountdropdownoption {
+  @apply w-24 h-10 sm:text-2xl text-xl
+  rounded-sm tracking-widest
+  duration-150 ease-in-out;
+}
+
+.accountdropdownoption.active {
+  @apply bg-thirdColor text-secondaryText;
+}
+.accountdropdownoption.inactive {
+  @apply hover:bg-activeGrayColor hover:shadow-lg;
+}
+
+.result {
+  @apply text-mainText scale-105 shadow-lg;
+}
+
+.headertab {
+  @apply flex justify-center
+  sm:w-40 sm:h-10 w-24 h-8
+  sm:text-2xl text-xl 
+  rounded-sm rounded-b-none tracking-widest
+  ease-in-out duration-150;
+}
+
+.headertab.active {
+  @apply items-center bg-thirdColor text-secondaryText shadow-lg;
+}
+
+.headertab.inactive {
+  @apply items-end hover:bg-activeColor hover:shadow-lg;
+}
+
+.accounttab {
+  @apply sm:w-40 sm:h-10 w-[7.5rem] h-8
+   rounded-sm rounded-b-none 
+   sm:text-xl text-lg tracking-wider
+   ease-in-out duration-150;
+}
+
+.accounttab.active {
+  @apply bg-thirdColor text-secondaryText 
+  shadow-lg z-20;
+}
+
+.accounttab.inactive {
+  @apply bg-secondaryColor hover:bg-activeColor
+  shadow-inner z-0;
+}
+
+.button {
+  @apply sm:w-28 sm:h-10 w-20 h-8
+  hover:scale-110 tracking-wider shadow-md rounded-sm 
+  text-secondaryText sm:text-xl text-lg
+  ease-in-out duration-150;
+}
+
+.button.validate {
+  @apply bg-thirdColor;
+}
+
+.button.cancel {
+  @apply bg-secondaryColor text-mainText;
+}
+
+.input {
+  @apply sm:w-36 sm:h-10 w-28 h-8 my-2 text-center shadow-inner rounded-sm tracking-wider sm:text-xl text-lg;
+}
+
+.profile.card {
+  @apply w-36 h-10 text-center tracking-wider rounded-sm
+      hover:bg-activeColor hover:scale-110 hover:shadow-lg
+      ease-in-out duration-150;
+}
+
+.profile.header {
+  @apply bg-thirdColor sm:w-80 w-60 sm:h-10 h-8
+      tracking-widest rounded-b-none rounded-sm shadow-lg absolute
+      sm:top-[-2.5rem] top-[-2rem]
+sm:text-xl text-lg text-secondaryText;
+}
+
+.input.disabled {
+  @apply w-36 h-10 my-2 bg-secondaryColor text-center shadow-inner rounded-sm;
+}
+
+.flexdiv {
+  @apply flex items-center justify-center content-center;
+}
+.flexdiv.col {
+  @apply flex flex-col items-center justify-center content-center;
+}
+
+.list {
+  @apply shadow-lg rounded-sm;
+}
+
+.list.selected {
+  @apply scale-105 z-10 rounded-sm ring-2 ring-thirdColor;
+}
+
+.list.unselected {
+  @apply opacity-30 bg-activeColor hover:opacity-100 hover:scale-105;
+}
+
+.sign {
+  @apply hover:scale-110 h-3 w-3 drop-shadow-lg  opacity-30 duration-150 ease-in-out;
+}
+
+.sign.main {
+  @apply sm:w-7 sm:h-7 w-5 h-5;
+}
+
+.sign.cancel {
+  @apply hover:opacity-100 hover:text-warning;
+}
+
+.sign.validate {
+  @apply hover:opacity-100 hover:scale-110;
+}
+
+.intenseShadow {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}

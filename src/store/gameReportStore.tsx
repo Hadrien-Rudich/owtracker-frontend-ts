@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { GameReportStore } from "./types/gameReportTypes";
+import { GameReportStore } from "../types/store/gameReportTypes";
 
 const gameReportStore = create<GameReportStore>()((set) => ({
   heroesData: [],

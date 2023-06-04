@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { ProfileStore } from "./types/profileTypes";
+import { ProfileStore } from "../types/store/profileTypes";
 
 const profileStore = create<ProfileStore>()((set) => ({
   profilesData: [],

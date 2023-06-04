@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { HeaderStore } from "./types/headerTypes";
+import { HeaderStore } from "../types/store/headerTypes";
 
 const headerStore = create<HeaderStore>()(() => ({
   locations: [

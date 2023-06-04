@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { HistoryStore } from "./types/historyTypes";
+import { HistoryStore } from "../types/store/historyTypes";
 
 const historyStore = create<HistoryStore>()((set) => ({
   historyData: [],

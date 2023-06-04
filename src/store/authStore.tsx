@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AuthStore } from "./types/authTypes";
+import { AuthStore } from "../types/store/authTypes";
 
 const authStore = create<AuthStore>()((set) => ({
   userData: {},
