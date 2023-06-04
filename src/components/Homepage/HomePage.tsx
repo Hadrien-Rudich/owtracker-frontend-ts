@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-import { authStore } from "../../store/authStore";
+import { authStore } from '../../store/authStore';
 
 function HomePage() {
   const { isLoggedIn } = authStore();
@@ -10,7 +10,7 @@ function HomePage() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/profiles");
+      navigate('/profiles');
     }
   });
 
@@ -19,7 +19,7 @@ function HomePage() {
       <div className="button_container containerbox">
         <Link to="/login">
           <button className="button bg-fourthColor" type="submit">
-            {" "}
+            {' '}
             LOG IN
           </button>
         </Link>

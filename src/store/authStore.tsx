@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { AuthStore } from "../types/store/authTypes";
+import { create } from 'zustand';
+import { AuthStore } from '../types/store/authTypes';
 
-const authStore = create<AuthStore>()((set) => ({
+export const authStore = create<AuthStore>()((set) => ({
   userData: {},
   isLoggedIn: false,
   logIn: () => set(() => ({ isLoggedIn: true })),
@@ -13,23 +13,23 @@ const authStore = create<AuthStore>()((set) => ({
   editSecurity: false,
   toggleEditSecurity: () =>
     set((state) => ({ editSecurity: !state.editSecurity })),
-  newEmail: "",
+  newEmail: '',
   setNewEmail: (email) => set(() => ({ newEmail: email })),
-  clearNewEmail: () => set(() => ({ newEmail: "" })),
-  newPassword: "",
+  clearNewEmail: () => set(() => ({ newEmail: '' })),
+  newPassword: '',
   setNewPassword: (password) => set(() => ({ newPassword: password })),
-  clearNewPassword: () => set(() => ({ newPassword: "" })),
-  confirmNewPassword: "",
+  clearNewPassword: () => set(() => ({ newPassword: '' })),
+  confirmNewPassword: '',
   setConfirmNewPassword: (password) =>
     set(() => ({ confirmNewPassword: password })),
-  clearConfirmNewPassword: () => set(() => ({ confirmNewPassword: "" })),
-  newBattleTag: "",
+  clearConfirmNewPassword: () => set(() => ({ confirmNewPassword: '' })),
+  newBattleTag: '',
   setNewBattleTag: (battleTag) => set(() => ({ newBattleTag: battleTag })),
-  clearNewBattleTag: () => set(() => ({ newBattleTag: "" })),
-  activeTab: "details",
+  clearNewBattleTag: () => set(() => ({ newBattleTag: '' })),
+  activeTab: 'details',
   setActiveTab: (tab) =>
     set(() => ({ activeTab: tab, editAccount: false, editSecurity: false })),
-  clearActiveTab: () => set(() => ({ activeTab: "details" })),
+  clearActiveTab: () => set(() => ({ activeTab: 'details' })),
 }));
 
-export { authStore };
+export default 'authStore';

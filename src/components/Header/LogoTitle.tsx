@@ -1,6 +1,4 @@
-import React from "react";
-
-const LogoTitle = () => {
+function LogoTitle() {
   return (
     <div className="titleandimage_container flex flex-col items-start sm:text-4xl text-2xl bg-mainColor z-50 xs:pt-2 xs:pl-4 pt-1 pl-2">
       <h1 className="sr-only">Overwatch 2 Game Tracker</h1>
@@ -18,6 +16,6 @@ const LogoTitle = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LogoTitle;

@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 interface InputFieldProps {
   label: string;
@@ -9,6 +9,7 @@ interface InputFieldProps {
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   required?: boolean;
+  htmlFor?: string;
 }
 
 export default InputFieldProps;

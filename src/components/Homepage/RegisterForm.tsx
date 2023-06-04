@@ -1,12 +1,12 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authStore } from "../../store/authStore";
-import InputField from "../InputField";
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authStore } from '../../store/authStore';
+import InputField from '../InputField';
 
 function RegisterForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const { isLoggedIn, logIn } = authStore();
 
@@ -26,7 +26,7 @@ function RegisterForm() {
   };
 
   const handleCancelClick = () => {
-    navigate("/");
+    navigate('/');
   };
 
   const handleRegister = (event: FormEvent) => {
@@ -36,7 +36,7 @@ function RegisterForm() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/profiles");
+      navigate('/profiles');
     }
   });
 

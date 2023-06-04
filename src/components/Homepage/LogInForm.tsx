@@ -1,11 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import InputField from "../InputField";
-import { authStore } from "../../store/authStore";
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import InputField from '../InputField';
+import { authStore } from '../../store/authStore';
 
 function LogInForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { isLoggedIn, logIn } = authStore();
 
@@ -20,7 +20,7 @@ function LogInForm() {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate('/');
   };
 
   const handleLogIn = (event: FormEvent) => {
@@ -30,7 +30,7 @@ function LogInForm() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/profiles");
+      navigate('/profiles');
     }
   });
 

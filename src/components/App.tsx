@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
 // import Gamereport from "./GameReport/GameReport";
-import Header from "./Header/Header";
-import LogInForm from "./Homepage/LogInForm";
-import RegisterForm from "./Homepage/RegisterForm";
-import HomePage from "./Homepage/HomePage";
+import Header from './Header/Header';
+import LogInForm from './Homepage/LogInForm';
+import RegisterForm from './Homepage/RegisterForm';
+import HomePage from './Homepage/HomePage';
 // import History from "./History/History";
 // import ProfilesPage from "./Profiles/Profiles";
 // import Stats from "./Stats/Stats";

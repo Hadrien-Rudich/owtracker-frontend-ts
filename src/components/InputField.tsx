@@ -1,19 +1,19 @@
-import InputFieldTypes from "../types/inputFieldTypes";
+import InputFieldProps from '../types/inputFieldTypes';
 
 function InputField({
   label,
-  type = "text",
+  type = 'text',
   value,
   placeholder,
   onChange,
   onKeyDown,
   disabled,
   required,
-}: InputFieldTypes) {
-  const inputValue = value || "";
+}: InputFieldProps) {
+  const inputValue = value || '';
 
   return (
-    <label>
+    <label htmlFor={label}>
       <p className="sm:text-xl text-lg">{label}</p>
       <input
         value={inputValue}

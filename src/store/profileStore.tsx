@@ -1,19 +1,19 @@
-import { create } from "zustand";
-import { ProfileStore } from "../types/store/profileTypes";
+import { create } from 'zustand';
+import { ProfileStore } from '../types/store/profileTypes';
 
-const profileStore = create<ProfileStore>()((set) => ({
+export const profileStore = create<ProfileStore>()((set) => ({
   profilesData: [],
   addProfilesData: (profiles) => set(() => ({ profilesData: profiles })),
-  profile: "",
+  profile: '',
   setProfile: (profile) =>
     set(() => ({
-      profile: profile,
+      profile,
     })),
   clearProfile: () =>
     set(() => ({
-      profile: "",
+      profile: '',
     })),
-  newProfile: "",
+  newProfile: '',
   setNewProfile: (profile) =>
     set(() => ({
       newProfile: profile,
@@ -24,15 +24,15 @@ const profileStore = create<ProfileStore>()((set) => ({
     })),
   clearNewProfile: () =>
     set(() => ({
-      newProfile: "",
+      newProfile: '',
     })),
 
   deleteProfile: (profile) => {
     set((state) => ({
       profilesData: state.profilesData.filter((p) => p.label !== profile),
-      profile: "",
+      profile: '',
     }));
   },
 }));
 
-export { profileStore };
+export default 'profileStore';
