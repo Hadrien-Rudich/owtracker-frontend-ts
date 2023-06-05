@@ -7,4 +7,4 @@ interface HeaderStore {
   locations: Location[];
 }
 
-export type { HeaderStore };
+export type { HeaderStore, Location };

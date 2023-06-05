@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ProfileStore } from '../types/store/profileTypes';
+import type { ProfileStore } from '../types/store/profileTypes';
 
 export const profileStore = create<ProfileStore>()((set) => ({
   profilesData: [],
@@ -35,4 +35,4 @@ export const profileStore = create<ProfileStore>()((set) => ({
   },
 }));
 
-export default 'profileStore';
+export default profileStore;

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GameReportStore } from '../types/store/gameReportTypes';
+import type { GameReportStore } from '../types/store/gameReportTypes';
 
 export const gameReportStore = create<GameReportStore>()((set) => ({
   heroesData: [],
@@ -36,4 +36,4 @@ export const gameReportStore = create<GameReportStore>()((set) => ({
   toggleMapModal: () => set((state) => ({ mapModal: !state.mapModal })),
 }));
 
-export default 'gameReportStore';
+export default gameReportStore;

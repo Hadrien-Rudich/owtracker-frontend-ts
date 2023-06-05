@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { AuthStore } from '../types/store/authTypes';
+import type { AuthStore } from '../types/store/authTypes';
 
 export const authStore = create<AuthStore>()((set) => ({
   userData: {},
@@ -32,4 +32,4 @@ export const authStore = create<AuthStore>()((set) => ({
   clearActiveTab: () => set(() => ({ activeTab: 'details' })),
 }));
 
-export default 'authStore';
+export default authStore;

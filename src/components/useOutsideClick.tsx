@@ -1,43 +1,47 @@
-import { useEffect, useRef, RefObject } from "react";
+import { useEffect, useRef, RefObject, useCallback } from 'react';
+
 type EventType = keyof DocumentEventMap;
 
-const useOutsideClick = <T extends HTMLElement>(
-  callback: () => void,
-  eventTypes: EventType[]
+const useOutsideClick = <T extends HTMLDivElement>(
+  callback: () => void, // Callback function to be invoked when click occurs outside the ref element
+  eventTypes: EventType[] // Event types to listen for (e.g., ['click', 'touchstart'])
 ): RefObject<T> => {
-  const ref = useRef<T | null>(null);
+  const ref = useRef<T | null>(null); // Ref to the element for which outside click is detected
 
-  // This function checks if a click event occurred outside the ref element
-  const handleClickOutside = (event: Event) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      // If the click occurred outside the ref element, invoke the callback
-      callback();
-    }
-  };
+  const callbackRef = useRef(callback); // Separate ref to store the callback function
+
+  const handleClickOutside = useCallback(
+    (event: Event) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callbackRef.current(); // Invoke the callback function from the separate ref
+      }
+    },
+    [callbackRef]
+  );
 
   useEffect(() => {
-    // This function handles the click event outside the ref element
-    const handleOutsideClick = (event: Event) => {
-      handleClickOutside(event);
-    };
+    const cleanupRefs: (() => void)[] = []; // Array to store cleanup functions for event listeners
 
     // Add event listeners for the specified event types
     eventTypes.forEach((eventType: EventType) => {
-      document.addEventListener(eventType, handleOutsideClick);
-      ref?.current?.addEventListener(eventType, callback);
+      document.addEventListener(eventType, handleClickOutside);
+      cleanupRefs.push(() =>
+        document.removeEventListener(eventType, handleClickOutside)
+      );
+
+      ref.current?.addEventListener(eventType, callbackRef.current);
+      cleanupRefs.push(() =>
+        ref.current?.removeEventListener(eventType, callbackRef.current)
+      );
     });
 
     // Cleanup function that runs when the component unmounts or when the dependency array changes
     return () => {
-      // Remove event listeners for the specified event types
-      eventTypes.forEach((eventType: EventType) => {
-        document.removeEventListener(eventType, handleOutsideClick);
-        ref?.current?.removeEventListener(eventType, callback);
-      });
+      cleanupRefs.forEach((cleanup) => cleanup()); // Remove event listeners
     };
-  }, [callback, eventTypes]);
+  }, [eventTypes, handleClickOutside]);
 
-  return ref;
+  return ref; // Return the ref to be assigned to the target element
 };
 
 export default useOutsideClick;

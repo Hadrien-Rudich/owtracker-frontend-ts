@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { HistoryStore } from '../types/store/historyTypes';
+import type { HistoryStore } from '../types/store/historyTypes';
 
 export const historyStore = create<HistoryStore>()((set) => ({
   historyData: [],
@@ -16,4 +16,4 @@ export const historyStore = create<HistoryStore>()((set) => ({
     })),
 }));
 
-export default 'historyStore';
+export default historyStore;

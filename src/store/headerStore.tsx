@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { HeaderStore } from '../types/store/headerTypes';
+import type { HeaderStore } from '../types/store/headerTypes';
 
 export const headerStore = create<HeaderStore>()(() => ({
   locations: [
@@ -10,4 +10,4 @@ export const headerStore = create<HeaderStore>()(() => ({
   ],
 }));
 
-export default 'headerStore';
+export default headerStore;

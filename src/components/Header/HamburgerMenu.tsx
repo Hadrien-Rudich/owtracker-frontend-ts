@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
-import { NavLink } from "react-router-dom";
-import { headerStore } from "../../store/headerStore";
-import { authStore } from "../../store/authStore";
-import useOutsideClick from "../UseOutsideClick";
+import { useState } from 'react';
+import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
+import { NavLink } from 'react-router-dom';
+import { headerStore } from '../../store/headerStore';
+import { authStore } from '../../store/authStore';
+import useOutsideClick from '../useOutsideClick';
 
-const HamburgerMenu = () => {
+function HamburgerMenu() {
   const { logOut } = authStore();
 
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
   const { locations } = headerStore();
 
-  const toggleHamburgerMenu = (e) => {
+  const toggleHamburgerMenu = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
     e.stopPropagation();
     setShowHamburgerMenu(!showHamburgerMenu);
   };
@@ -21,7 +23,7 @@ const HamburgerMenu = () => {
     setShowHamburgerMenu(false);
   };
 
-  const hamburgerMenuRef = useOutsideClick(handleOutsideClick, ["click"]);
+  const hamburgerMenuRef = useOutsideClick(handleOutsideClick, ['click']);
 
   const handleLogOut = () => {
     logOut();
@@ -30,6 +32,7 @@ const HamburgerMenu = () => {
   return (
     <div ref={hamburgerMenuRef} className="main_container">
       <button
+        type="button"
         className="hover:bg-activeGrayColor relative z-40"
         onClick={toggleHamburgerMenu}
       >
@@ -40,7 +43,7 @@ const HamburgerMenu = () => {
         )}
       </button>
       <div
-        className={`${showHamburgerMenu ? "  active" : " inactive"}  hamburger`}
+        className={`${showHamburgerMenu ? '  active' : ' inactive'}  hamburger`}
       >
         <div
           className="py-1 flexdiv col sm:text-4xl text-3xl "
@@ -48,14 +51,14 @@ const HamburgerMenu = () => {
           aria-orientation="vertical"
           aria-labelledby="options-menu"
         >
-          {locations.map((location, index) => (
+          {locations.map((location) => (
             <NavLink
-              key={index}
+              key={location.label}
               className={({ isActive }) =>
                 ` ${
                   isActive
-                    ? "bg-thirdColor text-secondaryText"
-                    : "hover:bg-activeGrayColor"
+                    ? 'bg-thirdColor text-secondaryText'
+                    : 'hover:bg-activeGrayColor'
                 } w-36 rounded-sm `
               }
               to={location.url}
@@ -65,6 +68,7 @@ const HamburgerMenu = () => {
             </NavLink>
           ))}
           <button
+            type="button"
             onClick={handleLogOut}
             className="w-36 rounded-sm  hover:bg-activeGrayColor"
           >
@@ -74,6 +78,6 @@ const HamburgerMenu = () => {
       </div>
     </div>
   );
-};
+}
 
 export default HamburgerMenu;
