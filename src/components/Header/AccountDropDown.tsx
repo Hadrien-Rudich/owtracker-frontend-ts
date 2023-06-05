@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 import { authStore } from '../../store/authStore';
@@ -8,9 +8,9 @@ function AccountDropDown() {
   const [showAccountDropDown, setShowAccountDropDown] = useState(false);
 
   const toggleAccountDropdown = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>
+    event: MouseEvent<HTMLButtonElement | HTMLDivElement>
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     setShowAccountDropDown(!showAccountDropDown);
   };
 

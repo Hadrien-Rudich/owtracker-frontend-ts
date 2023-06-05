@@ -6,7 +6,7 @@ interface UserData {
 }
 
 interface AuthStore {
-  userData: UserData | object;
+  userData: UserData;
   isLoggedIn: boolean;
   logIn: () => void;
   logOut: () => void;

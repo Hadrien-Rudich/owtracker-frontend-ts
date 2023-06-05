@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { NavLink } from 'react-router-dom';
 import { headerStore } from '../../store/headerStore';
@@ -13,9 +13,9 @@ function HamburgerMenu() {
   const { locations } = headerStore();
 
   const toggleHamburgerMenu = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+    event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
-    e.stopPropagation();
+    event.stopPropagation();
     setShowHamburgerMenu(!showHamburgerMenu);
   };
 

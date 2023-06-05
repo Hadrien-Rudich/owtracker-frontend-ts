@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import type { AuthStore } from '../types/store/authTypes';
+import type { AuthStore, UserData } from '../types/store/authTypes';
 
 export const authStore = create<AuthStore>()((set) => ({
-  userData: {},
+  userData: {} as UserData,
   isLoggedIn: false,
   logIn: () => set(() => ({ isLoggedIn: true })),
   logOut: () => set(() => ({ isLoggedIn: false })),
