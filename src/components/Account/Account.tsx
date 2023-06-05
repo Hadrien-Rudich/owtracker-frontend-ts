@@ -15,7 +15,7 @@ function Account() {
         const data = await fetchUserData();
         setUserData(data);
       } catch (error) {
-        // console.error('Failed to fetch user data', error);
+        console.error('Failed to fetch user data', error);
       }
     }
 

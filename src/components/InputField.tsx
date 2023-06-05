@@ -1,4 +1,4 @@
-import InputFieldProps from '../types/inputFieldTypes';
+import { InputFieldProps } from '../types/inputFieldTypes';
 
 function InputField({
   label,

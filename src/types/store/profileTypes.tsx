@@ -1,11 +1,11 @@
-interface ProfilesData {
+interface ProfileData {
   id: number;
   label: string;
 }
 
 interface ProfileStore {
-  profilesData: ProfilesData[] | [];
-  addProfilesData: (profiles: ProfilesData[] | []) => void;
+  profilesData: ProfileData[] | [];
+  addProfilesData: (profiles: ProfileData[] | []) => void;
   profile: string;
   setProfile: (profile: string) => void;
   clearProfile: () => void;
@@ -16,4 +16,4 @@ interface ProfileStore {
   deleteProfile: (profile: string) => void;
 }
 
-export type { ProfilesData, ProfileStore };
+export type { ProfileData, ProfileStore };

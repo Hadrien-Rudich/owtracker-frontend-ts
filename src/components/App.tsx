@@ -8,7 +8,7 @@ import HomePage from './Homepage/HomePage';
 // import History from "./History/History";
 // import ProfilesPage from "./Profiles/Profiles";
 // import Stats from "./Stats/Stats";
-// import Account from "./Account/Account";
+import Account from './Account/Account';
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
         {/* <Route path="/game" element={<Gamereport />} />
         <Route path="/history" element={<History />} />
         <Route path="/stats" element={<Stats />} />
-        <Route path="/profiles" element={<ProfilesPage />} />
-        <Route path="/account" element={<Account />} /> */}
+        <Route path="/profiles" element={<ProfilesPage />} /> */}
+        <Route path="/account" element={<Account />} />
       </Routes>
     </div>
   );
