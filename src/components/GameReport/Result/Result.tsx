@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import gameReportStore from '../../../store/gameReportStore';
+import { useState, MouseEvent } from 'react';
+import { gameReportStore } from '../../../store/gameReportStore';
 import { getResultClassName } from '../../../utils/outcomes';
 
 function Result() {
@@ -11,7 +11,7 @@ function Result() {
     { label: 'loss' },
   ]);
 
-  const toggleGameResult = (selectedResult) => {
+  const toggleGameResult = (selectedResult: string) => {
     if (selectedResult !== gameResult) {
       addGameResult(selectedResult);
     } else {
@@ -19,8 +19,9 @@ function Result() {
     }
   };
 
-  const handleClick = (e) => {
-    toggleGameResult(e.target.value);
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    console.log(event.currentTarget.value);
+    toggleGameResult(event.currentTarget.value);
   };
 
   return (

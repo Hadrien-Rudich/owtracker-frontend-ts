@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { fetchMapsData, fetchTypesData } from '../../../services/ApiService';
+import { useEffect } from 'react';
+import { fetchMapsData, fetchMapTypesData } from '../../../services/ApiService';
 import MapTypes from './MapTypes';
 import Map from './Map';
-import gameReportStore from '../../../store/gameReportStore';
+import { gameReportStore } from '../../../store/gameReportStore';
 
 function Maps() {
-  const { addMapsData, addTypesData } = gameReportStore();
+  const { addMapsData, addMapTypesData } = gameReportStore();
 
   useEffect(() => {
     async function getMapsData() {
@@ -23,15 +23,15 @@ function Maps() {
   useEffect(() => {
     async function getTypesData() {
       try {
-        const data = await fetchTypesData();
-        addTypesData(data);
+        const data = await fetchMapTypesData();
+        addMapTypesData(data);
       } catch (error) {
         // console.error('Failed to fetch maps data', error);
       }
     }
 
     getTypesData();
-  }, [addTypesData]);
+  }, [addMapTypesData]);
 
   return (
     <div className="maps_container bg-mainColor rounded-sm intenseShadow">

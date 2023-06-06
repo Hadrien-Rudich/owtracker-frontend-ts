@@ -1,5 +1,5 @@
 import type { HistoryData } from '../types/store/historyTypes';
-import type { MapTypeData } from '../types/store/gameReportTypes';
+import type { MapData } from '../types/store/gameReportTypes';
 
 const filterHistory = (month: number, data: HistoryData[]) => {
   if (Number(month) === 0) {
@@ -8,7 +8,7 @@ const filterHistory = (month: number, data: HistoryData[]) => {
   return data.filter((game) => Number(game.date.slice(3)) === Number(month));
 };
 
-const filterMapTypes = (mapsData: MapTypeData[], mapType: string) => {
+const filterMapTypes = (mapsData: MapData[], mapType: string) => {
   const result = mapsData.filter((map) => map.label === mapType);
   return result;
 };

@@ -1,11 +1,11 @@
-import React from 'react';
-import gameReportStore from '../../../store/gameReportStore';
+import { MouseEvent } from 'react';
+import { gameReportStore } from '../../../store/gameReportStore';
 import { filterMapTypes } from '../../../utils/filters';
 
 function Map() {
   const { map, addMap, clearMap, mapType, mapsData } = gameReportStore();
 
-  const toggleMap = (m) => {
+  const toggleMap = (m: string) => {
     if (map !== m) {
       addMap(m);
     } else {
@@ -13,8 +13,8 @@ function Map() {
     }
   };
 
-  const handleMapClick = (e) => {
-    toggleMap(e.currentTarget.value);
+  const handleMapClick = (event: MouseEvent<HTMLButtonElement>) => {
+    toggleMap(event.currentTarget.value);
   };
 
   const filteredMaps = filterMapTypes(mapsData, mapType);

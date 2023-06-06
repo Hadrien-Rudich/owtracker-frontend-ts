@@ -1,16 +1,20 @@
 import type { HistoryData } from '../types/store/historyTypes';
 
-// const getResultClassName = (gameResult: string, outcome) => {
-//   if (gameResult === outcome.label) {
-//     return `result bg-active${
-//       outcome.label.charAt(0).toUpperCase() + outcome.label.slice(1)
-//     }`;
-//   }
-//   if (gameResult !== outcome.label) {
-//     return 'hover:bg-activeColor hover:scale-105 hover:z-50';
-//   }
-//   return null;
-// };
+interface Outcome {
+  label: string;
+}
+
+const getResultClassName = (gameResult: string, outcome: Outcome) => {
+  if (gameResult === outcome.label) {
+    return `result bg-active${
+      outcome.label.charAt(0).toUpperCase() + outcome.label.slice(1)
+    }`;
+  }
+  if (gameResult !== outcome.label) {
+    return 'hover:bg-activeColor hover:scale-105 hover:z-50';
+  }
+  return null;
+};
 
 const getResultClassNameFromHistory = (history: HistoryData) => {
   switch (history.result) {
@@ -38,7 +42,7 @@ const getResultClassNameFromGameResult = (gameResult: string) => {
   }
 };
 export {
-  // getResultClassName,
+  getResultClassName,
   getResultClassNameFromHistory,
   getResultClassNameFromGameResult,
 };
