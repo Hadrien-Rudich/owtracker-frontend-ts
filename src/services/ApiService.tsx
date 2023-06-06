@@ -54,9 +54,7 @@ export const fetchProfilesData = async (): Promise<ProfileData[]> => {
   return fetchData(endpoint);
 };
 
-export const addUserProfileToDb = async (
-  profile: ProfileData
-): Promise<void> => {
+export const addUserProfileToDb = async (profile: string): Promise<void> => {
   try {
     const endpoint = 'http://localhost:3001/profiles';
     await axios.post(endpoint, { profile });
@@ -73,9 +71,7 @@ export const addUserProfileToDb = async (
   }
 };
 
-export const deleteProfileFromDb = async (
-  profile: ProfileData
-): Promise<void> => {
+export const deleteProfileFromDb = async (profile: string): Promise<void> => {
   try {
     const endpoint = `http://localhost:3001/profiles/${profile}`;
     await axios.delete(endpoint);

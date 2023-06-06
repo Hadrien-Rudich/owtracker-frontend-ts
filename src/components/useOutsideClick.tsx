@@ -2,12 +2,11 @@ import { useEffect, useRef, RefObject, useCallback } from 'react';
 
 type EventType = keyof DocumentEventMap;
 
-const useOutsideClick = <T extends HTMLDivElement>(
+const useOutsideClick = <T extends HTMLElement>(
+  ref: RefObject<T>, // Ref to the element for which outside click is detected
   callback: () => void, // Callback function to be invoked when click occurs outside the ref element
   eventTypes: EventType[] // Event types to listen for (e.g., ['click', 'touchstart'])
-): RefObject<T> => {
-  const ref = useRef<T | null>(null); // Ref to the element for which outside click is detected
-
+): void => {
   const callbackRef = useRef(callback); // Separate ref to store the callback function
 
   const handleClickOutside = useCallback(
@@ -16,7 +15,7 @@ const useOutsideClick = <T extends HTMLDivElement>(
         callbackRef.current(); // Invoke the callback function from the separate ref
       }
     },
-    [callbackRef]
+    [ref, callbackRef]
   );
 
   useEffect(() => {
@@ -28,11 +27,6 @@ const useOutsideClick = <T extends HTMLDivElement>(
       cleanupRefs.push(() =>
         document.removeEventListener(eventType, handleClickOutside)
       );
-
-      ref.current?.addEventListener(eventType, callbackRef.current);
-      cleanupRefs.push(() =>
-        ref.current?.removeEventListener(eventType, callbackRef.current)
-      );
     });
 
     // Cleanup function that runs when the component unmounts or when the dependency array changes
@@ -40,8 +34,6 @@ const useOutsideClick = <T extends HTMLDivElement>(
       cleanupRefs.forEach((cleanup) => cleanup()); // Remove event listeners
     };
   }, [eventTypes, handleClickOutside]);
-
-  return ref; // Return the ref to be assigned to the target element
 };
 
 export default useOutsideClick;

@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useRef } from 'react';
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { NavLink } from 'react-router-dom';
 import { headerStore } from '../../store/headerStore';
@@ -12,6 +12,8 @@ function HamburgerMenu() {
 
   const { locations } = headerStore();
 
+  const hamburgerMenuRef = useRef<HTMLInputElement>(null);
+
   const toggleHamburgerMenu = (
     event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
@@ -23,7 +25,7 @@ function HamburgerMenu() {
     setShowHamburgerMenu(false);
   };
 
-  const hamburgerMenuRef = useOutsideClick(handleOutsideClick, ['click']);
+  useOutsideClick(hamburgerMenuRef, handleOutsideClick, ['click']);
 
   const handleLogOut = () => {
     logOut();

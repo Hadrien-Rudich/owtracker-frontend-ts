@@ -6,7 +6,7 @@ import LogInForm from './Homepage/LogInForm';
 import RegisterForm from './Homepage/RegisterForm';
 import HomePage from './Homepage/HomePage';
 // import History from "./History/History";
-// import ProfilesPage from "./Profiles/Profiles";
+import Profiles from './Profiles/Profiles';
 // import Stats from "./Stats/Stats";
 import Account from './Account/Account';
 
@@ -21,8 +21,8 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         {/* <Route path="/game" element={<Gamereport />} />
         <Route path="/history" element={<History />} />
-        <Route path="/stats" element={<Stats />} />
-        <Route path="/profiles" element={<ProfilesPage />} /> */}
+        <Route path="/stats" element={<Stats />} /> */}
+        <Route path="/profiles" element={<Profiles />} />
         <Route path="/account" element={<Account />} />
       </Routes>
     </div>

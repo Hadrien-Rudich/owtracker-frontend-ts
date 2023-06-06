@@ -19,7 +19,6 @@ function HomePage() {
       <div className="button_container containerbox">
         <Link to="/login">
           <button className="button bg-fourthColor" type="submit">
-            {' '}
             LOG IN
           </button>
         </Link>

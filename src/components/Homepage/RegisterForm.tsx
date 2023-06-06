@@ -42,7 +42,7 @@ function RegisterForm() {
 
   return (
     <div className="register_container flexdiv row lg:mt-44 my-24">
-      <form action="submit">
+      <form onSubmit={handleRegister}>
         <div className=" inputandbutton_container containerbox">
           <div className="input_container flexdiv col gap-4">
             <InputField
@@ -77,11 +77,7 @@ function RegisterForm() {
             >
               Cancel
             </button>
-            <button
-              onClick={handleRegister}
-              type="submit"
-              className="button validate"
-            >
+            <button type="submit" className="button validate">
               Register
             </button>
           </div>

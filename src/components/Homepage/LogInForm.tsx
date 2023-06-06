@@ -23,7 +23,7 @@ function LogInForm() {
     navigate('/');
   };
 
-  const handleLogIn = (event: FormEvent) => {
+  const handleLogIn = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     logIn();
   };
@@ -35,7 +35,7 @@ function LogInForm() {
   });
 
   return (
-    <form action="submit">
+    <form onSubmit={handleLogIn}>
       <div className="login_container flexdiv lg:mt-44 my-24">
         <div className=" inputandbutton_container containerbox">
           <div className="input_container flexdiv col gap-4">
@@ -63,11 +63,7 @@ function LogInForm() {
             >
               <p className="">Cancel</p>
             </button>
-            <button
-              onClick={handleLogIn}
-              type="submit"
-              className="button validate"
-            >
+            <button type="submit" className="button validate">
               <p className="">Log in</p>
             </button>
           </div>
