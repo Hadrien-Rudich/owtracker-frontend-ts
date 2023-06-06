@@ -1,8 +1,9 @@
 interface HeroData {
   id: number;
-  email: string;
-  battleTag: string;
-  password: string;
+  label: string;
+  slug: string;
+  role: string;
+  imageUrl: string;
 }
 
 interface MapData {
@@ -28,7 +29,7 @@ interface RoleData {
 interface GameReportStore {
   heroesData: HeroData[] | [];
   addHeroesData: (heroes: HeroData[] | []) => void;
-  heroes: string[] | [];
+  heroes: string[];
   addHero: (hero: string) => void;
   removeHero: (hero: string) => void;
   clearHeroes: () => void;

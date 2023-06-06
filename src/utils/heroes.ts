@@ -1,13 +1,13 @@
-// import type {HeroData} from '../types/store/gameReportTypes'
+import { GameReportStore } from '../types/store/gameReportTypes';
 
-// const toggleHero = (selectedHero, heroes, addHero, removeHero) => {
-//   const heroInList = heroes.includes(selectedHero);
+const toggleHero = (selectedHero: string, store: GameReportStore) => {
+  const heroInList = store.heroes.includes(selectedHero);
 
-//   if (!heroInList) {
-//     addHero(selectedHero);
-//   } else {
-//     removeHero(selectedHero);
-//   }
-// };
+  if (!heroInList) {
+    store.addHero(selectedHero);
+  } else {
+    store.removeHero(selectedHero);
+  }
+};
 
-// export default toggleHero;
+export default toggleHero;
