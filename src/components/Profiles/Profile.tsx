@@ -68,7 +68,7 @@ function Profile() {
             className={`${
               p.label.toLowerCase() === profile.toLowerCase()
                 ? 'scale-110 bg-activeColor shadow-lg'
-                : 'bg-activeGrayColor shadow-inner'
+                : 'bg-activeGrayColor shadow-inner opacity-60 hover:opacity-100'
             } profilecard_container profile card hover:bg-activeColor hover:scale-110`}
           >
             {p.label}

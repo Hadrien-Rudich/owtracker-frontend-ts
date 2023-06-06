@@ -1,11 +1,11 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @font-face {
-  font-family: "Big Noodle Titling";
-  src: url("/styles/big_noodle_titling.ttf") format("truetype");
+  font-family: 'Big Noodle Titling';
+  src: url('/styles/big_noodle_titling.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -17,14 +17,14 @@
   width: 100%;
   height: 100%;
 
-  background-image: url("/images/Desktop_Outro_Characters.png");
+  background-image: url('/images/Desktop_Outro_Characters.png');
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.4;
 }
 
 .bg-image {
-  background-image: url("/images/Desktop_Outro_Sky.jpg");
+  background-image: url('/images/Desktop_Outro_Sky.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 1;
@@ -37,7 +37,7 @@
 }
 
 body {
-  font-family: "Big Noodle Titling", sans-serif;
+  font-family: 'Big Noodle Titling', sans-serif;
   /* font-family: 'Poppins', sans-serif; */
   /* font-family: 'Roboto', sans-serif; */
   /* background-image: url('/images/Desktop_Outro_Characters.png'); */
@@ -176,13 +176,22 @@ right-0;
   @apply sm:w-36 sm:h-10 w-28 h-8 my-2 text-center shadow-inner rounded-sm tracking-wider sm:text-xl text-lg;
 }
 
-.profile.card {
-  @apply w-36 h-10 text-center tracking-wider rounded-sm
-      hover:bg-activeColor hover:scale-110 hover:shadow-lg
-      ease-in-out duration-150;
+.profile {
+  @apply text-center tracking-wider rounded-sm
+       hover:scale-110 
+      ease-in-out;
 }
 
-.profile.header {
+/* .profile.add {
+  @apply w-44 h-12 text-xl duration-500;
+} */
+
+.profile.card {
+  @apply w-36 h-10 hover:shadow-lg
+  hover:bg-activeColor  duration-150;
+}
+
+.profileheader {
   @apply bg-thirdColor sm:w-80 w-60 sm:h-10 h-8
       tracking-widest rounded-b-none rounded-sm shadow-lg absolute
       sm:top-[-2.5rem] top-[-2rem]
@@ -213,7 +222,7 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .sign {
-  @apply hover:scale-110 h-3 w-3 drop-shadow-lg  opacity-30 duration-150 ease-in-out;
+  @apply hover:scale-110 h-3 w-3 drop-shadow-lg  opacity-40 duration-150 ease-in-out;
 }
 
 .sign.main {

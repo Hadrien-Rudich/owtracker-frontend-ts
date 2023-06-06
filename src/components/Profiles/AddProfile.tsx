@@ -29,6 +29,12 @@ function AddProfile() {
     clearNewProfile();
     setInputField(false);
   };
+  const handleAddClick = () => {
+    addNewProfile(newProfile);
+    addUserProfileToDb(newProfile);
+    setInputField(false);
+    clearNewProfile();
+  };
 
   const handleOutsideClick = () => {
     setInputField(false);
@@ -47,10 +53,7 @@ function AddProfile() {
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      console.log('pressed enter');
-      handleSubmit(event);
-    } else if (event.key === 'Escape') {
+    if (event.key === 'Escape') {
       clearNewProfile();
       setInputField(false);
       console.log('pressed escape');
@@ -61,9 +64,14 @@ function AddProfile() {
     <div className="addprofile_container h-12 flexdiv" ref={newProfileInputRef}>
       <button onClick={handlePlusClick} type="button">
         {!inputField && (
-          <div className="addbutton_container">
+          <button
+            type="button"
+            className="addbutton_container hover:scale-110 "
+          >
+            <span className="sr-only">Add Profile</span>
             <ImPlus className="sign main validate" />
-          </div>
+            {/* <ImPlus className="sign main validate" /> */}
+          </button>
         )}
       </button>
       {inputField && (
@@ -77,7 +85,7 @@ function AddProfile() {
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 ref={newProfileInputRef}
-                className="card profile"
+                className="profile card"
                 name="profile"
                 required
                 value={newProfile}
@@ -87,7 +95,7 @@ function AddProfile() {
               />
             </label>
 
-            <button type="submit">
+            <button onClick={handleAddClick} type="submit">
               <ImPlus className="sign validate" />
             </button>
           </div>

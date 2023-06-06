@@ -35,7 +35,7 @@ function Profiles() {
   return (
     <div className="Profiles_container flexdiv col lg:mt-[8.5rem] my-24 relative">
       {profile === '' && (
-        <div className="title_container profile header flexdiv">
+        <div className="title_container profileheader flexdiv">
           <h3 className="">
             {profilesData.length === 0
               ? 'CREATE A PROFILE'
@@ -44,8 +44,10 @@ function Profiles() {
         </div>
       )}
       <div className="containerbox">
-        <div className="w-52 flex flex-col gap-4">
+        <div className="-mt-2">
           <AddProfile />
+        </div>
+        <div className="w-52 flex flex-col gap-4">
           <Profile />
         </div>
       </div>
