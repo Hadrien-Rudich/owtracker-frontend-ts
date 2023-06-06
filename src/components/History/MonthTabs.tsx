@@ -1,12 +1,12 @@
-import React from 'react';
-import historyStore from '../../store/historyStore';
+import { MouseEvent } from 'react';
+import { historyStore } from '../../store/historyStore';
 import months from '../../utils/history';
 
 function MonthTabs() {
   const { currentMonth, setCurrentMonth } = historyStore();
 
-  const handleClick = (e) => {
-    setCurrentMonth(e.currentTarget.value);
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    setCurrentMonth(Number(event.currentTarget.value));
   };
 
   return (
