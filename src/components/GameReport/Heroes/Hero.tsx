@@ -1,12 +1,18 @@
 import { MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
-import toggleHero from '../../../utils/heroes';
 
 function Hero() {
-  const { rolesData, heroes, heroesData } = gameReportStore();
+  const { rolesData, heroes, heroesData, addHero, removeHero } =
+    gameReportStore();
 
   const handleHeroClick = (event: MouseEvent<HTMLButtonElement>) => {
-    toggleHero(event.currentTarget.value, gameReportStore());
+    const targetHero = event.currentTarget.value;
+    const heroInList = heroes.includes(targetHero);
+    if (!heroInList) {
+      addHero(targetHero);
+    } else {
+      removeHero(targetHero);
+    }
   };
 
   return (
