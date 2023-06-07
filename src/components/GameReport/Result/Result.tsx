@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
-import { getResultClassName } from '../../../utils/outcomes';
+import { getResultClassName } from '../../../utils/utils';
 
 function Result() {
   const { gameResult, addGameResult, clearGameResult } = gameReportStore();

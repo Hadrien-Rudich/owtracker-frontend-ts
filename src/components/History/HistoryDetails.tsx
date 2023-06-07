@@ -1,7 +1,9 @@
 import { historyStore } from '../../store/historyStore';
-import { filterHistory } from '../../utils/filters';
-import capitalizeFirstLetter from '../../utils/maps';
-import { getResultClassNameFromHistory } from '../../utils/outcomes';
+import {
+  filterHistory,
+  capitalizeFirstLetter,
+  getResultClassNameFromHistory,
+} from '../../utils/utils';
 
 function HistoryDetails() {
   const { historyData, currentMonth } = historyStore();

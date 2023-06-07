@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
-import { filterMapTypes } from '../../../utils/filters';
+import { filterMapTypes } from '../../../utils/utils';
 
 function Map() {
   const { map, addMap, clearMap, mapType, mapsData } = gameReportStore();
