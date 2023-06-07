@@ -13,7 +13,7 @@ function Maps() {
         const data = await fetchMapsData();
         addMapsData(data);
       } catch (error) {
-        // console.error('Failed to fetch maps data', error);
+        console.error('Failed to fetch maps data', error);
       }
     }
 
@@ -26,7 +26,7 @@ function Maps() {
         const data = await fetchMapTypesData();
         addMapTypesData(data);
       } catch (error) {
-        // console.error('Failed to fetch maps data', error);
+        console.error('Failed to fetch maps data', error);
       }
     }
 

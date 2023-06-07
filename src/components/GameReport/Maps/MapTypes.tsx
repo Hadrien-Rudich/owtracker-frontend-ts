@@ -6,10 +6,11 @@ function MapTypes() {
     gameReportStore();
 
   const handleMapTypeClick = (event: MouseEvent<HTMLButtonElement>) => {
-    if (mapType === event.currentTarget.value) {
+    const mapTypeValue = event.currentTarget.value;
+
+    if (mapType === mapTypeValue) {
       clearMapType();
     } else {
-      const mapTypeValue = event.currentTarget.value;
       addMapType(mapTypeValue);
     }
     toggleMapModal();

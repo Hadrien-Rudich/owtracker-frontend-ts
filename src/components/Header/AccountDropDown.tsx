@@ -1,11 +1,13 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 import { authStore } from '../../store/authStore';
+import useOutsideClick from '../useOutsideClick';
 
 function AccountDropDown() {
   const { logOut } = authStore();
   const [showAccountDropDown, setShowAccountDropDown] = useState(false);
+  const accountDropDownRef = useRef<HTMLDivElement>(null);
 
   const toggleAccountDropdown = (
     event: MouseEvent<HTMLButtonElement | HTMLDivElement>
@@ -17,10 +19,20 @@ function AccountDropDown() {
   const handleLogOut = () => {
     logOut();
   };
+
+  useOutsideClick(
+    accountDropDownRef,
+    () => {
+      setShowAccountDropDown(false);
+    },
+    ['click']
+  );
+
   return (
     <div
       onMouseLeave={toggleAccountDropdown}
       className="AccountDropDown_container relative z-40"
+      ref={accountDropDownRef}
     >
       <button
         type="button"

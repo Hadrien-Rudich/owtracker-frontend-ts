@@ -29,7 +29,7 @@ function Gamereport() {
         <div className="Result_container">
           <Result />
         </div>
-        {gameResult !== null && (
+        {gameResult !== '' && (
           <div className="Heroes_componentcontainer">
             <Heroes />
           </div>
@@ -40,7 +40,7 @@ function Gamereport() {
           </div>
         )}
 
-        {gameResult !== null && map !== null && heroes.length > 0 && (
+        {gameResult !== '' && map !== '' && heroes.length > 0 && (
           <div className="flexdiv gap-10 my-12">
             <Reset />
 

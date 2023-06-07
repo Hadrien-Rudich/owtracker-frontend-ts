@@ -9,7 +9,7 @@ const filterHistory = (month: number, data: HistoryData[]) => {
 };
 
 const filterMapTypes = (mapsData: MapData[], mapType: string) => {
-  const result = mapsData.filter((map) => map.label === mapType);
+  const result = mapsData.filter((map) => map.type === mapType);
   return result;
 };
 

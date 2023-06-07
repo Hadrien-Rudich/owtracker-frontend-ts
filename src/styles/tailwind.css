@@ -173,7 +173,7 @@ right-0;
 }
 
 .input {
-  @apply sm:w-36 sm:h-10 w-28 h-8 my-2 text-center shadow-inner rounded-sm tracking-wider sm:text-xl text-lg;
+  @apply sm:w-36 sm:h-10 w-28 h-8 my-2 text-center shadow-inner rounded-sm tracking-wider;
 }
 
 .profile {
