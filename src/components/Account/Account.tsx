@@ -7,7 +7,7 @@ import Security from './Security';
 import Tabs from './Tabs';
 
 function Account() {
-  const { setUserData, activeTab } = authStore();
+  const { setUserData, userData, activeTab } = authStore();
 
   useEffect(() => {
     async function getUserData() {

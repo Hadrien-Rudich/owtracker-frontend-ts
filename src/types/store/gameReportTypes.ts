@@ -28,17 +28,17 @@ interface RoleData {
 
 interface GameReportStore {
   heroesData: HeroData[] | [];
-  addHeroesData: (heroes: HeroData[] | []) => void;
+  addHeroesData: (heroes: HeroData[]) => void;
   heroes: string[];
   addHero: (hero: string) => void;
   removeHero: (hero: string) => void;
   clearHeroes: () => void;
   mapsData: MapData[] | [];
-  addMapsData: (maps: MapData[] | []) => void;
+  addMapsData: (maps: MapData[]) => void;
   map: string; // Used to be NULL
   addMap: (map: string) => void;
   mapTypesData: MapTypeData[] | [];
-  addMapTypesData: (mapTypes: MapTypeData[] | []) => void;
+  addMapTypesData: (mapTypes: MapTypeData[]) => void;
   mapType: string; // Used to be NULL
   addMapType: (mapType: string) => void;
   clearMapType: () => void;
@@ -47,7 +47,7 @@ interface GameReportStore {
   addGameResult: (gameResult: string) => void;
   clearGameResult: () => void;
   rolesData: RoleData[] | [];
-  addRolesData: (roles: RoleData[] | []) => void;
+  addRolesData: (roles: RoleData[]) => void;
   role: string; // Used to be NULL
   addRole: (role: string) => void;
   clearRole: () => void;

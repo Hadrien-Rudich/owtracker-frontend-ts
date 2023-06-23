@@ -5,7 +5,7 @@ interface ProfileData {
 
 interface ProfileStore {
   profilesData: ProfileData[] | [];
-  addProfilesData: (profiles: ProfileData[] | []) => void;
+  addProfilesData: (profiles: ProfileData[]) => void;
   profile: string;
   setProfile: (profile: string) => void;
   clearProfile: () => void;

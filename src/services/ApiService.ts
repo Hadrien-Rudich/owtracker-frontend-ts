@@ -9,7 +9,7 @@ import type {
   RoleData,
 } from '../types/store/gameReportTypes';
 
-const fetchData = async <T,>(endpoint: string): Promise<T> => {
+const fetchData = async <T>(endpoint: string): Promise<T> => {
   try {
     const result: AxiosResponse<T> = await axios(endpoint);
     return result.data;
@@ -20,43 +20,43 @@ const fetchData = async <T,>(endpoint: string): Promise<T> => {
 };
 
 export const fetchHeroesData = async (): Promise<HeroData[]> => {
-  const endpoint = 'http://localhost:3001/heroes';
+  const endpoint = 'http://localhost:3002/heroes';
   return fetchData(endpoint);
 };
 
 export const fetchRolesData = async (): Promise<RoleData[]> => {
-  const endpoint = 'http://localhost:3001/roles';
+  const endpoint = 'http://localhost:3002/heroroles';
   return fetchData(endpoint);
 };
 
 export const fetchMapsData = async (): Promise<MapData[]> => {
-  const endpoint = 'http://localhost:3001/maps';
+  const endpoint = 'http://localhost:3002/maps';
   return fetchData(endpoint);
 };
 
 export const fetchMapTypesData = async (): Promise<MapTypeData[]> => {
-  const endpoint = 'http://localhost:3001/types';
+  const endpoint = 'http://localhost:3002/maptypes';
   return fetchData(endpoint);
 };
 
 export const fetchHistoryData = async (): Promise<HistoryData[]> => {
-  const endpoint = 'http://localhost:3001/history';
+  const endpoint = 'http://localhost:3002/games';
   return fetchData(endpoint);
 };
 
 export const fetchUserData = async (): Promise<UserData> => {
-  const endpoint = 'http://localhost:3001/user/1';
+  const endpoint = 'http://localhost:3002/account/1';
   return fetchData(endpoint);
 };
 
 export const fetchProfilesData = async (): Promise<ProfileData[]> => {
-  const endpoint = 'http://localhost:3001/profiles';
+  const endpoint = 'http://localhost:3002/profiles';
   return fetchData(endpoint);
 };
 
 export const addUserProfileToDb = async (profile: string): Promise<void> => {
   try {
-    const endpoint = 'http://localhost:3001/profiles';
+    const endpoint = 'http://localhost:3002/profiles';
     await axios.post(endpoint, { profile });
   } catch (error) {
     console.error('Failed to add profile', error);
@@ -64,7 +64,7 @@ export const addUserProfileToDb = async (profile: string): Promise<void> => {
   }
 
   try {
-    await axios.get('http://localhost:3001/profiles');
+    await axios.get('http://localhost:3002/profiles');
   } catch (error) {
     console.error('Failed to fetch profiles data', error);
     throw error; // or handle the error accordingly
@@ -73,7 +73,7 @@ export const addUserProfileToDb = async (profile: string): Promise<void> => {
 
 export const deleteProfileFromDb = async (profile: string): Promise<void> => {
   try {
-    const endpoint = `http://localhost:3001/profiles/${profile}`;
+    const endpoint = `http://localhost:3002/profiles/${profile}`;
     await axios.delete(endpoint);
   } catch (error) {
     console.error('Failed to delete profile', error);
@@ -81,7 +81,7 @@ export const deleteProfileFromDb = async (profile: string): Promise<void> => {
   }
 
   try {
-    await axios.get('http://localhost:3001/profiles');
+    await axios.get('http://localhost:3002/profiles');
   } catch (error) {
     console.error('Failed to fetch profiles data', error);
     throw error; // or handle the error accordingly
