@@ -14,7 +14,7 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-const fetchData = async <T>(endpoint: string, method: Method): Promise<T> => {
+const fetchData = async <T,>(endpoint: string, method: Method): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await instance.request({
       url: endpoint,
@@ -28,7 +28,7 @@ const fetchData = async <T>(endpoint: string, method: Method): Promise<T> => {
   }
 };
 
-const postData = async <T>(endpoint: string, data: any): Promise<T> => {
+const postData = async <T,>(endpoint: string, data: any): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await instance.post(endpoint, data);
     console.log(response.data);
