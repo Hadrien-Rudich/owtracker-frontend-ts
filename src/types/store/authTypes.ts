@@ -2,7 +2,7 @@ interface UserData {
   id: number;
   email: string;
   battleTag: string;
-  password: string;
+  refreshToken: string;
 }
 interface UserCredentials {
   email: string;

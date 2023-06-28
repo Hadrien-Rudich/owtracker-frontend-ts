@@ -9,18 +9,21 @@ import type {
   RoleData,
 } from '../types/store/gameReportTypes';
 
-const instance = axios.create({
+const api = axios.create({
   baseURL: 'http://localhost:3002/',
   withCredentials: true,
 });
 
+api.interceptors.request.use((config) => {
+  return config;
+});
+
 const fetchData = async <T>(endpoint: string, method: Method): Promise<T> => {
   try {
-    const response: AxiosResponse<T> = await instance.request({
+    const response: AxiosResponse<T> = await api.request({
       url: endpoint,
       method,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -30,8 +33,7 @@ const fetchData = async <T>(endpoint: string, method: Method): Promise<T> => {
 
 const postData = async <T>(endpoint: string, data: any): Promise<T> => {
   try {
-    const response: AxiosResponse<T> = await instance.post(endpoint, data);
-    console.log(response.data);
+    const response: AxiosResponse<T> = await api.post(endpoint, data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -78,13 +80,37 @@ export const fetchHistoryData = async (): Promise<HistoryData[]> => {
 //   // return fetchData(endpoint);
 // };
 
+interface ApiUserData {
+  accessToken: string;
+  user: { id: number; email: string; battleTag: string; refreshToken: string };
+}
+
 export const verifyCredentials = async (
   email: string,
   password: string
-): Promise<void> => {
+): Promise<ApiUserData> => {
   const endpoint = 'login';
-  await postData(endpoint, { email, password });
+  const response = await postData<ApiUserData>(endpoint, {
+    email,
+    password,
+  });
+  return {
+    accessToken: response.accessToken,
+    user: response.user,
+  };
 };
+
+// export const verifyCredentials = async (
+//   email: string,
+//   password: string
+// ): Promise<ApiUserData> => {
+//   const endpoint = 'login';
+//   const response: AxiosResponse<ApiUserData> = await postData(endpoint, {
+//     email,
+//     password,
+//   });
+//   return response.data;
+// };
 
 // export const register = async (
 //   email: string,
@@ -110,8 +136,8 @@ export const register = async (
   await postData(endpoint, { email, password, battleTag });
 };
 
-export const fetchUserData = async (id: string): Promise<UserData> => {
-  const endpoint = `accoount/${id}`;
+export const fetchUserData = async (id: number): Promise<UserData> => {
+  const endpoint = `account/${id}`;
   return fetchData(endpoint, 'GET');
 };
 

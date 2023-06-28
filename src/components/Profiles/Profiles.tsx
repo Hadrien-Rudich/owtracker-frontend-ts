@@ -20,14 +20,14 @@ function Profiles() {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    async function getProfilesData() {
+    const getProfilesData = async () => {
       try {
         const data = await fetchProfilesData();
         addProfilesData(data);
       } catch (error) {
-        console.error('Failed to fetch history data', error);
+        console.error('Failed to fetch profiles data', error);
       }
-    }
+    };
 
     getProfilesData();
   }, [addProfilesData, newProfile]);

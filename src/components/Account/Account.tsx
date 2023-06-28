@@ -9,18 +9,18 @@ import Tabs from './Tabs';
 function Account() {
   const { setUserData, userData, activeTab } = authStore();
 
-  useEffect(() => {
-    async function getUserData() {
-      try {
-        const data = await fetchUserData();
-        setUserData(data);
-      } catch (error) {
-        console.error('Failed to fetch user data', error);
-      }
-    }
+  // useEffect(() => {
+  //   async function getUserData() {
+  //     try {
+  //       const data = await fetchUserData(userData.id);
+  //       setUserData(data);
+  //     } catch (error) {
+  //       console.error('Failed to fetch user data', error);
+  //     }
+  //   }
 
-    getUserData();
-  }, [setUserData]);
+  //   getUserData();
+  // }, [setUserData]);
 
   const navigate = useNavigate();
   const { isLoggedIn } = authStore();

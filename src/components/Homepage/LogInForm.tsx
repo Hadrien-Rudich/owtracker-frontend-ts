@@ -8,7 +8,7 @@ function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isLoggedIn, logIn } = authStore();
+  const { isLoggedIn, logIn, setUserData } = authStore();
 
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ function LogInForm() {
   };
 
   async function handleLogIn(event: FormEvent<HTMLFormElement>) {
-    console.log(email, password);
     event.preventDefault();
 
     try {
-      await verifyCredentials(email, password);
+      const response = await verifyCredentials(email, password);
+      setUserData(response.user);
       logIn();
     } catch (error) {
       console.error('Failed to authenticate user', error);
@@ -40,7 +40,7 @@ function LogInForm() {
     if (isLoggedIn) {
       navigate('/profiles');
     }
-  });
+  }, [isLoggedIn]);
 
   return (
     <form onSubmit={handleLogIn}>
