@@ -4,6 +4,10 @@ interface UserData {
   battleTag: string;
   password: string;
 }
+interface UserCredentials {
+  email: string;
+  password: string;
+}
 
 interface AuthStore {
   userData: UserData;
@@ -32,4 +36,4 @@ interface AuthStore {
   clearActiveTab: () => void;
 }
 
-export type { UserData, AuthStore };
+export type { UserData, AuthStore, UserCredentials };

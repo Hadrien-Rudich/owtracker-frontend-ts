@@ -2,10 +2,12 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authStore } from '../../store/authStore';
 import InputField from '../InputField';
+import { register } from '../../services/ApiService';
 
 function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const { isLoggedIn, logIn } = authStore();
@@ -14,6 +16,10 @@ function RegisterForm() {
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
+  };
+
+  const handleBattleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setBattleTag(event.target.value);
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,10 +35,16 @@ function RegisterForm() {
     navigate('/');
   };
 
-  const handleRegister = (event: FormEvent) => {
+  async function handleRegister(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    logIn();
-  };
+
+    try {
+      await register(email, password, battleTag);
+      // logIn();
+    } catch (error) {
+      console.error('Failed to register user', error);
+    }
+  }
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -52,6 +64,13 @@ function RegisterForm() {
               required
               onChange={handleEmailChange}
             />
+            <InputField
+              label="BattleTag"
+              type="text"
+              value={battleTag}
+              required
+              onChange={handleBattleTagChange}
+            />
 
             <InputField
               label="Password"
@@ -62,7 +81,7 @@ function RegisterForm() {
             />
 
             <InputField
-              label="Confirm"
+              label="Confirm Password"
               type="password"
               value={confirmPassword}
               required

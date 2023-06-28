@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { authStore } from '../../store/authStore';
+import { verifyCredentials } from '../../services/ApiService';
 
 function LogInForm() {
   const [email, setEmail] = useState('');
@@ -23,10 +24,17 @@ function LogInForm() {
     navigate('/');
   };
 
-  const handleLogIn = (event: FormEvent<HTMLFormElement>) => {
+  async function handleLogIn(event: FormEvent<HTMLFormElement>) {
+    console.log(email, password);
     event.preventDefault();
-    logIn();
-  };
+
+    try {
+      await verifyCredentials(email, password);
+      logIn();
+    } catch (error) {
+      console.error('Failed to authenticate user', error);
+    }
+  }
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -40,7 +48,7 @@ function LogInForm() {
         <div className=" inputandbutton_container containerbox">
           <div className="input_container flexdiv col gap-4">
             <InputField
-              label="Email"
+              label="email"
               type="email"
               value={email}
               required
@@ -48,7 +56,7 @@ function LogInForm() {
             />
 
             <InputField
-              label="Password"
+              label="password"
               type="password"
               value={password}
               required
