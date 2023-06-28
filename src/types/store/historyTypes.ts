@@ -13,7 +13,7 @@ interface HistoryData {
 
 interface HistoryStore {
   historyData: HistoryData[] | [];
-  addHistoryData: (history: HistoryData[] | []) => void;
+  addHistoryData: (history: HistoryData[]) => void;
   removeHistoryData: () => void;
   currentMonth: number;
   setCurrentMonth: (month: number) => void;
