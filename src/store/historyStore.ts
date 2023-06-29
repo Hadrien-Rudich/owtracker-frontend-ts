@@ -14,6 +14,12 @@ export const historyStore = create<HistoryStore>()((set) => ({
     set(() => ({
       currentMonth: month,
     })),
+  reset: () => {
+    set(() => ({
+      historyData: [],
+      currentMonth: 0,
+    }));
+  },
 }));
 
 export default historyStore;

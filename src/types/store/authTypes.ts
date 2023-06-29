@@ -12,8 +12,8 @@ interface UserCredentials {
 interface AuthStore {
   userData: UserData;
   isLoggedIn: boolean;
-  logIn: () => void;
-  logOut: () => void;
+  setLoggedIn: () => void;
+  setLoggedOut: () => void;
   setUserData: (userData: UserData) => void;
   editAccount: boolean;
   toggleEditAccount: () => void;

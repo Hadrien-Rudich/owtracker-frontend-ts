@@ -55,6 +55,7 @@ interface GameReportStore {
   toggleRoleModal: () => void;
   mapModal: boolean;
   toggleMapModal: () => void;
+  reset: () => void;
 }
 
 export type { HeroData, MapData, MapTypeData, RoleData, GameReportStore };

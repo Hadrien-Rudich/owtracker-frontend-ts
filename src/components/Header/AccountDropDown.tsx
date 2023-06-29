@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 import { authStore } from '../../store/authStore';
 import useOutsideClick from '../useOutsideClick';
+import { logOut } from '../../services/ApiService';
 
 function AccountDropDown() {
-  const { logOut } = authStore();
+  const { setLoggedOut } = authStore();
   const [showAccountDropDown, setShowAccountDropDown] = useState(false);
   const accountDropDownRef = useRef<HTMLDivElement>(null);
 
@@ -18,6 +19,7 @@ function AccountDropDown() {
 
   const handleLogOut = () => {
     logOut();
+    setLoggedOut();
   };
 
   useOutsideClick(

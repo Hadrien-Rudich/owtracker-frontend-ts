@@ -2,13 +2,13 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { authStore } from '../../store/authStore';
-import { verifyCredentials } from '../../services/ApiService';
+import { logIn } from '../../services/ApiService';
 
 function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isLoggedIn, logIn, setUserData } = authStore();
+  const { isLoggedIn, setLoggedIn, setUserData } = authStore();
 
   const navigate = useNavigate();
 
@@ -28,9 +28,9 @@ function LogInForm() {
     event.preventDefault();
 
     try {
-      const response = await verifyCredentials(email, password);
+      const response = await logIn(email, password);
       setUserData(response.user);
-      logIn();
+      setLoggedIn();
     } catch (error) {
       console.error('Failed to authenticate user', error);
     }
@@ -40,7 +40,7 @@ function LogInForm() {
     if (isLoggedIn) {
       navigate('/profiles');
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <form onSubmit={handleLogIn}>

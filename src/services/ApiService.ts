@@ -85,7 +85,7 @@ interface ApiUserData {
   user: { id: number; email: string; battleTag: string; refreshToken: string };
 }
 
-export const verifyCredentials = async (
+export const logIn = async (
   email: string,
   password: string
 ): Promise<ApiUserData> => {
@@ -136,14 +136,48 @@ export const register = async (
   await postData(endpoint, { email, password, battleTag });
 };
 
-export const fetchUserData = async (id: number): Promise<UserData> => {
-  const endpoint = `account/${id}`;
+export const logOut = async (): Promise<void> => {
+  const endpoint = 'logout';
+  await postData(endpoint, null);
+};
+
+export const fetchUserData = async (userId: number): Promise<UserData> => {
+  const endpoint = `user/${userId}`;
   return fetchData(endpoint, 'GET');
 };
 
-export const fetchProfilesData = async (): Promise<ProfileData[]> => {
-  const endpoint = 'profiles';
+// export const fetchProfileData = async (
+//   userId: number,
+//   profileId: number
+// ): Promise<ProfileData[]> => {
+//   const endpoint = `user/${userId}/profiles/${profileId}`;
+//   return fetchData(endpoint, 'GET');
+// };
+
+export const fetchProfilesData = async (
+  userId: number
+): Promise<ProfileData[]> => {
+  // const endpoint = `user/2/profiles`;
+  const endpoint = `user/${userId}/profiles`;
   return fetchData(endpoint, 'GET');
+};
+
+interface ApiProfileData {
+  message: string;
+  profile: { id: number; userId: number; label: string };
+}
+
+export const addUserProfileToDb = async (
+  userId: number,
+  profile: string
+): Promise<ApiProfileData> => {
+  const endpoint = `user/${userId}/profiles`;
+  const response = await postData<ApiProfileData>(endpoint, { label: profile });
+  console.log('je suis la response');
+  return {
+    message: response.message,
+    profile: response.profile,
+  };
 };
 
 // export const addUserProfileToDb = async (profile: string): Promise<void> => {
@@ -163,18 +197,6 @@ export const fetchProfilesData = async (): Promise<ProfileData[]> => {
 //   }
 // };
 
-export const addUserProfileToDb = async (profile: string): Promise<void> => {
-  const endpoint = 'profiles';
-  await postData(endpoint, { profile });
-
-  try {
-    await fetchData('profiles', 'GET');
-  } catch (error) {
-    console.error('Failed to fetch profiles data', error);
-    throw error;
-  }
-};
-
 // export const deleteProfileFromDb = async (profile: string): Promise<void> => {
 //   try {
 //     const endpoint = `http://localhost:3002/profiles/${profile}`;
@@ -192,8 +214,8 @@ export const addUserProfileToDb = async (profile: string): Promise<void> => {
 //   }
 // };
 
-export const deleteProfileFromDb = async (profile: string): Promise<void> => {
-  const endpoint = `profiles/${profile}`;
+export const deleteProfileFromDb = async (profileId: number): Promise<void> => {
+  const endpoint = `profiles/${profileId}`;
   await fetchData(endpoint, 'DELETE');
 
   try {

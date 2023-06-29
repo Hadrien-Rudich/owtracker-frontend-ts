@@ -18,9 +18,9 @@ export const profileStore = create<ProfileStore>()((set) => ({
     set(() => ({
       newProfile: profile,
     })),
-  addNewProfile: (profile) =>
+  addNewProfile: (newProfileObj) =>
     set((state) => ({
-      profilesData: [...state.profilesData, { label: profile, id: 10 }], // to be modified
+      profilesData: [...state.profilesData, newProfileObj], // to be modified
     })),
   clearNewProfile: () =>
     set(() => ({
@@ -31,6 +31,13 @@ export const profileStore = create<ProfileStore>()((set) => ({
     set((state) => ({
       profilesData: state.profilesData.filter((p) => p.label !== profile),
       profile: '',
+    }));
+  },
+  reset: () => {
+    set(() => ({
+      profilesData: [],
+      profile: '',
+      newProfile: '',
     }));
   },
 }));

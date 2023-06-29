@@ -17,6 +17,7 @@ interface HistoryStore {
   removeHistoryData: () => void;
   currentMonth: number;
   setCurrentMonth: (month: number) => void;
+  reset: () => void;
 }
 
 export type { HistoryData, HistoryStore };

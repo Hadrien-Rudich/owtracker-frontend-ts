@@ -10,8 +10,8 @@ import { fetchProfilesData } from '../../services/ApiService';
 function Profiles() {
   const navigate = useNavigate();
 
-  const { isLoggedIn } = authStore();
-  const { profile, profilesData, addProfilesData, newProfile } = profileStore();
+  const { isLoggedIn, userData } = authStore();
+  const { profile, profilesData, addProfilesData } = profileStore();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -22,7 +22,9 @@ function Profiles() {
   useEffect(() => {
     const getProfilesData = async () => {
       try {
-        const data = await fetchProfilesData();
+        const data = await fetchProfilesData(userData.id);
+        console.log(Number(userData.id));
+        console.log(data);
         addProfilesData(data);
       } catch (error) {
         console.error('Failed to fetch profiles data', error);
@@ -30,7 +32,7 @@ function Profiles() {
     };
 
     getProfilesData();
-  }, [addProfilesData, newProfile]);
+  }, [addProfilesData, userData.id]);
 
   return (
     <div className="Profiles_container flexdiv col lg:mt-[8.5rem] my-24 relative">

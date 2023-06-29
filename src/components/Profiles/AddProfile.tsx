@@ -11,9 +11,12 @@ import { profileStore } from '../../store/profileStore';
 import { addUserProfileToDb } from '../../services/ApiService';
 import useOutsideClick from '../useOutsideClick';
 
+import { authStore } from '../../store/authStore';
+
 function AddProfile() {
-  const { newProfile, setNewProfile, addNewProfile, clearNewProfile } =
+  const { newProfile, setNewProfile, clearNewProfile, addNewProfile } =
     profileStore();
+  const { userData } = authStore();
   const [inputField, setInputField] = useState(false);
   const newProfileInputRef = useRef<HTMLInputElement>(null);
 
@@ -29,11 +32,21 @@ function AddProfile() {
     clearNewProfile();
     setInputField(false);
   };
-  const handleAddClick = () => {
-    addNewProfile(newProfile);
-    addUserProfileToDb(newProfile);
-    setInputField(false);
-    clearNewProfile();
+
+  const handleAddClick = async () => {
+    try {
+      const profileAddedtoDb = await addUserProfileToDb(
+        userData.id,
+        newProfile
+      );
+      addNewProfile(profileAddedtoDb.profile);
+
+      setInputField(false);
+      clearNewProfile();
+    } catch (error) {
+      // Handle error
+      console.error('Failed to add profile', error);
+    }
   };
 
   const handleOutsideClick = () => {
@@ -42,13 +55,15 @@ function AddProfile() {
 
   useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (newProfile !== '') {
-      addNewProfile(newProfile);
-      addUserProfileToDb(newProfile);
-      setInputField(false);
-      clearNewProfile();
+      try {
+        handleAddClick();
+      } catch (error) {
+        // Handle error
+        console.error('Failed to add profile', error);
+      }
     }
   };
 

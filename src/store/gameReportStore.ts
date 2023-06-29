@@ -34,6 +34,20 @@ export const gameReportStore = create<GameReportStore>()((set) => ({
   toggleRoleModal: () => set((state) => ({ roleModal: !state.roleModal })),
   mapModal: false,
   toggleMapModal: () => set((state) => ({ mapModal: !state.mapModal })),
+  reset: () =>
+    set(() => ({
+      heroesData: [],
+      heroes: [],
+      mapsData: [],
+      map: '',
+      mapTypesData: [],
+      mapType: '',
+      gameResult: '',
+      rolesData: [],
+      role: '',
+      roleModal: false,
+      mapModal: false,
+    })),
 }));
 
 export default gameReportStore;

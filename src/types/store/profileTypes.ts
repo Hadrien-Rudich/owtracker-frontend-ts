@@ -1,5 +1,12 @@
 interface ProfileData {
   id: number;
+  userId: number;
+  label: string;
+}
+
+interface NewProfileObj {
+  id: number;
+  userId: number;
   label: string;
 }
 
@@ -11,9 +18,10 @@ interface ProfileStore {
   clearProfile: () => void;
   newProfile: string;
   setNewProfile: (profile: string) => void;
-  addNewProfile: (profile: string) => void;
+  addNewProfile: (newProfileObj: NewProfileObj) => void;
   clearNewProfile: () => void;
   deleteProfile: (profile: string) => void;
+  reset: () => void;
 }
 
 export type { ProfileData, ProfileStore };

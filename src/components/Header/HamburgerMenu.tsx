@@ -4,9 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { headerStore } from '../../store/headerStore';
 import { authStore } from '../../store/authStore';
 import useOutsideClick from '../useOutsideClick';
+import { logOut } from '../../services/ApiService';
 
 function HamburgerMenu() {
-  const { logOut } = authStore();
+  const { setLoggedOut } = authStore();
 
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
@@ -29,6 +30,7 @@ function HamburgerMenu() {
 
   const handleLogOut = () => {
     logOut();
+    setLoggedOut();
   };
 
   return (

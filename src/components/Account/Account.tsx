@@ -1,26 +1,12 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authStore } from '../../store/authStore';
-import { fetchUserData } from '../../services/ApiService';
 import Details from './Details';
 import Security from './Security';
 import Tabs from './Tabs';
 
 function Account() {
-  const { setUserData, userData, activeTab } = authStore();
-
-  // useEffect(() => {
-  //   async function getUserData() {
-  //     try {
-  //       const data = await fetchUserData(userData.id);
-  //       setUserData(data);
-  //     } catch (error) {
-  //       console.error('Failed to fetch user data', error);
-  //     }
-  //   }
-
-  //   getUserData();
-  // }, [setUserData]);
+  const { activeTab } = authStore();
 
   const navigate = useNavigate();
   const { isLoggedIn } = authStore();

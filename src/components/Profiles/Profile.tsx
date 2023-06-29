@@ -1,46 +1,15 @@
-import { useEffect, MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { MouseEvent } from 'react';
 import { ImCross } from 'react-icons/im';
-import { authStore } from '../../store/authStore';
 import { profileStore } from '../../store/profileStore';
 
-import {
-  fetchProfilesData,
-  deleteProfileFromDb,
-} from '../../services/ApiService';
+import { deleteProfileFromDb } from '../../services/ApiService';
+import { authStore } from '../../store/authStore';
 
 function Profile() {
-  const navigate = useNavigate();
+  const { profilesData, profile, setProfile, deleteProfile, clearProfile } =
+    profileStore();
 
-  const { isLoggedIn } = authStore();
-  const {
-    addProfilesData,
-    profilesData,
-    profile,
-    setProfile,
-    newProfile,
-    deleteProfile,
-    clearProfile,
-  } = profileStore();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
-
-  useEffect(() => {
-    async function getProfilesData() {
-      try {
-        const data = await fetchProfilesData();
-        addProfilesData(data);
-      } catch (error) {
-        console.error('Failed to fetch history data', error);
-      }
-    }
-
-    getProfilesData();
-  }, [addProfilesData, newProfile]);
+  const { userData } = authStore();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (profile === event.currentTarget.value) {
@@ -52,8 +21,14 @@ function Profile() {
   };
 
   const handleDeleteClick = (event: MouseEvent<HTMLButtonElement>) => {
-    deleteProfileFromDb(event.currentTarget.value);
-    deleteProfile(event.currentTarget.value);
+    const label = event.currentTarget.value;
+    const foundProfile = profilesData.find(
+      (p) => p.label === label && userData.id === p.userId
+    );
+    if (foundProfile) {
+      deleteProfileFromDb(foundProfile.id); // Delete profile from the database using the ID
+      deleteProfile(profile); // Delete profile from the store using the label
+    }
   };
 
   return (

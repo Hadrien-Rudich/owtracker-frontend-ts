@@ -1,11 +1,26 @@
 import { create } from 'zustand';
 import type { AuthStore, UserData } from '../types/store/authTypes';
+import { resetStore } from './resetStore';
 
 export const authStore = create<AuthStore>()((set) => ({
   userData: {} as UserData,
   isLoggedIn: false,
-  logIn: () => set(() => ({ isLoggedIn: true })),
-  logOut: () => set(() => ({ isLoggedIn: false })),
+  setLoggedIn: () => set(() => ({ isLoggedIn: true })),
+  setLoggedOut: () =>
+    set(() => {
+      resetStore.getState().resetAllStores();
+      return {
+        userData: {} as UserData,
+        isLoggedIn: false,
+        editAccount: false,
+        editSecurity: false,
+        newEmail: '',
+        newPassword: '',
+        confirmNewPassword: '',
+        newBattleTag: '',
+        activeTab: 'details',
+      };
+    }),
   setUserData: (userData) => set(() => ({ userData })),
   editAccount: false,
   toggleEditAccount: () =>

@@ -10,7 +10,7 @@ function RegisterForm() {
   const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const { isLoggedIn, logIn } = authStore();
+  const { isLoggedIn, setLoggedIn } = authStore();
 
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ function RegisterForm() {
 
     try {
       await register(email, password, battleTag);
-      // logIn();
+      setLoggedIn();
     } catch (error) {
       console.error('Failed to register user', error);
     }
