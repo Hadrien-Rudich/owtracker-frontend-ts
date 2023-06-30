@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { fetchMapsData, fetchMapTypesData } from '../../../services/ApiService';
+import {
+  fetchMapsFromApi,
+  fetchMapTypesFromApi,
+} from '../../../services/ApiService';
 import MapTypes from './MapTypes';
 import Map from './Map';
 import { gameReportStore } from '../../../store/gameReportStore';
@@ -10,7 +13,7 @@ function Maps() {
   useEffect(() => {
     async function getMapsData() {
       try {
-        const data = await fetchMapsData();
+        const data = await fetchMapsFromApi();
         addMapsData(data);
       } catch (error) {
         console.error('Failed to fetch maps data', error);
@@ -23,7 +26,7 @@ function Maps() {
   useEffect(() => {
     async function getTypesData() {
       try {
-        const data = await fetchMapTypesData();
+        const data = await fetchMapTypesFromApi();
         addMapTypesData(data);
       } catch (error) {
         console.error('Failed to fetch maps data', error);

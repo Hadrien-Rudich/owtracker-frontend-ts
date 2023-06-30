@@ -20,7 +20,6 @@ function Result() {
   };
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget.value);
     toggleGameResult(event.currentTarget.value);
   };
 

@@ -178,7 +178,7 @@ right-0;
 
 .profile {
   @apply text-center tracking-wider rounded-sm
-       hover:scale-110 
+        
       ease-in-out;
 }
 
@@ -222,19 +222,7 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .sign {
-  @apply hover:scale-110 h-3 w-3 drop-shadow-lg  opacity-40 duration-150 ease-in-out;
-}
-
-.sign.main {
-  @apply sm:w-7 sm:h-7 w-5 h-5;
-}
-
-.sign.cancel {
-  @apply hover:opacity-100 hover:text-warning;
-}
-
-.sign.validate {
-  @apply hover:opacity-100 hover:scale-110;
+  @apply hover:scale-110 drop-shadow-lg  opacity-40 hover:opacity-100 duration-150 ease-in-out;
 }
 
 .intenseShadow {

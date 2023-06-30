@@ -27,6 +27,16 @@ export const profileStore = create<ProfileStore>()((set) => ({
       newProfile: '',
     })),
 
+  newProfileLabel: '',
+  setNewProfileLabel: (label) =>
+    set(() => ({
+      newProfileLabel: label,
+    })),
+  clearNewProfileLabel: () =>
+    set(() => ({
+      newProfileLabel: '',
+    })),
+
   deleteProfile: (profile) => {
     set((state) => ({
       profilesData: state.profilesData.filter((p) => p.label !== profile),

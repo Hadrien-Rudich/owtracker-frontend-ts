@@ -18,7 +18,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-const fetchData = async <T>(endpoint: string, method: Method): Promise<T> => {
+const fetchDataFromApi = async <T>(
+  endpoint: string,
+  method: Method
+): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await api.request({
       url: endpoint,
@@ -31,7 +34,7 @@ const fetchData = async <T>(endpoint: string, method: Method): Promise<T> => {
   }
 };
 
-const postData = async <T>(endpoint: string, data: any): Promise<T> => {
+const postDataToApi = async <T>(endpoint: string, data: any): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await api.post(endpoint, data);
     return response.data;
@@ -41,45 +44,43 @@ const postData = async <T>(endpoint: string, data: any): Promise<T> => {
   }
 };
 
-export const fetchHeroesData = async (): Promise<HeroData[]> => {
+const deleteDataFromApi = async <T>(
+  endpoint: string,
+  data: any
+): Promise<T> => {
+  try {
+    const response: AxiosResponse<T> = await api.delete(endpoint, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const fetchHeroesFromApi = async (): Promise<HeroData[]> => {
   const endpoint = 'heroes';
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
 
-export const fetchRolesData = async (): Promise<RoleData[]> => {
+export const fetchRolesFromApi = async (): Promise<RoleData[]> => {
   const endpoint = 'heroroles';
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
 
-export const fetchMapsData = async (): Promise<MapData[]> => {
+export const fetchMapsFromApi = async (): Promise<MapData[]> => {
   const endpoint = 'maps';
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
 
-export const fetchMapTypesData = async (): Promise<MapTypeData[]> => {
+export const fetchMapTypesFromApi = async (): Promise<MapTypeData[]> => {
   const endpoint = 'maptypes';
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
 
-export const fetchHistoryData = async (): Promise<HistoryData[]> => {
+export const fetchHistoryFromApi = async (): Promise<HistoryData[]> => {
   const endpoint = 'history';
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
-
-// export const verifyCredentials = async (
-//   email: string,
-//   password: string
-// ): Promise<void> => {
-//   try {
-//     const endpoint = 'http://localhost:3002/login';
-//     await axios.post(endpoint, { email, password });
-//   } catch (error) {
-//     console.error('Failed to authenticate user', error);
-//     throw error;
-//   }
-//   // return fetchData(endpoint);
-// };
-
 interface ApiUserData {
   accessToken: string;
   user: { id: number; email: string; battleTag: string; refreshToken: string };
@@ -90,7 +91,7 @@ export const logIn = async (
   password: string
 ): Promise<ApiUserData> => {
   const endpoint = 'login';
-  const response = await postData<ApiUserData>(endpoint, {
+  const response = await postDataToApi<ApiUserData>(endpoint, {
     email,
     password,
   });
@@ -100,128 +101,63 @@ export const logIn = async (
   };
 };
 
-// export const verifyCredentials = async (
-//   email: string,
-//   password: string
-// ): Promise<ApiUserData> => {
-//   const endpoint = 'login';
-//   const response: AxiosResponse<ApiUserData> = await postData(endpoint, {
-//     email,
-//     password,
-//   });
-//   return response.data;
-// };
-
-// export const register = async (
-//   email: string,
-//   password: string,
-//   battleTag: string
-// ): Promise<void> => {
-//   try {
-//     const endpoint = 'http://localhost:3002/register';
-//     const response = await axios.post(endpoint, { email, password, battleTag });
-//     console.log(response.data);
-//   } catch (error) {
-//     console.error('Failed to register user', error);
-//     throw error;
-//   }
-// };
-
 export const register = async (
   email: string,
   password: string,
   battleTag: string
 ): Promise<void> => {
   const endpoint = 'register';
-  await postData(endpoint, { email, password, battleTag });
+  await postDataToApi(endpoint, { email, password, battleTag });
 };
 
 export const logOut = async (): Promise<void> => {
   const endpoint = 'logout';
-  await postData(endpoint, null);
+  await postDataToApi(endpoint, null);
 };
 
-export const fetchUserData = async (userId: number): Promise<UserData> => {
+export const fetchUserFromApi = async (userId: number): Promise<UserData> => {
   const endpoint = `user/${userId}`;
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
 
-// export const fetchProfileData = async (
-//   userId: number,
-//   profileId: number
-// ): Promise<ProfileData[]> => {
-//   const endpoint = `user/${userId}/profiles/${profileId}`;
-//   return fetchData(endpoint, 'GET');
-// };
-
-export const fetchProfilesData = async (
+export const fetchProfilesFromApi = async (
   userId: number
 ): Promise<ProfileData[]> => {
   // const endpoint = `user/2/profiles`;
   const endpoint = `user/${userId}/profiles`;
-  return fetchData(endpoint, 'GET');
+  return fetchDataFromApi(endpoint, 'GET');
 };
 
-interface ApiProfileData {
+interface ApiAddProfile {
   message: string;
   profile: { id: number; userId: number; label: string };
 }
 
-export const addUserProfileToDb = async (
+export const addProfileToApi = async (
   userId: number,
   profile: string
-): Promise<ApiProfileData> => {
+): Promise<ApiAddProfile> => {
   const endpoint = `user/${userId}/profiles`;
-  const response = await postData<ApiProfileData>(endpoint, { label: profile });
-  console.log('je suis la response');
+  const response = await postDataToApi<ApiAddProfile>(endpoint, {
+    label: profile,
+  });
   return {
     message: response.message,
     profile: response.profile,
   };
 };
+interface ApiDeleteProfile {
+  message: string;
+  profile: { id: number; userId: number };
+}
 
-// export const addUserProfileToDb = async (profile: string): Promise<void> => {
-//   try {
-//     const endpoint = 'http://localhost:3002/profiles';
-//     await axios.post(endpoint, { profile });
-//   } catch (error) {
-//     console.error('Failed to add profile', error);
-//     throw error; // or handle the error accordingly
-//   }
-
-//   try {
-//     await axios.get('http://localhost:3002/profiles');
-//   } catch (error) {
-//     console.error('Failed to fetch profiles data', error);
-//     throw error; // or handle the error accordingly
-//   }
-// };
-
-// export const deleteProfileFromDb = async (profile: string): Promise<void> => {
-//   try {
-//     const endpoint = `http://localhost:3002/profiles/${profile}`;
-//     await axios.delete(endpoint);
-//   } catch (error) {
-//     console.error('Failed to delete profile', error);
-//     throw error; // or handle the error accordingly
-//   }
-
-//   try {
-//     await axios.get('http://localhost:3002/profiles');
-//   } catch (error) {
-//     console.error('Failed to fetch profiles data', error);
-//     throw error; // or handle the error accordingly
-//   }
-// };
-
-export const deleteProfileFromDb = async (profileId: number): Promise<void> => {
-  const endpoint = `profiles/${profileId}`;
-  await fetchData(endpoint, 'DELETE');
-
-  try {
-    await fetchData('profiles', 'GET');
-  } catch (error) {
-    console.error('Failed to fetch profiles data', error);
-    throw error;
-  }
+export const deleteProfileFromApi = async (
+  userId: number,
+  profileId: number
+): Promise<void> => {
+  const endpoint = `user/${userId}/profiles/${profileId}`;
+  await deleteDataFromApi<ApiDeleteProfile>(endpoint, {
+    id: profileId,
+    userId,
+  });
 };

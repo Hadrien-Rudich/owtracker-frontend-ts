@@ -6,7 +6,6 @@ function Details() {
 
   const handleEditSecurityClick = () => {
     toggleEditSecurity();
-    console.log();
   };
 
   return (

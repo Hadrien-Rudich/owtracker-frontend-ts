@@ -5,7 +5,7 @@ import { profileStore } from '../../store/profileStore';
 import AddProfile from './AddProfile';
 import Profile from './Profile';
 
-import { fetchProfilesData } from '../../services/ApiService';
+import { fetchProfilesFromApi } from '../../services/ApiService';
 
 function Profiles() {
   const navigate = useNavigate();
@@ -22,9 +22,7 @@ function Profiles() {
   useEffect(() => {
     const getProfilesData = async () => {
       try {
-        const data = await fetchProfilesData(userData.id);
-        console.log(Number(userData.id));
-        console.log(data);
+        const data = await fetchProfilesFromApi(userData.id);
         addProfilesData(data);
       } catch (error) {
         console.error('Failed to fetch profiles data', error);

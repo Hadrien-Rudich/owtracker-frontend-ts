@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { fetchHeroesData, fetchRolesData } from '../../../services/ApiService';
+import {
+  fetchHeroesFromApi,
+  fetchRolesFromApi,
+} from '../../../services/ApiService';
 import { gameReportStore } from '../../../store/gameReportStore';
 import Hero from './Hero';
 
@@ -9,7 +12,7 @@ function Heroes() {
   useEffect(() => {
     async function getHeroesData() {
       try {
-        const data = await fetchHeroesData();
+        const data = await fetchHeroesFromApi();
         addHeroesData(data);
       } catch (error) {
         console.error('Failed to fetch heroes data', error);
@@ -22,7 +25,7 @@ function Heroes() {
   useEffect(() => {
     async function getRolesData() {
       try {
-        const data = await fetchRolesData();
+        const data = await fetchRolesFromApi();
         addRolesData(data);
       } catch (error) {
         console.error('Failed to fetch roles data', error);

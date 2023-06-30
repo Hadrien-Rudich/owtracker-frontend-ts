@@ -7,8 +7,11 @@ import {
   useRef,
 } from 'react';
 import { ImPlus, ImCross } from 'react-icons/im';
+import { FaCheck } from 'react-icons/fa';
+import InputField from '../InputField';
+
 import { profileStore } from '../../store/profileStore';
-import { addUserProfileToDb } from '../../services/ApiService';
+import { addProfileToApi } from '../../services/ApiService';
 import useOutsideClick from '../useOutsideClick';
 
 import { authStore } from '../../store/authStore';
@@ -35,10 +38,7 @@ function AddProfile() {
 
   const handleAddClick = async () => {
     try {
-      const profileAddedtoDb = await addUserProfileToDb(
-        userData.id,
-        newProfile
-      );
+      const profileAddedtoDb = await addProfileToApi(userData.id, newProfile);
       addNewProfile(profileAddedtoDb.profile);
 
       setInputField(false);
@@ -58,12 +58,7 @@ function AddProfile() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (newProfile !== '') {
-      try {
-        handleAddClick();
-      } catch (error) {
-        // Handle error
-        console.error('Failed to add profile', error);
-      }
+      handleAddClick();
     }
   };
 
@@ -71,29 +66,30 @@ function AddProfile() {
     if (event.key === 'Escape') {
       clearNewProfile();
       setInputField(false);
-      console.log('pressed escape');
     }
   };
 
   return (
     <div className="addprofile_container h-12 flexdiv" ref={newProfileInputRef}>
-      <button onClick={handlePlusClick} type="button">
-        {!inputField && (
-          <button
-            type="button"
-            className="addbutton_container hover:scale-110 "
-          >
-            <span className="sr-only">Add Profile</span>
-            <ImPlus className="sign main validate" />
-            {/* <ImPlus className="sign main validate" /> */}
-          </button>
-        )}
-      </button>
+      {!inputField && (
+        <button
+          type="button"
+          className="addbutton_container hover:scale-110 "
+          onClick={handlePlusClick}
+        >
+          <span className="sr-only">Add Profile</span>
+          <ImPlus className="sign h-6 w-6" />
+        </button>
+      )}
       {inputField && (
         <form onSubmit={handleSubmit}>
           <div className="form_container flex gap-4">
-            <button onClick={handleCrossClick} type="button">
-              <ImCross className="sign cancel" />
+            <button
+              onClick={handleCrossClick}
+              type="button"
+              className="text-warning hover:scale-125"
+            >
+              <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
             </button>
             <label htmlFor="newProfile">
               <input
@@ -109,9 +105,12 @@ function AddProfile() {
                 type="text"
               />
             </label>
-
-            <button onClick={handleAddClick} type="submit">
-              <ImPlus className="sign validate" />
+            <button
+              type="submit"
+              onClick={handleAddClick}
+              className="text-validate hover:scale-125"
+            >
+              <FaCheck className="sign h-5 w-5" />
             </button>
           </div>
         </form>
