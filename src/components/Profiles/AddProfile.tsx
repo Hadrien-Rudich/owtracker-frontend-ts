@@ -8,7 +8,6 @@ import {
 } from 'react';
 import { ImPlus, ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
-import InputField from '../InputField';
 
 import { profileStore } from '../../store/profileStore';
 import { addProfileToApi } from '../../services/ApiService';
@@ -17,8 +16,14 @@ import useOutsideClick from '../useOutsideClick';
 import { authStore } from '../../store/authStore';
 
 function AddProfile() {
-  const { newProfile, setNewProfile, clearNewProfile, addNewProfile } =
-    profileStore();
+  const {
+    profilesData,
+    newProfile,
+    setNewProfile,
+    clearNewProfile,
+    addNewProfile,
+    clearProfile,
+  } = profileStore();
   const { userData } = authStore();
   const [inputField, setInputField] = useState(false);
   const newProfileInputRef = useRef<HTMLInputElement>(null);
@@ -29,43 +34,47 @@ function AddProfile() {
   const handlePlusClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setInputField(true);
+    clearProfile();
   };
 
-  const handleCrossClick = () => {
+  const handleCancel = () => {
     clearNewProfile();
     setInputField(false);
   };
 
-  const handleAddClick = async () => {
-    try {
-      const profileAddedtoDb = await addProfileToApi(userData.id, newProfile);
-      addNewProfile(profileAddedtoDb.profile);
-
-      setInputField(false);
-      clearNewProfile();
-    } catch (error) {
-      // Handle error
-      console.error('Failed to add profile', error);
-    }
-  };
-
   const handleOutsideClick = () => {
     setInputField(false);
+    clearNewProfile();
   };
 
   useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
+  const handleAddProfile = async () => {
+    const profileNameInUse = profilesData.find((p) => newProfile === p.label);
+
+    if (newProfile !== '' && newProfile !== profileNameInUse?.label) {
+      try {
+        const profileAddedtoDb = await addProfileToApi(userData.id, newProfile);
+        addNewProfile(profileAddedtoDb.profile);
+
+        setInputField(false);
+      } catch (error) {
+        console.error('Failed to add profile', error);
+      }
+    } else {
+      console.log('name is already in use');
+    }
+    clearNewProfile();
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (newProfile !== '') {
-      handleAddClick();
-    }
+    handleAddProfile();
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape') {
-      clearNewProfile();
-      setInputField(false);
+      handleCancel();
     }
   };
 
@@ -78,14 +87,14 @@ function AddProfile() {
           onClick={handlePlusClick}
         >
           <span className="sr-only">Add Profile</span>
-          <ImPlus className="sign h-6 w-6" />
+          <ImPlus className="sign h-7 w-7" />
         </button>
       )}
       {inputField && (
         <form onSubmit={handleSubmit}>
           <div className="form_container flex gap-4">
             <button
-              onClick={handleCrossClick}
+              onClick={handleCancel}
               type="button"
               className="text-warning hover:scale-125"
             >
@@ -107,7 +116,7 @@ function AddProfile() {
             </label>
             <button
               type="submit"
-              onClick={handleAddClick}
+              onClick={handleAddProfile}
               className="text-validate hover:scale-125"
             >
               <FaCheck className="sign h-5 w-5" />

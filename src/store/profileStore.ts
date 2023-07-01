@@ -20,13 +20,12 @@ export const profileStore = create<ProfileStore>()((set) => ({
     })),
   addNewProfile: (newProfileObj) =>
     set((state) => ({
-      profilesData: [...state.profilesData, newProfileObj], // to be modified
+      profilesData: [...state.profilesData, newProfileObj],
     })),
   clearNewProfile: () =>
     set(() => ({
       newProfile: '',
     })),
-
   newProfileLabel: '',
   setNewProfileLabel: (label) =>
     set(() => ({
@@ -34,9 +33,29 @@ export const profileStore = create<ProfileStore>()((set) => ({
     })),
   clearNewProfileLabel: () =>
     set(() => ({
-      newProfileLabel: '',
+      updatedProfileLabel: '',
+    })),
+  updateProfile: false,
+
+  updatedProfileLabel: '',
+
+  setUpdatedProfileLabel: (label) =>
+    set(() => ({
+      updatedProfileLabel: label,
     })),
 
+  toggleUpdateProfileLabel: false,
+  toggleUpdateProfile: () =>
+    set((state) => ({
+      toggleUpdateProfileLabel: !state.toggleUpdateProfileLabel,
+    })),
+  updateProfileLabel(profileId, newProfileLabel) {
+    set((state) => ({
+      profilesData: state.profilesData.map((p) =>
+        p.id === profileId ? { ...p, label: newProfileLabel } : p
+      ),
+    }));
+  },
   deleteProfile: (profile) => {
     set((state) => ({
       profilesData: state.profilesData.filter((p) => p.label !== profile),

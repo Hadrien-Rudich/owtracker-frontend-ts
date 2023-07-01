@@ -44,6 +44,16 @@ const postDataToApi = async <T>(endpoint: string, data: any): Promise<T> => {
   }
 };
 
+const patchDataOnApi = async <T>(endpoint: string, data: any): Promise<T> => {
+  try {
+    const response: AxiosResponse<T> = await api.patch(endpoint, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const deleteDataFromApi = async <T>(
   endpoint: string,
   data: any
@@ -139,6 +149,21 @@ export const addProfileToApi = async (
 ): Promise<ApiAddProfile> => {
   const endpoint = `user/${userId}/profiles`;
   const response = await postDataToApi<ApiAddProfile>(endpoint, {
+    label: profile,
+  });
+  return {
+    message: response.message,
+    profile: response.profile,
+  };
+};
+
+export const updateProfileOnApi = async (
+  userId: number,
+  profileId: number,
+  profile: string
+): Promise<ApiAddProfile> => {
+  const endpoint = `user/${userId}/profiles/${profileId}`;
+  const response = await patchDataOnApi<ApiAddProfile>(endpoint, {
     label: profile,
   });
   return {
