@@ -187,8 +187,21 @@ right-0;
 } */
 
 .profile.card {
-  @apply w-36 h-10 hover:shadow-lg
-  hover:bg-activeColor  duration-150;
+  @apply w-36 h-10;
+}
+
+.profile.selected {
+  @apply scale-110 bg-activeColor shadow-lg;
+}
+
+.profile.card.active {
+  @apply bg-activeGrayColor 
+  shadow-inner opacity-60 hover:opacity-100 
+  hover:shadow-lg hover:bg-activeColor  duration-150;
+}
+
+.profile.card.disabled {
+  @apply bg-activeGrayColor shadow-inner opacity-60;
 }
 
 .profileheader {

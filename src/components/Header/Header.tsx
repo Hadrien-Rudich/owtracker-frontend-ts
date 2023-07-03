@@ -8,7 +8,7 @@ import Tabs from './Tabs';
 
 function Header() {
   const { isLoggedIn } = authStore();
-  const { profile } = profileStore();
+  const { profile: profile } = profileStore();
 
   const renderLoggedInHeader = () => {
     if (profile) {

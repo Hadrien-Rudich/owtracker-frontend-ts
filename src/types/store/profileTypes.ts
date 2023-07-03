@@ -17,11 +17,11 @@ interface ProfileStore {
   newProfileLabel: string;
   setNewProfileLabel: (label: string) => void;
   clearNewProfileLabel: () => void;
-  updateProfile: boolean;
+  isUpdatingProfile: boolean;
+  setIsUpdatingProfile: (boolean: boolean) => void;
   updatedProfileLabel: string;
   setUpdatedProfileLabel: (label: string) => void;
-  toggleUpdateProfile: () => void;
-  toggleUpdateProfileLabel: boolean;
+  clearUpdatedProfileLabel: () => void;
   updateProfileLabel: (profileId: number, newProfileLabel: string) => void;
   deleteProfile: (profile: string) => void;
   reset: () => void;

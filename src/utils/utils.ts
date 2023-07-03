@@ -1,6 +1,7 @@
 import type { HistoryData } from '../types/store/historyTypes';
 import type { MapData } from '../types/store/gameReportTypes';
 import type { Month, Outcome } from '../types/utilsTypes';
+import type { ProfileData } from '../types/store/profileTypes';
 
 const months: Month[] = [
   { label: 'all', index: 0 },
@@ -71,6 +72,16 @@ const getResultClassNameFromGameResult = (gameResult: string) => {
   }
 };
 
+const verifyProfileLabelAvailability = (
+  newProfileLabel: string,
+  profilesData: ProfileData[]
+) => {
+  const profileLabelIsInUse = profilesData.some(
+    (profile) => profile.label === newProfileLabel
+  );
+  return profileLabelIsInUse;
+};
+
 export {
   filterHistory,
   filterMapTypes,
@@ -78,5 +89,6 @@ export {
   getResultClassName,
   getResultClassNameFromHistory,
   getResultClassNameFromGameResult,
+  verifyProfileLabelAvailability,
   months,
 };

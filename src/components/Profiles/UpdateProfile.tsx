@@ -5,41 +5,65 @@ import { profileStore } from '../../store/profileStore';
 import type { ProfileData } from '../../types/store/profileTypes';
 import { updateProfileOnApi } from '../../services/ApiService';
 import { authStore } from '../../store/authStore';
+import { verifyProfileLabelAvailability } from '../../utils/utils';
 
 function UpdateProfile({ p }: { p: ProfileData }) {
   const {
     profile,
+    profilesData,
     updatedProfileLabel,
-    setUpdatedProfileLabel: setNewProfileLabel,
-    toggleUpdateProfile,
+    setUpdatedProfileLabel,
+    setIsUpdatingProfile,
     updateProfileLabel,
+    clearUpdatedProfileLabel,
   } = profileStore();
 
   const { userData } = authStore();
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape') {
-      toggleUpdateProfile();
+      clearUpdatedProfileLabel();
+      setIsUpdatingProfile(false);
     }
   };
-
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewProfileLabel(event.target.value);
+    setUpdatedProfileLabel(event.target.value);
+    console.log(event.target.value);
   };
 
   const handleUpdateProfile = async () => {
-    await updateProfileOnApi(userData.id, p.id, updatedProfileLabel);
-    updateProfileLabel(p.id, updatedProfileLabel);
-    toggleUpdateProfile();
+    const profileLabelInUse = verifyProfileLabelAvailability(
+      updatedProfileLabel,
+      profilesData
+    );
+
+    if (profileLabelInUse) {
+      console.log(`You already have a profile called ${updatedProfileLabel}`);
+      return;
+    }
+
+    if (updatedProfileLabel === '') {
+      console.log('Profile name cannot be empty');
+      return;
+    }
+
+    try {
+      await updateProfileOnApi(userData.id, p.id, updatedProfileLabel);
+      updateProfileLabel(p.id, updatedProfileLabel);
+      setIsUpdatingProfile(false);
+    } catch (error) {
+      console.log(error);
+    }
+    // }
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await handleUpdateProfile();
+    handleUpdateProfile();
   };
 
   const handleCancel = () => {
-    toggleUpdateProfile();
+    setIsUpdatingProfile(false);
   };
 
   return (
@@ -60,7 +84,7 @@ function UpdateProfile({ p }: { p: ProfileData }) {
           } profilecard_container profile card hover:bg-activeColor hover:scale-110`}
         />
       </form>
-      <div className="flexdiv row gap-2">
+      <div className="button_container flexdiv row gap-2">
         <button
           type="button"
           onClick={handleUpdateProfile}

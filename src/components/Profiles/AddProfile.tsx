@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { ImPlus, ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
-
+import { verifyProfileLabelAvailability } from '../../utils/utils';
 import { profileStore } from '../../store/profileStore';
 import { addProfileToApi } from '../../services/ApiService';
 import useOutsideClick from '../useOutsideClick';
@@ -23,6 +23,7 @@ function AddProfile() {
     clearNewProfile,
     addNewProfile,
     clearProfile,
+    setIsUpdatingProfile,
   } = profileStore();
   const { userData } = authStore();
   const [inputField, setInputField] = useState(false);
@@ -33,7 +34,9 @@ function AddProfile() {
   };
   const handlePlusClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    setIsUpdatingProfile(false);
     setInputField(true);
+
     clearProfile();
   };
 
@@ -50,21 +53,29 @@ function AddProfile() {
   useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
   const handleAddProfile = async () => {
-    const profileNameInUse = profilesData.find((p) => newProfile === p.label);
+    const profileLabelInUse = verifyProfileLabelAvailability(
+      newProfile,
+      profilesData
+    );
 
-    if (newProfile !== '' && newProfile !== profileNameInUse?.label) {
-      try {
-        const profileAddedtoDb = await addProfileToApi(userData.id, newProfile);
-        addNewProfile(profileAddedtoDb.profile);
-
-        setInputField(false);
-      } catch (error) {
-        console.error('Failed to add profile', error);
-      }
-    } else {
-      console.log('name is already in use');
+    if (profileLabelInUse) {
+      console.log(`You already have a profile called ${newProfile}`);
+      return;
     }
-    clearNewProfile();
+
+    if (newProfile === '') {
+      console.log('Profile name cannot be empty');
+      return;
+    }
+
+    try {
+      const profileToApi = await addProfileToApi(userData.id, newProfile);
+      addNewProfile(profileToApi.profile);
+      setInputField(false);
+      clearNewProfile();
+    } catch (error) {
+      console.error('Failed to add profile', error);
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -92,20 +103,13 @@ function AddProfile() {
       )}
       {inputField && (
         <form onSubmit={handleSubmit}>
-          <div className="form_container flex gap-4">
-            <button
-              onClick={handleCancel}
-              type="button"
-              className="text-warning hover:scale-125"
-            >
-              <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
-            </button>
+          <div className="form_container ml-16 flex gap-6">
             <label htmlFor="newProfile">
               <input
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 ref={newProfileInputRef}
-                className="profile card"
+                className="profile card scale-110"
                 name="profile"
                 required
                 value={newProfile}
@@ -114,13 +118,22 @@ function AddProfile() {
                 type="text"
               />
             </label>
-            <button
-              type="submit"
-              onClick={handleAddProfile}
-              className="text-validate hover:scale-125"
-            >
-              <FaCheck className="sign h-5 w-5" />
-            </button>
+            <div className="button_container flexdiv row gap-2">
+              <button
+                type="submit"
+                onClick={handleAddProfile}
+                className="text-validate hover:scale-125"
+              >
+                <FaCheck className="sign h-5 w-5" />
+              </button>
+              <button
+                onClick={handleCancel}
+                type="button"
+                className="text-warning hover:scale-125"
+              >
+                <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
+              </button>
+            </div>
           </div>
         </form>
       )}

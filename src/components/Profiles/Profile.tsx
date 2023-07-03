@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
-import { ImCross } from 'react-icons/im';
 import { RiEditFill } from 'react-icons/ri';
+import { FaTrashAlt } from 'react-icons/fa';
+
 import { profileStore } from '../../store/profileStore';
 import { deleteProfileFromApi } from '../../services/ApiService';
 import { authStore } from '../../store/authStore';
@@ -13,9 +14,10 @@ function Profile() {
     setProfile,
     deleteProfile,
     clearProfile,
-    setUpdatedProfileLabel: setNewProfileLabel,
-    toggleUpdateProfileLabel: updateProfile,
-    toggleUpdateProfile,
+    setNewProfileLabel,
+    isUpdatingProfile,
+    setIsUpdatingProfile,
+    setUpdatedProfileLabel,
   } = profileStore();
 
   const { userData } = authStore();
@@ -23,6 +25,10 @@ function Profile() {
   const handleClick = (
     event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLInputElement>
   ) => {
+    if (isUpdatingProfile) {
+      return;
+    }
+
     if (profile === event.currentTarget.value) {
       clearProfile();
     } else {
@@ -43,8 +49,9 @@ function Profile() {
     }
   };
 
-  const handleEditClick = () => {
-    toggleUpdateProfile();
+  const handleEditClick = (event: MouseEvent<HTMLButtonElement>) => {
+    setUpdatedProfileLabel(event.currentTarget.value);
+    setIsUpdatingProfile(true);
   };
 
   return (
@@ -54,7 +61,8 @@ function Profile() {
           className="profile_container flex ml-8 gap-2 relative"
           key={p.label}
         >
-          {updateProfile && p.label.toLowerCase() === profile.toLowerCase() ? (
+          {isUpdatingProfile &&
+          p.label.toLowerCase() === profile.toLowerCase() ? (
             <UpdateProfile p={p} />
           ) : (
             <button
@@ -62,18 +70,22 @@ function Profile() {
               value={p.label.toLowerCase()}
               onClick={handleClick}
               type="button"
+              disabled={isUpdatingProfile}
               className={`${
+                // eslint-disable-next-line no-nested-ternary
                 p.label.toLowerCase() === profile.toLowerCase()
-                  ? 'scale-110 bg-activeColor shadow-lg'
-                  : 'bg-activeGrayColor shadow-inner opacity-60 hover:opacity-100'
-              } profilecard_container profile card hover:bg-activeColor hover:scale-110`}
+                  ? 'selected'
+                  : isUpdatingProfile // Check if updating profile
+                  ? 'disabled'
+                  : 'active'
+              } profilecard_container profile card`}
             >
               {p.label}
             </button>
           )}
 
           {p.label.toLowerCase() === profile.toLowerCase() &&
-            !updateProfile && (
+            !isUpdatingProfile && (
               <div className="button_container">
                 <button
                   value={p.label}
@@ -81,11 +93,12 @@ function Profile() {
                   type="button"
                   className=" absolute text-warning hover:scale-125 top-3 right-[-0.2rem]"
                 >
-                  <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
+                  <FaTrashAlt className="sign h-[1rem] w-[1rem]" />
                 </button>
                 <button
                   type="button"
                   className="absolute top-[0.65rem] left-0"
+                  value={p.label}
                   onClick={handleEditClick}
                 >
                   <RiEditFill className="sign h-5 w-5" />

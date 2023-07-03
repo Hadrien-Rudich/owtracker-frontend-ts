@@ -35,8 +35,6 @@ export const profileStore = create<ProfileStore>()((set) => ({
     set(() => ({
       updatedProfileLabel: '',
     })),
-  updateProfile: false,
-
   updatedProfileLabel: '',
 
   setUpdatedProfileLabel: (label) =>
@@ -44,10 +42,15 @@ export const profileStore = create<ProfileStore>()((set) => ({
       updatedProfileLabel: label,
     })),
 
-  toggleUpdateProfileLabel: false,
-  toggleUpdateProfile: () =>
-    set((state) => ({
-      toggleUpdateProfileLabel: !state.toggleUpdateProfileLabel,
+  clearUpdatedProfileLabel: () =>
+    set(() => ({
+      updatedProfileLabel: '',
+    })),
+
+  isUpdatingProfile: false,
+  setIsUpdatingProfile: (boolean: boolean) =>
+    set(() => ({
+      isUpdatingProfile: boolean,
     })),
   updateProfileLabel(profileId, newProfileLabel) {
     set((state) => ({
