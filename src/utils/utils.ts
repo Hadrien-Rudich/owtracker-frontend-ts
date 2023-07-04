@@ -1,4 +1,4 @@
-import type { HistoryData } from '../types/store/historyTypes';
+import type { GameData } from '../types/store/gameTypes';
 import type { MapData } from '../types/store/gameReportTypes';
 import type { Month, Outcome } from '../types/utilsTypes';
 import type { ProfileData } from '../types/store/profileTypes';
@@ -19,11 +19,13 @@ const months: Month[] = [
   { label: 'December', index: 12 },
 ];
 
-const filterHistory = (month: number, data: HistoryData[]) => {
+const filterGames = (month: number, gameData: GameData[]) => {
   if (Number(month) === 0) {
-    return data;
+    return gameData;
   }
-  return data.filter((game) => Number(game.date.slice(3)) === Number(month));
+  return gameData.filter(
+    (game) => Number(game.date.slice(3)) === Number(month)
+  );
 };
 
 const filterMapTypes = (mapsData: MapData[], mapType: string) => {
@@ -46,8 +48,8 @@ const getResultClassName = (gameResult: string, outcome: Outcome) => {
   return null;
 };
 
-const getResultClassNameFromHistory = (history: HistoryData) => {
-  switch (history.result) {
+const getResultClassNameFromGame = (game: GameData) => {
+  switch (game.result) {
     case 'win':
       return 'bg-activeWin';
     case 'loss':
@@ -59,8 +61,8 @@ const getResultClassNameFromHistory = (history: HistoryData) => {
   }
 };
 
-const getResultClassNameFromGameResult = (gameResult: string) => {
-  switch (gameResult) {
+const getResultClassNameFromResult = (result: string) => {
+  switch (result) {
     case 'win':
       return 'bg-activeWin';
     case 'loss':
@@ -83,12 +85,12 @@ const verifyProfileLabelAvailability = (
 };
 
 export {
-  filterHistory,
+  filterGames,
   filterMapTypes,
   capitalizeFirstLetter,
   getResultClassName,
-  getResultClassNameFromHistory,
-  getResultClassNameFromGameResult,
+  getResultClassNameFromGame,
+  getResultClassNameFromResult,
   verifyProfileLabelAvailability,
   months,
 };

@@ -3,7 +3,11 @@ import { gameReportStore } from '../../../store/gameReportStore';
 import { getResultClassName } from '../../../utils/utils';
 
 function Result() {
-  const { gameResult, addGameResult, clearGameResult } = gameReportStore();
+  const {
+    result: gameResult,
+    addResult: addGameResult,
+    clearResult: clearGameResult,
+  } = gameReportStore();
 
   const [outcomes] = useState([
     { label: 'win' },

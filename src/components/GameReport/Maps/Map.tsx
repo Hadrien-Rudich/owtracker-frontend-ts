@@ -3,18 +3,28 @@ import { gameReportStore } from '../../../store/gameReportStore';
 import { filterMapTypes } from '../../../utils/utils';
 
 function Map() {
-  const { map, addMap, clearMap, mapType, mapsData } = gameReportStore();
+  const {
+    map,
+    addMap,
+    clearMap,
+    addMapImageUrl,
+    clearMapImageUrl,
+    mapType,
+    mapsData,
+  } = gameReportStore();
 
-  const toggleMap = (m: string) => {
-    if (map !== m) {
-      addMap(m);
+  const handleMapClick = (
+    event: MouseEvent<HTMLButtonElement>,
+    imageUrl: string
+  ) => {
+    const targetMap = event.currentTarget.value;
+    if (map !== targetMap) {
+      addMap(targetMap);
+      addMapImageUrl(imageUrl);
     } else {
       clearMap();
+      clearMapImageUrl();
     }
-  };
-
-  const handleMapClick = (event: MouseEvent<HTMLButtonElement>) => {
-    toggleMap(event.currentTarget.value);
   };
 
   const filteredMaps = filterMapTypes(mapsData, mapType);
@@ -29,7 +39,7 @@ function Map() {
             }   list sm:w-1/4 w-2/4 `}
             key={m.id}
             value={m.slug}
-            onClick={handleMapClick}
+            onClick={(event) => handleMapClick(event, m.imageUrl)}
             type="button"
           >
             <img src={`images/maps/${m.imageUrl}`} alt="map" />

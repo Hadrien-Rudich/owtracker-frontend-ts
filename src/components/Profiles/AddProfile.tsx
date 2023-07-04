@@ -22,7 +22,7 @@ function AddProfile() {
     setNewProfile,
     clearNewProfile,
     addNewProfile,
-    clearProfile,
+    clearProfileData,
     setIsUpdatingProfile,
   } = profileStore();
   const { userData } = authStore();
@@ -37,7 +37,7 @@ function AddProfile() {
     setIsUpdatingProfile(false);
     setInputField(true);
 
-    clearProfile();
+    clearProfileData();
   };
 
   const handleCancel = () => {

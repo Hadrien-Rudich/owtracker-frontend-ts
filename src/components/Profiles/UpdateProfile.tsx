@@ -9,7 +9,7 @@ import { verifyProfileLabelAvailability } from '../../utils/utils';
 
 function UpdateProfile({ p }: { p: ProfileData }) {
   const {
-    profile,
+    profileData,
     profilesData,
     updatedProfileLabel,
     setUpdatedProfileLabel,
@@ -78,7 +78,7 @@ function UpdateProfile({ p }: { p: ProfileData }) {
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
           className={`${
-            p.label.toLowerCase() === profile.toLowerCase()
+            p.label === profileData.label
               ? 'scale-110 bg-activeColor shadow-lg'
               : 'bg-activeGrayColor shadow-inner opacity-60 hover:opacity-100'
           } profilecard_container profile card hover:bg-activeColor hover:scale-110`}

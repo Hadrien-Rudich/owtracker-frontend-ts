@@ -2,16 +2,28 @@ import { MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
 
 function Hero() {
-  const { rolesData, heroes, heroesData, addHero, removeHero } =
-    gameReportStore();
+  const {
+    rolesData,
+    heroes,
+    heroesData,
+    addHero,
+    removeHero,
+    addHeroImageUrl,
+    removeHeroImageUrl,
+  } = gameReportStore();
 
-  const handleHeroClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleHeroClick = (
+    event: MouseEvent<HTMLButtonElement>,
+    imageUrl: string
+  ) => {
     const targetHero = event.currentTarget.value;
     const heroInList = heroes.includes(targetHero);
     if (!heroInList) {
       addHero(targetHero);
+      addHeroImageUrl(imageUrl);
     } else {
       removeHero(targetHero);
+      removeHeroImageUrl(imageUrl);
     }
   };
 
@@ -39,7 +51,7 @@ function Hero() {
                       className="bg-mainColor hover:bg-activeColor shadow-lg"
                       key={h.slug}
                       value={h.slug}
-                      onClick={handleHeroClick}
+                      onClick={(event) => handleHeroClick(event, h.imageUrl)}
                       type="button"
                     >
                       <img
