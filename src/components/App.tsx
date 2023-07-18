@@ -8,6 +8,7 @@ import HomePage from './Homepage/HomePage';
 import Games from './Games/Games';
 import Profiles from './Profiles/Profiles';
 import Account from './Account/Account';
+import RQ from './RQ';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/rq" element={<RQ />} />
+
         <Route path="/login" element={<LogInForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/games" element={<Games />} />
