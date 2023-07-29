@@ -1,9 +1,9 @@
 import { MouseEvent } from 'react';
-import { historyStore } from '../../store/historyStore';
+import { gameStore } from '../../store/gameStore';
 import { months } from '../../utils/utils';
 
 function MonthTabs() {
-  const { currentMonth, setCurrentMonth } = historyStore();
+  const { currentMonth, setCurrentMonth } = gameStore();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setCurrentMonth(Number(event.currentTarget.value));

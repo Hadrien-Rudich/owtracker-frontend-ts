@@ -1,18 +1,28 @@
 import { create } from 'zustand';
-import type { ProfileStore } from '../types/store/profileTypes';
+import type { ProfileStore, ProfileData } from '../types/store/profileTypes';
 
 export const profileStore = create<ProfileStore>()((set) => ({
   profilesData: [],
-  addProfilesData: (profiles) => set(() => ({ profilesData: profiles })),
-  profile: '',
-  setProfile: (profile) =>
+  addProfilesData: (profilesOb) => set(() => ({ profilesData: profilesOb })),
+  profileData: { label: '' } as ProfileData,
+  setProfileData: (profileObj) =>
     set(() => ({
-      profile,
+      profileData: profileObj,
     })),
-  clearProfile: () =>
+  clearProfileData: () =>
     set(() => ({
-      profile: '',
+      profileData: {} as ProfileData,
     })),
+
+  // profile: '',
+  // setProfile: (profile) =>
+  //   set(() => ({
+  //     profile,
+  //   })),
+  // clearProfile: () =>
+  //   set(() => ({
+  //     profile: '',
+  //   })),
   newProfile: '',
   setNewProfile: (profile) =>
     set(() => ({

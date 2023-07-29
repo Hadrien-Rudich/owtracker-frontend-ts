@@ -8,10 +8,10 @@ import Tabs from './Tabs';
 
 function Header() {
   const { isLoggedIn } = authStore();
-  const { profile: profile } = profileStore();
+  const { profileData } = profileStore();
 
   const renderLoggedInHeader = () => {
-    if (profile) {
+    if (profileData.id) {
       return (
         <div className="flex justify-center items-end">
           <div className="Tabs_container hidden md:block  ">

@@ -11,7 +11,7 @@ function Profiles() {
   const navigate = useNavigate();
 
   const { isLoggedIn, userData } = authStore();
-  const { profile, profilesData, addProfilesData } = profileStore();
+  const { profileData, profilesData, addProfilesData } = profileStore();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -34,7 +34,7 @@ function Profiles() {
 
   return (
     <div className="Profiles_container flexdiv col lg:mt-[8.5rem] my-24 relative">
-      {profile === '' && (
+      {profileData.label === '' && (
         <div className="title_container profileheader flexdiv">
           <h3 className="">
             {profilesData.length === 0

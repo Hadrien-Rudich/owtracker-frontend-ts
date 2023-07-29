@@ -2,13 +2,13 @@ import { create } from 'zustand';
 import { ResetStore } from '../types/store/resetType';
 
 import { gameReportStore } from './gameReportStore';
-import { historyStore } from './historyStore';
+import { gameStore } from './gameStore';
 import { profileStore } from './profileStore';
 
 export const resetStore = create<ResetStore>(() => ({
   resetAllStores: () => {
     gameReportStore.getState().reset();
-    historyStore.getState().reset();
+    gameStore.getState().reset();
     profileStore.getState().reset();
   },
 }));

@@ -1,9 +1,15 @@
 import React from 'react';
-import gameReportStore from '../../../store/gameReportStore';
-import getResultClassNameFromGameResult from '../../../utils/outcomes';
+import { gameReportStore } from '../../../store/gameReportStore';
+import { getResultClassNameFromGameResult } from '../../../utils/utils';
 
 function GameReportRecap() {
-  const { map, mapsData, heroes, heroesData, gameResult } = gameReportStore();
+  const {
+    map,
+    mapsData,
+    heroes,
+    heroesData,
+    result: gameResult,
+  } = gameReportStore();
 
   return (
     <div className="historyDetails_container flexdiv col gap  text-secondaryText">

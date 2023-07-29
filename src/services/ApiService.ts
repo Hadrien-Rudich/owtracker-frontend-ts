@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, Method } from 'axios';
 import type { UserData } from '../types/store/authTypes';
-import type { HistoryData } from '../types/store/historyTypes';
+import type { GameData } from '../types/store/gameTypes';
 import type { ProfileData } from '../types/store/profileTypes';
 import type {
   HeroData,
@@ -37,6 +37,7 @@ const fetchDataFromApi = async <T>(
 const postDataToApi = async <T>(endpoint: string, data: any): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await api.post(endpoint, data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -87,11 +88,7 @@ export const fetchMapTypesFromApi = async (): Promise<MapTypeData[]> => {
   return fetchDataFromApi(endpoint, 'GET');
 };
 
-export const fetchHistoryFromApi = async (): Promise<HistoryData[]> => {
-  const endpoint = 'history';
-  return fetchDataFromApi(endpoint, 'GET');
-};
-interface ApiUserData {
+interface UserVerified {
   accessToken: string;
   user: { id: number; email: string; battleTag: string; refreshToken: string };
 }
@@ -99,9 +96,9 @@ interface ApiUserData {
 export const logIn = async (
   email: string,
   password: string
-): Promise<ApiUserData> => {
+): Promise<UserVerified> => {
   const endpoint = 'login';
-  const response = await postDataToApi<ApiUserData>(endpoint, {
+  const response = await postDataToApi<UserVerified>(endpoint, {
     email,
     password,
   });
@@ -133,12 +130,11 @@ export const fetchUserFromApi = async (userId: number): Promise<UserData> => {
 export const fetchProfilesFromApi = async (
   userId: number
 ): Promise<ProfileData[]> => {
-  // const endpoint = `user/2/profiles`;
   const endpoint = `user/${userId}/profiles`;
   return fetchDataFromApi(endpoint, 'GET');
 };
 
-interface ApiAddProfile {
+interface ProfileAddedtoApi {
   message: string;
   profile: { id: number; userId: number; label: string };
 }
@@ -146,9 +142,9 @@ interface ApiAddProfile {
 export const addProfileToApi = async (
   userId: number,
   profile: string
-): Promise<ApiAddProfile> => {
+): Promise<ProfileAddedtoApi> => {
   const endpoint = `user/${userId}/profiles`;
-  const response = await postDataToApi<ApiAddProfile>(endpoint, {
+  const response = await postDataToApi<ProfileAddedtoApi>(endpoint, {
     label: profile,
   });
   return {
@@ -161,9 +157,9 @@ export const updateProfileOnApi = async (
   userId: number,
   profileId: number,
   profile: string
-): Promise<ApiAddProfile> => {
+): Promise<ProfileAddedtoApi> => {
   const endpoint = `user/${userId}/profiles/${profileId}`;
-  const response = await patchDataOnApi<ApiAddProfile>(endpoint, {
+  const response = await patchDataOnApi<ProfileAddedtoApi>(endpoint, {
     label: profile,
   });
   return {
@@ -171,7 +167,7 @@ export const updateProfileOnApi = async (
     profile: response.profile,
   };
 };
-interface ApiDeleteProfile {
+interface ProfileDeletedFromApi {
   message: string;
   profile: { id: number; userId: number };
 }
@@ -181,8 +177,61 @@ export const deleteProfileFromApi = async (
   profileId: number
 ): Promise<void> => {
   const endpoint = `user/${userId}/profiles/${profileId}`;
-  await deleteDataFromApi<ApiDeleteProfile>(endpoint, {
+  await deleteDataFromApi<ProfileDeletedFromApi>(endpoint, {
     id: profileId,
     userId,
   });
+};
+
+interface GameAddedToApi {
+  message: string;
+  game: {
+    id: number;
+    userId: number;
+    profileId: number;
+    result: string;
+    map: string;
+    mapType: string;
+    mapImageUrl: string;
+    heroes: string[];
+    heroesImageUrl: string[];
+    date: string;
+  };
+}
+
+interface GameSubmitted {
+  result: string;
+  map: string;
+  mapType: string;
+  mapImageUrl: string;
+  heroes: string[];
+  heroesImageUrl: string[];
+}
+
+export const addGameToApi = async (
+  userId: number,
+  profileId: number,
+  gameObj: GameSubmitted
+): Promise<GameAddedToApi> => {
+  const endpoint = `user/${userId}/profiles/${profileId}/games`;
+  const response = await postDataToApi<GameAddedToApi>(endpoint, {
+    userId,
+    profileId,
+    ...gameObj,
+  });
+
+  return {
+    message: response.message,
+    game: response.game,
+  };
+};
+
+export const fetchGamesFromApi = async (
+  userId: number,
+  profileId: number
+): Promise<GameData[]> => {
+  const endpoint = `user/${userId}/profiles/${profileId}/games`;
+  console.log(endpoint);
+
+  return fetchDataFromApi(endpoint, 'GET');
 };

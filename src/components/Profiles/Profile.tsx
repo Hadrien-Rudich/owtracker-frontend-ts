@@ -6,14 +6,15 @@ import { profileStore } from '../../store/profileStore';
 import { deleteProfileFromApi } from '../../services/ApiService';
 import { authStore } from '../../store/authStore';
 import UpdateProfile from './UpdateProfile';
+import type { ProfileData } from '../../types/store/profileTypes';
 
 function Profile() {
   const {
     profilesData,
-    profile,
-    setProfile,
+    profileData,
+    setProfileData,
+    clearProfileData,
     deleteProfile,
-    clearProfile,
     setNewProfileLabel,
     isUpdatingProfile,
     setIsUpdatingProfile,
@@ -22,19 +23,21 @@ function Profile() {
 
   const { userData } = authStore();
 
-  const handleClick = (
-    event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLInputElement>
+  const handleProfileClick = (
+    event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLInputElement>,
+    profileObj: ProfileData
   ) => {
+    const selectedProfile = event.currentTarget.value;
+
     if (isUpdatingProfile) {
       return;
     }
 
-    if (profile === event.currentTarget.value) {
-      clearProfile();
+    if (profileData.label === selectedProfile) {
+      clearProfileData();
     } else {
-      const selectedProfile = event.currentTarget.value;
-      setProfile(selectedProfile);
-      setNewProfileLabel(selectedProfile);
+      setProfileData(profileObj);
+      setNewProfileLabel(profileObj.label);
     }
   };
 
@@ -61,21 +64,26 @@ function Profile() {
           className="profile_container flex ml-8 gap-2 relative"
           key={p.label}
         >
-          {isUpdatingProfile &&
-          p.label.toLowerCase() === profile.toLowerCase() ? (
+          {isUpdatingProfile && p.label === profileData.label ? (
             <UpdateProfile p={p} />
           ) : (
             <button
-              key={p.id}
-              value={p.label.toLowerCase()}
-              onClick={handleClick}
+              key={p.label}
+              value={p.label}
+              onClick={(event) =>
+                handleProfileClick(event, {
+                  id: p.id,
+                  label: p.label,
+                  userId: p.userId,
+                })
+              }
               type="button"
               disabled={isUpdatingProfile}
               className={`${
                 // eslint-disable-next-line no-nested-ternary
-                p.label.toLowerCase() === profile.toLowerCase()
+                p.label === profileData.label
                   ? 'selected'
-                  : isUpdatingProfile // Check if updating profile
+                  : isUpdatingProfile
                   ? 'disabled'
                   : 'active'
               } profilecard_container profile card`}
@@ -84,27 +92,26 @@ function Profile() {
             </button>
           )}
 
-          {p.label.toLowerCase() === profile.toLowerCase() &&
-            !isUpdatingProfile && (
-              <div className="button_container">
-                <button
-                  value={p.label}
-                  onClick={handleDeleteClick}
-                  type="button"
-                  className=" absolute text-warning hover:scale-125 top-3 right-[-0.2rem]"
-                >
-                  <FaTrashAlt className="sign h-[1rem] w-[1rem]" />
-                </button>
-                <button
-                  type="button"
-                  className="absolute top-[0.65rem] left-0"
-                  value={p.label}
-                  onClick={handleEditClick}
-                >
-                  <RiEditFill className="sign h-5 w-5" />
-                </button>
-              </div>
-            )}
+          {p.label === profileData.label && !isUpdatingProfile && (
+            <div className="button_container">
+              <button
+                value={p.label}
+                onClick={handleDeleteClick}
+                type="button"
+                className=" absolute text-warning hover:scale-125 top-3 right-[-0.2rem]"
+              >
+                <FaTrashAlt className="sign h-[1rem] w-[1rem]" />
+              </button>
+              <button
+                type="button"
+                className="absolute top-[0.65rem] left-0"
+                value={p.label}
+                onClick={handleEditClick}
+              >
+                <RiEditFill className="sign h-5 w-5" />
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </div>

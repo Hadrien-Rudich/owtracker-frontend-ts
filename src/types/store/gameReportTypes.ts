@@ -33,6 +33,9 @@ interface GameReportStore {
   addHero: (hero: string) => void;
   removeHero: (hero: string) => void;
   clearHeroes: () => void;
+  heroesImageUrl: string[];
+  addHeroImageUrl: (heroImageUrl: string) => void;
+  removeHeroImageUrl: (heroImageUrl: string) => void;
   mapsData: MapData[] | [];
   addMapsData: (maps: MapData[]) => void;
   map: string; // Used to be NULL
@@ -43,9 +46,13 @@ interface GameReportStore {
   addMapType: (mapType: string) => void;
   clearMapType: () => void;
   clearMap: () => void;
-  gameResult: string; // Used to be NULL
-  addGameResult: (gameResult: string) => void;
-  clearGameResult: () => void;
+  mapImageUrl: string; // Used to be NULL
+  addMapImageUrl: (mapImageUrl: string) => void;
+  clearMapImageUrl: () => void;
+
+  result: string; // Used to be NULL
+  addResult: (result: string) => void;
+  clearResult: () => void;
   rolesData: RoleData[] | [];
   addRolesData: (roles: RoleData[]) => void;
   role: string; // Used to be NULL
