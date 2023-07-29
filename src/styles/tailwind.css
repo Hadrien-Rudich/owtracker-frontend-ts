@@ -238,6 +238,31 @@ sm:text-xl text-lg text-secondaryText;
   @apply hover:scale-110 drop-shadow-lg  opacity-40 hover:opacity-100 duration-150 ease-in-out;
 }
 
+.progressBar {
+  width: 33%;
+  height: 2rem;
+  background-color: rgb(255 255 255);
+  border-radius: 0.125rem;
+  color: rgb(255 255 255);
+  position: absolute;
+}
+
+.progressBar::before {
+  content: attr(data-label);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0rem;
+  top: 0rem;
+  bottom: 0rem;
+  width: calc(var(--width, 0) * 1%);
+  min-width: 0rem;
+  max-width: calc(100%);
+  background-color: rgb(67 160 71);
+  border-radius: 0.125rem;
+  padding: 0.5rem;
+}
+
 .intenseShadow {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
