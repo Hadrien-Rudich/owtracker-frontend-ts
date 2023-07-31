@@ -62,6 +62,8 @@ interface GameReportStore {
   toggleRoleModal: () => void;
   mapModal: boolean;
   toggleMapModal: () => void;
+  saveGame: boolean;
+  toggleSaveGame: () => void;
   reset: () => void;
 }
 

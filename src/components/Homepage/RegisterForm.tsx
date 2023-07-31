@@ -1,6 +1,5 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authStore } from '../../store/authStore';
 import InputField from '../InputField';
 import { register } from '../../services/ApiService';
 
@@ -9,8 +8,6 @@ function RegisterForm() {
   const [password, setPassword] = useState('');
   const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const { isLoggedIn, setLoggedIn } = authStore();
 
   const navigate = useNavigate();
 
@@ -39,18 +36,14 @@ function RegisterForm() {
     event.preventDefault();
 
     try {
-      await register(email, password, battleTag);
-      setLoggedIn();
+      const newUser = await register(email, password, battleTag);
+      if (newUser) {
+        navigate('/login');
+      }
     } catch (error) {
       console.error('Failed to register user', error);
     }
   }
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/profiles');
-    }
-  });
 
   return (
     <div className="register_container flexdiv row lg:mt-44 my-24">

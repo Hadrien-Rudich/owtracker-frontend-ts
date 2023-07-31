@@ -239,8 +239,8 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .progressBar {
-  width: 33%;
-  height: 2rem;
+  width: 50%;
+  height: 3rem;
   background-color: rgb(255 255 255);
   border-radius: 0.125rem;
   color: rgb(255 255 255);
