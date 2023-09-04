@@ -1,19 +1,14 @@
 import { gameReportStore } from '../../store/gameReportStore';
 
 function Reset() {
-  const {
-    clearMapType,
-    clearMap,
-    clearHeroes,
-    clearResult: clearGameResult,
-    clearRole,
-  } = gameReportStore();
+  const { clearMapType, clearMap, clearHeroes, clearResult, clearRole } =
+    gameReportStore();
 
   const resetSelection = () => {
     clearMapType();
     clearMap();
     clearHeroes();
-    clearGameResult();
+    clearResult();
     clearRole();
   };
 

@@ -112,9 +112,21 @@ export const register = async (
   email: string,
   password: string,
   battleTag: string
-): Promise<void> => {
+): Promise<boolean> => {
   const endpoint = 'register';
-  await postDataToApi(endpoint, { email, password, battleTag });
+  try {
+    const response: any = await postDataToApi(endpoint, {
+      email,
+      password,
+      battleTag,
+    });
+    if (response.message === 'New User created') {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const logOut = async (): Promise<void> => {

@@ -6,8 +6,17 @@ import { profileStore } from '../../store/profileStore';
 import { gameStore } from '../../store/gameStore';
 
 function SubmitForm() {
-  const { heroes, map, mapImageUrl, result, mapType, heroesImageUrl } =
-    gameReportStore();
+  const {
+    heroes,
+    map,
+    mapImageUrl,
+    result,
+    mapType,
+    heroesImageUrl,
+    saveGame,
+    toggleSaveGame,
+    reset,
+  } = gameReportStore();
 
   const { userData } = authStore();
   const { profileData } = profileStore();
@@ -15,6 +24,9 @@ function SubmitForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    toggleSaveGame();
+
     const gameToApi = await addGameToApi(userData.id, profileData.id, {
       result,
       map,
@@ -25,12 +37,20 @@ function SubmitForm() {
     });
 
     addGameData(gameToApi.game);
+    setTimeout(() => {
+      toggleSaveGame();
+      reset();
+    }, 1000);
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit} action="submit">
-        <button type="submit" className="button bg-thirdColor">
+        <button
+          type="submit"
+          disabled={saveGame}
+          className={!saveGame ? 'button bg-thirdColor' : 'button cancel'}
+        >
           SUBMIT
         </button>
       </form>

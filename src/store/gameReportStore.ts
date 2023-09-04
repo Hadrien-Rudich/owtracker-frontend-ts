@@ -47,6 +47,8 @@ export const gameReportStore = create<GameReportStore>()((set) => ({
   toggleRoleModal: () => set((state) => ({ roleModal: !state.roleModal })),
   mapModal: false,
   toggleMapModal: () => set((state) => ({ mapModal: !state.mapModal })),
+  saveGame: false,
+  toggleSaveGame: () => set((state) => ({ saveGame: !state.saveGame })),
   reset: () =>
     set(() => ({
       heroesData: [],
