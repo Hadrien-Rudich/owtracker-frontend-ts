@@ -20,7 +20,7 @@ function SubmitForm() {
 
   const { userData } = authStore();
   const { profileData } = profileStore();
-  const { addGameData, gamesData } = gameStore();
+  const { addGameData } = gameStore();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

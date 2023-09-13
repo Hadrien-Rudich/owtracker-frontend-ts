@@ -1,8 +1,13 @@
-import { useEffect } from 'react';
+import { useQueries } from '@tanstack/react-query';
 import {
   fetchMapsFromApi,
   fetchMapTypesFromApi,
 } from '../../../services/ApiService';
+import type {
+  MapData,
+  MapTypeData,
+} from '../../../types/store/gameReportTypes';
+
 import MapTypes from './MapTypes';
 import Map from './Map';
 import { gameReportStore } from '../../../store/gameReportStore';
@@ -10,31 +15,33 @@ import { gameReportStore } from '../../../store/gameReportStore';
 function Maps() {
   const { addMapsData, addMapTypesData } = gameReportStore();
 
-  useEffect(() => {
-    async function getMapsData() {
-      try {
-        const data = await fetchMapsFromApi();
-        addMapsData(data);
-      } catch (error) {
-        console.error('Failed to fetch maps data', error);
-      }
-    }
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ['mapsData'],
+        queryFn: fetchMapsFromApi,
+        onSuccess: (fetchedData: MapData[]) => {
+          addMapsData(fetchedData);
+        },
+        staleTime: 1000 * 60 * 60 * 24 * 30,
+        cacheTime: 1000 * 60 * 60 * 24 * 30 * 30,
+      },
 
-    getMapsData();
-  }, [addMapsData]);
+      {
+        queryKey: ['mapTypesData'],
+        queryFn: fetchMapTypesFromApi,
+        onSuccess: (fetchedData: MapTypeData[]) => {
+          addMapTypesData(fetchedData);
+        },
+        staleTime: 1000 * 60 * 60 * 24 * 30,
+        cacheTime: 1000 * 60 * 60 * 24 * 30 * 30,
+      },
+    ],
+  });
 
-  useEffect(() => {
-    async function getTypesData() {
-      try {
-        const data = await fetchMapTypesFromApi();
-        addMapTypesData(data);
-      } catch (error) {
-        console.error('Failed to fetch maps data', error);
-      }
-    }
-
-    getTypesData();
-  }, [addMapTypesData]);
+  // if (results.some((result) => result.isLoading)) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div className="maps_container bg-mainColor rounded-sm intenseShadow">

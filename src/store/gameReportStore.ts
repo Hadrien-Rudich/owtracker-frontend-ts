@@ -51,16 +51,12 @@ export const gameReportStore = create<GameReportStore>()((set) => ({
   toggleSaveGame: () => set((state) => ({ saveGame: !state.saveGame })),
   reset: () =>
     set(() => ({
-      heroesData: [],
       heroes: [],
       heroesImageUrl: [],
-      mapsData: [],
       map: '',
       mapImageUrl: '',
-      mapTypesData: [],
       mapType: '',
       result: '',
-      rolesData: [],
       role: '',
       roleModal: false,
       mapModal: false,

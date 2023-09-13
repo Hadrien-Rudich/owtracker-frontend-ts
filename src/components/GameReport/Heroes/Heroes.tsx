@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useQueries } from '@tanstack/react-query';
+import type { HeroData, RoleData } from '../../../types/store/gameReportTypes';
 import {
   fetchHeroesFromApi,
   fetchRolesFromApi,
@@ -9,31 +10,33 @@ import Hero from './Hero';
 function Heroes() {
   const { addHeroesData, addRolesData } = gameReportStore();
 
-  useEffect(() => {
-    async function getHeroesData() {
-      try {
-        const data = await fetchHeroesFromApi();
-        addHeroesData(data);
-      } catch (error) {
-        console.error('Failed to fetch heroes data', error);
-      }
-    }
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ['heroesData'],
+        queryFn: fetchHeroesFromApi,
+        onSuccess: (fetchedData: HeroData[]) => {
+          addHeroesData(fetchedData);
+        },
+        staleTime: 1000 * 60 * 60 * 24 * 30,
+        cacheTime: 1000 * 60 * 60 * 24 * 30 * 30,
+      },
 
-    getHeroesData();
-  }, [addHeroesData]);
+      {
+        queryKey: ['rolesData'],
+        queryFn: fetchRolesFromApi,
+        onSuccess: (fetchedData: RoleData[]) => {
+          addRolesData(fetchedData);
+        },
+        staleTime: 1000 * 60 * 60 * 24 * 30,
+        cacheTime: 1000 * 60 * 60 * 24 * 30 * 30,
+      },
+    ],
+  });
 
-  useEffect(() => {
-    async function getRolesData() {
-      try {
-        const data = await fetchRolesFromApi();
-        addRolesData(data);
-      } catch (error) {
-        console.error('Failed to fetch roles data', error);
-      }
-    }
-
-    getRolesData();
-  }, [addRolesData]);
+  // if (results.some((result) => result.isLoading)) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div className="heroes_container bg-mainColor rounded-sm my-6 intenseShadow">

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from 'react-loader-spinner';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
+import type { GameData } from '../../types/store/gameTypes';
 
 import { fetchGamesFromApi } from '../../services/ApiService';
 
@@ -24,14 +25,12 @@ function Games() {
     return data;
   };
 
-  // Use useQuery to fetch and cache games data
   const { isLoading, isFetching, isError, isSuccess } = useQuery(
     ['gamesData'],
     fetchGamesData,
     {
       enabled: isLoggedIn, // Fetch data only when isLoggedIn is true
-      onSuccess: (fetchedData) => {
-        // Update the gameStore with the fetched data
+      onSuccess: (fetchedData: GameData[]) => {
         addGamesData(fetchedData);
       },
     }
