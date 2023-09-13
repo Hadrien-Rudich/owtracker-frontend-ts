@@ -37,7 +37,6 @@ const fetchDataFromApi = async <T>(
 const postDataToApi = async <T>(endpoint: string, data: any): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await api.post(endpoint, data);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -231,7 +230,7 @@ export const addGameToApi = async (
     profileId,
     ...gameObj,
   });
-
+  console.log('I am the response from submit', response);
   return {
     message: response.message,
     game: response.game,

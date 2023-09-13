@@ -53,8 +53,10 @@ export const gameReportStore = create<GameReportStore>()((set) => ({
     set(() => ({
       heroesData: [],
       heroes: [],
+      heroesImageUrl: [],
       mapsData: [],
       map: '',
+      mapImageUrl: '',
       mapTypesData: [],
       mapType: '',
       result: '',

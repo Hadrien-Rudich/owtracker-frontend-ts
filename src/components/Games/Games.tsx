@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
@@ -16,27 +17,35 @@ function Games() {
   const { addGamesData, gamesData } = gameStore();
   const { profileData } = profileStore();
 
+  // Define a function to fetch games data
+  const fetchGamesData = async () => {
+    const data = await fetchGamesFromApi(userData.id, profileData.id);
+    return data;
+  };
+
+  // Use useQuery to fetch and cache games data
+  const { isLoading, isError } = useQuery(['gamesData'], fetchGamesData, {
+    enabled: isLoggedIn, // Fetch data only when isLoggedIn is true
+    onSuccess: (fetchedData) => {
+      // Update the gameStore with the fetched data
+      addGamesData(fetchedData);
+      console.log('I am GAMES the parent', gamesData);
+    },
+  });
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
     }
   }, [isLoggedIn, navigate]);
 
-  useEffect(() => {
-    async function getGamesData() {
-      try {
-        const data = await fetchGamesFromApi(userData.id, profileData.id);
-        addGamesData(data);
-        console.log('I am gamesData', gamesData);
-      } catch (error) {
-        console.error('Failed to fetch history data', error);
-      }
-    }
+  if (isLoading) {
+    return <div>Loading...</div>; // Handle loading state
+  }
 
-    getGamesData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addGamesData, userData, profileData.id]);
-
+  if (isError) {
+    return <div>Error fetching data</div>; // Handle error state
+  }
   return (
     <div className="History_container lg:mt-[8.5rem] my-24 container mx-auto">
       <div className="MonthTabs_container">
