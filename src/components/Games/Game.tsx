@@ -8,12 +8,6 @@ import {
 function Game() {
   const { gamesData, currentMonth } = gameStore();
 
-  // Ensure that gamesData is an array and currentMonth is defined
-  // if (!Array.isArray(gamesData) || !currentMonth) {
-  console.log('I am GAME the child', gamesData);
-  //   return <div>No data available.</div>;
-  // }
-
   const filteredGames = filterGames(currentMonth, gamesData);
 
   return (

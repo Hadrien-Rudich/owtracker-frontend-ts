@@ -18,7 +18,7 @@ function Account() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <div className="Account_container flexdiv col lg:mt-[8.5rem] my-24 relative">
+    <div className="Account_container flexdiv col lg:mt-[8.5rem] relative">
       <div className="Tabs_container absolute sm:top-[-3.5rem] top-[-2.98rem]">
         <Tabs />
       </div>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { ProgressBar } from 'react-loader-spinner';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
 
@@ -24,14 +25,17 @@ function Games() {
   };
 
   // Use useQuery to fetch and cache games data
-  const { isLoading, isError } = useQuery(['gamesData'], fetchGamesData, {
-    enabled: isLoggedIn, // Fetch data only when isLoggedIn is true
-    onSuccess: (fetchedData) => {
-      // Update the gameStore with the fetched data
-      addGamesData(fetchedData);
-      console.log('I am GAMES the parent', gamesData);
-    },
-  });
+  const { isLoading, isFetching, isError, isSuccess } = useQuery(
+    ['gamesData'],
+    fetchGamesData,
+    {
+      enabled: isLoggedIn, // Fetch data only when isLoggedIn is true
+      onSuccess: (fetchedData) => {
+        // Update the gameStore with the fetched data
+        addGamesData(fetchedData);
+      },
+    }
+  );
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -39,23 +43,36 @@ function Games() {
     }
   }, [isLoggedIn, navigate]);
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Handle loading state
+  if (isLoading || isFetching) {
+    return (
+      <div className="flexdiv">
+        <ProgressBar
+          height="300"
+          width="300"
+          borderColor="#ffffff"
+          barColor="#51E5FF"
+        />
+      </div>
+    );
   }
 
   if (isError) {
-    return <div>Error fetching data</div>; // Handle error state
+    return (
+      <div className="mt-24 text-5xl text-activeColor">NO GAMES FOUND</div>
+    ); // Handle error state
   }
-  return (
-    <div className="History_container lg:mt-[8.5rem] my-24 container mx-auto">
-      <div className="MonthTabs_container">
-        <MonthTabs />
-      </div>
-      <div className="HistoryDetails_container mt-12">
-        <Game />
-      </div>
-    </div>
-  );
-}
 
+  if (isSuccess && gamesData.length > 0) {
+    return (
+      <div className="History_container lg:mt-[8.5rem] my-24 container mx-auto">
+        <div className="MonthTabs_container">
+          <MonthTabs />
+        </div>
+        <div className="HistoryDetails_container mt-12">
+          <Game />
+        </div>
+      </div>
+    );
+  }
+}
 export default Games;

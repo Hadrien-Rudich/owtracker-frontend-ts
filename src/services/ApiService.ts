@@ -230,7 +230,6 @@ export const addGameToApi = async (
     profileId,
     ...gameObj,
   });
-  console.log('I am the response from submit', response);
   return {
     message: response.message,
     game: response.game,

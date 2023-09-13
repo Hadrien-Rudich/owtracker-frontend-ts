@@ -37,11 +37,9 @@ function SubmitForm() {
     });
 
     addGameData(gameToApi.game);
-    console.log('I am the SUBMIT2', gameToApi);
     setTimeout(() => {
       toggleSaveGame();
       reset();
-      console.log('I am the SUBMIT AFTER TIMEOUT', gamesData);
     }, 1000);
   };
 
