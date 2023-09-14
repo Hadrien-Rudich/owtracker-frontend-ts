@@ -241,7 +241,5 @@ export const fetchGamesFromApi = async (
   profileId: number
 ): Promise<GameData[]> => {
   const endpoint = `user/${userId}/profiles/${profileId}/games`;
-  console.log(endpoint);
-
   return fetchDataFromApi(endpoint, 'GET');
 };

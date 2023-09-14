@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import LoadingSpinner from '../LoadingSpinner';
 import { authStore } from '../../store/authStore';
 import { profileStore } from '../../store/profileStore';
 import AddProfile from './AddProfile';
@@ -19,18 +21,18 @@ function Profiles() {
     }
   }, [isLoggedIn, navigate]);
 
-  useEffect(() => {
-    const getProfilesData = async () => {
-      try {
-        const data = await fetchProfilesFromApi(userData.id);
-        addProfilesData(data);
-      } catch (error) {
-        console.error('Failed to fetch profiles data', error);
-      }
-    };
+  const { isLoading, isFetching, isError, isSuccess } = useQuery(
+    ['profilesData'],
+    async () => {
+      const data = await fetchProfilesFromApi(userData.id);
+      addProfilesData(data);
+      return data;
+    }
+  );
 
-    getProfilesData();
-  }, [addProfilesData, userData.id]);
+  if (isLoading || isFetching) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="Profiles_container flexdiv col lg:mt-[8.5rem] my-24 relative">

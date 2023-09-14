@@ -10,9 +10,6 @@ interface ProfileStore {
   profileData: ProfileData;
   setProfileData: (profileObj: ProfileData) => void;
   clearProfileData: () => void;
-  // profile: string;
-  // setProfile: (profile: string) => void;
-  // clearProfile: () => void;
   newProfile: string;
   setNewProfile: (profile: string) => void;
   addNewProfile: (newProfileObj: ProfileData) => void;

@@ -16,6 +16,7 @@ function UpdateProfile({ p }: { p: ProfileData }) {
     setIsUpdatingProfile,
     updateProfileLabel,
     clearUpdatedProfileLabel,
+    setProfileData,
   } = profileStore();
 
   const { userData } = authStore();
@@ -28,7 +29,6 @@ function UpdateProfile({ p }: { p: ProfileData }) {
   };
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUpdatedProfileLabel(event.target.value);
-    console.log(event.target.value);
   };
 
   const handleUpdateProfile = async () => {
@@ -48,9 +48,16 @@ function UpdateProfile({ p }: { p: ProfileData }) {
     }
 
     try {
-      await updateProfileOnApi(userData.id, p.id, updatedProfileLabel);
+      const updatedProfile = await updateProfileOnApi(
+        userData.id,
+        p.id,
+        updatedProfileLabel
+      );
+      console.log(updatedProfile);
+
       updateProfileLabel(p.id, updatedProfileLabel);
       setIsUpdatingProfile(false);
+      setProfileData(updatedProfile.profile);
     } catch (error) {
       console.log(error);
     }
