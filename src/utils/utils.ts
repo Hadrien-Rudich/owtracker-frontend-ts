@@ -78,10 +78,19 @@ const verifyProfileLabelAvailability = (
   newProfileLabel: string,
   profilesData: ProfileData[]
 ) => {
-  const profileLabelIsInUse = profilesData.some(
+  const profileIsAvailable = profilesData.some(
     (profile) => profile.label === newProfileLabel
   );
-  return profileLabelIsInUse;
+
+  if (!profileIsAvailable) {
+    console.log(`You already have a profile with that name`);
+    return false;
+  }
+  if (newProfileLabel === '') {
+    console.log('Profile name cannot be empty');
+    return false;
+  }
+  return true;
 };
 
 export {

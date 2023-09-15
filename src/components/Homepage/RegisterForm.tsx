@@ -2,12 +2,14 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { register } from '../../services/ApiService';
+import LoadingSpinner from '../LoadingSpinner';
 
 function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [createUser, setCreateUser] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,18 +34,21 @@ function RegisterForm() {
     navigate('/');
   };
 
-  async function handleRegister(event: FormEvent<HTMLFormElement>) {
+  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      const newUser = await register(email, password, battleTag);
-      if (newUser) {
+    const newUser = await register(email, password, battleTag);
+    if (newUser) {
+      setCreateUser(true);
+
+      setTimeout(() => {
+        setCreateUser(false);
         navigate('/login');
-      }
-    } catch (error) {
-      console.error('Failed to register user', error);
+      }, 1000);
+    } else {
+      console.log('couldnt create user');
     }
-  }
+  };
 
   return (
     <div className="register_container flexdiv row lg:mt-44 my-24">
@@ -81,17 +86,25 @@ function RegisterForm() {
               onChange={handleConfirmPasswordChange}
             />
           </div>
-          <div className="button_container flexdiv gap-6">
-            <button
-              onClick={handleCancelClick}
-              type="button"
-              className="button cancel"
-            >
-              Cancel
-            </button>
-            <button type="submit" className="button validate">
-              Register
-            </button>
+          <div className="button_container flexdiv gap-6 relative h-10">
+            {!createUser ? (
+              <div className="flexdiv gap-6">
+                <button
+                  onClick={handleCancelClick}
+                  type="button"
+                  className="button cancel"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="button validate">
+                  Register
+                </button>
+              </div>
+            ) : (
+              <div className="absolute top-[-2]">
+                <LoadingSpinner />
+              </div>
+            )}
           </div>
         </div>
       </form>

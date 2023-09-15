@@ -6,13 +6,14 @@ import {
   KeyboardEvent,
   useRef,
 } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { ImPlus, ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
 import { profileStore } from '../../store/profileStore';
 import { addProfileToApi } from '../../services/ApiService';
 import useOutsideClick from '../useOutsideClick';
-
+import type { ProfileAddedtoApi } from '../../services/ApiService';
 import { authStore } from '../../store/authStore';
 
 function AddProfile() {
@@ -29,6 +30,16 @@ function AddProfile() {
   const [inputField, setInputField] = useState(false);
   const newProfileInputRef = useRef<HTMLInputElement>(null);
 
+  const mutation = useMutation({
+    mutationFn: () => addProfileToApi(userData.id, newProfile),
+    onSuccess: (newProfileAddedToApi: ProfileAddedtoApi) => {
+      addNewProfile(newProfileAddedToApi.profile);
+      setInputField(false);
+      clearNewProfile();
+    },
+    retry: 1,
+  });
+
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewProfile(event.target.value);
   };
@@ -36,7 +47,6 @@ function AddProfile() {
     event.stopPropagation();
     setIsUpdatingProfile(false);
     setInputField(true);
-
     clearProfileData();
   };
 
@@ -53,28 +63,12 @@ function AddProfile() {
   useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
   const handleAddProfile = async () => {
-    const profileLabelInUse = verifyProfileLabelAvailability(
+    const profileIsAvailable = verifyProfileLabelAvailability(
       newProfile,
       profilesData
     );
-
-    if (profileLabelInUse) {
-      console.log(`You already have a profile called ${newProfile}`);
-      return;
-    }
-
-    if (newProfile === '') {
-      console.log('Profile name cannot be empty');
-      return;
-    }
-
-    try {
-      const profileToApi = await addProfileToApi(userData.id, newProfile);
-      addNewProfile(profileToApi.profile);
-      setInputField(false);
-      clearNewProfile();
-    } catch (error) {
-      console.error('Failed to add profile', error);
+    if (profileIsAvailable) {
+      mutation.mutate();
     }
   };
 

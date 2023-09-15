@@ -8,6 +8,7 @@ import AddProfile from './AddProfile';
 import Profile from './Profile';
 
 import { fetchProfilesFromApi } from '../../services/ApiService';
+import type { ProfileData } from '../../types/store/profileTypes';
 
 function Profiles() {
   const navigate = useNavigate();
@@ -21,14 +22,14 @@ function Profiles() {
     }
   }, [isLoggedIn, navigate]);
 
-  const { isLoading, isFetching, isError, isSuccess } = useQuery(
-    ['profilesData'],
-    async () => {
-      const data = await fetchProfilesFromApi(userData.id);
-      addProfilesData(data);
-      return data;
-    }
-  );
+  const { isLoading, isFetching, isError, isSuccess } = useQuery({
+    queryKey: ['profilesData'],
+    queryFn: () => fetchProfilesFromApi(userData.id),
+    onSuccess: (fetchedData: ProfileData[]) => {
+      addProfilesData(fetchedData);
+    },
+    retry: 1,
+  });
 
   if (isLoading || isFetching) {
     return <LoadingSpinner />;

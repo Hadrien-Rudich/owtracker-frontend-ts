@@ -107,6 +107,16 @@ export const logIn = async (
   };
 };
 
+interface NewUserCreated {
+  message: string;
+  user: {
+    id: number;
+    email: string;
+    password: string;
+    battleTag: string;
+  };
+}
+
 export const register = async (
   email: string,
   password: string,
@@ -114,7 +124,7 @@ export const register = async (
 ): Promise<boolean> => {
   const endpoint = 'register';
   try {
-    const response: any = await postDataToApi(endpoint, {
+    const response: NewUserCreated = await postDataToApi(endpoint, {
       email,
       password,
       battleTag,
@@ -145,7 +155,7 @@ export const fetchProfilesFromApi = async (
   return fetchDataFromApi(endpoint, 'GET');
 };
 
-interface ProfileAddedtoApi {
+export interface ProfileAddedtoApi {
   message: string;
   profile: { id: number; userId: number; label: string };
 }

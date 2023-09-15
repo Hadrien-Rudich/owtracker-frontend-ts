@@ -4,8 +4,8 @@ function LoadingSpinner() {
   return (
     <div className="flexdiv">
       <ProgressBar
-        height="300"
-        width="300"
+        height="100"
+        width="100"
         borderColor="#ffffff"
         barColor="#51E5FF"
       />

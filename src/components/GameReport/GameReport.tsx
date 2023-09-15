@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ProgressBar } from 'react-loader-spinner';
+import LoadingSpinner from '../LoadingSpinner';
+
 import { authStore } from '../../store/authStore';
 
 import Heroes from './Heroes/Heroes';
@@ -41,24 +42,16 @@ function Gamereport() {
         )}
 
         {result !== '' && map !== '' && heroes.length > 0 && (
-          <div className="flexdiv gap-10 my-12 relative">
+          <div className="button_container flexdiv gap-10 my-12 relative">
             {!saveGame ? (
-              <div className="flexdiv">
+              <div className="flexdiv gap-6">
                 <Reset />
 
                 <SubmitForm />
               </div>
             ) : (
-              // <div className="absolute top-[-4] left-0 w-full h-full flex items-center justify-center z-50">
-              //   <SavingProgressBar />
-              // </div>
               <div className="absolute mt-6">
-                <ProgressBar
-                  height="300"
-                  width="300"
-                  borderColor="#ffffff"
-                  barColor="#51E5FF"
-                />
+                <LoadingSpinner />
               </div>
             )}
           </div>

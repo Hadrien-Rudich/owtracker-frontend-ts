@@ -10,6 +10,7 @@ import { fetchGamesFromApi } from '../../services/ApiService';
 import { profileStore } from '../../store/profileStore';
 import MonthTabs from './MonthTabs';
 import Game from './Game';
+import type { GameData } from '../../types/store/gameTypes';
 
 function Games() {
   const navigate = useNavigate();
@@ -18,14 +19,14 @@ function Games() {
   const { addGamesData, gamesData } = gameStore();
   const { profileData } = profileStore();
 
-  const { isLoading, isFetching, isError, isSuccess } = useQuery(
-    ['gamesData'],
-    async () => {
-      const data = await fetchGamesFromApi(userData.id, profileData.id);
-      addGamesData(data);
-      return data;
-    }
-  );
+  const { isLoading, isFetching, isError, isSuccess } = useQuery({
+    queryKey: ['gamesData'],
+    queryFn: () => fetchGamesFromApi(userData.id, profileData.id),
+    onSuccess: (fetchedData: GameData[]) => {
+      addGamesData(fetchedData);
+    },
+    retry: 1,
+  });
 
   useEffect(() => {
     if (!isLoggedIn) {
