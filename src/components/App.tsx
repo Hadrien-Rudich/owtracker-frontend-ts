@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-// import SavingProgressBar from './GameReport/SavingProgressBar';
 import GameReport from './GameReport/GameReport';
 import Header from './Header/Header';
 import LogInForm from './Homepage/LogInForm';
@@ -17,9 +16,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/bar" element={<SavingProgressBar />} /> */}
         <Route path="/rq" element={<RQMain />} />
-
         <Route path="/login" element={<LogInForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/games" element={<Games />} />

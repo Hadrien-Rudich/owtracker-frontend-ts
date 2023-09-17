@@ -41,7 +41,7 @@ function Profile() {
           key={p.label}
         >
           {isUpdatingProfile && p.label === profileData.label ? (
-            <UpdateProfile p={p} />
+            <UpdateProfile profileObj={p} />
           ) : (
             <button
               key={p.label}

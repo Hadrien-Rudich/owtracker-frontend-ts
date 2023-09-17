@@ -63,11 +63,11 @@ function AddProfile() {
   useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
   const handleAddProfile = async () => {
-    const profileIsAvailable = verifyProfileLabelAvailability(
+    const profileLabelIsAvailable = verifyProfileLabelAvailability(
       newProfile,
       profilesData
     );
-    if (profileIsAvailable) {
+    if (profileLabelIsAvailable) {
       mutation.mutate();
     }
   };
