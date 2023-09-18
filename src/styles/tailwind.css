@@ -182,10 +182,6 @@ right-0;
       ease-in-out;
 }
 
-/* .profile.add {
-  @apply w-44 h-12 text-xl duration-500;
-} */
-
 .profile.card {
   @apply w-36 h-10;
 }
@@ -232,6 +228,18 @@ sm:text-xl text-lg text-secondaryText;
 
 .list.unselected {
   @apply opacity-30 bg-activeColor hover:opacity-100 hover:scale-105;
+}
+
+.game {
+  @apply flexdiv w-full h-12 bg-mainColor hover:shadow-lg;
+}
+
+.game.selected {
+  @apply bg-activeColor scale-105 opacity-100 z-30 ring-2 ring-thirdColor;
+}
+
+.game.unselected {
+  @apply hover:opacity-100 hover:bg-activeColor z-10;
 }
 
 .sign {

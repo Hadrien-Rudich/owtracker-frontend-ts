@@ -20,7 +20,7 @@ export const fetchDataFromApi = async <T>(
     });
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error('zoooob', error);
     throw error;
   }
 };

@@ -1,16 +1,11 @@
-import { useEffect } from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
 import type { GameData } from '../../types/store/gameTypes';
 import { deleteGameFromApi } from '../../services/API/games';
 
 function DeleteGame({ gameObj }: { gameObj: GameData }) {
-  const navigate = useNavigate();
-
-  const { isLoggedIn } = authStore();
-  const { deleteGameData } = gameStore();
+  const { deleteGame: deleteGameData } = gameStore();
 
   const mutation = useMutation({
     mutationFn: () =>
@@ -21,25 +16,17 @@ function DeleteGame({ gameObj }: { gameObj: GameData }) {
     retry: 1,
   });
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
-
-  const handleDeleteClick = async () => {
+  const handleDeleteClick = () => {
     mutation.mutate();
   };
   return (
-    <div>
-      <button
-        className="w-12 h-12 bg-thirdColor"
-        type="button"
-        onClick={handleDeleteClick}
-      >
-        DELETE
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={handleDeleteClick}
+      className=" text-warning hover:scale-125"
+    >
+      <FaTrashAlt className="sign h-[1.1rem] w-[1.1rem]" />
+    </button>
   );
 }
 

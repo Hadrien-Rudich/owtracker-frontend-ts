@@ -12,14 +12,14 @@ import { verifyProfileLabelAvailability } from '../../utils/utils';
 
 function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   const {
-    profileData,
+    selectedProfile: profileData,
     profilesData,
     updatedProfileLabel,
     setUpdatedProfileLabel,
     setIsUpdatingProfile,
     updateProfileLabel,
     clearUpdatedProfileLabel,
-    setProfileData,
+    selectProfile: setProfileData,
   } = profileStore();
 
   const mutation = useMutation({

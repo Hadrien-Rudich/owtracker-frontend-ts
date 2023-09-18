@@ -5,7 +5,7 @@ import { profileStore } from '../../store/profileStore';
 import { deleteProfileFromApi } from '../../services/API/profiles';
 
 function DeleteProfile({ profileObj }: { profileObj: ProfileData }) {
-  const { clearProfileData, deleteProfile } = profileStore();
+  const { unselectProfile: clearProfileData, deleteProfile } = profileStore();
 
   const mutation = useMutation({
     mutationFn: () => deleteProfileFromApi(profileObj.userId, profileObj.id),

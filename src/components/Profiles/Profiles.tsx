@@ -13,7 +13,11 @@ function Profiles() {
   const navigate = useNavigate();
 
   const { isLoggedIn, userData } = authStore();
-  const { profileData, profilesData, addProfilesData } = profileStore();
+  const {
+    selectedProfile: profileData,
+    profilesData,
+    addProfilesData,
+  } = profileStore();
 
   useEffect(() => {
     if (!isLoggedIn) {

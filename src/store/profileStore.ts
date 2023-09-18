@@ -4,46 +4,27 @@ import type { ProfileStore, ProfileData } from '../types/store/profileTypes';
 export const profileStore = create<ProfileStore>()((set) => ({
   profilesData: [],
   addProfilesData: (profilesOb) => set(() => ({ profilesData: profilesOb })),
-  profileData: { label: '' } as ProfileData,
-  setProfileData: (profileObj) =>
+  selectedProfile: { label: '' } as ProfileData,
+  selectProfile: (profileObj) =>
     set(() => ({
-      profileData: profileObj,
+      selectedProfile: profileObj,
     })),
-  clearProfileData: () =>
+  unselectProfile: () =>
     set(() => ({
-      profileData: {} as ProfileData,
+      selectedProfile: {} as ProfileData,
     })),
-
-  // profile: '',
-  // setProfile: (profile) =>
-  //   set(() => ({
-  //     profile,
-  //   })),
-  // clearProfile: () =>
-  //   set(() => ({
-  //     profile: '',
-  //   })),
   newProfile: '',
   setNewProfile: (profile) =>
     set(() => ({
       newProfile: profile,
     })),
-  addNewProfile: (newProfileObj) =>
-    set((state) => ({
-      profilesData: [...state.profilesData, newProfileObj],
-    })),
   clearNewProfile: () =>
     set(() => ({
       newProfile: '',
     })),
-  newProfileLabel: '',
-  setNewProfileLabel: (label) =>
-    set(() => ({
-      newProfileLabel: label,
-    })),
-  clearNewProfileLabel: () =>
-    set(() => ({
-      updatedProfileLabel: '',
+  addNewProfile: (newProfileObj) =>
+    set((state) => ({
+      profilesData: [...state.profilesData, newProfileObj],
     })),
   updatedProfileLabel: '',
 

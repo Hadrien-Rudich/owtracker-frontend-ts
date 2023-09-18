@@ -17,7 +17,7 @@ function Games() {
 
   const { isLoggedIn, userData } = authStore();
   const { addGamesData, gamesData } = gameStore();
-  const { profileData } = profileStore();
+  const { selectedProfile: profileData } = profileStore();
 
   const { isLoading, isFetching, isError, isSuccess } = useQuery({
     queryKey: ['gamesData'],

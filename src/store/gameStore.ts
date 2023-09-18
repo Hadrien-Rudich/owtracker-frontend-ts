@@ -3,22 +3,36 @@ import type { GameStore, GameData } from '../types/store/gameTypes';
 
 export const gameStore = create<GameStore>()((set) => ({
   gamesData: [],
-  addGamesData: (games) => set(() => ({ gamesData: games })),
+  addGamesData: (gamesObj) => set(() => ({ gamesData: gamesObj })),
   removeGamesData: () => {
     set(() => ({
       gamesData: [],
     }));
   },
-  gameData: {} as GameData,
-  addGameData: (gameData) =>
+  selectedGame: {} as GameData,
+  addGame: (gameData) =>
     set((state) => ({
       gamesData: [...state.gamesData, gameData],
     })),
-  deleteGameData: (gameId: number) => {
+  deleteGame: (gameId: number) => {
     set((state) => ({
       gamesData: state.gamesData.filter((g: GameData) => g.id !== gameId),
     }));
   },
+
+  selectGame: (gameObj: GameData) =>
+    set(() => ({
+      selectedGame: gameObj,
+    })),
+  unselectGame: () =>
+    set(() => ({
+      selectedGame: {} as GameData,
+    })),
+  isUpdatingGame: false,
+  setIsUpdatingGame: (boolean: boolean) =>
+    set(() => ({
+      isUpdatingGame: boolean,
+    })),
   currentMonth: 0,
   setCurrentMonth: (month) =>
     set(() => ({

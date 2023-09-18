@@ -15,9 +15,13 @@ interface GameStore {
   gamesData: GameData[] | [];
   addGamesData: (games: GameData[]) => void;
   removeGamesData: () => void;
-  gameData: GameData;
-  addGameData: (game: GameData) => void;
-  deleteGameData: (gameId: number) => void;
+  selectedGame: GameData;
+  addGame: (game: GameData) => void;
+  deleteGame: (gameId: number) => void;
+  selectGame: (game: GameData) => void;
+  unselectGame: () => void;
+  isUpdatingGame: boolean;
+  setIsUpdatingGame: (boolean: boolean) => void;
   currentMonth: number;
   setCurrentMonth: (month: number) => void;
   reset: () => void;

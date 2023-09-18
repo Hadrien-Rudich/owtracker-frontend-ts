@@ -4,9 +4,9 @@ import { getResultClassName } from '../../../utils/utils';
 
 function Result() {
   const {
-    result: gameResult,
-    addResult: addGameResult,
-    clearResult: clearGameResult,
+    selectedResult: gameResult,
+    selectResult: addGameResult,
+    unselectResult: clearGameResult,
   } = gameReportStore();
 
   const [outcomes] = useState([

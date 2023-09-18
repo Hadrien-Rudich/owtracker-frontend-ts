@@ -8,10 +8,9 @@ import EditProfile from './EditProfile';
 function Profile() {
   const {
     profilesData,
-    profileData,
-    setProfileData,
-    clearProfileData,
-    setNewProfileLabel,
+    selectedProfile,
+    selectProfile,
+    unselectProfile,
     isUpdatingProfile,
   } = profileStore();
 
@@ -19,17 +18,16 @@ function Profile() {
     event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLInputElement>,
     profileObj: ProfileData
   ) => {
-    const selectedProfile = event.currentTarget.value;
+    const targetProfile = event.currentTarget.value;
 
     if (isUpdatingProfile) {
       return;
     }
 
-    if (profileData.label === selectedProfile) {
-      clearProfileData();
+    if (selectedProfile.label === targetProfile) {
+      unselectProfile();
     } else {
-      setProfileData(profileObj);
-      setNewProfileLabel(profileObj.label);
+      selectProfile(profileObj);
     }
   };
 
@@ -40,7 +38,7 @@ function Profile() {
           className="profile_container flex ml-8 gap-2 relative"
           key={p.label}
         >
-          {isUpdatingProfile && p.label === profileData.label ? (
+          {isUpdatingProfile && p.label === selectedProfile.label ? (
             <UpdateProfile profileObj={p} />
           ) : (
             <button
@@ -57,7 +55,7 @@ function Profile() {
               disabled={isUpdatingProfile}
               className={`${
                 // eslint-disable-next-line no-nested-ternary
-                p.label === profileData.label
+                p.label === selectedProfile.label
                   ? 'selected'
                   : isUpdatingProfile
                   ? 'disabled'
@@ -68,7 +66,7 @@ function Profile() {
             </button>
           )}
 
-          {p.label === profileData.label && !isUpdatingProfile && (
+          {p.label === selectedProfile.label && !isUpdatingProfile && (
             <div className="button_container">
               <DeleteProfile profileObj={p} />
               <EditProfile profileObj={p} />

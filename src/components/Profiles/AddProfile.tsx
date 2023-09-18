@@ -25,7 +25,7 @@ function AddProfile() {
     setNewProfile,
     clearNewProfile,
     addNewProfile,
-    clearProfileData,
+    unselectProfile,
     setIsUpdatingProfile,
   } = profileStore();
   const { userData } = authStore();
@@ -49,7 +49,7 @@ function AddProfile() {
     event.stopPropagation();
     setIsUpdatingProfile(false);
     setInputField(true);
-    clearProfileData();
+    unselectProfile();
   };
 
   const handleCancel = () => {

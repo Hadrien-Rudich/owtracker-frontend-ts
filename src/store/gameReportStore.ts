@@ -4,45 +4,43 @@ import type { GameReportStore } from '../types/store/gameReportTypes';
 export const gameReportStore = create<GameReportStore>()((set) => ({
   heroesData: [],
   addHeroesData: (heroes) => set(() => ({ heroesData: heroes })),
-  heroes: [],
-  addHero: (hero) => set((state) => ({ heroes: [...state.heroes, hero] })),
-  removeHero: (hero) => {
+  selectedHeroes: [],
+  selectedHeroesImageUrl: [],
+  selectHero: (hero, heroImageUrl) =>
     set((state) => ({
-      heroes: state.heroes.filter((h) => h !== hero),
-    }));
-  },
-  clearHeroes: () => set(() => ({ heroes: [] })),
-  heroesImageUrl: [],
-  addHeroImageUrl: (heroImageUrl) =>
-    set((state) => ({
-      heroesImageUrl: [...state.heroesImageUrl, heroImageUrl],
+      selectedHeroes: [...state.selectedHeroes, hero],
+      selectedHeroesImageUrl: [...state.selectedHeroesImageUrl, heroImageUrl],
     })),
-  removeHeroImageUrl: (heroImageUrl) => {
+  unselectHero: (hero, heroImageUrl) => {
     set((state) => ({
-      heroesImageUrl: state.heroesImageUrl.filter((u) => u !== heroImageUrl),
+      selectedHeroes: state.selectedHeroes.filter((h) => h !== hero),
+      selectedHeroesImageUrl: state.selectedHeroesImageUrl.filter(
+        (u) => u !== heroImageUrl
+      ),
     }));
   },
+  unselectHeroes: () =>
+    set(() => ({ selectedHeroes: [], selectedHeroesImageUrl: [] })),
   mapsData: [],
   addMapsData: (maps) => set(() => ({ mapsData: maps })),
-  map: '',
-  addMap: (map) => set(() => ({ map })),
+  selectedMap: '',
+  selectedMapImageUrl: '',
+  selectMap: (map, mapImageUrl) =>
+    set(() => ({ selectedMap: map, selectedMapImageUrl: mapImageUrl })),
+  unselectMap: () => set(() => ({ selectedMap: '', selectedMapImageUrl: '' })),
   mapTypesData: [],
   addMapTypesData: (types) => set(() => ({ mapTypesData: types })),
-  mapType: '',
-  addMapType: (mapType) => set(() => ({ mapType })),
-  clearMapType: () => set(() => ({ mapType: '' })),
-  clearMap: () => set(() => ({ map: '' })),
-  mapImageUrl: '',
-  addMapImageUrl: (mapImageUrl) => set(() => ({ mapImageUrl })),
-  clearMapImageUrl: () => set(() => ({ mapImageUrl: '' })),
-  result: '',
-  addResult: (result) => set(() => ({ result })),
-  clearResult: () => set(() => ({ result: '' })),
+  selectedMapType: '',
+  selectMapType: (mapType) => set(() => ({ selectedMapType: mapType })),
+  unselectMapType: () => set(() => ({ selectedMapType: '' })),
+  selectedResult: '',
+  selectResult: (result) => set(() => ({ selectedResult: result })),
+  unselectResult: () => set(() => ({ selectedResult: '' })),
   rolesData: [],
   addRolesData: (roles) => set(() => ({ rolesData: roles })),
-  role: '',
-  addRole: (role) => set(() => ({ role })),
-  clearRole: () => set(() => ({ role: '' })),
+  selectedRole: '',
+  selectRole: (role) => set(() => ({ selectedRole: role })),
+  unselectRole: () => set(() => ({ selectedRole: '' })),
   roleModal: false,
   toggleRoleModal: () => set((state) => ({ roleModal: !state.roleModal })),
   mapModal: false,
@@ -51,13 +49,13 @@ export const gameReportStore = create<GameReportStore>()((set) => ({
   toggleSaveGame: () => set((state) => ({ saveGame: !state.saveGame })),
   reset: () =>
     set(() => ({
-      heroes: [],
-      heroesImageUrl: [],
-      map: '',
-      mapImageUrl: '',
-      mapType: '',
-      result: '',
-      role: '',
+      selectedHeroes: [],
+      selectedHeroesImageUrl: [],
+      selectedMap: '',
+      selectedMapImageUrl: '',
+      selectedMapType: '',
+      selectedResult: '',
+      selectedRole: '',
       roleModal: false,
       mapModal: false,
     })),

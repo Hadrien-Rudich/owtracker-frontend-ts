@@ -7,20 +7,20 @@ import { gameStore } from '../../store/gameStore';
 
 function SubmitForm() {
   const {
-    heroes,
-    map,
-    mapImageUrl,
-    result,
-    mapType,
-    heroesImageUrl,
+    selectedHeroes: heroes,
+    selectedMap: map,
+    selectedMapImageUrl: mapImageUrl,
+    selectedResult: result,
+    selectedMapType: mapType,
+    selectedHeroesImageUrl: heroesImageUrl,
     saveGame,
     toggleSaveGame,
     reset,
   } = gameReportStore();
 
   const { userData } = authStore();
-  const { profileData } = profileStore();
-  const { addGameData } = gameStore();
+  const { selectedProfile: profileData } = profileStore();
+  const { addGame: addGameData } = gameStore();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

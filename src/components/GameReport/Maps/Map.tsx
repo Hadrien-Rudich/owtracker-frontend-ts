@@ -4,12 +4,11 @@ import { filterMapTypes } from '../../../utils/utils';
 
 function Map() {
   const {
-    map,
-    addMap,
-    clearMap,
-    addMapImageUrl,
-    clearMapImageUrl,
-    mapType,
+    selectedMap: map,
+    selectMap,
+    unselectMap,
+
+    selectedMapType,
     mapsData,
   } = gameReportStore();
 
@@ -19,19 +18,17 @@ function Map() {
   ) => {
     const targetMap = event.currentTarget.value;
     if (map !== targetMap) {
-      addMap(targetMap);
-      addMapImageUrl(imageUrl);
+      selectMap(targetMap, imageUrl);
     } else {
-      clearMap();
-      clearMapImageUrl();
+      unselectMap();
     }
   };
 
-  const filteredMaps = filterMapTypes(mapsData, mapType);
+  const filteredMaps = filterMapTypes(mapsData, selectedMapType);
 
   return (
     <div className="map_container pb-6 flexdiv flex-wrap w-5/6 sm:gap-1 gap-0">
-      {mapType !== null &&
+      {selectedMapType !== null &&
         filteredMaps.map((m) => (
           <button
             className={`${

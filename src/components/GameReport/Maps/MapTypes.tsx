@@ -2,8 +2,13 @@ import { MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
 
 function MapTypes() {
-  const { mapType, addMapType, clearMapType, toggleMapModal, mapTypesData } =
-    gameReportStore();
+  const {
+    selectedMapType: mapType,
+    selectMapType: addMapType,
+    unselectMapType: clearMapType,
+    toggleMapModal,
+    mapTypesData,
+  } = gameReportStore();
 
   const handleMapTypeClick = (event: MouseEvent<HTMLButtonElement>) => {
     const mapTypeValue = event.currentTarget.value;

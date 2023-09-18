@@ -7,16 +7,13 @@ interface ProfileData {
 interface ProfileStore {
   profilesData: ProfileData[] | [];
   addProfilesData: (profiles: ProfileData[]) => void;
-  profileData: ProfileData;
-  setProfileData: (profileObj: ProfileData) => void;
-  clearProfileData: () => void;
+  selectedProfile: ProfileData;
+  selectProfile: (profileObj: ProfileData) => void;
+  unselectProfile: () => void;
   newProfile: string;
   setNewProfile: (profile: string) => void;
   addNewProfile: (newProfileObj: ProfileData) => void;
   clearNewProfile: () => void;
-  newProfileLabel: string;
-  setNewProfileLabel: (label: string) => void;
-  clearNewProfileLabel: () => void;
   isUpdatingProfile: boolean;
   setIsUpdatingProfile: (boolean: boolean) => void;
   updatedProfileLabel: string;

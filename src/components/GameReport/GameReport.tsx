@@ -16,7 +16,12 @@ function Gamereport() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = authStore();
-  const { map, heroes, result, saveGame } = gameReportStore();
+  const {
+    selectedMap: map,
+    selectedHeroes: heroes,
+    selectedResult: result,
+    saveGame,
+  } = gameReportStore();
 
   useEffect(() => {
     if (!isLoggedIn) {

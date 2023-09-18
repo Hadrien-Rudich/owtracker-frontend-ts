@@ -2,28 +2,19 @@ import { MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
 
 function Hero() {
-  const {
-    rolesData,
-    heroes,
-    heroesData,
-    addHero,
-    removeHero,
-    addHeroImageUrl,
-    removeHeroImageUrl,
-  } = gameReportStore();
+  const { rolesData, selectedHeroes, heroesData, selectHero, unselectHero } =
+    gameReportStore();
 
   const handleHeroClick = (
     event: MouseEvent<HTMLButtonElement>,
     imageUrl: string
   ) => {
     const targetHero = event.currentTarget.value;
-    const heroInList = heroes.includes(targetHero);
+    const heroInList = selectedHeroes.includes(targetHero);
     if (!heroInList) {
-      addHero(targetHero);
-      addHeroImageUrl(imageUrl);
+      selectHero(targetHero, imageUrl);
     } else {
-      removeHero(targetHero);
-      removeHeroImageUrl(imageUrl);
+      unselectHero(targetHero, imageUrl);
     }
   };
 
@@ -56,7 +47,9 @@ function Hero() {
                     >
                       <img
                         className={`${
-                          heroes.includes(h.slug) ? 'selected' : 'unselected'
+                          selectedHeroes.includes(h.slug)
+                            ? 'selected'
+                            : 'unselected'
                         } list md:h-10 lg:h-11 h-9`}
                         src={`images/heroes/${h.imageUrl}`}
                         alt=""
