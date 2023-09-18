@@ -14,7 +14,11 @@ export const gameStore = create<GameStore>()((set) => ({
     set((state) => ({
       gamesData: [...state.gamesData, gameData],
     })),
-
+  deleteGameData: (gameId: number) => {
+    set((state) => ({
+      gamesData: state.gamesData.filter((g: GameData) => g.id !== gameId),
+    }));
+  },
   currentMonth: 0,
   setCurrentMonth: (month) =>
     set(() => ({

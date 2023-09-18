@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { authStore } from '../../store/authStore';
-import { logIn } from '../../services/ApiService';
+import { logIn } from '../../services/API/users';
 
 function LogInForm() {
   const [email, setEmail] = useState('');

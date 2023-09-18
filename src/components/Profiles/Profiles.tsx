@@ -6,8 +6,7 @@ import { authStore } from '../../store/authStore';
 import { profileStore } from '../../store/profileStore';
 import AddProfile from './AddProfile';
 import Profile from './Profile';
-
-import { fetchProfilesFromApi } from '../../services/ApiService';
+import { fetchProfilesFromApi } from '../../services/API/profiles';
 import type { ProfileData } from '../../types/store/profileTypes';
 
 function Profiles() {

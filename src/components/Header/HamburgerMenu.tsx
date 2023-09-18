@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { headerStore } from '../../store/headerStore';
 import { authStore } from '../../store/authStore';
 import useOutsideClick from '../useOutsideClick';
-import { logOut } from '../../services/ApiService';
+import { logOut } from '../../services/API/users';
 
 function HamburgerMenu() {
   const { setLoggedOut } = authStore();

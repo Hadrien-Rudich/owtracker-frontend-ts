@@ -3,7 +3,7 @@ import type { HeroData, RoleData } from '../../../types/store/gameReportTypes';
 import {
   fetchHeroesFromApi,
   fetchRolesFromApi,
-} from '../../../services/ApiService';
+} from '../../../services/API/gameReport';
 import { gameReportStore } from '../../../store/gameReportStore';
 import Hero from './Hero';
 

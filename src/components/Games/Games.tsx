@@ -5,7 +5,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
 
-import { fetchGamesFromApi } from '../../services/ApiService';
+import { fetchGamesFromApi } from '../../services/API/games';
 
 import { profileStore } from '../../store/profileStore';
 import MonthTabs from './MonthTabs';

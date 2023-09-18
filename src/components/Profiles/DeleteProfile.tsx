@@ -2,7 +2,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 import type { ProfileData } from '../../types/store/profileTypes';
 import { profileStore } from '../../store/profileStore';
-import { deleteProfileFromApi } from '../../services/ApiService';
+import { deleteProfileFromApi } from '../../services/API/profiles';
 
 function DeleteProfile({ profileObj }: { profileObj: ProfileData }) {
   const { clearProfileData, deleteProfile } = profileStore();

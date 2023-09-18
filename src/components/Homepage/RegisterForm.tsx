@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
-import { register } from '../../services/ApiService';
+import { register } from '../../services/API/users';
 import LoadingSpinner from '../LoadingSpinner';
 
 function RegisterForm() {

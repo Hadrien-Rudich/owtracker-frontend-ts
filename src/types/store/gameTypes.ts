@@ -17,6 +17,7 @@ interface GameStore {
   removeGamesData: () => void;
   gameData: GameData;
   addGameData: (game: GameData) => void;
+  deleteGameData: (gameId: number) => void;
   currentMonth: number;
   setCurrentMonth: (month: number) => void;
   reset: () => void;

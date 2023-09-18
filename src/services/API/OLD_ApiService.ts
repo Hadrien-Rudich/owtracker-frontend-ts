@@ -1,13 +1,13 @@
 import axios, { AxiosResponse, Method } from 'axios';
-import type { UserData } from '../types/store/authTypes';
-import type { GameData } from '../types/store/gameTypes';
-import type { ProfileData } from '../types/store/profileTypes';
+import type { UserData } from '../../types/store/authTypes';
+import type { GameData } from '../../types/store/gameTypes';
+import type { ProfileData } from '../../types/store/profileTypes';
 import type {
   HeroData,
   MapData,
   MapTypeData,
   RoleData,
-} from '../types/store/gameReportTypes';
+} from '../../types/store/gameReportTypes';
 
 const api = axios.create({
   baseURL: 'http://localhost:3002/',

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 import { authStore } from '../../store/authStore';
 import useOutsideClick from '../useOutsideClick';
-import { logOut } from '../../services/ApiService';
+import { logOut } from '../../services/API/users';
 
 function AccountDropDown() {
   const { setLoggedOut } = authStore();

@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { gameReportStore } from '../../store/gameReportStore';
-import { addGameToApi } from '../../services/ApiService';
+import { addGameToApi } from '../../services/API/games';
 import { authStore } from '../../store/authStore';
 import { profileStore } from '../../store/profileStore';
 import { gameStore } from '../../store/gameStore';

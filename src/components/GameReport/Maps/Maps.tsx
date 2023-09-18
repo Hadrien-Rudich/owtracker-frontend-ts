@@ -2,7 +2,7 @@ import { useQueries } from '@tanstack/react-query';
 import {
   fetchMapsFromApi,
   fetchMapTypesFromApi,
-} from '../../../services/ApiService';
+} from '../../../services/API/gameReport';
 import type {
   MapData,
   MapTypeData,

@@ -4,9 +4,11 @@ import { ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { profileStore } from '../../store/profileStore';
 import type { ProfileData } from '../../types/store/profileTypes';
-import { updateProfileOnApi } from '../../services/ApiService';
+import {
+  updateProfileOnApi,
+  ProfileAddedtoApi,
+} from '../../services/API/profiles';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
-import type { ProfileAddedtoApi } from '../../services/ApiService';
 
 function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   const {

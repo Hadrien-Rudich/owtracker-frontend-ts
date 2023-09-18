@@ -11,9 +11,11 @@ import { ImPlus, ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
 import { profileStore } from '../../store/profileStore';
-import { addProfileToApi } from '../../services/ApiService';
+import {
+  addProfileToApi,
+  ProfileAddedtoApi,
+} from '../../services/API/profiles';
 import useOutsideClick from '../useOutsideClick';
-import type { ProfileAddedtoApi } from '../../services/ApiService';
 import { authStore } from '../../store/authStore';
 
 function AddProfile() {
