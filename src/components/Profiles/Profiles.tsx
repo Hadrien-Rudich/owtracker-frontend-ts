@@ -25,7 +25,11 @@ function Profiles() {
     }
   }, [isLoggedIn, navigate]);
 
-  const { isLoading, isFetching, isError, isSuccess } = useQuery({
+  const {
+    isLoading,
+    isFetching,
+    //  isError, isSuccess
+  } = useQuery({
     queryKey: ['profilesData'],
     queryFn: () => fetchProfilesFromApi(userData.id),
     onSuccess: (fetchedData: ProfileData[]) => {

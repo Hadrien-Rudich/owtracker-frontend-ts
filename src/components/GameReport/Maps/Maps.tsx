@@ -15,7 +15,8 @@ import { gameReportStore } from '../../../store/gameReportStore';
 function Maps() {
   const { addMapsData, addMapTypesData } = gameReportStore();
 
-  const results = useQueries({
+  // const results =
+  useQueries({
     queries: [
       {
         queryKey: ['mapsData'],

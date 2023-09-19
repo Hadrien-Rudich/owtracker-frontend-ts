@@ -5,13 +5,14 @@ import type { GameData } from '../../types/store/gameTypes';
 import { deleteGameFromApi } from '../../services/API/games';
 
 function DeleteGame({ gameObj }: { gameObj: GameData }) {
-  const { deleteGame: deleteGameData } = gameStore();
+  const { deleteGame: deleteGameData, unselectGame } = gameStore();
 
   const mutation = useMutation({
     mutationFn: () =>
       deleteGameFromApi(gameObj.userId, gameObj.profileId, gameObj.id),
     onSuccess: () => {
       deleteGameData(gameObj.id);
+      unselectGame();
     },
     retry: 1,
   });

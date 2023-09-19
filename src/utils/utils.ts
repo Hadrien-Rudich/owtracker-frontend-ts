@@ -24,7 +24,7 @@ const filterGames = (month: number, gameData: GameData[]) => {
     return gameData;
   }
   return gameData.filter(
-    (game) => Number(game.date.slice(3)) === Number(month)
+    (game) => Number(game.date.slice(3, 5)) === Number(month)
   );
 };
 

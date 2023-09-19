@@ -235,11 +235,11 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .game.selected {
-  @apply bg-activeColor scale-105 opacity-100 z-30 ring-2 ring-thirdColor;
+  @apply bg-activeColor opacity-100 ring-2 ring-thirdColor shadow-lg;
 }
 
 .game.unselected {
-  @apply hover:opacity-100 hover:bg-activeColor z-10;
+  @apply hover:opacity-100 hover:bg-activeColor;
 }
 
 .sign {

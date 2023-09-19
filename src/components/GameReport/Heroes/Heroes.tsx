@@ -10,7 +10,8 @@ import Hero from './Hero';
 function Heroes() {
   const { addHeroesData, addRolesData } = gameReportStore();
 
-  const results = useQueries({
+  // const results =
+  useQueries({
     queries: [
       {
         queryKey: ['heroesData'],

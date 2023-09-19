@@ -11,8 +11,8 @@ function Result() {
 
   const [outcomes] = useState([
     { label: 'win' },
-    { label: 'draw' },
     { label: 'loss' },
+    { label: 'draw' },
   ]);
 
   const toggleGameResult = (selectedResult: string) => {

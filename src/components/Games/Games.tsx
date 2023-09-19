@@ -17,11 +17,11 @@ function Games() {
 
   const { isLoggedIn, userData } = authStore();
   const { addGamesData, gamesData } = gameStore();
-  const { selectedProfile: profileData } = profileStore();
+  const { selectedProfile } = profileStore();
 
   const { isLoading, isFetching, isError, isSuccess } = useQuery({
     queryKey: ['gamesData'],
-    queryFn: () => fetchGamesFromApi(userData.id, profileData.id),
+    queryFn: () => fetchGamesFromApi(userData.id, selectedProfile.id),
     onSuccess: (fetchedData: GameData[]) => {
       addGamesData(fetchedData);
     },
