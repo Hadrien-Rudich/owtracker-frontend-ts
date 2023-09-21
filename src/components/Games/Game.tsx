@@ -13,7 +13,6 @@ function Game() {
     gamesData,
     selectGame,
     unselectGame,
-    setIsUpdatingGame,
     isUpdatingGame,
     selectedGame,
     currentMonth,
@@ -23,14 +22,8 @@ function Game() {
 
   const handleGameSelection = (gameObj: GameData) => {
     if (selectedGame.id === gameObj.id) {
-      console.log(selectedGame, gameObj);
-
-      setIsUpdatingGame(false);
       unselectGame();
     } else {
-      console.log(selectedGame, gameObj);
-
-      setIsUpdatingGame(true);
       selectGame(gameObj);
     }
   };
@@ -48,12 +41,10 @@ function Game() {
           <div
             key={g.id}
             className={`${
-              isUpdatingGame && g.id === selectedGame.id
-                ? ' selected z-10'
-                : ' unselected'
+              g.id === selectedGame.id ? ' selected z-10' : ' unselected'
             }  gameHistory_container game relative`}
           >
-            <div className="lg:w-[47%] w-[30%] mapImage_container relative">
+            <div className="w-[45%] lg:w[40%] mapImage_container ">
               <img
                 className="h-12 w-full object-cover rounded-sm rounded-r-none"
                 src={`images/maps/${g.mapImageUrl}`}
@@ -61,7 +52,7 @@ function Game() {
               />
               <div className="absolute inset-0">
                 <div className="flexdiv gap-4 absolute top-1/2 left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-                  <p className="sm:h-12 sm:w-32 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
+                  <p className="flex items-center sm:h-12 sm:w-32 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
                     {g.map}
                   </p>
 
@@ -75,7 +66,7 @@ function Game() {
                 </div>
               </div>
             </div>
-            <div className="heroImage_container flex sm:justify-center justify-start pl-4  gap-0.5 lg:w-[47%] w-[50%]">
+            <div className="heroImage_container flex sm:justify-center justify-start pl-4  gap-0.5 w-[45%] lg:w[40%] relative">
               {g.heroesImageUrl.map((heroImage) => (
                 <img
                   key={heroImage}
@@ -85,28 +76,34 @@ function Game() {
                 />
               ))}
             </div>
-            <div className="result_container flexdiv lg:w-[3%] w-[10%]">
-              <p
-                className={`${getResultClassNameFromGame(g)}     
-               result_container w-1/2`}
+
+            <div className="flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
+              <div
+                className={`${
+                  g.id === selectedGame.id
+                    ? 'absolute 2xl:right-[1.25rem] xl:right-[0.85rem] lg:right-[0.5rem] md:right-[5.5rem] sm:right-[5.25rem] xs:right-[4.5rem] xxs:right-[4.2rem] right-[4rem]'
+                    : 'hidden'
+                } button_container ]`}
               >
-                {g.result.slice(0, 1)}
-              </p>
-            </div>
-            <div className="date_container flexdiv lg:w-[3%] w-[10%]">
-              <p>{g.date.slice(0, 5)}</p>
-            </div>
-            <div
-              className={`${
-                isUpdatingGame && g.id === selectedGame.id ? '' : 'hidden'
-              } button_container flexdiv absolute xl:right-[6.5rem] lg:right-[4rem] sm:right-[9rem] xs:right-[7rem] right-[5rem]`}
-            >
-              {isUpdatingGame && g.id === selectedGame.id && (
-                <div className=" flex justify-center sm:gap-2">
-                  <EditGame gameObj={g} />
-                  <DeleteGame gameObj={g} />
-                </div>
-              )}
+                {g.id === selectedGame.id && (
+                  <div className="2xl:gap-2 sm:gap-1 gap-0 flexdiv">
+                    <EditGame gameObj={g} />
+                    <DeleteGame gameObj={g} />
+                  </div>
+                )}
+              </div>
+              <div className="result_container md:w-[25%] w-[30%]">
+                <p
+                  className={`${getResultClassNameFromGame(g)}     
+               result_container`}
+                >
+                  {g.result.slice(0, 1)}
+                </p>
+              </div>
+
+              <div className="date_container  md:w-[25%] w-[30%]">
+                {isUpdatingGame ? <p>ZOB</p> : <p>{g.date.slice(0, 5)}</p>}
+              </div>
             </div>
           </div>
         </button>
