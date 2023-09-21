@@ -1,8 +1,8 @@
 import { FaTrashAlt } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
-import { gameStore } from '../../store/gameStore';
-import type { GameData } from '../../types/store/gameTypes';
-import { deleteGameFromApi } from '../../services/API/games';
+import { gameStore } from '../../../store/gameStore';
+import type { GameData } from '../../../types/store/gameTypes';
+import { deleteGameFromApi } from '../../../services/API/games';
 
 function DeleteGame({ gameObj }: { gameObj: GameData }) {
   const { deleteGame: deleteGameData, unselectGame } = gameStore();
@@ -26,7 +26,7 @@ function DeleteGame({ gameObj }: { gameObj: GameData }) {
       onClick={handleDeleteClick}
       className=" text-warning hover:scale-125"
     >
-      <FaTrashAlt className="sign h-[1.1rem] w-[1.1rem]" />
+      <FaTrashAlt className="sign lg:h-[1.2rem] lg:w-[1.2rem] h-[1.4rem] w-[1.4rem]" />
     </button>
   );
 }

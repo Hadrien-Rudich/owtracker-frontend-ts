@@ -9,7 +9,7 @@ import { fetchGamesFromApi } from '../../services/API/games';
 
 import { profileStore } from '../../store/profileStore';
 import MonthTabs from './MonthTabs';
-import Game from './Game';
+import Game from './Game/Game';
 import type { GameData } from '../../types/store/gameTypes';
 
 function Games() {
@@ -46,11 +46,11 @@ function Games() {
 
   if (isSuccess && gamesData.length > 0) {
     return (
-      <div className="History_container lg:mt-[8.5rem] my-24 container mx-auto">
+      <div className="History_container lg:mt-[6rem] my-24 container mx-auto">
         <div className="MonthTabs_container">
           <MonthTabs />
         </div>
-        <div className="HistoryDetails_container mt-12">
+        <div className="HistoryDetails_container">
           <Game />
         </div>
       </div>

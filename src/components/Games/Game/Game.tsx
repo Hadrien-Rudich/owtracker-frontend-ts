@@ -1,21 +1,21 @@
-import { gameStore } from '../../store/gameStore';
-import {
-  filterGames,
-  capitalizeFirstLetter,
-  getResultClassNameFromGame,
-} from '../../utils/utils';
-import DeleteGame from './DeleteGame';
-import EditGame from './EditGame';
-import type { GameData } from '../../types/store/gameTypes';
+import { gameStore } from '../../../store/gameStore';
+import { filterGames, capitalizeFirstLetter } from '../../../utils/utils';
+import Result from './Result/Result';
+import EditResult from './Result/EditResult';
+import Date from './Date/Date';
+import GameButtons from './GameButtons';
+import type { GameData } from '../../../types/store/gameTypes';
+import EditDate from './Date/EditDate';
 
 function Game() {
   const {
     gamesData,
     selectGame,
     unselectGame,
-    isUpdatingGame,
     selectedGame,
     currentMonth,
+    isUpdatingGame,
+    setIsUpdatingGame,
   } = gameStore();
 
   const filteredGames = filterGames(currentMonth, gamesData);
@@ -24,19 +24,28 @@ function Game() {
     if (selectedGame.id === gameObj.id) {
       unselectGame();
     } else {
+      setIsUpdatingGame(false);
       selectGame(gameObj);
     }
   };
 
+  const ResultComponent = isUpdatingGame ? EditResult : Result;
+  const DateComponent = isUpdatingGame ? EditDate : Date;
+
   return (
-    <div className="flexdiv col tracking-wider">
+    <div className="flexdiv col tracking-wider z-30">
       {filteredGames.map((g) => (
-        <button
+        <div
           key={g.id}
-          value={g.id}
           onClick={() => handleGameSelection(g)}
-          type="button"
+          role="button"
+          tabIndex={0}
           className="w-full flexdiv"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleGameSelection(g);
+            }
+          }}
         >
           <div
             key={g.id}
@@ -52,7 +61,7 @@ function Game() {
               />
               <div className="absolute inset-0">
                 <div className="flexdiv gap-4 absolute top-1/2 left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-                  <p className="flex items-center sm:h-12 sm:w-32 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
+                  <p className="flex items-center sm:h-12 sm:w-40 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
                     {g.map}
                   </p>
 
@@ -76,37 +85,19 @@ function Game() {
                 />
               ))}
             </div>
-
-            <div className="flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
-              <div
-                className={`${
-                  g.id === selectedGame.id
-                    ? 'absolute 2xl:right-[1.25rem] xl:right-[0.85rem] lg:right-[0.5rem] md:right-[5.5rem] sm:right-[5.25rem] xs:right-[4.5rem] xxs:right-[4.2rem] right-[4rem]'
-                    : 'hidden'
-                } button_container ]`}
-              >
-                {g.id === selectedGame.id && (
-                  <div className="2xl:gap-2 sm:gap-1 gap-0 flexdiv">
-                    <EditGame gameObj={g} />
-                    <DeleteGame gameObj={g} />
-                  </div>
-                )}
+            <div className="details_container flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
+              <div className="gamebuttons_container flexdiv">
+                <GameButtons gameObj={g} />
               </div>
               <div className="result_container md:w-[25%] w-[30%]">
-                <p
-                  className={`${getResultClassNameFromGame(g)}     
-               result_container`}
-                >
-                  {g.result.slice(0, 1)}
-                </p>
+                <ResultComponent gameObj={g} />
               </div>
-
-              <div className="date_container  md:w-[25%] w-[30%]">
-                {isUpdatingGame ? <p>ZOB</p> : <p>{g.date.slice(0, 5)}</p>}
+              <div className="date_container md:w-[25%] w-[30%]">
+                <DateComponent gameObj={g} />
               </div>
             </div>
           </div>
-        </button>
+        </div>
       ))}
     </div>
   );

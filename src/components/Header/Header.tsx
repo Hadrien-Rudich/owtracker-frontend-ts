@@ -14,7 +14,7 @@ function Header() {
     if (profileData.id) {
       return (
         <div className="flex justify-center items-end">
-          <div className="Tabs_container hidden md:block  ">
+          <div className="Tabs_container hidden md:block ">
             <Tabs />
           </div>
 

@@ -10,7 +10,7 @@ function Tabs() {
   };
 
   return (
-    <div className="Tabs_container flexdiv pb-4 relative top-4">
+    <div className="Tabs_container flexdiv relative top-4 divide-x divide-mainColor">
       {sections.map((section) => (
         <div key={section.label}>
           <h2>
@@ -19,7 +19,7 @@ function Tabs() {
               value={section.label}
               onClick={handleActiveTab}
               className={`${
-                activeTab === section.label ? ' active' : 'inactive'
+                activeTab === section.label ? 'active' : 'inactive'
               }   
                 accounttab flexdiv`}
             >

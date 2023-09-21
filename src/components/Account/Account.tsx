@@ -18,12 +18,12 @@ function Account() {
   }, [isLoggedIn, navigate]);
 
   return (
-    <div className="Account_container flexdiv col lg:mt-[8.5rem] relative">
-      <div className="Tabs_container absolute sm:top-[-3.5rem] top-[-2.98rem]">
+    <div className="Account_container flexdiv col lg:mt-[8.5rem] relative mt-[8.5rem]">
+      <div className="Tabs_container absolute sm:top-[-3.5rem] top-[-2.98rem]  ">
         <Tabs />
       </div>
       <div
-        className="main_container 
+        className="main_container
        flexdiv col sm:gap-10 gap-5
   sm:w-80 sm:py-10 w-60 py-5
   bg-mainColor shadow-lg rounded-sm rounded-t-none"

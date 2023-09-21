@@ -121,7 +121,7 @@ right-0;
 }
 
 .result {
-  @apply text-mainText scale-105 shadow-lg;
+  @apply text-mainText shadow-lg;
 }
 
 .headertab {
@@ -137,7 +137,7 @@ right-0;
 }
 
 .headertab.inactive {
-  @apply items-end hover:bg-activeColor hover:shadow-lg;
+  @apply items-start hover:bg-activeColor hover:shadow-lg;
 }
 
 .accounttab {
@@ -149,12 +149,11 @@ right-0;
 
 .accounttab.active {
   @apply bg-thirdColor text-secondaryText 
-  shadow-lg z-20;
+  shadow-lg z-20 items-center;
 }
 
 .accounttab.inactive {
-  @apply bg-secondaryColor hover:bg-activeColor
-  shadow-inner z-0;
+  @apply bg-activeGrayColor hover:bg-activeColor shadow-inner z-0 items-start;
 }
 
 .button {
@@ -192,7 +191,7 @@ right-0;
 
 .profile.card.active {
   @apply bg-activeGrayColor 
-  shadow-inner opacity-60 hover:opacity-100 
+  shadow-inner 
   hover:shadow-lg hover:bg-activeColor  duration-150;
 }
 

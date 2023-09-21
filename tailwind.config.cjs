@@ -8,10 +8,12 @@ export default {
     colors: {
       mainColor: '#C4D9F2',
       secondaryColor: '#C8C8CF',
+      secondaryColor: '#C8C8CF',
       thirdColor: '#F06414',
       fourthColor: '#8A2BE2',
       fifthColor: '#E6DACF',
       sixthColor: '#2F67A9',
+      altColor: '#51E5FF',
       inactiveColor: '#347FD3',
       activeColor: '#FFFFFF',
       activeGrayColor: '#ADB7C6',
