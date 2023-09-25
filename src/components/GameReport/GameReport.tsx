@@ -9,19 +9,17 @@ import Result from './Result/Result';
 import Reset from './Reset';
 import SubmitForm from './SubmitForm';
 import Maps from './Maps/Maps';
-// import SavingProgressBar from './SavingProgressBar';
 import { gameReportStore } from '../../store/gameReportStore';
+import { gameStore } from '../../store/gameStore';
+import SavedToast from '../SavedToast';
 
 function Gamereport() {
   const navigate = useNavigate();
 
+  const { newGameSubmitted, toggleNewGameSubmitted } = gameStore();
   const { isLoggedIn } = authStore();
-  const {
-    selectedMap: map,
-    selectedHeroes: heroes,
-    selectedResult: result,
-    saveGame,
-  } = gameReportStore();
+  const { selectedMap, selectedHeroes, selectedResult, saveGame } =
+    gameReportStore();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -30,37 +28,45 @@ function Gamereport() {
   });
 
   return (
-    <div className="GameReport_container container mx-auto flexdiv">
-      <div className="lg:mt-[8.5rem] my-24 w-full rounded-sm">
+    <div className="GameReport_container container mx-auto flexdiv relative">
+      <div className="lg:mt-[8.5rem] my-24 w-full rounded-sm ">
+        <SavedToast
+          topPosition="top-1/4"
+          toastText="Game saved!"
+          booleanProp={newGameSubmitted}
+          toggleBooleanProp={toggleNewGameSubmitted}
+        />
         <div className="Result_container">
           <Result />
         </div>
-        {result !== '' && (
+        {selectedResult !== '' && (
           <div className="Heroes_componentcontainer">
             <Heroes />
           </div>
         )}
-        {heroes.length > 0 && result !== null && (
+        {selectedHeroes.length > 0 && selectedResult !== null && (
           <div className="Maps_container">
             <Maps />
           </div>
         )}
 
-        {result !== '' && map !== '' && heroes.length > 0 && (
-          <div className="button_container flexdiv gap-10 my-12 relative">
-            {!saveGame ? (
-              <div className="flexdiv gap-6">
-                <Reset />
+        {selectedResult !== '' &&
+          selectedMap !== '' &&
+          selectedHeroes.length > 0 && (
+            <div className="button_container flexdiv gap-10 my-12 relative">
+              {!saveGame ? (
+                <div className="flexdiv gap-6">
+                  <Reset />
 
-                <SubmitForm />
-              </div>
-            ) : (
-              <div className="absolute mt-6">
-                <LoadingSpinner />
-              </div>
-            )}
-          </div>
-        )}
+                  <SubmitForm />
+                </div>
+              ) : (
+                <div className="absolute mt-6">
+                  <LoadingSpinner />
+                </div>
+              )}
+            </div>
+          )}
       </div>
     </div>
   );

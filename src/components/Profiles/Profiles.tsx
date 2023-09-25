@@ -8,15 +8,18 @@ import AddProfile from './AddProfile';
 import Profile from './Profile';
 import { fetchProfilesFromApi } from '../../services/API/profiles';
 import type { ProfileData } from '../../types/store/profileTypes';
+import SavedToast from '../SavedToast';
 
 function Profiles() {
   const navigate = useNavigate();
 
   const { isLoggedIn, userData } = authStore();
   const {
-    selectedProfile: profileData,
+    selectedProfile,
     profilesData,
     addProfilesData,
+    newProfileSubmitted,
+    toggleNewProfileSubmitted,
   } = profileStore();
 
   useEffect(() => {
@@ -44,7 +47,7 @@ function Profiles() {
 
   return (
     <div className="Profiles_container flexdiv col lg:mt-[8.5rem] my-24 relative">
-      {profileData.label === '' && (
+      {selectedProfile.label === '' && (
         <div className="title_container profileheader flexdiv">
           <h3 className="">
             {profilesData.length === 0
@@ -54,6 +57,12 @@ function Profiles() {
         </div>
       )}
       <div className="containerbox">
+        <SavedToast
+          topPosition="top-[-4rem]"
+          toastText="Profile saved!"
+          booleanProp={newProfileSubmitted}
+          toggleBooleanProp={toggleNewProfileSubmitted}
+        />
         <div className="-mt-2">
           <AddProfile />
         </div>

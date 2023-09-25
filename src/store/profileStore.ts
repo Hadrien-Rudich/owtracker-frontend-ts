@@ -56,6 +56,9 @@ export const profileStore = create<ProfileStore>()((set) => ({
       profile: '',
     }));
   },
+  newProfileSubmitted: false,
+  toggleNewProfileSubmitted: () =>
+    set((state) => ({ newProfileSubmitted: !state.newProfileSubmitted })),
   reset: () => {
     set(() => ({
       profilesData: [],

@@ -1,46 +1,54 @@
 import { FormEvent } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { gameReportStore } from '../../store/gameReportStore';
-import { addGameToApi } from '../../services/API/games';
+import { addGameToApi, GameAddedToApi } from '../../services/API/games';
 import { authStore } from '../../store/authStore';
 import { profileStore } from '../../store/profileStore';
 import { gameStore } from '../../store/gameStore';
 
 function SubmitForm() {
   const {
-    selectedHeroes: heroes,
-    selectedMap: map,
-    selectedMapImageUrl: mapImageUrl,
-    selectedResult: result,
-    selectedMapType: mapType,
-    selectedHeroesImageUrl: heroesImageUrl,
+    selectedHeroes,
+    selectedMap,
+    selectedMapImageUrl,
+    selectedResult,
+    selectedMapType,
+    selectedHeroesImageUrl,
     saveGame,
     toggleSaveGame,
     reset,
   } = gameReportStore();
 
   const { userData } = authStore();
-  const { selectedProfile: profileData } = profileStore();
-  const { addGame: addGameData } = gameStore();
+  const { selectedProfile } = profileStore();
+  const { addGame, toggleNewGameSubmitted } = gameStore();
+
+  const mutation = useMutation({
+    mutationFn: () =>
+      addGameToApi(userData.id, selectedProfile.id, {
+        result: selectedResult,
+        map: selectedMap,
+        mapType: selectedMapType,
+        mapImageUrl: selectedMapImageUrl,
+        heroes: selectedHeroes,
+        heroesImageUrl: selectedHeroesImageUrl,
+      }),
+    onSuccess: (newGameAddedToApi: GameAddedToApi) => {
+      addGame(newGameAddedToApi.game);
+      setTimeout(() => {
+        toggleSaveGame();
+        reset();
+        toggleNewGameSubmitted();
+      }, 1000);
+    },
+    retry: 1,
+  });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     toggleSaveGame();
-
-    const gameToApi = await addGameToApi(userData.id, profileData.id, {
-      result,
-      map,
-      mapType,
-      mapImageUrl,
-      heroes,
-      heroesImageUrl,
-    });
-
-    addGameData(gameToApi.game);
-    setTimeout(() => {
-      toggleSaveGame();
-      reset();
-    }, 1000);
+    mutation.mutate();
   };
 
   return (

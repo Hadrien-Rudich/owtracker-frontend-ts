@@ -1,16 +1,31 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { authStore } from '../../store/authStore';
-import { logIn } from '../../services/API/users';
+import LoadingSpinner from '../LoadingSpinner';
+import { logIn, UserVerified } from '../../services/API/users';
 
 function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
 
   const { isLoggedIn, setLoggedIn, setUserData } = authStore();
 
   const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: () => logIn(email, password),
+    onSuccess: (fetchedData: UserVerified) => {
+      setUserData(fetchedData.user);
+      setUserAuthenticated(true);
+      setTimeout(() => {
+        setLoggedIn();
+      }, 500);
+    },
+    retry: 1,
+  });
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -24,16 +39,10 @@ function LogInForm() {
     navigate('/');
   };
 
-  async function handleLogIn(event: FormEvent<HTMLFormElement>) {
+  function handleLogIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    try {
-      const response = await logIn(email, password);
-      setUserData(response.user);
-      setLoggedIn();
-    } catch (error) {
-      console.error('Failed to authenticate user', error);
-    }
+    mutation.mutate();
+    setUserAuthenticated(false);
   }
 
   useEffect(() => {
@@ -64,16 +73,24 @@ function LogInForm() {
             />
           </div>
           <div className="button_container flexdiv gap-6">
-            <button
-              onClick={handleCancel}
-              type="button"
-              className="button cancel "
-            >
-              <p className="">Cancel</p>
-            </button>
-            <button type="submit" className="button validate">
-              <p className="">Log in</p>
-            </button>
+            {!userAuthenticated ? (
+              <div className="flexdiv gap-6">
+                <button
+                  onClick={handleCancel}
+                  type="button"
+                  className="button cancel "
+                >
+                  <p className="">Cancel</p>
+                </button>
+                <button type="submit" className="button validate">
+                  <p className="">Log in</p>
+                </button>
+              </div>
+            ) : (
+              <div className="absolute top-[-2]">
+                <LoadingSpinner />
+              </div>
+            )}
           </div>
         </div>
       </div>

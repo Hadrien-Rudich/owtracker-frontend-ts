@@ -6,7 +6,7 @@ import {
   deleteDataFromApi,
 } from './general';
 
-interface GameAddedToApi {
+export interface GameAddedToApi {
   message: string;
   game: {
     id: number;

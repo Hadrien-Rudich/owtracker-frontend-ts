@@ -21,6 +21,8 @@ interface ProfileStore {
   clearUpdatedProfileLabel: () => void;
   updateProfileLabel: (profileId: number, newProfileLabel: string) => void;
   deleteProfile: (profile: string) => void;
+  newProfileSubmitted: boolean;
+  toggleNewProfileSubmitted: () => void;
   reset: () => void;
 }
 

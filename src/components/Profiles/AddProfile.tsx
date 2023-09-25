@@ -27,6 +27,7 @@ function AddProfile() {
     addNewProfile,
     unselectProfile,
     setIsUpdatingProfile,
+    toggleNewProfileSubmitted,
   } = profileStore();
   const { userData } = authStore();
   const [inputField, setInputField] = useState(false);
@@ -71,6 +72,7 @@ function AddProfile() {
     );
     if (profileLabelIsAvailable) {
       mutation.mutate();
+      toggleNewProfileSubmitted();
     }
   };
 

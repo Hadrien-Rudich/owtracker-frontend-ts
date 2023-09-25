@@ -2,7 +2,7 @@ import type { UserData } from '../../types/store/authTypes';
 
 import { postDataToApi, fetchDataFromApi } from './general';
 
-interface UserVerified {
+export interface UserVerified {
   accessToken: string;
   user: { id: number; email: string; battleTag: string; refreshToken: string };
 }

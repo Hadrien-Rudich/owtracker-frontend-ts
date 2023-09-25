@@ -274,3 +274,32 @@ sm:text-xl text-lg text-secondaryText;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
+
+/* Define the custom animation */
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  /*
+  25% {
+    opacity: 0.33;
+  }
+  50% {
+    opacity: 0.66;
+  }
+  75% {
+    opacity: 1;
+  } */
+
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1.5s infinite; /* Adjust the animation duration as needed */
+  transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
+}
