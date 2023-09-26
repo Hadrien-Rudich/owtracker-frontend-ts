@@ -5,7 +5,7 @@ function Tabs() {
   const { locations } = headerStore();
 
   return (
-    <div className="md:flex hidden  bg-activeGrayColor rounded-t-sm divide-x divide-mainColor">
+    <div className="md:flex hidden rounded-t-sm divide-x divide-activeColor">
       {locations.map((location) => (
         <NavLink
           key={location.label}

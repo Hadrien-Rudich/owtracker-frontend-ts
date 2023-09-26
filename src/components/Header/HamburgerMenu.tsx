@@ -37,7 +37,7 @@ function HamburgerMenu() {
     <div ref={hamburgerMenuRef} className="main_container">
       <button
         type="button"
-        className="hover:bg-activeGrayColor relative z-40"
+        className="hover:bg-secondaryColor relative z-40"
         onClick={toggleHamburgerMenu}
       >
         {showHamburgerMenu ? (
@@ -62,7 +62,7 @@ function HamburgerMenu() {
                 ` ${
                   isActive
                     ? 'bg-thirdColor text-secondaryText'
-                    : 'hover:bg-activeGrayColor'
+                    : 'hover:bg-secondaryColor'
                 } w-36 rounded-sm `
               }
               to={location.url}
@@ -74,7 +74,7 @@ function HamburgerMenu() {
           <button
             type="button"
             onClick={handleLogOut}
-            className="w-36 rounded-sm  hover:bg-activeGrayColor"
+            className="w-36 rounded-sm  hover:bg-secondaryColor"
           >
             Log out
           </button>

@@ -29,7 +29,7 @@ function Result() {
 
   return (
     <div className="Result_container flexdiv bg-mainColor rounded-sm intenseShadow">
-      <div className="resultoutcome_container flexdiv w-full md:text-xl text-lg rounded-sm divide-x divide-activeGrayColor">
+      <div className="resultoutcome_container flexdiv w-full md:text-xl text-lg rounded-sm divide-x divide-activeColor">
         {outcomes.map((outcome) => (
           <button
             onClick={handleClick}

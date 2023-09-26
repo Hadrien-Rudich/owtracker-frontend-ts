@@ -10,7 +10,7 @@ function Tabs() {
   };
 
   return (
-    <div className="Tabs_container flexdiv relative top-4 divide-x divide-mainColor">
+    <div className="Tabs_container flexdiv relative top-4 divide-x divide-activeColor">
       {sections.map((section) => (
         <div key={section.label}>
           <h2>

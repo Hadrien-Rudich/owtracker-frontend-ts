@@ -33,14 +33,14 @@ function Game() {
   const DateComponent = isUpdatingGame ? EditDate : Date;
 
   return (
-    <div className="flexdiv col tracking-wider z-30">
+    <div className="flexdiv col tracking-wider z-30 ">
       {filteredGames.map((g) => (
         <div
           key={g.id}
           onClick={() => handleGameSelection(g)}
           role="button"
           tabIndex={0}
-          className="w-full flexdiv"
+          className="w-full flexdiv border-[0.01rem] border-activeColor"
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               handleGameSelection(g);

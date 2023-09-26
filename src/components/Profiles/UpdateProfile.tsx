@@ -76,7 +76,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
           className={`${
             profileObj.label === profileData.label
               ? 'scale-110 bg-activeColor shadow-lg'
-              : 'bg-activeGrayColor shadow-inner opacity-60 hover:opacity-100'
+              : 'bg-secondaryColor shadow-inner opacity-60 hover:opacity-100'
           } profilecard_container profile card hover:bg-activeColor hover:scale-110`}
         />
       </form>

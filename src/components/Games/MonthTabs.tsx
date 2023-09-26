@@ -11,7 +11,7 @@ function MonthTabs() {
 
   return (
     <div className="monthTab_container">
-      <div className="rounded-sm shadow-lg flex divide-x divide-mainColor ">
+      <div className="rounded-sm shadow-lg flex divide-x bg-secondaryColor divide-activeColor">
         {months.map((month, index) => (
           <button
             key={month.index}
@@ -20,9 +20,9 @@ function MonthTabs() {
             type="button"
             className={`${
               Number(currentMonth) === Number(month.index)
-                ? `bg-thirdColor text-secondaryText rounded-sm shadow-lg items-center `
-                : `bg-activeGrayColor hover:bg-activeColor hover:shadow-lg items-start`
-            } w-1/12 h-8 tracking-widest flex justify-center 
+                ? `bg-thirdColor text-secondaryText rounded-sm shadow-lg  `
+                : ` hover:bg-activeColor hover:shadow-lg`
+            } w-1/12 h-8 tracking-widest flex justify-center items-center 
             ${index === 0 ? 'rounded-sm rounded-r-none' : ''} ${
               index === months.length - 1 ? 'rounded-sm rounded-l-none' : ''
             }`}
