@@ -1,46 +1,54 @@
 import { FormEvent } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { gameReportStore } from '../../store/gameReportStore';
-import { addGameToApi } from '../../services/API/games';
+import { addGameToApi, GameAddedToApi } from '../../services/API/games';
 import { authStore } from '../../store/authStore';
 import { profileStore } from '../../store/profileStore';
 import { gameStore } from '../../store/gameStore';
 
 function SubmitForm() {
   const {
-    selectedHeroes: heroes,
-    selectedMap: map,
-    selectedMapImageUrl: mapImageUrl,
-    selectedResult: result,
-    selectedMapType: mapType,
-    selectedHeroesImageUrl: heroesImageUrl,
-    saveGame,
-    toggleSaveGame,
+    selectedHeroes,
+    selectedMap,
+    selectedMapImageUrl,
+    selectedResult,
+    selectedMapType,
+    selectedHeroesImageUrl,
+    savingGameInProgress,
+    setSavingGameInProgress,
     reset,
   } = gameReportStore();
 
   const { userData } = authStore();
-  const { selectedProfile: profileData } = profileStore();
-  const { addGame: addGameData } = gameStore();
+  const { selectedProfile } = profileStore();
+  const { addGame, setGameSavedToast } = gameStore();
+
+  const mutation = useMutation({
+    mutationFn: () =>
+      addGameToApi(userData.id, selectedProfile.id, {
+        result: selectedResult,
+        map: selectedMap,
+        mapType: selectedMapType,
+        mapImageUrl: selectedMapImageUrl,
+        heroes: selectedHeroes,
+        heroesImageUrl: selectedHeroesImageUrl,
+      }),
+    onSuccess: (newGameAddedToApi: GameAddedToApi) => {
+      addGame(newGameAddedToApi.game);
+      setTimeout(() => {
+        setSavingGameInProgress(false);
+        reset();
+        setGameSavedToast(true);
+      }, 1000);
+    },
+    retry: 1,
+  });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    toggleSaveGame();
-
-    const gameToApi = await addGameToApi(userData.id, profileData.id, {
-      result,
-      map,
-      mapType,
-      mapImageUrl,
-      heroes,
-      heroesImageUrl,
-    });
-
-    addGameData(gameToApi.game);
-    setTimeout(() => {
-      toggleSaveGame();
-      reset();
-    }, 1000);
+    setSavingGameInProgress(true);
+    mutation.mutate();
+    setGameSavedToast(false);
   };
 
   return (
@@ -48,8 +56,10 @@ function SubmitForm() {
       <form onSubmit={handleSubmit} action="submit">
         <button
           type="submit"
-          disabled={saveGame}
-          className={!saveGame ? 'button bg-thirdColor' : 'button cancel'}
+          disabled={savingGameInProgress}
+          className={
+            !savingGameInProgress ? 'button bg-thirdColor' : 'button cancel'
+          }
         >
           SUBMIT
         </button>

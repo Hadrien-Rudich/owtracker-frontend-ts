@@ -1,13 +1,11 @@
 import { useState, MouseEvent } from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
+import { gameStore } from '../../../store/gameStore';
 import { getResultClassName } from '../../../utils/utils';
 
 function Result() {
-  const {
-    selectedResult: gameResult,
-    selectResult: addGameResult,
-    unselectResult: clearGameResult,
-  } = gameReportStore();
+  const { selectedResult, selectResult, unselectResult } = gameReportStore();
+  const { setGameSavedToast } = gameStore();
 
   const [outcomes] = useState([
     { label: 'win' },
@@ -15,16 +13,17 @@ function Result() {
     { label: 'draw' },
   ]);
 
-  const toggleGameResult = (selectedResult: string) => {
-    if (selectedResult !== gameResult) {
-      addGameResult(selectedResult);
+  const selectGameResult = (targetResult: string) => {
+    setGameSavedToast(false);
+    if (targetResult !== selectedResult) {
+      selectResult(targetResult);
     } else {
-      clearGameResult();
+      unselectResult();
     }
   };
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    toggleGameResult(event.currentTarget.value);
+    selectGameResult(event.currentTarget.value);
   };
 
   return (
@@ -37,7 +36,7 @@ function Result() {
             type="button"
             value={outcome.label}
             className={`result-button w-1/3 h-10 tracking-widest rounded-sm duration-150 ease-in-out
-            ${getResultClassName(gameResult, outcome)}`}
+            ${getResultClassName(selectedResult, outcome)}`}
           >
             {outcome.label}
           </button>

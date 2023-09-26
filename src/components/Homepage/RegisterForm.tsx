@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { register } from '../../services/API/users';
@@ -34,20 +35,21 @@ function RegisterForm() {
     navigate('/');
   };
 
-  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const newUser = await register(email, password, battleTag);
-    if (newUser) {
+  const mutation = useMutation({
+    mutationFn: () => register(email, password, battleTag),
+    onSuccess: () => {
       setCreateUser(true);
-
       setTimeout(() => {
-        setCreateUser(false);
         navigate('/login');
-      }, 1000);
-    } else {
-      console.log('couldnt create user');
-    }
+      }, 500);
+    },
+    retry: 1,
+  });
+
+  const handleRegister = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    mutation.mutate();
+    setCreateUser(false);
   };
 
   return (

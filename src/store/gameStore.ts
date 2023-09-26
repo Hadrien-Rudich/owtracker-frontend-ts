@@ -38,6 +38,8 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({
       currentMonth: month,
     })),
+  gameSavedToast: false,
+  setGameSavedToast: (value: boolean) => set(() => ({ gameSavedToast: value })),
   reset: () => {
     set(() => ({
       gamesData: [],

@@ -12,14 +12,15 @@ function Profile() {
     selectProfile,
     unselectProfile,
     isUpdatingProfile,
+    setProfileSavedToast,
   } = profileStore();
 
   const handleProfileClick = (
     event: MouseEvent<HTMLButtonElement> | MouseEvent<HTMLInputElement>,
     profileObj: ProfileData
   ) => {
+    setProfileSavedToast(false);
     const targetProfile = event.currentTarget.value;
-
     if (isUpdatingProfile) {
       return;
     }

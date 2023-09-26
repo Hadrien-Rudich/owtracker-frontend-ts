@@ -27,6 +27,7 @@ function AddProfile() {
     addNewProfile,
     unselectProfile,
     setIsUpdatingProfile,
+    setProfileSavedToast,
   } = profileStore();
   const { userData } = authStore();
   const [inputField, setInputField] = useState(false);
@@ -64,17 +65,18 @@ function AddProfile() {
 
   useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
-  const handleAddProfile = async () => {
+  const handleAddProfile = () => {
     const profileLabelIsAvailable = verifyProfileLabelAvailability(
       newProfile,
       profilesData
     );
     if (profileLabelIsAvailable) {
       mutation.mutate();
+      setProfileSavedToast(true);
     }
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleAddProfile();
   };

@@ -21,6 +21,8 @@ interface ProfileStore {
   clearUpdatedProfileLabel: () => void;
   updateProfileLabel: (profileId: number, newProfileLabel: string) => void;
   deleteProfile: (profile: string) => void;
+  profileSavedToast: boolean;
+  setProfileSavedToast: (value: boolean) => void;
   reset: () => void;
 }
 
