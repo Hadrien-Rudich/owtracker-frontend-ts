@@ -56,9 +56,9 @@ export const profileStore = create<ProfileStore>()((set) => ({
       profile: '',
     }));
   },
-  newProfileSubmitted: false,
-  toggleNewProfileSubmitted: () =>
-    set((state) => ({ newProfileSubmitted: !state.newProfileSubmitted })),
+  profileSavedToast: false,
+  setProfileSavedToast: (value: boolean) =>
+    set(() => ({ profileSavedToast: value })),
   reset: () => {
     set(() => ({
       profilesData: [],

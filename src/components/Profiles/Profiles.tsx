@@ -18,8 +18,8 @@ function Profiles() {
     selectedProfile,
     profilesData,
     addProfilesData,
-    newProfileSubmitted,
-    toggleNewProfileSubmitted,
+    profileSavedToast,
+    setProfileSavedToast,
   } = profileStore();
 
   useEffect(() => {
@@ -60,8 +60,8 @@ function Profiles() {
         <SavedToast
           topPosition="top-[-4rem]"
           toastText="Profile saved!"
-          booleanProp={newProfileSubmitted}
-          toggleBooleanProp={toggleNewProfileSubmitted}
+          booleanProp={profileSavedToast}
+          setBooleanProp={setProfileSavedToast}
         />
         <div className="-mt-2">
           <AddProfile />

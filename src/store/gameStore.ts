@@ -38,9 +38,8 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({
       currentMonth: month,
     })),
-  newGameSubmitted: false,
-  toggleNewGameSubmitted: () =>
-    set((state) => ({ newGameSubmitted: !state.newGameSubmitted })),
+  gameSavedToast: false,
+  setGameSavedToast: (value: boolean) => set(() => ({ gameSavedToast: value })),
   reset: () => {
     set(() => ({
       gamesData: [],

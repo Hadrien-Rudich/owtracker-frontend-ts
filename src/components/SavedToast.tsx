@@ -4,19 +4,19 @@ interface SavedToastProps {
   topPosition: string;
   toastText: string;
   booleanProp: boolean;
-  toggleBooleanProp: () => void;
+  setBooleanProp: (value: boolean) => void;
 }
 
 function SavedToast({
   toastText,
   booleanProp,
-  toggleBooleanProp,
+  setBooleanProp,
   topPosition,
 }: SavedToastProps) {
   useEffect(() => {
     if (booleanProp) {
       setTimeout(() => {
-        toggleBooleanProp();
+        setBooleanProp(false);
       }, 3000);
     }
   });

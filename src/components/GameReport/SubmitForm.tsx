@@ -14,14 +14,14 @@ function SubmitForm() {
     selectedResult,
     selectedMapType,
     selectedHeroesImageUrl,
-    saveGame,
-    toggleSaveGame,
+    savingGameInProgress,
+    setSavingGameInProgress,
     reset,
   } = gameReportStore();
 
   const { userData } = authStore();
   const { selectedProfile } = profileStore();
-  const { addGame, toggleNewGameSubmitted } = gameStore();
+  const { addGame, setGameSavedToast } = gameStore();
 
   const mutation = useMutation({
     mutationFn: () =>
@@ -36,9 +36,9 @@ function SubmitForm() {
     onSuccess: (newGameAddedToApi: GameAddedToApi) => {
       addGame(newGameAddedToApi.game);
       setTimeout(() => {
-        toggleSaveGame();
+        setSavingGameInProgress(false);
         reset();
-        toggleNewGameSubmitted();
+        setGameSavedToast(true);
       }, 1000);
     },
     retry: 1,
@@ -46,9 +46,9 @@ function SubmitForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    toggleSaveGame();
+    setSavingGameInProgress(true);
     mutation.mutate();
+    setGameSavedToast(false);
   };
 
   return (
@@ -56,8 +56,10 @@ function SubmitForm() {
       <form onSubmit={handleSubmit} action="submit">
         <button
           type="submit"
-          disabled={saveGame}
-          className={!saveGame ? 'button bg-thirdColor' : 'button cancel'}
+          disabled={savingGameInProgress}
+          className={
+            !savingGameInProgress ? 'button bg-thirdColor' : 'button cancel'
+          }
         >
           SUBMIT
         </button>

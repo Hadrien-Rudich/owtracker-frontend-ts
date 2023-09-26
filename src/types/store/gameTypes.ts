@@ -24,8 +24,8 @@ interface GameStore {
   setIsUpdatingGame: (boolean: boolean) => void;
   currentMonth: number;
   setCurrentMonth: (month: number) => void;
-  newGameSubmitted: boolean;
-  toggleNewGameSubmitted: () => void;
+  gameSavedToast: boolean;
+  setGameSavedToast: (value: boolean) => void;
   reset: () => void;
 }
 

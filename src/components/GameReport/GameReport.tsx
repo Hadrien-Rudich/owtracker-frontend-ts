@@ -16,9 +16,9 @@ import SavedToast from '../SavedToast';
 function Gamereport() {
   const navigate = useNavigate();
 
-  const { newGameSubmitted, toggleNewGameSubmitted } = gameStore();
+  const { gameSavedToast, setGameSavedToast } = gameStore();
   const { isLoggedIn } = authStore();
-  const { selectedMap, selectedHeroes, selectedResult, saveGame } =
+  const { selectedMap, selectedHeroes, selectedResult, savingGameInProgress } =
     gameReportStore();
 
   useEffect(() => {
@@ -33,8 +33,8 @@ function Gamereport() {
         <SavedToast
           topPosition="top-1/4"
           toastText="Game saved!"
-          booleanProp={newGameSubmitted}
-          toggleBooleanProp={toggleNewGameSubmitted}
+          booleanProp={gameSavedToast}
+          setBooleanProp={setGameSavedToast}
         />
         <div className="Result_container">
           <Result />
@@ -54,7 +54,7 @@ function Gamereport() {
           selectedMap !== '' &&
           selectedHeroes.length > 0 && (
             <div className="button_container flexdiv gap-10 my-12 relative">
-              {!saveGame ? (
+              {!savingGameInProgress ? (
                 <div className="flexdiv gap-6">
                   <Reset />
 
