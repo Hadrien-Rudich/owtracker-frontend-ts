@@ -7,7 +7,7 @@ function Result() {
   const { selectedResult, selectResult, unselectResult } = gameReportStore();
   const { setGameSavedToast } = gameStore();
 
-  const [outcomes] = useState([
+  const [results] = useState([
     { label: 'win' },
     { label: 'loss' },
     { label: 'draw' },
@@ -29,16 +29,16 @@ function Result() {
   return (
     <div className="Result_container flexdiv bg-mainColor rounded-sm intenseShadow">
       <div className="resultoutcome_container flexdiv w-full md:text-xl text-lg rounded-sm divide-x divide-activeColor">
-        {outcomes.map((outcome) => (
+        {results.map((result) => (
           <button
             onClick={handleClick}
-            key={outcome.label}
+            key={result.label}
             type="button"
-            value={outcome.label}
+            value={result.label}
             className={`result-button w-1/3 h-10 tracking-widest rounded-sm duration-150 ease-in-out
-            ${getResultClassName(selectedResult, outcome)}`}
+            ${getResultClassName(selectedResult, result)}`}
           >
-            {outcome.label}
+            {result.label}
           </button>
         ))}
       </div>

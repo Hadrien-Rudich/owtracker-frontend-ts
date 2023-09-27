@@ -1,6 +1,6 @@
 import React from 'react';
 import { gameReportStore } from '../../../store/gameReportStore';
-import { getResultClassNameFromGameResult } from '../../../utils/utils';
+import { getResultClassNameFromResult } from '../../../utils/utils';
 
 function GameReportRecap() {
   const {
@@ -43,7 +43,7 @@ function GameReportRecap() {
             ))}
           </div>
           <div
-            className={`result_container flexdiv w-1/12 ${getResultClassNameFromGameResult(
+            className={`result_container flexdiv w-1/12 ${getResultClassNameFromResult(
               gameResult
             )}`}
           >

@@ -13,9 +13,9 @@ function GameButtons({ gameObj }: { gameObj: GameData }) {
     <div
       className={`${
         gameObj.id === selectedGame.id
-          ? 'absolute 2xl:right-[1.15rem] xl:right-[0.65rem] lg:right-[0.35rem] md:right-[5.5rem] sm:right-[5.5rem] xs:right-[4.5rem] xxs:right-[4.2rem] right-[4rem]'
+          ? 'absolute 2xl:left-[-3rem] xl:left-[-3rem] lg:left-[-4rem] md:left-[-5rem] sm:left-[-5rem] xs:right-[1.5rem] xxs:right-[2.2rem] right-[1rem]'
           : 'hidden'
-      } GameButtons_container ]`}
+      } GameButtons_container`}
     >
       <div className="xl:gap-3 lg:gap-1 gap-4 flexdiv">
         {!isUpdatingGame && gameObj.id === selectedGame.id ? (

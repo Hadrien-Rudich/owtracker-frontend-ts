@@ -33,6 +33,21 @@ const filterMapTypes = (mapsData: MapData[], mapType: string) => {
   return result;
 };
 
+const reverseDateFormat = (date: string) => {
+  const parts = date.split('/');
+  const reversedParts = parts.reverse();
+  const reversedDateString = reversedParts.join('/');
+  return reversedDateString;
+};
+
+const convertDateToDatePickerFormat = (date: string) => {
+  const [day, month] = date.split('/');
+  return new Date(
+    new Date().getFullYear(),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10)
+  );
+};
 const capitalizeFirstLetter = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -74,6 +89,20 @@ const getResultClassNameFromResult = (result: string) => {
   }
 };
 
+const getGameContainerClassName = (
+  game: GameData,
+  selectedGame: GameData,
+  isUpdatingGame: boolean
+) => {
+  if (game.id === selectedGame.id) {
+    return 'selected z-10 ';
+  }
+  if (!isUpdatingGame) {
+    return 'unselected z-0';
+  }
+  return 'grayscale hover:cursor-default';
+};
+
 const verifyProfileLabelAvailability = (
   newProfileLabel: string,
   profilesData: ProfileData[]
@@ -94,10 +123,13 @@ const verifyProfileLabelAvailability = (
 export {
   filterGames,
   filterMapTypes,
+  reverseDateFormat,
+  convertDateToDatePickerFormat,
   capitalizeFirstLetter,
   getResultClassName,
   getResultClassNameFromGame,
   getResultClassNameFromResult,
+  getGameContainerClassName,
   verifyProfileLabelAvailability,
   months,
 };

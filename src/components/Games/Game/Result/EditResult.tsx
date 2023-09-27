@@ -1,45 +1,83 @@
-import { useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../store/gameStore';
-import { getResultClassNameFromGame } from '../../../../utils/utils';
+import { getResultClassNameFromResult } from '../../../../utils/utils';
 import Result from './Result';
 import type { GameData } from '../../../../types/store/gameTypes';
 
 function EditResult({ gameObj }: { gameObj: GameData }) {
   const { selectedGame } = gameStore();
-  const [isDropDownActive, setIsDropDownActive] = useState(false);
 
-  const handleDropDown = (event: MouseEvent<HTMLButtonElement>) => {
-    setIsDropDownActive(!isDropDownActive);
-    event.stopPropagation();
+  const [isDropDownActive, setIsDropDownActive] = useState(false);
+  const [currentResult, setCurrentResult] = useState<string>(gameObj.result);
+  const [newResult, setNewResult] = useState<string>('');
+  const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
+
+  const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
+
+  const selectResult = (result: string) => {
+    setNewResult(result.toLowerCase());
+    setCurrentResult(result.toLowerCase());
+    setIsDropDownActive(false);
   };
+
+  if (selectedGame.id !== gameObj.id) {
+    return <Result gameObj={gameObj} />;
+  }
 
   return (
     <div className="EditResult_container relative">
-      {selectedGame.id !== gameObj.id ? (
-        <Result gameObj={gameObj} />
-      ) : (
-        <div className="absolute top-[-0.8rem] right-0 w-full">
-          {isDropDownActive ? (
-            <ul className="ring-2">
-              <li className="bg-activeWin">Win</li>
-              <li className="bg-activeLoss">Loss</li>
-              <li className="bg-activeDraw">Draw</li>
-            </ul>
-          ) : (
+      <div className="absolute top-[-0.8rem] right-0 w-full">
+        {isDropDownActive ? (
+          <div className="ring-2">
             <button
-              className={`${getResultClassNameFromGame(
-                gameObj
+              className={`${getResultClassNameFromResult(
+                newResult === '' ? selectedGame.result : newResult
+              )} w-full relative`}
+              type="button"
+              onClick={toggleDropDown}
+            >
+              {/* {newResult === '' ? selectedGame.result.slice(0, 1) : newResult} */}
+              {newResult === '' ? selectedGame.result : newResult}
+            </button>
+            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
+
+            <ul className=" relative top-0.25">
+              {results.map(
+                (result) =>
+                  result.label.toLowerCase() !==
+                    // newResult.toLocaleLowerCase() && (
+                    currentResult && (
+                    <li key={result.label}>
+                      <button
+                        type="button"
+                        className={`w-full bg-active${result.label}`}
+                        onClick={() => selectResult(result.label)}
+                        id={result.label}
+                      >
+                        <p>{result.label}</p>
+                      </button>
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <button
+              className={`${getResultClassNameFromResult(
+                newResult === '' ? selectedGame.result : newResult
               )} w-full relative ring-2`}
               type="button"
-              onClick={handleDropDown}
+              onClick={toggleDropDown}
             >
-              {selectedGame.result.slice(0, 1)}
-              <MdOutlineKeyboardArrowDown className="absolute h-6 w-6 right-[-0.15rem] top-[0rem]" />
+              {/* {newResult === '' ? selectedGame.result.slice(0, 1) : newResult} */}
+              {newResult === '' ? selectedGame.result : newResult}
             </button>
-          )}
-        </div>
-      )}
+            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
