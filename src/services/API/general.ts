@@ -43,7 +43,10 @@ export const patchDataOnApi = async <T>(
   data: any
 ): Promise<T> => {
   try {
+    console.log(endpoint);
+    console.log(data);
     const response: AxiosResponse<T> = await api.patch(endpoint, data);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error(error);

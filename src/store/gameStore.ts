@@ -33,6 +33,47 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({
       isUpdatingGame: boolean,
     })),
+  currentGameResult: '',
+  setCurrentGameResult: (result: string) =>
+    set(() => ({
+      currentGameResult: result,
+    })),
+  clearCurrentGameResult: () =>
+    set(() => ({
+      currentGameResult: '',
+    })),
+  currentGameDate: new Date(),
+  setCurrentGameDate: (date: Date) =>
+    set(() => ({
+      currentGameDate: date,
+    })),
+  clearCurrentGameDate: () =>
+    set(() => ({
+      currentGameDate: new Date(),
+    })),
+  updatedGameResult: '',
+  setUpdatedGameResult: (result: string) =>
+    set(() => ({
+      updatedGameResult: result,
+    })),
+  clearUpdatedGameResult: () =>
+    set(() => ({
+      updatedGameResult: '',
+    })),
+  updatedGameDate: '',
+  setUpdatedGameDate: (date: string) =>
+    set(() => ({
+      updatedGameDate: date,
+    })),
+  clearUpdatedGameDate: () =>
+    set(() => ({
+      updatedGameDate: '',
+    })),
+  gameUpdateInProgress: false,
+  setGameUpdateInProgress: (boolean: boolean) =>
+    set(() => ({
+      gameUpdateInProgress: boolean,
+    })),
   currentMonth: 0,
   setCurrentMonth: (month) =>
     set(() => ({

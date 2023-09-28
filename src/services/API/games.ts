@@ -60,17 +60,28 @@ export const addGameToApi = async (
   };
 };
 
+interface GameUpdateForm {
+  result: string;
+  date: string;
+  map: string;
+  mapType: string;
+  mapImageUrl: string;
+  heroes: string[];
+  heroesImageUrl: string[];
+}
+
 export const updateGameOnApi = async (
   userId: number,
   profileId: number,
   gameId: number,
-  gameObj: GameReportForm
+  gameObj: GameUpdateForm
 ): Promise<GameAddedToApi> => {
   const endpoint = `user/${userId}/profiles/${profileId}/games/${gameId}`;
   const response = await patchDataOnApi<GameAddedToApi>(endpoint, {
-    gameId,
     ...gameObj,
   });
+
+  console.log(response);
   return {
     message: response.message,
     game: response.game,

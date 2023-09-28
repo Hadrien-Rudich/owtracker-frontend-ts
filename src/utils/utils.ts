@@ -33,11 +33,12 @@ const filterMapTypes = (mapsData: MapData[], mapType: string) => {
   return result;
 };
 
-const reverseDateFormat = (date: string) => {
-  const parts = date.split('/');
-  const reversedParts = parts.reverse();
-  const reversedDateString = reversedParts.join('/');
-  return reversedDateString;
+const formatDateForGameEdit = (date: Date): string => {
+  const day = date.getUTCDate().toString().padStart(2, '0');
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  const year = date.getUTCFullYear().toString().slice(-2);
+
+  return `${day}/${month}/${year}`;
 };
 
 const convertDateToDatePickerFormat = (date: string) => {
@@ -95,7 +96,7 @@ const getGameContainerClassName = (
   isUpdatingGame: boolean
 ) => {
   if (game.id === selectedGame.id) {
-    return 'selected z-10 ';
+    return 'selected z-10';
   }
   if (!isUpdatingGame) {
     return 'unselected z-0';
@@ -123,7 +124,7 @@ const verifyProfileLabelAvailability = (
 export {
   filterGames,
   filterMapTypes,
-  reverseDateFormat,
+  formatDateForGameEdit,
   convertDateToDatePickerFormat,
   capitalizeFirstLetter,
   getResultClassName,

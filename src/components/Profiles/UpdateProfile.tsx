@@ -19,7 +19,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
     setIsUpdatingProfile,
     updateProfileLabel,
     clearUpdatedProfileLabel,
-    selectProfile: setProfileData,
+    selectProfile,
   } = profileStore();
 
   const mutation = useMutation({
@@ -28,7 +28,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
     onSuccess: (updatedProfile: ProfileAddedtoApi) => {
       updateProfileLabel(profileObj.id, updatedProfileLabel);
       setIsUpdatingProfile(false);
-      setProfileData(updatedProfile.profile);
+      selectProfile(updatedProfile.profile);
     },
     retry: 1,
   });

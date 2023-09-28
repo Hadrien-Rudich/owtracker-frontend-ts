@@ -1,5 +1,5 @@
 import CancelGameEdit from '../GameEdit/CancelGameEdit';
-import ConfirmGameEdit from '../GameEdit/ConfirmGameEdit';
+import SubmitGameEdit from '../GameEdit/SubmitGameEdit';
 import { gameStore } from '../../../store/gameStore';
 import DeleteGame from '../GameEdit/DeleteGame';
 import EditGame from '../GameEdit/EditGame';
@@ -26,7 +26,7 @@ function GameButtons({ gameObj }: { gameObj: GameData }) {
         ) : (
           gameObj.id === selectedGame.id && (
             <>
-              <ConfirmGameEdit />
+              <SubmitGameEdit gameObj={gameObj} />
               <CancelGameEdit />
             </>
           )

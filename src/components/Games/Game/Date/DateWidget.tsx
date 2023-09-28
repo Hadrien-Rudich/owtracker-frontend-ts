@@ -2,36 +2,40 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { gameStore } from '../../../../store/gameStore';
 import type { GameData } from '../../../../types/store/gameTypes';
 import {
-  reverseDateFormat,
+  formatDateForGameEdit,
   convertDateToDatePickerFormat,
 } from '../../../../utils/utils';
 
 function DateWidget({
   setIsDropDownActive,
-  setNewDate,
   gameObj,
 }: {
   setIsDropDownActive: (value: boolean) => void;
-  setNewDate: (value: string) => void;
   gameObj: GameData;
 }) {
-  const [startDate, setStartDate] = useState(
-    convertDateToDatePickerFormat(gameObj.date)
-  );
+  const { currentGameDate, setCurrentGameDate, setUpdatedGameDate } =
+    gameStore();
+  const formattedDate = convertDateToDatePickerFormat(gameObj.date);
+
+  // setCurrentGameDate(formattedDate);
+  // setCurrentGameDate(formattedDate);
+  // const [currentGameDate, setCurrentGameDate] = useState(
+  //   convertDateToDatePickerFormat(gameObj.date)
+  // );
+
   return (
     <div className="flexdiv relative">
       <DatePicker
         locale="en"
         dateFormat="dd/MM"
-        selected={startDate}
+        selected={currentGameDate}
         onClickOutside={() => setIsDropDownActive(false)}
-        onChange={(date) => date && setStartDate(date)}
+        onChange={(date) => date && setCurrentGameDate(date)}
         onSelect={(date) => {
-          setNewDate(
-            reverseDateFormat(date.toISOString().slice(5, 10).replace('-', '/'))
-          );
+          setUpdatedGameDate(formatDateForGameEdit(date));
         }}
         className="ring-2 w-full z-50 text-center hover:cursor-pointer"
         wrapperClassName="w-full"

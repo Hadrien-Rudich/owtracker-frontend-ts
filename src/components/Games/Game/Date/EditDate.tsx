@@ -8,7 +8,6 @@ import DateWidget from './DateWidget';
 function EditDate({ gameObj }: { gameObj: GameData }) {
   const { selectedGame } = gameStore();
   const [, setIsDropDownActive] = useState(false);
-  const [, setNewDate] = useState<string>('');
 
   return (
     <div className="EditDate_container relative">
@@ -18,7 +17,6 @@ function EditDate({ gameObj }: { gameObj: GameData }) {
         <div className=" absolute top-[-0.8rem] right-0 w-full bg-activeColor">
           <DateWidget
             setIsDropDownActive={setIsDropDownActive}
-            setNewDate={setNewDate}
             gameObj={gameObj}
           />
         </div>

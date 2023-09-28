@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
-
+import SavedToast from '../SavedToast';
 import { fetchGamesFromApi } from '../../services/API/games';
 
 import { profileStore } from '../../store/profileStore';
@@ -16,7 +16,8 @@ function Games() {
   const navigate = useNavigate();
 
   const { isLoggedIn, userData } = authStore();
-  const { addGamesData, gamesData } = gameStore();
+  const { addGamesData, gamesData, gameSavedToast, setGameSavedToast } =
+    gameStore();
   const { selectedProfile } = profileStore();
 
   const { isLoading, isFetching, isError, isSuccess } = useQuery({
@@ -47,6 +48,12 @@ function Games() {
   if (isSuccess && gamesData.length > 0) {
     return (
       <div className="History_container lg:mt-[6rem] my-24 container mx-auto">
+        <SavedToast
+          topPosition="top-[12.5rem]"
+          toastText="Game updated!"
+          booleanProp={gameSavedToast}
+          setBooleanProp={setGameSavedToast}
+        />
         <div className="MonthTabs_container">
           <MonthTabs />
         </div>

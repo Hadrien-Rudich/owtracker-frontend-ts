@@ -48,9 +48,6 @@ function Profile() {
               onClick={(event) =>
                 handleProfileClick(event, {
                   ...p,
-                  // id: p.id,
-                  // label: p.label,
-                  // userId: p.userId,
                 })
               }
               type="button"

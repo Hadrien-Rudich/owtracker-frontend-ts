@@ -6,17 +6,15 @@ import Result from './Result';
 import type { GameData } from '../../../../types/store/gameTypes';
 
 function EditResult({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame } = gameStore();
+  const { selectedGame, updatedGameResult, setUpdatedGameResult } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [currentResult, setCurrentResult] = useState<string>(gameObj.result);
-  const [newResult, setNewResult] = useState<string>('');
   const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
-
   const selectResult = (result: string) => {
-    setNewResult(result.toLowerCase());
+    setUpdatedGameResult(result.toLowerCase());
     setCurrentResult(result.toLowerCase());
     setIsDropDownActive(false);
   };
@@ -32,13 +30,17 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
           <div className="ring-2">
             <button
               className={`${getResultClassNameFromResult(
-                newResult === '' ? selectedGame.result : newResult
+                updatedGameResult === ''
+                  ? selectedGame.result
+                  : updatedGameResult
               )} w-full relative`}
               type="button"
               onClick={toggleDropDown}
             >
-              {/* {newResult === '' ? selectedGame.result.slice(0, 1) : newResult} */}
-              {newResult === '' ? selectedGame.result : newResult}
+              {/* {updatedGameResult === '' ? selectedGame.result.slice(0, 1) : updatedGameResult} */}
+              {updatedGameResult === ''
+                ? selectedGame.result
+                : updatedGameResult}
             </button>
             <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
 
@@ -46,7 +48,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
               {results.map(
                 (result) =>
                   result.label.toLowerCase() !==
-                    // newResult.toLocaleLowerCase() && (
+                    // updatedGameResult.toLocaleLowerCase() && (
                     currentResult && (
                     <li key={result.label}>
                       <button
@@ -66,13 +68,17 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
           <div>
             <button
               className={`${getResultClassNameFromResult(
-                newResult === '' ? selectedGame.result : newResult
+                updatedGameResult === ''
+                  ? selectedGame.result
+                  : updatedGameResult
               )} w-full relative ring-2`}
               type="button"
               onClick={toggleDropDown}
             >
-              {/* {newResult === '' ? selectedGame.result.slice(0, 1) : newResult} */}
-              {newResult === '' ? selectedGame.result : newResult}
+              {/* {updatedGameResult === '' ? selectedGame.result.slice(0, 1) : updatedGameResult} */}
+              {updatedGameResult === ''
+                ? selectedGame.result
+                : updatedGameResult}
             </button>
             <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
           </div>

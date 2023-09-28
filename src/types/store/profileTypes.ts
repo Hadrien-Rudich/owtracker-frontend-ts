@@ -23,6 +23,7 @@ interface ProfileStore {
   deleteProfile: (profile: string) => void;
   profileSavedToast: boolean;
   setProfileSavedToast: (value: boolean) => void;
+
   reset: () => void;
 }
 
