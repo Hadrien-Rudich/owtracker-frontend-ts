@@ -1,19 +1,23 @@
 import { FaCheck } from 'react-icons/fa';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  // useQueryClient
+} from '@tanstack/react-query';
 import { gameStore } from '../../../store/gameStore';
 import type { GameData } from '../../../types/store/gameTypes';
 import { updateGameOnApi, GameAddedToApi } from '../../../services/API/games';
 
 function SubmitGameEdit({ gameObj }: { gameObj: GameData }) {
   const {
-    selectGame,
+    // selectGame,
     updatedGameResult,
     updatedGameDate,
     setIsUpdatingGame,
     setGameSavedToast,
+    updateGame,
   } = gameStore();
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: () =>
@@ -23,18 +27,28 @@ function SubmitGameEdit({ gameObj }: { gameObj: GameData }) {
         date: updatedGameDate,
       }),
     onSuccess: (UpdatedGameOnApi: GameAddedToApi) => {
-      selectGame(UpdatedGameOnApi.game);
+      // selectGame(UpdatedGameOnApi.game);
       setIsUpdatingGame(false);
       setGameSavedToast(true);
-      queryClient.invalidateQueries({ queryKey: ['gamesData'] });
+      updateGame(UpdatedGameOnApi.game.id, UpdatedGameOnApi.game);
+      // queryClient.invalidateQueries({
+      //   queryKey: ['gamesData'],
+      // });
     },
     retry: 1,
   });
 
   const handleSubmit = () => {
-    console.log('handleSubmit');
-    console.log(gameObj);
-    mutation.mutate();
+    if (
+      gameObj.result === updatedGameResult &&
+      gameObj.date === updatedGameDate
+    ) {
+      console.log('submitted Game was identical to original Game');
+    } else {
+      console.log('handleSubmit');
+      console.log(gameObj);
+      mutation.mutate();
+    }
   };
 
   return (

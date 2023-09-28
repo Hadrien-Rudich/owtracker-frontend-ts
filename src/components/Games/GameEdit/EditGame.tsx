@@ -3,12 +3,19 @@ import { gameStore } from '../../../store/gameStore';
 import type { GameData } from '../../../types/store/gameTypes';
 
 function EditGame({ gameObj }: { gameObj: GameData }) {
-  const { setIsUpdatingGame, isUpdatingGame } = gameStore();
+  const {
+    setIsUpdatingGame,
+    isUpdatingGame,
+    setUpdatedGameResult,
+    setUpdatedGameDate,
+  } = gameStore();
 
   const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
     setIsUpdatingGame(true);
+    setUpdatedGameResult(gameObj.result);
+    setUpdatedGameDate(gameObj.date);
   };
 
   return (

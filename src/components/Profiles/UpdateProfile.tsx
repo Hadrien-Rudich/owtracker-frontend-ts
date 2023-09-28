@@ -12,7 +12,7 @@ import { verifyProfileLabelAvailability } from '../../utils/utils';
 
 function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   const {
-    selectedProfile: profileData,
+    selectedProfile,
     profilesData,
     updatedProfileLabel,
     setUpdatedProfileLabel,
@@ -74,7 +74,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
           className={`${
-            profileObj.label === profileData.label
+            profileObj.label === selectedProfile.label
               ? 'scale-110 bg-activeColor shadow-lg'
               : 'bg-secondaryColor shadow-inner opacity-60 hover:opacity-100'
           } profilecard_container profile card hover:bg-activeColor hover:scale-110`}

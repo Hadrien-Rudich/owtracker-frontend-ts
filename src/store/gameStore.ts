@@ -14,6 +14,15 @@ export const gameStore = create<GameStore>()((set) => ({
     set((state) => ({
       gamesData: [...state.gamesData, gameData],
     })),
+  updateGame: (gameId: number, updatedGameObj: GameData) =>
+    set((state) => ({
+      gamesData: state.gamesData.map((game: GameData) => {
+        if (game.id === gameId) {
+          return updatedGameObj;
+        }
+        return game;
+      }),
+    })),
   deleteGame: (gameId: number) => {
     set((state) => ({
       gamesData: state.gamesData.filter((g: GameData) => g.id !== gameId),
@@ -42,14 +51,14 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({
       currentGameResult: '',
     })),
-  currentGameDate: new Date(),
-  setCurrentGameDate: (date: Date) =>
+  selectedGameDate: new Date(),
+  selectGameDate: (date: Date) =>
     set(() => ({
-      currentGameDate: date,
+      selectedGameDate: date,
     })),
-  clearCurrentGameDate: () =>
+  clearSelectedGameDate: () =>
     set(() => ({
-      currentGameDate: new Date(),
+      selectedGameDate: new Date(),
     })),
   updatedGameResult: '',
   setUpdatedGameResult: (result: string) =>

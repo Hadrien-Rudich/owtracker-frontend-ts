@@ -16,25 +16,27 @@ function DateWidget({
   setIsDropDownActive: (value: boolean) => void;
   gameObj: GameData;
 }) {
-  const { currentGameDate, setCurrentGameDate, setUpdatedGameDate } =
-    gameStore();
-  const formattedDate = convertDateToDatePickerFormat(gameObj.date);
+  const { selectedGameDate, selectGameDate, setUpdatedGameDate } = gameStore();
 
-  // setCurrentGameDate(formattedDate);
-  // setCurrentGameDate(formattedDate);
-  // const [currentGameDate, setCurrentGameDate] = useState(
-  //   convertDateToDatePickerFormat(gameObj.date)
-  // );
+  const uneditedDate = convertDateToDatePickerFormat(gameObj.date);
+
+  const [gameObjectDate, setGameObjectDate] = useState(
+    convertDateToDatePickerFormat(gameObj.date)
+  );
 
   return (
     <div className="flexdiv relative">
       <DatePicker
         locale="en"
         dateFormat="dd/MM"
-        selected={currentGameDate}
+        selected={
+          selectedGameDate === gameObjectDate ? selectedGameDate : uneditedDate
+        }
         onClickOutside={() => setIsDropDownActive(false)}
-        onChange={(date) => date && setCurrentGameDate(date)}
+        onChange={(date) => date && selectGameDate(date)}
         onSelect={(date) => {
+          selectGameDate(date);
+          setGameObjectDate(date);
           setUpdatedGameDate(formatDateForGameEdit(date));
         }}
         className="ring-2 w-full z-50 text-center hover:cursor-pointer"

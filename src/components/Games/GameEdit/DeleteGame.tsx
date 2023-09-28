@@ -1,18 +1,26 @@
 import { FaTrashAlt } from 'react-icons/fa';
-import { useMutation } from '@tanstack/react-query';
+import {
+  useMutation,
+  //  useQueryClient
+} from '@tanstack/react-query';
 import { gameStore } from '../../../store/gameStore';
 import type { GameData } from '../../../types/store/gameTypes';
 import { deleteGameFromApi } from '../../../services/API/games';
 
 function DeleteGame({ gameObj }: { gameObj: GameData }) {
-  const { deleteGame: deleteGameData, unselectGame } = gameStore();
+  const { deleteGame, unselectGame } = gameStore();
+
+  // const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: () =>
       deleteGameFromApi(gameObj.userId, gameObj.profileId, gameObj.id),
     onSuccess: () => {
-      deleteGameData(gameObj.id);
+      deleteGame(gameObj.id);
       unselectGame();
+      // queryClient.invalidateQueries({
+      //   queryKey: ['gamesData'],
+      // });
     },
     retry: 1,
   });

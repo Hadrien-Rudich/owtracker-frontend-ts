@@ -17,6 +17,7 @@ interface GameStore {
   removeGamesData: () => void;
   selectedGame: GameData;
   addGame: (game: GameData) => void;
+  updateGame: (gameId: number, updatedGameObj: GameData) => void;
   deleteGame: (gameId: number) => void;
   selectGame: (game: GameData) => void;
   unselectGame: () => void;
@@ -25,9 +26,9 @@ interface GameStore {
   currentGameResult: string;
   setCurrentGameResult: (result: string) => void;
   clearCurrentGameResult: () => void;
-  currentGameDate: Date;
-  setCurrentGameDate: (date: Date) => void;
-  clearCurrentGameDate: () => void;
+  selectedGameDate: Date;
+  selectGameDate: (date: Date) => void;
+  clearSelectedGameDate: () => void;
   updatedGameResult: string;
   setUpdatedGameResult: (result: string) => void;
   clearUpdatedGameResult: () => void;
