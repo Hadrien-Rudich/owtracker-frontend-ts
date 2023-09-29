@@ -6,16 +6,16 @@ function EditGame({ gameObj }: { gameObj: GameData }) {
   const {
     setIsUpdatingGame,
     isUpdatingGame,
-    setUpdatedGameResult,
-    setUpdatedGameDate,
+    selectGameResult,
+    selectGameDateInFormat,
   } = gameStore();
 
   const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
     setIsUpdatingGame(true);
-    setUpdatedGameResult(gameObj.result);
-    setUpdatedGameDate(gameObj.date);
+    selectGameResult(gameObj.result);
+    selectGameDateInFormat(gameObj.date);
   };
 
   return (

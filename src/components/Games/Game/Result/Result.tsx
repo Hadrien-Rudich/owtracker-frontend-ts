@@ -3,16 +3,14 @@ import type { GameData } from '../../../../types/store/gameTypes';
 
 function Result({ gameObj }: { gameObj: GameData }) {
   return (
-    <div className="Result_container">
-      <p
-        className={`${getResultClassNameFromGame(gameObj)}     
+    <p
+      className={`${getResultClassNameFromGame(gameObj)}     
  result_container`}
-      >
-        {/* {gameObj.result.slice(0, 1)} */}
+    >
+      {/* {gameObj.result.slice(0, 1)} */}
 
-        {gameObj.result}
-      </p>
-    </div>
+      {gameObj.result}
+    </p>
   );
 }
 

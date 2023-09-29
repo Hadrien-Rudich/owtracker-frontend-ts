@@ -16,7 +16,8 @@ function DateWidget({
   setIsDropDownActive: (value: boolean) => void;
   gameObj: GameData;
 }) {
-  const { selectedGameDate, selectGameDate, setUpdatedGameDate } = gameStore();
+  const { selectedGameDate, selectGameDate, selectGameDateInFormat } =
+    gameStore();
 
   const uneditedDate = convertDateToDatePickerFormat(gameObj.date);
 
@@ -37,7 +38,7 @@ function DateWidget({
         onSelect={(date) => {
           selectGameDate(date);
           setGameObjectDate(date);
-          setUpdatedGameDate(formatDateForGameEdit(date));
+          selectGameDateInFormat(formatDateForGameEdit(date));
         }}
         className="ring-2 w-full z-50 text-center hover:cursor-pointer"
         wrapperClassName="w-full"

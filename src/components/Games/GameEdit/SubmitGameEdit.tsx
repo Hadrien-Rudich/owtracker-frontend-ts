@@ -10,8 +10,8 @@ import { updateGameOnApi, GameAddedToApi } from '../../../services/API/games';
 function SubmitGameEdit({ gameObj }: { gameObj: GameData }) {
   const {
     // selectGame,
-    updatedGameResult,
-    updatedGameDate,
+    selectedGameResult,
+    selectedGameDateInFormat,
     setIsUpdatingGame,
     setGameSavedToast,
     updateGame,
@@ -23,8 +23,8 @@ function SubmitGameEdit({ gameObj }: { gameObj: GameData }) {
     mutationFn: () =>
       updateGameOnApi(gameObj.userId, gameObj.profileId, gameObj.id, {
         ...gameObj,
-        result: updatedGameResult,
-        date: updatedGameDate,
+        result: selectedGameResult,
+        date: selectedGameDateInFormat,
       }),
     onSuccess: (UpdatedGameOnApi: GameAddedToApi) => {
       // selectGame(UpdatedGameOnApi.game);
@@ -40,8 +40,8 @@ function SubmitGameEdit({ gameObj }: { gameObj: GameData }) {
 
   const handleSubmit = () => {
     if (
-      gameObj.result === updatedGameResult &&
-      gameObj.date === updatedGameDate
+      gameObj.result === selectedGameResult &&
+      gameObj.date === selectedGameDateInFormat
     ) {
       console.log('submitted Game was identical to original Game');
     } else {

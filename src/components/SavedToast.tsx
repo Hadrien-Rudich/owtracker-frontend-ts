@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface SavedToastProps {
   topPosition: string;
@@ -13,13 +14,29 @@ function SavedToast({
   setBooleanProp,
   topPosition,
 }: SavedToastProps) {
+  const location = useLocation();
+  const [isMounted, setIsMounted] = useState(true);
+
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (booleanProp) {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setBooleanProp(false);
       }, 3000);
     }
-  });
+
+    return () => {
+      clearTimeout(timeoutId);
+      setIsMounted(false);
+    };
+  }, [booleanProp, setBooleanProp]);
+
+  useEffect(() => {
+    if (!isMounted) {
+      setBooleanProp(false);
+    }
+  }, [location, isMounted, setBooleanProp]);
 
   return (
     <div
