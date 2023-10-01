@@ -1,14 +1,10 @@
 import { ChangeEvent, KeyboardEvent, FormEvent } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { profileStore } from '../../store/profileStore';
 import type { ProfileData } from '../../types/store/profileTypes';
-import {
-  updateProfileOnApi,
-  ProfileAddedtoApi,
-} from '../../services/API/profiles';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
+import useProfileUpdateMutation from '../../hooks/profiles/useProfileUpdateMutation';
 
 function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   const {
@@ -17,21 +13,10 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
     updatedProfileLabel,
     setUpdatedProfileLabel,
     setIsUpdatingProfile,
-    updateProfileLabel,
     clearUpdatedProfileLabel,
-    selectProfile,
   } = profileStore();
 
-  const mutation = useMutation({
-    mutationFn: () =>
-      updateProfileOnApi(profileObj.userId, profileObj.id, updatedProfileLabel),
-    onSuccess: (updatedProfile: ProfileAddedtoApi) => {
-      updateProfileLabel(profileObj.id, updatedProfileLabel);
-      setIsUpdatingProfile(false);
-      selectProfile(updatedProfile.profile);
-    },
-    retry: 1,
-  });
+  const mutateProfile = useProfileUpdateMutation({ profileObj });
 
   const handleUpdateProfile = async () => {
     const profileLabelIsAvailable = verifyProfileLabelAvailability(
@@ -39,7 +24,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
       profilesData
     );
     if (profileLabelIsAvailable) {
-      mutation.mutate();
+      mutateProfile();
     }
   };
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {

@@ -6,17 +6,12 @@ import {
   KeyboardEvent,
   useRef,
 } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { ImPlus, ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
 import { profileStore } from '../../store/profileStore';
-import {
-  addProfileToApi,
-  ProfileAddedtoApi,
-} from '../../services/API/profiles';
 import useOutsideClick from '../useOutsideClick';
-import { authStore } from '../../store/authStore';
+import useProfileAddMutation from '../../hooks/profiles/useProfileAddMutation';
 
 function AddProfile() {
   const {
@@ -24,24 +19,14 @@ function AddProfile() {
     newProfile,
     setNewProfile,
     clearNewProfile,
-    addNewProfile,
     unselectProfile,
     setIsUpdatingProfile,
     setProfileSavedToast,
   } = profileStore();
-  const { userData } = authStore();
   const [inputField, setInputField] = useState(false);
   const newProfileInputRef = useRef<HTMLInputElement>(null);
 
-  const mutation = useMutation({
-    mutationFn: () => addProfileToApi(userData.id, newProfile),
-    onSuccess: (newProfileAddedToApi: ProfileAddedtoApi) => {
-      addNewProfile(newProfileAddedToApi.profile);
-      setInputField(false);
-      clearNewProfile();
-    },
-    retry: 1,
-  });
+  const mutateProfile = useProfileAddMutation();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewProfile(event.target.value);
@@ -71,7 +56,8 @@ function AddProfile() {
       profilesData
     );
     if (profileLabelIsAvailable) {
-      mutation.mutate();
+      mutateProfile();
+      setInputField(false);
       setProfileSavedToast(true);
     }
   };

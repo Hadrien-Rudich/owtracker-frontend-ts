@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchGamesFromApi } from '../services/API/games';
-import { gameStore } from '../store/gameStore';
-import { profileStore } from '../store/profileStore';
-import type { GameData } from '../types/store/gameTypes';
+import { fetchGamesFromApi } from '../../services/API/games';
+import { gameStore } from '../../store/gameStore';
+import { profileStore } from '../../store/profileStore';
+import type { GameData } from '../../types/store/gameTypes';
 
 export const useGamesQuery = () => {
   const { addGamesData } = gameStore();

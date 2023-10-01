@@ -2,10 +2,10 @@ import { useQueries } from '@tanstack/react-query';
 import {
   fetchHeroesFromApi,
   fetchRolesFromApi,
-} from '../services/API/gameReport';
-import { gameReportStore } from '../store/gameReportStore';
+} from '../../services/API/gameReport';
+import { gameReportStore } from '../../store/gameReportStore';
 
-import type { HeroData, RoleData } from '../types/store/gameReportTypes';
+import type { HeroData, RoleData } from '../../types/store/gameReportTypes';
 
 export const useHeroesQueries = () => {
   const { addHeroesData, addRolesData } = gameReportStore();

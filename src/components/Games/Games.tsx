@@ -4,7 +4,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
 import SavedToast from '../SavedToast';
-import { useGamesQuery } from '../../hooks/useGamesQuery';
+import { useGamesQuery } from '../../hooks/games/useGamesQuery';
 import MonthTabs from './MonthTabs';
 import Game from './Game/Game';
 

@@ -1,30 +1,23 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import { authStore } from '../../store/authStore';
 import LoadingSpinner from '../LoadingSpinner';
-import { logIn, UserVerified } from '../../services/API/users';
+import useUserLoginMutation from '../../hooks/users/useUserLoginMutation';
 
 function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userAuthenticated, setUserAuthenticated] = useState(false);
 
-  const { isLoggedIn, setLoggedIn, setUserData } = authStore();
+  const { isLoggedIn } = authStore();
 
   const navigate = useNavigate();
 
-  const mutation = useMutation({
-    mutationFn: () => logIn(email, password),
-    onSuccess: (fetchedData: UserVerified) => {
-      setUserData(fetchedData.user);
-      setUserAuthenticated(true);
-      setTimeout(() => {
-        setLoggedIn();
-      }, 500);
-    },
-    retry: 1,
+  const mutateUser = useUserLoginMutation({
+    email,
+    password,
+    setUserAuthenticated,
   });
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +34,10 @@ function LogInForm() {
 
   function handleLogIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    mutation.mutate();
-    setUserAuthenticated(false);
+    setUserAuthenticated(true);
+    setTimeout(() => {
+      mutateUser();
+    }, 1500);
   }
 
   useEffect(() => {

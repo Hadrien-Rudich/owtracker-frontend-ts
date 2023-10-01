@@ -1,23 +1,12 @@
 import { FaTrashAlt } from 'react-icons/fa';
-import { useMutation } from '@tanstack/react-query';
 import type { ProfileData } from '../../types/store/profileTypes';
-import { profileStore } from '../../store/profileStore';
-import { deleteProfileFromApi } from '../../services/API/profiles';
+import useProfileDeleteMutation from '../../hooks/profiles/useProfileDeleteMutation';
 
 function DeleteProfile({ profileObj }: { profileObj: ProfileData }) {
-  const { unselectProfile: clearProfileData, deleteProfile } = profileStore();
-
-  const mutation = useMutation({
-    mutationFn: () => deleteProfileFromApi(profileObj.userId, profileObj.id),
-    onSuccess: () => {
-      deleteProfile(profileObj.label);
-      clearProfileData();
-    },
-    retry: 1,
-  });
+  const mutateProfile = useProfileDeleteMutation({ profileObj });
 
   const handleDeleteClick = async () => {
-    mutation.mutate();
+    mutateProfile();
   };
 
   return (

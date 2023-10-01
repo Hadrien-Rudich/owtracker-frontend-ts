@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { gameStore } from '../store/gameStore';
-import type { GameData } from '../types/store/gameTypes';
-import { updateGameOnApi, GameAddedToApi } from '../services/API/games';
+import { gameStore } from '../../store/gameStore';
+import type { GameData } from '../../types/store/gameTypes';
+import { updateGameOnApi, GameAddedToApi } from '../../services/API/games';
 
-function useGamesUpdateMutation({ gameObj }: { gameObj: GameData }) {
+function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
   const {
     selectedGameResult,
     selectedGameDateInFormat,
@@ -12,7 +12,7 @@ function useGamesUpdateMutation({ gameObj }: { gameObj: GameData }) {
     updateGame,
   } = gameStore();
 
-  useMutation({
+  const { mutate } = useMutation({
     mutationFn: () =>
       updateGameOnApi(gameObj.userId, gameObj.profileId, gameObj.id, {
         ...gameObj,
@@ -26,6 +26,8 @@ function useGamesUpdateMutation({ gameObj }: { gameObj: GameData }) {
     },
     retry: 1,
   });
+
+  return mutate;
 }
 
-export default useGamesUpdateMutation;
+export default useGameUpdateMutation;

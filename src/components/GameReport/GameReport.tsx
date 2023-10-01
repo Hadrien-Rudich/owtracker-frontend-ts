@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
-
 import { authStore } from '../../store/authStore';
-
 import Heroes from './Heroes/Heroes';
 import Result from './Result/Result';
 import Reset from './Reset';
-import SubmitForm from './SubmitForm';
+import SubmitGame from './SubmitGame';
 import Maps from './Maps/Maps';
 import { gameReportStore } from '../../store/gameReportStore';
 import { gameStore } from '../../store/gameStore';
@@ -58,7 +56,7 @@ function Gamereport() {
                 <div className="flexdiv gap-6">
                   <Reset />
 
-                  <SubmitForm />
+                  <SubmitGame />
                 </div>
               ) : (
                 <div className="absolute mt-6">

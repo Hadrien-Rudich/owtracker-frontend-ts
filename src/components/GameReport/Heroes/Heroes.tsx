@@ -1,4 +1,4 @@
-import { useHeroesQueries } from '../../../hooks/useHeroesQueries';
+import { useHeroesQueries } from '../../../hooks/queries/useHeroesQueries';
 import Hero from './Hero';
 
 function Heroes() {
