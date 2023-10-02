@@ -53,7 +53,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
                     <li key={result.label}>
                       <button
                         type="button"
-                        className={`w-full bg-active${result.label}`}
+                        className={`w-full bg-activeColor bg-active${result.label} hover:bg-activeColor`}
                         onClick={() => selectResult(result.label)}
                         id={result.label}
                       >

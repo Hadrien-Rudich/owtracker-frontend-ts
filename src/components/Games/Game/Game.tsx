@@ -78,7 +78,7 @@ function Game() {
             )} gameHistory_container game relative`}
           >
             <div className="Map_container w-[45%] lg:w[40%] mapImage_container ">
-              <MapComponent gameObj={game} />
+              <MapComponent gameObj={game} imgHeight="h-12" />
             </div>
             <div className="Heroes_container flex sm:justify-center justify-start pl-4  gap-0.5 w-[45%] lg:w[40%] relative">
               <HeroesComponent gameObj={game} />

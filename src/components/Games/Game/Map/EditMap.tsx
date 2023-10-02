@@ -4,11 +4,11 @@ import { gameStore } from '../../../../store/gameStore';
 import type { GameData } from '../../../../types/store/gameTypes';
 import Map from './Map';
 import { gameReportStore } from '../../../../store/gameReportStore';
-import { capitalizeFirstLetter } from '../../../../utils/utils';
 
 function EditMap({ gameObj }: { gameObj: GameData }) {
   const { selectedGame, selectedGameMap, selectGameMap } = gameStore();
   const { mapsData } = gameReportStore();
+  const { isUpdatingGame } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [currentMap, setCurrentMap] = useState<string>(gameObj.map);
@@ -21,7 +21,7 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
   };
 
   if (selectedGame.id !== gameObj.id) {
-    return <Map gameObj={gameObj} />;
+    return <Map gameObj={gameObj} imgHeight="h-12" />;
   }
 
   return (
@@ -34,14 +34,10 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               type="button"
               onClick={toggleDropDown}
             >
-              <img
-                className="h-8 w-full object-cover rounded-sm rounded-r-none"
-                src={`images/maps/${gameObj.mapImageUrl}`}
-                alt=""
-              />
-              <div className=" relative">
-                <div className="flexdiv h-7 gap-4 absolute top-[-1rem] left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-                  <p className="flex items-center sm:h-12 sm:w-40 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
+              <div>
+                <Map gameObj={gameObj} imgHeight="h-8" />
+                <div className="absolute flexdiv top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2  px-1 bg-mainText bg-opacity-40 h-6 w-1/4 ">
+                  <p className="text-xl truncate tracking-wider text-secondaryText text-center">
                     {gameObj.map}
                   </p>
                 </div>
@@ -53,20 +49,7 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               {mapsData.map(
                 (map) =>
                   map.label.toLowerCase() !== currentMap.toLowerCase() && (
-                    <div className="mapimage_container">
-                      <img
-                        className="h-12 w-full object-cover rounded-sm rounded-r-none"
-                        src={`images/maps/${map.imageUrl}`}
-                        alt=""
-                      />
-                      <div className=" relative">
-                        <div className="flexdiv gap-4 absolute top-[-1.5rem] left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-                          <p className="flex items-center sm:h-12 sm:w-40 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
-                            {map.label}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <Map mapObj={map} imgHeight="h-8" />
                   )
               )}
             </div>
@@ -78,14 +61,10 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               type="button"
               onClick={toggleDropDown}
             >
-              <img
-                className="h-8 w-full object-cover rounded-sm rounded-r-none"
-                src={`images/maps/${gameObj.mapImageUrl}`}
-                alt=""
-              />
-              <div className=" relative">
-                <div className="flexdiv h-7 gap-4 absolute top-[-1rem] left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-                  <p className="flex items-center sm:h-12 sm:w-40 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
+              <Map gameObj={gameObj} imgHeight="h-8" />
+              <div className="map_container flexdiv">
+                <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
+                  <p className="text-xl absolute truncate tracking-wider text-secondaryText">
                     {gameObj.map}
                   </p>
                 </div>
