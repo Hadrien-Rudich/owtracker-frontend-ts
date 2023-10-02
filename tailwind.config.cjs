@@ -4,6 +4,13 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+
+  variants: {
+    extend: {
+      display: ['group-hover'],
+    },
+  },
+
   theme: {
     colors: {
       mainColor: '#C4D9F2',

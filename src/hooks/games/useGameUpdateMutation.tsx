@@ -6,6 +6,8 @@ import { updateGameOnApi, GameAddedToApi } from '../../services/API/games';
 function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
   const {
     selectedGameResult,
+    selectedGameMap,
+    selectedGameMapImage,
     selectedGameDateInFormat,
     setIsUpdatingGame,
     setGameSavedToast,
@@ -18,6 +20,8 @@ function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
         ...gameObj,
         result: selectedGameResult,
         date: selectedGameDateInFormat,
+        map: selectedGameMap,
+        mapImageUrl: selectedGameMapImage,
       }),
     onSuccess: (UpdatedGameOnApi: GameAddedToApi) => {
       setIsUpdatingGame(false);

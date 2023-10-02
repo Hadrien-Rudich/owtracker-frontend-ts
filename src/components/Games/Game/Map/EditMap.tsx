@@ -6,17 +6,17 @@ import Map from './Map';
 import { gameReportStore } from '../../../../store/gameReportStore';
 
 function EditMap({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame, selectedGameMap, selectGameMap } = gameStore();
+  const { selectedGame, selectedGameMap, selectGameMap, updateSelectedGame } =
+    gameStore();
   const { mapsData } = gameReportStore();
-  const { isUpdatingGame } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  const [currentMap, setCurrentMap] = useState<string>(gameObj.map);
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
-  const selectMap = (map: string) => {
-    selectGameMap(map);
-    setCurrentMap(map);
+
+  const selectMap = (map: string, mapImage: string) => {
+    selectGameMap(map, mapImage);
+    updateSelectedGame({ ...selectedGame, map, mapImageUrl: mapImage });
     setIsDropDownActive(false);
   };
 
@@ -45,31 +45,57 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
             </button>
             <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
 
-            <div className="absolute top-[2.1rem] right-0 w-full bg-activeColor ring-2">
+            <div
+              className="absolute top-[2.7rem] right-[-0.1rem] w-full
+"
+            >
               {mapsData.map(
                 (map) =>
-                  map.label.toLowerCase() !== currentMap.toLowerCase() && (
-                    <Map mapObj={map} imgHeight="h-8" />
+                  map.label.toLowerCase() !== gameObj.map.toLowerCase() && (
+                    <button
+                      type="button"
+                      className="w-1/2 hover:bor h-6"
+                      onClick={() => selectMap(map.label, map.imageUrl)}
+                    >
+                      <Map mapObj={map} imgHeight="h-12" />
+                    </button>
                   )
               )}
             </div>
           </div>
         ) : (
           <div className="mapimage_container flexdiv">
-            <button
-              className="w-full relative ring-2"
-              type="button"
-              onClick={toggleDropDown}
-            >
-              <Map gameObj={gameObj} imgHeight="h-8" />
-              <div className="map_container flexdiv">
-                <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
-                  <p className="text-xl absolute truncate tracking-wider text-secondaryText">
-                    {gameObj.map}
-                  </p>
+            {selectedGameMap === selectedGame.map ? (
+              <button
+                className="w-full relative ring-2"
+                type="button"
+                onClick={toggleDropDown}
+              >
+                <Map gameObj={selectedGame} imgHeight="h-8" />
+                <div className="map_container flexdiv">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
+                    <p className="text-xl absolute truncate tracking-wider text-secondaryText">
+                      {selectedGame.map}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            ) : (
+              <button
+                className="w-full relative ring-2"
+                type="button"
+                onClick={toggleDropDown}
+              >
+                <Map gameObj={selectedGame} imgHeight="h-8" />
+                <div className="map_container flexdiv">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
+                    <p className="text-xl absolute truncate tracking-wider text-secondaryText">
+                      {selectedGame.map}
+                    </p>
+                  </div>
+                </div>
+              </button>
+            )}
             <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
           </div>
         )}

@@ -9,14 +9,6 @@ function CancelGameEdit() {
     setIsUpdatingGame(false);
   };
 
-  // const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-  //   if (event.key === 'Escape') {
-  //     console.log('handleCancelEdit');
-
-  //     handleCancelEdit();
-  //   }
-  // };
-
   return (
     <button type="button" className="text-warning hover:scale-125">
       <ImCross

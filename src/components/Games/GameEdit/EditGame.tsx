@@ -7,7 +7,9 @@ function EditGame({ gameObj }: { gameObj: GameData }) {
     setIsUpdatingGame,
     isUpdatingGame,
     selectGameResult,
+    selectedGameMap,
     selectGameDateInFormat,
+    selectGameMap,
   } = gameStore();
 
   const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -16,6 +18,8 @@ function EditGame({ gameObj }: { gameObj: GameData }) {
     setIsUpdatingGame(true);
     selectGameResult(gameObj.result);
     selectGameDateInFormat(gameObj.date);
+    selectGameMap(gameObj.map, gameObj.mapImageUrl);
+    console.log(selectedGameMap);
   };
 
   return (

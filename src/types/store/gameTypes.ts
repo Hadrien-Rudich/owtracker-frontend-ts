@@ -18,6 +18,7 @@ interface GameStore {
   selectedGame: GameData;
   addGame: (game: GameData) => void;
   updateGame: (gameId: number, updatedGameObj: GameData) => void;
+  updateSelectedGame: (updatedProperties: Partial<GameData>) => void;
   deleteGame: (gameId: number) => void;
   selectGame: (game: GameData) => void;
   unselectGame: () => void;
@@ -27,7 +28,8 @@ interface GameStore {
   setCurrentGameMap: (map: string) => void;
   clearCurrentGameMap: () => void;
   selectedGameMap: string;
-  selectGameMap: (map: string) => void;
+  selectedGameMapImage: string;
+  selectGameMap: (map: string, mapImage: string) => void;
   clearSelectedGameMap: () => void;
   currentGameHeroes: string[];
   setCurrentGameHeroes: (heroes: string[]) => void;

@@ -6,16 +6,20 @@ import Result from './Result';
 import type { GameData } from '../../../../types/store/gameTypes';
 
 function EditResult({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame, selectedGameResult, selectGameResult } = gameStore();
+  const {
+    selectedGame,
+    selectedGameResult,
+    selectGameResult,
+    updateSelectedGame,
+  } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  const [currentResult, setCurrentResult] = useState(gameObj.result);
   const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
   const selectResult = (result: string) => {
     selectGameResult(result.toLowerCase());
-    setCurrentResult(result.toLowerCase());
+    updateSelectedGame({ ...selectedGame, result });
     setIsDropDownActive(false);
   };
 
@@ -48,8 +52,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
               {results.map(
                 (result) =>
                   result.label.toLowerCase() !==
-                    // selectedGameResult.toLocaleLowerCase() && (
-                    currentResult && (
+                    selectedGame.result.toLowerCase() && (
                     <li key={result.label}>
                       <button
                         type="button"

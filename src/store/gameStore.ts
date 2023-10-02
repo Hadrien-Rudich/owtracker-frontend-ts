@@ -14,6 +14,14 @@ export const gameStore = create<GameStore>()((set) => ({
     set((state) => ({
       gamesData: [...state.gamesData, gameData],
     })),
+
+  updateSelectedGame: (updatedProperties: Partial<GameData>) =>
+    set((state) => ({
+      selectedGame: {
+        ...state.selectedGame,
+        ...updatedProperties,
+      },
+    })),
   updateGame: (gameId: number, updatedGameObj: GameData) =>
     set((state) => ({
       gamesData: state.gamesData.map((game: GameData) => {
@@ -54,13 +62,16 @@ export const gameStore = create<GameStore>()((set) => ({
     })),
 
   selectedGameMap: '',
-  selectGameMap: (map: string) =>
+  selectedGameMapImage: '',
+  selectGameMap: (map: string, mapImage: string) =>
     set(() => ({
       selectedGameMap: map,
+      selectedGameMapImage: mapImage,
     })),
   clearSelectedGameMap: () =>
     set(() => ({
       selectedGameMap: '',
+      selectedGameMapImage: '',
     })),
 
   currentGameHeroes: [],

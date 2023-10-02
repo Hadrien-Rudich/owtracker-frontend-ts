@@ -52,14 +52,14 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
       )}
 
       {mapObj && (
-        <div className="map_container flexdiv">
+        <div className="map_container flexdiv group h-8">
           <img
             className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
             src={`images/maps/${mapObj.imageUrl}`}
             alt=""
           />
-          <div className="absolute flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
-            <p className="text-xl absolute truncate tracking-wider text-secondaryText">
+          <div className="absolute flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6  invisible group-hover:visible ">
+            <p className="text-xl absolute truncate tracking-wider text-secondaryText invisible group-hover:visible ">
               {mapObj.label}
             </p>
           </div>
