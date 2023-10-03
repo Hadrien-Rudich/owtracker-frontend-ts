@@ -85,13 +85,20 @@ export const gameStore = create<GameStore>()((set) => ({
     })),
 
   selectedGameHeroes: [],
-  selectGameHero: (hero) =>
+  selectedGameHeroesImages: [],
+
+  selectGameHero: (hero, heroImage) =>
     set((state) => ({
       selectedGameHeroes: [...state.selectedGameHeroes, hero],
+      selectedGameHeroesImages: [...state.selectedGameHeroesImages, heroImage],
     })),
+
   unselectGameHero: (hero) => {
     set((state) => ({
       selectedGameHeroes: state.selectedGameHeroes.filter((h) => h !== hero),
+      selectedGameHeroesImages: state.selectedGameHeroesImages.filter(
+        (h) => h !== hero
+      ),
     }));
   },
   clearSelectedGameHeroes: () =>

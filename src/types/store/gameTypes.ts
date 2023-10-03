@@ -32,12 +32,17 @@ interface GameStore {
   selectGameMap: (map: string, mapImage: string) => void;
   clearSelectedGameMap: () => void;
   currentGameHeroes: string[];
+
   setCurrentGameHeroes: (heroes: string[]) => void;
   clearCurrentGameHeroes: () => void;
+
   selectedGameHeroes: string[];
-  selectGameHero: (hero: string) => void;
+  selectedGameHeroesImages: string[];
+
+  selectGameHero: (hero: string, heroImage: string) => void;
   unselectGameHero: (hero: string) => void;
   clearSelectedGameHeroes: () => void;
+
   currentGameResult: string;
   setCurrentGameResult: (result: string) => void;
   clearCurrentGameResult: () => void;

@@ -81,7 +81,7 @@ function Game() {
               <MapComponent gameObj={game} imgHeight="h-12" />
             </div>
             <div className="Heroes_container flex sm:justify-center justify-start pl-4  gap-0.5 w-[45%] lg:w[40%] relative">
-              <HeroesComponent gameObj={game} />
+              <HeroesComponent gameObj={game} imgHeight="h-10" />
             </div>
             <div className="details_container flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
               <div className="gamebuttons_container flexdiv relative">
