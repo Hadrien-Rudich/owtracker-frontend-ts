@@ -227,7 +227,7 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .list.unselected {
-  @apply opacity-30 bg-activeColor hover:opacity-100 hover:scale-105;
+  @apply opacity-30 bg-activeColor hover:opacity-100;
 }
 
 .game {

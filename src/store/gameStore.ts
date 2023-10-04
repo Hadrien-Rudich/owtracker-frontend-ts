@@ -63,11 +63,21 @@ export const gameStore = create<GameStore>()((set) => ({
 
   selectedGameMap: '',
   selectedGameMapImage: '',
+  selectedGameMapType: '',
   selectGameMap: (map: string, mapImage: string) =>
     set(() => ({
       selectedGameMap: map,
       selectedGameMapImage: mapImage,
     })),
+  selectGameMapType: (mapType: string) =>
+    set(() => ({
+      selectedGameMapType: mapType,
+    })),
+  clearSelectedGameMapType: () =>
+    set(() => ({
+      selectedGameMapType: '',
+    })),
+
   clearSelectedGameMap: () =>
     set(() => ({
       selectedGameMap: '',

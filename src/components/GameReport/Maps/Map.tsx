@@ -30,7 +30,7 @@ function Map() {
     }
   }, [selectedMapType]);
   return (
-    <div className="map_container pb-6 flexdiv flex-wrap w-full sm:gap-1 gap-0">
+    <div className="map_container pb-6 flexdiv flex-wrap sm:gap-4 gap-0 w-5/6">
       {selectedMapType !== '' && (
         <ScrollIntoView shouldScroll={shouldScrollIntoMaps}>
           {filteredMaps.map((m) => (
@@ -39,17 +39,23 @@ function Map() {
                 selectedMap?.includes(m.slug.toLowerCase())
                   ? 'selected'
                   : 'unselected'
-              }   list sm:w-1/6 w-2/4 `}
+              }   list sm:w-1/4 w-2/4 `}
               key={m.id}
               value={m.slug}
               onClick={(event) => handleMapClick(event, m.imageUrl)}
               type="button"
             >
-              <div className="map_container flexdiv group">
+              <div className="map_container flexdiv relative group">
                 <img src={`images/maps/${m.imageUrl}`} alt="map" />
 
-                <div className="absolute bottom-0 right-[0.09rem]  flexdiv bg-mainText bg-opacity-40 w-1/2 h-6 invisible group-hover:visible ">
-                  <p className="text-lg absolute truncate tracking-wider text-secondaryText invisible group-hover:visible ">
+                <div
+                  className={`${
+                    selectedMap === m.slug
+                      ? 'visible'
+                      : ' invisible group-hover:visible'
+                  } absolute bottom-0 right-[0.09rem] flexdiv bg-mainText bg-opacity-40`}
+                >
+                  <p className="h-6 text-lg px-4 truncate tracking-wider text-secondaryText">
                     {m.label}
                   </p>
                 </div>

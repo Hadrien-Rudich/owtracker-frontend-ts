@@ -15,7 +15,7 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
   return (
     <>
       {gameObj && !isUpdatingGame ? (
-        <div>
+        <div className="">
           <img
             className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
             src={`images/maps/${gameObj.mapImageUrl}`}
@@ -41,7 +41,7 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
       ) : (
         gameObj &&
         isUpdatingGame && (
-          <div>
+          <div className="">
             <img
               className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
               src={`images/maps/${gameObj.mapImageUrl}`}

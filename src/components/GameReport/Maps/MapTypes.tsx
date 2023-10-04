@@ -39,6 +39,7 @@ function MapTypes() {
     );
     setShouldScrollIntoMapTypes(false);
   }, [shouldScrollIntoMapTypes]);
+
   const handleMapTypeClick = (event: MouseEvent<HTMLButtonElement>) => {
     const mapTypeValue = event.currentTarget.value;
 
