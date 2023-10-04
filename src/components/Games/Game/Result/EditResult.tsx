@@ -29,7 +29,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
 
   return (
     <div className="EditResult_container relative">
-      <div className="absolute top-[-0.8rem] right-0 w-full">
+      <div className="absolute top-[-0.75rem] right-0 w-full">
         {isDropDownActive ? (
           <div className="ring-2">
             <button

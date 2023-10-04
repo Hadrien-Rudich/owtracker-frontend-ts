@@ -13,7 +13,7 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
     updateSelectedGame,
   } = gameStore();
 
-  const { heroesData } = gameReportStore();
+  const { rolesData, heroesData } = gameReportStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [currentGame, setCurrentGame] = useState(gameObj);
@@ -39,33 +39,49 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
   }
   return (
     <div className="EditMap_container relative flexdiv w-[85%] bg-sixthColor">
-      <div className="w-full absolute top-[-1.1rem] right-[-0.4rem]">
+      <div className="w-full absolute top-[-1rem] right-[-0.4rem]">
         {isDropDownActive ? (
-          <div className="heroesImages_container ring-2 bg-fourthColor">
+          <div className="heroesImages_container ring-2 bg-mainColor">
             <button
               className="w-full relative"
               type="button"
               onClick={toggleDropDown}
             >
               <div className="currentHeroes_container flexdiv">
-                <Heroes gameObj={currentGame} imgHeight="h-9" />
+                <Heroes gameObj={currentGame} imgHeight="h-8" />
               </div>
             </button>
             <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
 
-            <div
-              className="heroesDropDown_container grid grid-cols-10
-"
-            >
-              {heroesData.map((hero) => (
-                <div className="map_container" key={hero.label}>
-                  <button
-                    type="button"
-                    className="w-full h-6"
-                    onClick={() => selectHeroes(hero.label, hero.imageUrl)}
-                  >
-                    <Heroes heroObj={hero} imgHeight="h-12" />
-                  </button>
+            <div className="heroesDropDown_container grid grid-cols-3 justify-center content-center">
+              {rolesData.map((r) => (
+                <div
+                  key={r.label}
+                  className="heroesByRoles_container bg-thirdColor"
+                >
+                  <div className="heroes_container flexdiv">
+                    <div className="flexdiv flex-wrap">
+                      {heroesData
+                        .filter(
+                          (hero) =>
+                            hero.role.toLowerCase() === r.label.toLowerCase()
+                        )
+                        .map((h) => (
+                          <div
+                            className="heroes_container bg-fourthColor"
+                            key={h.label}
+                          >
+                            <button
+                              type="button"
+                              className="h-6"
+                              onClick={() => selectHeroes(h.label, h.imageUrl)}
+                            >
+                              <Heroes heroObj={h} imgHeight="h-9" />
+                            </button>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -78,7 +94,7 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
                 type="button"
                 onClick={toggleDropDown}
               >
-                <Heroes gameObj={selectedGame} imgHeight="h-9" />
+                <Heroes gameObj={selectedGame} imgHeight="h-12" />
               </button>
             ) : (
               <button
@@ -86,7 +102,7 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
                 type="button"
                 onClick={toggleDropDown}
               >
-                <Heroes gameObj={selectedGame} imgHeight="h-9" />
+                <Heroes gameObj={selectedGame} imgHeight="h-8" />
               </button>
             )}
             <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />

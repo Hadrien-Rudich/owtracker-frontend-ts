@@ -1,4 +1,5 @@
-import useMapsQueries from '../../../hooks/queries/useMapsQueries';
+import { useMapsQueries } from '../../../hooks/queries/useMapsQueries';
+
 import MapTypes from './MapTypes';
 import Map from './Map';
 

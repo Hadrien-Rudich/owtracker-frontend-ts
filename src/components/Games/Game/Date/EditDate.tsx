@@ -14,7 +14,7 @@ function EditDate({ gameObj }: { gameObj: GameData }) {
       {selectedGame.id !== gameObj.id ? (
         <Date gameObj={gameObj} />
       ) : (
-        <div className=" absolute top-[-0.8rem] right-0 w-full bg-activeColor">
+        <div className=" absolute top-[-0.75rem] right-0 w-full bg-activeColor">
           <DateWidget
             setIsDropDownActive={setIsDropDownActive}
             gameObj={gameObj}
