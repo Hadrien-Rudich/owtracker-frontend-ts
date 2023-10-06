@@ -45,20 +45,14 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({
       selectedGame: {} as GameData,
     })),
+  resetSelectedGame: (originalGameObj: GameData) =>
+    set(() => ({
+      selectedGame: originalGameObj,
+    })),
   isUpdatingGame: false,
   setIsUpdatingGame: (boolean: boolean) =>
     set(() => ({
       isUpdatingGame: boolean,
-    })),
-
-  currentGameMap: '',
-  setCurrentGameMap: (map: string) =>
-    set(() => ({
-      currentGameMap: map,
-    })),
-  clearCurrentGameMap: () =>
-    set(() => ({
-      currentGameMap: '',
     })),
 
   selectedGameMap: '',
@@ -78,24 +72,14 @@ export const gameStore = create<GameStore>()((set) => ({
       selectedGameMapType: '',
     })),
 
-  clearSelectedGameMap: () =>
-    set(() => ({
-      selectedGameMap: '',
-      selectedGameMapImage: '',
-    })),
-
-  currentGameHeroes: [],
-  setCurrentGameHeroes: (heroes: string[]) =>
-    set(() => ({
-      currentGameHeroes: heroes,
-    })),
-  clearCurrentGameHeroes: () =>
-    set(() => ({
-      currentGameHeroes: [],
-    })),
-
   selectedGameHeroes: [],
   selectedGameHeroesImages: [],
+
+  selectGameHeroes: (heroes, heroesImages) =>
+    set(() => ({
+      selectedGameHeroes: heroes,
+      selectedGameHeroesImages: heroesImages,
+    })),
 
   selectGameHero: (hero, heroImage) =>
     set((state) => ({
@@ -103,36 +87,24 @@ export const gameStore = create<GameStore>()((set) => ({
       selectedGameHeroesImages: [...state.selectedGameHeroesImages, heroImage],
     })),
 
-  unselectGameHero: (hero) => {
+  unselectGameHero: (hero, heroImage) => {
     set((state) => ({
       selectedGameHeroes: state.selectedGameHeroes.filter((h) => h !== hero),
       selectedGameHeroesImages: state.selectedGameHeroesImages.filter(
-        (h) => h !== hero
+        (hImg) => hImg !== heroImage
       ),
     }));
   },
-  clearSelectedGameHeroes: () =>
-    set(() => ({
-      selectedGameHeroes: [],
-    })),
-  currentGameResult: '',
-  setCurrentGameResult: (result: string) =>
-    set(() => ({
-      currentGameResult: result,
-    })),
-  clearCurrentGameResult: () =>
-    set(() => ({
-      currentGameResult: '',
-    })),
 
   selectedGameResult: '',
+  selectedGameCurrentResult: '',
   selectGameResult: (result: string) =>
     set(() => ({
       selectedGameResult: result,
     })),
-  clearSelectedGameResult: () =>
+  selectGameCurrentResult: (result: string) =>
     set(() => ({
-      selectedGameResult: '',
+      selectedGameResult: result,
     })),
 
   selectedGameDate: new Date(),
@@ -140,19 +112,11 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({
       selectedGameDate: date,
     })),
-  clearSelectedGameDate: () =>
-    set(() => ({
-      selectedGameDate: new Date(),
-    })),
 
   selectedGameDateInFormat: '',
   selectGameDateInFormat: (date: string) =>
     set(() => ({
       selectedGameDateInFormat: date,
-    })),
-  clearSelectedGameDateInFormat: () =>
-    set(() => ({
-      selectedGameDateInFormat: '',
     })),
 
   gameUpdateInProgress: false,

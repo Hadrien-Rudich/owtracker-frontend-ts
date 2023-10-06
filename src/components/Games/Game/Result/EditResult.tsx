@@ -4,24 +4,14 @@ import { gameStore } from '../../../../store/gameStore';
 import { getResultClassNameFromResult } from '../../../../utils/utils';
 import Result from './Result';
 import type { GameData } from '../../../../types/store/gameTypes';
+import ResultsDropDown from './ResultsDropDown';
 
 function EditResult({ gameObj }: { gameObj: GameData }) {
-  const {
-    selectedGame,
-    selectedGameResult,
-    selectGameResult,
-    updateSelectedGame,
-  } = gameStore();
+  const { selectedGame, selectedGameResult } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
-  const selectResult = (result: string) => {
-    selectGameResult(result.toLowerCase());
-    updateSelectedGame({ ...selectedGame, result });
-    setIsDropDownActive(false);
-  };
 
   if (selectedGame.id !== gameObj.id) {
     return <Result gameObj={gameObj} />;
@@ -29,60 +19,32 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
 
   return (
     <div className="EditResult_container relative">
-      <div className="absolute top-[-0.75rem] right-0 w-full">
+      <div className="absolute w-full top-[-0.75rem] right-0 ">
         {isDropDownActive ? (
-          <div className="ring-2">
-            <button
-              className={`${getResultClassNameFromResult(
-                selectedGameResult === ''
-                  ? selectedGame.result
-                  : selectedGameResult
-              )} w-full relative`}
-              type="button"
-              onClick={toggleDropDown}
-            >
-              {/* {selectedGameResult === '' ? selectedGame.result.slice(0, 1) : selectedGameResult} */}
-              {selectedGameResult === ''
-                ? selectedGame.result
-                : selectedGameResult}
-            </button>
-            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
-
-            <ul className=" relative top-0.25">
-              {results.map(
-                (result) =>
-                  result.label.toLowerCase() !==
-                    selectedGame.result.toLowerCase() && (
-                    <li key={result.label}>
-                      <button
-                        type="button"
-                        className={`w-full bg-activeColor bg-active${result.label} hover:bg-activeColor`}
-                        onClick={() => selectResult(result.label)}
-                        id={result.label}
-                      >
-                        <p>{result.label}</p>
-                      </button>
-                    </li>
-                  )
-              )}
-            </ul>
-          </div>
+          <ResultsDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
           <div>
-            <button
-              className={`${getResultClassNameFromResult(
-                selectedGameResult === ''
-                  ? selectedGame.result
-                  : selectedGameResult
-              )} w-full relative ring-2`}
-              type="button"
-              onClick={toggleDropDown}
-            >
-              {/* {selectedGameResult === '' ? selectedGame.result.slice(0, 1) : selectedGameResult} */}
-              {selectedGameResult === ''
-                ? selectedGame.result
-                : selectedGameResult}
-            </button>
+            {selectedGame.result === gameObj.result ? (
+              <button
+                className={`${getResultClassNameFromResult(
+                  gameObj.result
+                )} w-full relative ring-2`}
+                type="button"
+                onClick={toggleDropDown}
+              >
+                <Result gameObj={gameObj} />
+              </button>
+            ) : (
+              <button
+                className={`${getResultClassNameFromResult(
+                  selectedGame.result
+                )} w-full relative ring-2`}
+                type="button"
+                onClick={toggleDropDown}
+              >
+                <Result gameObj={selectedGame} />
+              </button>
+            )}
             <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
           </div>
         )}

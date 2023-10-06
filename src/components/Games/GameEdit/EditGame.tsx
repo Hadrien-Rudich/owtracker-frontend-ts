@@ -4,22 +4,24 @@ import type { GameData } from '../../../types/store/gameTypes';
 
 function EditGame({ gameObj }: { gameObj: GameData }) {
   const {
+    selectGame,
     setIsUpdatingGame,
-    isUpdatingGame,
     selectGameResult,
-    selectedGameMap,
-    selectGameDateInFormat,
+    selectGameHeroes,
     selectGameMap,
+    selectGameDateInFormat,
+    isUpdatingGame,
   } = gameStore();
 
   const handleEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
-    setIsUpdatingGame(true);
+    selectGame(gameObj);
     selectGameResult(gameObj.result);
     selectGameDateInFormat(gameObj.date);
     selectGameMap(gameObj.map, gameObj.mapImageUrl);
-    console.log(selectedGameMap);
+    selectGameHeroes(gameObj.heroes, gameObj.heroesImageUrl);
+    setIsUpdatingGame(true);
   };
 
   return (

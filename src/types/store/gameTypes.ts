@@ -15,54 +15,51 @@ interface GameStore {
   gamesData: GameData[] | [];
   addGamesData: (games: GameData[]) => void;
   removeGamesData: () => void;
-  selectedGame: GameData;
+
   addGame: (game: GameData) => void;
   updateGame: (gameId: number, updatedGameObj: GameData) => void;
   updateSelectedGame: (updatedProperties: Partial<GameData>) => void;
   deleteGame: (gameId: number) => void;
   selectGame: (game: GameData) => void;
+  resetSelectedGame: (originalGameObj: GameData) => void;
   unselectGame: () => void;
-  isUpdatingGame: boolean;
+
   setIsUpdatingGame: (boolean: boolean) => void;
-  currentGameMap: string;
-  setCurrentGameMap: (map: string) => void;
-  clearCurrentGameMap: () => void;
+
+  selectedGame: GameData;
+  isUpdatingGame: boolean;
   selectedGameMap: string;
   selectedGameMapType: string;
   selectedGameMapImage: string;
-  selectGameMap: (map: string, mapImage: string) => void;
-  selectGameMapType: (mapType: string) => void;
-  clearSelectedGameMapType: () => void;
-  clearSelectedGameMap: () => void;
-  currentGameHeroes: string[];
-
-  setCurrentGameHeroes: (heroes: string[]) => void;
-  clearCurrentGameHeroes: () => void;
-
+  selectedGameDate: Date;
+  selectedGameResult: string;
+  selectedGameCurrentResult: string;
+  selectedGameDateInFormat: string;
   selectedGameHeroes: string[];
   selectedGameHeroesImages: string[];
 
-  selectGameHero: (hero: string, heroImage: string) => void;
-  unselectGameHero: (hero: string) => void;
-  clearSelectedGameHeroes: () => void;
-
-  currentGameResult: string;
-  setCurrentGameResult: (result: string) => void;
-  clearCurrentGameResult: () => void;
-  selectedGameDate: Date;
-  selectGameDate: (date: Date) => void;
-  clearSelectedGameDate: () => void;
-  selectedGameResult: string;
-  selectGameResult: (result: string) => void;
-  clearSelectedGameResult: () => void;
-  selectedGameDateInFormat: string;
-  selectGameDateInFormat: (date: string) => void;
-  clearSelectedGameDateInFormat: () => void;
   gameUpdateInProgress: boolean;
-  setGameUpdateInProgress: (boolean: boolean) => void;
   currentMonth: number;
-  setCurrentMonth: (month: number) => void;
   gameSavedToast: boolean;
+  selectGameMap: (map: string, mapImage: string) => void;
+  selectGameMapType: (mapType: string) => void;
+  clearSelectedGameMapType: () => void;
+
+  selectGameHero: (hero: string, heroImage: string) => void;
+  selectGameHeroes: (heroes: string[], heroesImages: string[]) => void;
+  unselectGameHero: (hero: string, heroImage: string) => void;
+
+  selectGameDate: (date: Date) => void;
+
+  selectGameResult: (result: string) => void;
+  selectGameCurrentResult: (result: string) => void;
+
+  selectGameDateInFormat: (date: string) => void;
+
+  setGameUpdateInProgress: (boolean: boolean) => void;
+
+  setCurrentMonth: (month: number) => void;
+
   setGameSavedToast: (value: boolean) => void;
   reset: () => void;
 }

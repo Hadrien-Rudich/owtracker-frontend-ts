@@ -4,8 +4,12 @@ import type { GameData } from '../../../types/store/gameTypes';
 import useGameUpdateMutation from '../../../hooks/games/useGameUpdateMutation';
 
 function UpdateGame({ gameObj }: { gameObj: GameData }) {
-  const { selectedGameResult, selectedGameDateInFormat, selectedGameMap } =
-    gameStore();
+  const {
+    selectedGameResult,
+    selectedGameDateInFormat,
+    selectedGameMap,
+    selectedGame,
+  } = gameStore();
 
   const mutateGame = useGameUpdateMutation({ gameObj });
 
@@ -17,6 +21,8 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
     ) {
       console.log('Submitted Game was identical to the original Game');
     } else {
+      console.log(selectedGame);
+      console.log(gameObj);
       mutateGame();
     }
   };

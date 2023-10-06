@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../store/gameStore';
 import type { GameData } from '../../../../types/store/gameTypes';
 import Map from './Map';
-import MapDropDown from './MapDropDown';
+import MapDropDown from './MapsDropDown';
 
 function EditMap({ gameObj }: { gameObj: GameData }) {
   const { selectedGame, selectedGameMap } = gameStore();

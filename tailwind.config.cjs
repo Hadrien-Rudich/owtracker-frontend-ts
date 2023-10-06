@@ -32,6 +32,7 @@ export default {
       activeLoss: '#D9534F',
       warning: '#D32F2F',
       validate: '#43A047',
+      new: '#009e38',
     },
     screens: {
       xs: '520px',

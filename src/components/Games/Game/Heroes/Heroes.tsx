@@ -10,14 +10,13 @@ interface HeroesProps {
 
 function Heroes({ gameObj, heroObj, imgHeight }: HeroesProps) {
   return (
-    <>
+    <div className="Heroes_container flexdiv">
       {gameObj &&
         gameObj.heroesImageUrl.map((heroImage) => (
           <img
             key={heroImage}
             src={`images/heroes/${heroImage}`}
             className={`${imgHeight}`}
-            // className="sm:h-10 h-7"
             alt=""
           />
         ))}
@@ -27,11 +26,10 @@ function Heroes({ gameObj, heroObj, imgHeight }: HeroesProps) {
           key={heroObj.id}
           src={`images/heroes/${heroObj.imageUrl}`}
           className={`${imgHeight}`}
-          // className="sm:h-10 h-7"
           alt=""
         />
       )}
-    </>
+    </div>
   );
 }
 

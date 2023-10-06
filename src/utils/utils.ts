@@ -41,6 +41,15 @@ const formatDateForGameEdit = (date: Date): string => {
   return `${day}/${month}/${year}`;
 };
 
+const dateNowInGameFormat = () => {
+  const currentDate = new Date();
+  const day = currentDate.getDate().toString().padStart(2, '0');
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+
+  const formattedDate = `${day}/${month}`;
+  return formattedDate;
+};
+
 const convertDateToDatePickerFormat = (date: string) => {
   const [day, month] = date.split('/');
   return new Date(
@@ -127,6 +136,7 @@ export {
   filterMapTypes,
   formatDateForGameEdit,
   convertDateToDatePickerFormat,
+  dateNowInGameFormat as dateNow,
   capitalizeFirstLetter,
   getResultClassName,
   getResultClassNameFromGame,

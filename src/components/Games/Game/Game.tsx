@@ -11,6 +11,7 @@ import Heroes from './Heroes/Heroes';
 import Map from './Map/Map';
 import EditMap from './Map/EditMap';
 import EditHeroes from './Heroes/EditHeroes';
+import New from './Date/New';
 
 function Game() {
   const {
@@ -94,6 +95,11 @@ function Game() {
                 <DateComponent gameObj={game} />
               </div>
             </div>
+            {!isUpdatingGame && (
+              <div className="New_container">
+                <New gameObj={game} />
+              </div>
+            )}
           </div>
         </div>
       ))}
