@@ -9,6 +9,7 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
     selectedGameDateInFormat,
     selectedGameMap,
     selectedGame,
+    selectedGameHeroes,
   } = gameStore();
 
   const mutateGame = useGameUpdateMutation({ gameObj });
@@ -17,7 +18,8 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
     if (
       gameObj.result === selectedGameResult &&
       gameObj.date === selectedGameDateInFormat &&
-      gameObj.map === selectedGameMap
+      gameObj.map === selectedGameMap &&
+      gameObj.heroes === selectedGameHeroes
     ) {
       console.log('Submitted Game was identical to the original Game');
     } else {

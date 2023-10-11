@@ -40,7 +40,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
         heroesImageUrl: [...selectedGame.heroesImageUrl, heroImage],
       });
     } else {
-      console.log('hero already in list');
+      if (selectedGameHeroes.length === 1) return;
       const updatedSelectedHeroes = selectedGameHeroes.filter(
         (selectedHero) => selectedHero !== hero
       );
@@ -58,7 +58,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container ring-2 bg-mainColor">
+    <div className="heroesImages_container ring-2 bg-activeColor">
       <button
         className="w-full relative"
         type="button"
@@ -70,7 +70,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
       </button>
       <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
 
-      <div className="heroesDropDown_container grid grid-cols-3 justify-center content-center">
+      <div className="heroesDropDown_container grid grid-cols-3 justify-center content-center bg-mainColor pt-4">
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
             <div className="heroes_container flexdiv">
@@ -80,11 +80,11 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
                     (hero) => hero.role.toLowerCase() === r.label.toLowerCase()
                   )
                   .map((h) => (
-                    <div className="heroes_container " key={h.label}>
+                    <div className="heroes_container " key={h.slug}>
                       <button
                         type="button"
                         className="h-6"
-                        onClick={() => selectHero(h.label, h.imageUrl)}
+                        onClick={() => selectHero(h.slug, h.imageUrl)}
                       >
                         <Heroes heroObj={h} imgHeight="h-9" />
                       </button>

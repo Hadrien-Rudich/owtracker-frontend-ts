@@ -9,6 +9,8 @@ function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
     selectedGameMap,
     selectedGameMapImage,
     selectedGameDateInFormat,
+    selectedGameHeroes,
+    selectedGameHeroesImages,
     setIsUpdatingGame,
     setGameSavedToast,
     updateGame,
@@ -22,6 +24,8 @@ function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
         date: selectedGameDateInFormat,
         map: selectedGameMap,
         mapImageUrl: selectedGameMapImage,
+        heroes: selectedGameHeroes,
+        heroesImageUrl: selectedGameHeroesImages,
       }),
     onSuccess: (UpdatedGameOnApi: GameAddedToApi) => {
       setIsUpdatingGame(false);

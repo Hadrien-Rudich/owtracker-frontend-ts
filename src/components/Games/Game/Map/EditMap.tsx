@@ -31,7 +31,7 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               >
                 <Map gameObj={selectedGame} imgHeight="h-8" />
                 <div className="map_container flexdiv">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 h-8 w-1/4">
                     <p className="text-xl absolute truncate tracking-wider text-secondaryText">
                       {selectedGame.map}
                     </p>
