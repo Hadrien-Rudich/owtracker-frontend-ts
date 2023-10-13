@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { gameStore } from '../../../store/gameStore';
-import { filterGames, getGameContainerClassName } from '../../../utils/utils';
+import {
+  filterGamesByMonth,
+  getGameContainerClassName,
+} from '../../../utils/utils';
 import Result from './Result/Result';
 import EditResult from './Result/EditResult';
 import Date from './Date/Date';
@@ -36,7 +39,7 @@ function Game() {
     };
   }, [setIsUpdatingGame]);
 
-  const filteredGames = filterGames(currentMonth, gamesData);
+  const filteredGames = filterGamesByMonth(currentMonth, gamesData);
 
   const handleGameSelection = (gameObj: GameData) => {
     if (isUpdatingGame) {

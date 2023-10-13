@@ -19,7 +19,10 @@ const months: Month[] = [
   { label: 'December', index: 12 },
 ];
 
-const filterGames = (month: number, gameData: GameData[]) => {
+const filterGamesByMonth = (
+  month: number,
+  gameData: GameData[]
+): GameData[] => {
   if (Number(month) === 0) {
     return gameData;
   }
@@ -28,7 +31,17 @@ const filterGames = (month: number, gameData: GameData[]) => {
   );
 };
 
-const filterMapTypes = (mapsData: MapData[], mapType: string) => {
+const filterGamesByResult = (gameData: GameData[]): number[] => {
+  const wins = gameData.filter((game) => game.result === 'win');
+  const losses = gameData.filter((game) => game.result === 'loss');
+  const draws = gameData.filter((game) => game.result === 'draw');
+
+  const results = [wins.length, losses.length, draws.length];
+
+  return results;
+};
+
+const filterMapTypes = (mapsData: MapData[], mapType: string): MapData[] => {
   const result = mapsData.filter((map) => map.type === mapType);
   return result;
 };
@@ -41,7 +54,7 @@ const formatDateForGameEdit = (date: Date): string => {
   return `${day}/${month}/${year}`;
 };
 
-const dateNowInGameFormat = () => {
+const dateNowInGameFormat = (): string => {
   const currentDate = new Date();
   const day = currentDate.getDate().toString().padStart(2, '0');
   const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
@@ -50,7 +63,7 @@ const dateNowInGameFormat = () => {
   return formattedDate;
 };
 
-const convertDateToDatePickerFormat = (date: string) => {
+const convertDateToDatePickerFormat = (date: string): Date => {
   const [day, month] = date.split('/');
   return new Date(
     new Date().getFullYear(),
@@ -59,10 +72,10 @@ const convertDateToDatePickerFormat = (date: string) => {
   );
 };
 
-const capitalizeFirstLetter = (string: string) =>
+const capitalizeFirstLetter = (string: string): string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-const getResultClassName = (gameResult: string, outcome: Outcome) => {
+const getResultClassName = (gameResult: string, outcome: Outcome): string => {
   if (gameResult === outcome.label) {
     return `result bg-active${
       outcome.label.charAt(0).toUpperCase() + outcome.label.slice(1)
@@ -71,10 +84,10 @@ const getResultClassName = (gameResult: string, outcome: Outcome) => {
   if (gameResult !== outcome.label) {
     return 'hover:bg-activeColor hover:scale-105 hover:z-50';
   }
-  return null;
+  return '';
 };
 
-const getResultClassNameFromGame = (game: GameData) => {
+const getResultClassNameFromGame = (game: GameData): string => {
   switch (game.result) {
     case 'win':
       return 'bg-activeWin';
@@ -87,7 +100,7 @@ const getResultClassNameFromGame = (game: GameData) => {
   }
 };
 
-const getResultClassNameFromResult = (result: string) => {
+const getResultClassNameFromResult = (result: string): string => {
   switch (result) {
     case 'win':
       return 'bg-activeWin';
@@ -104,7 +117,7 @@ const getGameContainerClassName = (
   game: GameData,
   selectedGame: GameData,
   isUpdatingGame: boolean
-) => {
+): string => {
   if (game.id === selectedGame.id) {
     return 'selected z-10';
   }
@@ -117,7 +130,7 @@ const getGameContainerClassName = (
 const verifyProfileLabelAvailability = (
   newProfileLabel: string,
   profilesData: ProfileData[]
-) => {
+): boolean => {
   if (newProfileLabel === '') {
     console.log('Profile name cannot be empty');
     return false;
@@ -132,7 +145,8 @@ const verifyProfileLabelAvailability = (
 };
 
 export {
-  filterGames,
+  filterGamesByMonth,
+  filterGamesByResult,
   filterMapTypes,
   formatDateForGameEdit,
   convertDateToDatePickerFormat,

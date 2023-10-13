@@ -1,5 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { gameStore } from '../../store/gameStore';
+import { filterGamesByResult } from '../../utils/utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,27 +31,30 @@ const options = {
   },
 };
 
-export const data = {
-  labels: ['Win', 'Loss', 'Draw'],
-  datasets: [
-    {
-      data: [12, 19, 3],
-      backgroundColor: [
-        'rgba(75, 192, 128, 0.6)', // Green for Win
-        'rgba(255, 99, 132, 0.6)', // Red for Loss
-        'rgba(255, 206, 86, 0.6)', // Yellow for Draw
-      ],
-      borderColor: [
-        'rgba(75, 192, 128, 1)', // Corresponding border color for Win
-        'rgba(255, 99, 132, 1)', // Corresponding border color for Loss
-        'rgba(255, 206, 86, 1)', // Corresponding border color for Draw
-      ],
-      borderWidth: 2,
-    },
-  ],
-};
-
 function DoughnutChart() {
+  const { gamesData } = gameStore();
+  const results = filterGamesByResult(gamesData);
+
+  const data = {
+    labels: ['Win', 'Loss', 'Draw'],
+    datasets: [
+      {
+        data: results,
+        backgroundColor: [
+          'rgba(75, 192, 128, 0.6)', // Green for Win
+          'rgba(255, 99, 132, 0.6)', // Red for Loss
+          'rgba(255, 206, 86, 0.6)', // Yellow for Draw
+        ],
+        borderColor: [
+          'rgba(75, 192, 128, 1)', // Corresponding border color for Win
+          'rgba(255, 99, 132, 1)', // Corresponding border color for Loss
+          'rgba(255, 206, 86, 1)', // Corresponding border color for Draw
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
   return (
     <div className="Doughnut_container">
       <Doughnut data={data} options={options} />
