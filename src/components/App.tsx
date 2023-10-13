@@ -7,6 +7,7 @@ import HomePage from './Homepage/HomePage';
 import Games from './Games/Games';
 import Profiles from './Profiles/Profiles';
 import Account from './Account/Account';
+import Stats from './Stats/Stats';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/games" element={<Games />} />
         <Route path="/game" element={<GameReport />} />
-        {/* <Route path="/stats" element={<Stats />} /> */}
+        <Route path="/stats" element={<Stats />} />
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/account" element={<Account />} />
       </Routes>
