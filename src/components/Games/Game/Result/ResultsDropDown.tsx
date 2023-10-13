@@ -33,7 +33,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
   };
 
   return (
-    <div className="ring-2">
+    <div className="ring-2 ring-thirdColor">
       <button
         className={`${getResultClassNameFromResult(
           currentGame.result.charAt(0).toUpperCase() +

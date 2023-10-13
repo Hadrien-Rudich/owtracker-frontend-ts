@@ -7,7 +7,7 @@ import type { GameData } from '../../../../types/store/gameTypes';
 import ResultsDropDown from './ResultsDropDown';
 
 function EditResult({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame, selectedGameResult } = gameStore();
+  const { selectedGame } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
 

@@ -52,9 +52,9 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
       )}
 
       {mapObj && (
-        <div className="map_container flexdiv group h-8">
+        <div className="map_container flexdiv group">
           <img
-            className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
+            className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none h-14`}
             src={`images/maps/${mapObj.imageUrl}`}
             alt=""
           />

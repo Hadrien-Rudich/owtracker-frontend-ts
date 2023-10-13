@@ -10,15 +10,20 @@ interface HeroesProps {
 
 function Heroes({ gameObj, heroObj, imgHeight }: HeroesProps) {
   return (
-    <div className="Heroes_container flexdiv">
+    <div className="Heroes_container flexdiv  gap-1">
       {gameObj &&
         gameObj.heroesImageUrl.map((heroImage) => (
-          <img
-            key={heroImage}
-            src={`images/heroes/${heroImage}`}
-            className={`${imgHeight}`}
-            alt=""
-          />
+          <button
+            type="button"
+            className="bg-activeColor rounded-sm"
+            key={(gameObj.id, heroImage)}
+          >
+            <img
+              src={`images/heroes/${heroImage}`}
+              className={`${imgHeight}`}
+              alt=""
+            />
+          </button>
         ))}
 
       {heroObj && (

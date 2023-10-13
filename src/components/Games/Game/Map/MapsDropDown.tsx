@@ -37,7 +37,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container ring-2 bg-mainColor">
+    <div className="mapImage_container ring-2  ring-thirdColor bg-mainColor">
       <button
         className="w-full relative"
         type="button"
@@ -54,19 +54,22 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
       </button>
       <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
       <div className="mapsDropDown_container">
-        <div className="MapTypes_container pb-6 pt-2">
+        <div className="MapTypes_container h-14 flexdiv">
           <MapTypes />
         </div>
-        <div className="filteredMaps_container flex flex-col gap-1.5">
+        <div className="filteredMaps_container flex flex-col divide-y-2 divide-activeColor pb-[0.15rem]">
           {mapsData
             .filter((map) => map.type === selectedGameMapType)
             .map(
               (map) =>
                 map.label.toLowerCase() !== selectedGame.map.toLowerCase() && (
-                  <div key={(gameObj.id, map.label)} className="map_container">
+                  <div
+                    key={(gameObj.id, map.label)}
+                    className="map_container h-14"
+                  >
                     <button
                       type="button"
-                      className="w-full h-6"
+                      className="w-full h-14"
                       onClick={() => selectMap(map.label, map.imageUrl)}
                     >
                       <Map mapObj={map} imgHeight="h-14" />

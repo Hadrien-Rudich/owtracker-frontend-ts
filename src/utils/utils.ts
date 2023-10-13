@@ -136,7 +136,7 @@ export {
   filterMapTypes,
   formatDateForGameEdit,
   convertDateToDatePickerFormat,
-  dateNowInGameFormat as dateNow,
+  dateNowInGameFormat,
   capitalizeFirstLetter,
   getResultClassName,
   getResultClassNameFromGame,

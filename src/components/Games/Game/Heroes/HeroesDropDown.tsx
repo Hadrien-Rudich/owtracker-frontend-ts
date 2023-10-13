@@ -58,29 +58,32 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container ring-2 bg-activeColor">
+    <div className="heroesImages_container ring-2 ring-thirdColor bg-activeColor">
       <button
         className="w-full relative"
         type="button"
         onClick={toggleDropDown}
       >
-        <div className="currentHeroes_container flexdiv">
+        <div className="currentHeroes_container flexdiv pt-2">
           <Heroes gameObj={currentGame} imgHeight="h-8" />
         </div>
       </button>
       <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
 
-      <div className="heroesDropDown_container grid grid-cols-3 justify-center content-center bg-mainColor pt-4">
+      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
             <div className="heroes_container flexdiv">
-              <div className="flexdiv flex-wrap">
+              <div className="flexdiv flex-wrap gap-1">
                 {heroesData
                   .filter(
                     (hero) => hero.role.toLowerCase() === r.label.toLowerCase()
                   )
                   .map((h) => (
-                    <div className="heroes_container " key={h.slug}>
+                    <div
+                      className="heroes_container bg-activeColor rounded-sm h-9 hover:scale-110"
+                      key={h.slug}
+                    >
                       <button
                         type="button"
                         className="h-6"
