@@ -6,7 +6,7 @@ function New({ gameObj }: { gameObj: GameData }) {
     <p
       className={`${
         gameObj.date.slice(0, 5) === dateNowInGameFormat()
-          ? 'block absolute right-8 top-[0.85rem] text-new text-sm italic  tracking-widest'
+          ? 'block absolute right-2 top-[0.85rem] px-1 bg-secondaryColor text-new text-sm rotate-[-45deg] tracking-widest'
           : 'hidden'
       }`}
     >
