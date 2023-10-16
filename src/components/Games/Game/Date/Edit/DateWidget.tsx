@@ -2,12 +2,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { gameStore } from '../../../../store/gameStore';
-import type { GameData } from '../../../../types/store/gameTypes';
+import { gameStore } from '../../../../../store/gameStore';
+import type { GameData } from '../../../../../types/store/gameTypes';
 import {
   formatDateForGameEdit,
   convertDateToDatePickerFormat,
-} from '../../../../utils/utils';
+} from '../../../../../utils/utils';
 
 function DateWidget({
   setIsDropDownActive,

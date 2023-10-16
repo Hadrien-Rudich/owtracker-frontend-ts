@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { gameStore } from '../../../../store/gameStore';
-import type { GameData } from '../../../../types/store/gameTypes';
-import Map from './Map';
-import { gameReportStore } from '../../../../store/gameReportStore';
-import MapTypes from './MapTypes';
+import { gameStore } from '../../../../../store/gameStore';
+import type { GameData } from '../../../../../types/store/gameTypes';
+import Map from '../Map';
+import { gameReportStore } from '../../../../../store/gameReportStore';
+import MapTypes from '../MapTypes';
 
 interface MapsDropDownProps {
   gameObj: GameData;

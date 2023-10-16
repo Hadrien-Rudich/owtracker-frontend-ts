@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { gameStore } from '../../../../store/gameStore';
+import { gameStore } from '../../../../../store/gameStore';
 
-import Date from './Date';
-import type { GameData } from '../../../../types/store/gameTypes';
+import Date from '../Date';
+import type { GameData } from '../../../../../types/store/gameTypes';
 import DateWidget from './DateWidget';
 
 function EditDate({ gameObj }: { gameObj: GameData }) {

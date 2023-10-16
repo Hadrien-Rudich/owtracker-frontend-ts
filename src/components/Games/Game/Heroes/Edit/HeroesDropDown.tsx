@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { gameStore } from '../../../../store/gameStore';
-import type { GameData } from '../../../../types/store/gameTypes';
-import Heroes from './Heroes';
-import { gameReportStore } from '../../../../store/gameReportStore';
+import { gameStore } from '../../../../../store/gameStore';
+import type { GameData } from '../../../../../types/store/gameTypes';
+import Heroes from '../Heroes';
+import { gameReportStore } from '../../../../../store/gameReportStore';
 
 interface HeroesDropDownProps {
   gameObj: GameData;

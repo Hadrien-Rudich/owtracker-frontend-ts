@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { gameStore } from '../../../../store/gameStore';
-import { getResultClassNameFromResult } from '../../../../utils/utils';
-import type { GameData } from '../../../../types/store/gameTypes';
-import Result from './Result';
+import { gameStore } from '../../../../../store/gameStore';
+import { getResultClassNameFromResult } from '../../../../../utils/utils';
+import type { GameData } from '../../../../../types/store/gameTypes';
+import Result from '../Result';
 
 interface ResultsDropDownProps {
   gameObj: GameData;

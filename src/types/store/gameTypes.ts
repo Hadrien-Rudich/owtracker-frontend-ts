@@ -25,9 +25,11 @@ interface GameStore {
   unselectGame: () => void;
 
   setIsUpdatingGame: (boolean: boolean) => void;
+  setIsCreatingGame: (boolean: boolean) => void;
 
   selectedGame: GameData;
   isUpdatingGame: boolean;
+  isCreatingGame: boolean;
   selectedGameMap: string;
   selectedGameMapType: string;
   selectedGameMapImage: string;

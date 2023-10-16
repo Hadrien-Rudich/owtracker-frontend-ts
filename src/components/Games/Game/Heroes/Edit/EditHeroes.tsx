@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { gameStore } from '../../../../store/gameStore';
-import type { GameData } from '../../../../types/store/gameTypes';
-import Heroes from './Heroes';
+import { gameStore } from '../../../../../store/gameStore';
+import type { GameData } from '../../../../../types/store/gameTypes';
+import Heroes from '../Heroes';
 import HeroesDropDown from './HeroesDropDown';
 
 function EditHeroes({ gameObj }: { gameObj: GameData }) {
