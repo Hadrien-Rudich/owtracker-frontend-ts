@@ -16,15 +16,15 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
     return <Heroes gameObj={gameObj} imgHeight="h-10" />;
   }
   return (
-    <div className="EditMap_container relative flexdiv w-[85%]">
+    <div className="EditHeroes_container relative flexdiv w-[85%]">
       <div className="w-full absolute top-[-1rem] right-[-0.4rem]">
         {isDropDownActive ? (
           <HeroesDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
-          <div className="heroesimages_container flexdiv">
+          <div className="heroesImages_container flexdiv">
             {selectedGameHeroes === selectedGame.heroes ? (
               <button
-                className="w-full relative ring-2 "
+                className="w-full relative ring-2"
                 type="button"
                 onClick={toggleDropDown}
               >

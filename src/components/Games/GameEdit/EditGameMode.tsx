@@ -2,7 +2,7 @@ import { RiEditFill } from 'react-icons/ri';
 import { gameStore } from '../../../store/gameStore';
 import type { GameData } from '../../../types/store/gameTypes';
 
-function EditGame({ gameObj }: { gameObj: GameData }) {
+function EditGameMode({ gameObj }: { gameObj: GameData }) {
   const {
     selectGame,
     setIsUpdatingGame,
@@ -40,4 +40,4 @@ function EditGame({ gameObj }: { gameObj: GameData }) {
   );
 }
 
-export default EditGame;
+export default EditGameMode;

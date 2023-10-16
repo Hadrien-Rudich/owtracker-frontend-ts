@@ -51,6 +51,17 @@ export const gameStore = create<GameStore>()((set) => ({
     })),
   isUpdatingGame: false,
   isCreatingGame: false,
+  clearNewGame: () =>
+    set(() => ({
+      selectedGameMap: '',
+      selectedGameMapImage: '',
+      selectedGameMapType: '',
+      selectedGameHeroes: [],
+      selectedGameHeroesImages: [],
+      selectedGameResult: '',
+      selectedGameDate: new Date(),
+      selectedGameDateInFormat: '',
+    })),
   setIsUpdatingGame: (boolean: boolean) =>
     set(() => ({
       isUpdatingGame: boolean,

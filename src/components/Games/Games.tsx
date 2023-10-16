@@ -6,13 +6,16 @@ import { gameStore } from '../../store/gameStore';
 import SavedToast from '../SavedToast';
 import { useGamesQuery } from '../../hooks/games/useGamesQuery';
 import MonthTabs from './MonthTabs';
-import Game from './Game/Game';
+import Game from './Game';
+import NewGame from './NewGame';
+import CreateGameMode from './GameCreation/CreateGameMode';
 
 function Games() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = authStore();
-  const { gamesData, gameSavedToast, setGameSavedToast } = gameStore();
+  const { gamesData, gameSavedToast, setGameSavedToast, isCreatingGame } =
+    gameStore();
 
   const { isLoading, isFetching, isError, isSuccess } = useGamesQuery();
 
@@ -34,17 +37,18 @@ function Games() {
 
   if (isSuccess && gamesData.length > 0) {
     return (
-      <div className="History_container lg:mt-[6rem] my-24 container mx-auto">
+      <div className="Games_container lg:mt-[6rem] my-24 container mx-auto rounded-sm bg-mainColor">
         <SavedToast
           topPosition="top-[12.5rem]"
           toastText="Game updated!"
           booleanProp={gameSavedToast}
           setBooleanProp={setGameSavedToast}
         />
-        <div className="MonthTabs_container">
+        {/* <div className="MonthTabs_container">
           <MonthTabs />
-        </div>
-        <div className="HistoryDetails_container">
+        </div> */}
+
+        <div className="Game_container">
           <Game />
         </div>
       </div>

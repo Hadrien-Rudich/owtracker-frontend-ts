@@ -1,5 +1,5 @@
-import { dateNowInGameFormat } from '../../../utils/utils';
-import type { GameData } from '../../../types/store/gameTypes';
+import { dateNowInGameFormat } from '../../../../utils/utils';
+import type { GameData } from '../../../../types/store/gameTypes';
 
 function New({ gameObj }: { gameObj: GameData }) {
   return (

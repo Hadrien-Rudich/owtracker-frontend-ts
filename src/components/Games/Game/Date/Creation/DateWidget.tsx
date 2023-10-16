@@ -27,7 +27,7 @@ function DateWidget({
           selectGameDate(date);
           selectGameDateInFormat(formatDateForGameEdit(date));
         }}
-        className="ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-thirdColor focus:outline-none"
+        className="ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-fourthColor focus:outline-none"
         wrapperClassName="w-full"
       />
       <MdOutlineKeyboardArrowDown className="absolute w-4 h-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />

@@ -1,17 +1,16 @@
-import { useEffect } from 'react';
-import { gameStore } from '../../../store/gameStore';
-import { getGameContainerClassName } from '../../../utils/utils';
-import Result from './Result/Result';
-import EditResult from './Result/Edit/EditResult';
-import Date from './Date/Date';
-import GameButtons from './GameButtons';
-import type { GameData } from '../../../types/store/gameTypes';
-import EditDate from './Date/Edit/EditDate';
-import Heroes from './Heroes/Heroes';
-import Map from './Map/Map';
-import EditMap from './Map/Edit/EditMap';
-import EditHeroes from './Heroes/Edit/EditHeroes';
-import New from './New';
+import { gameStore } from '../../store/gameStore';
+import { getGameContainerClassName } from '../../utils/utils';
+import Result from './Game/Result/Result';
+import EditResult from './Game/Result/Edit/EditResult';
+import Date from './Game/Date/Date';
+import EditGameButtons from './GameEdit/EditGameButtons';
+import type { GameData } from '../../types/store/gameTypes';
+import EditDate from './Game/Date/Edit/EditDate';
+import Heroes from './Game/Heroes/Heroes';
+import Map from './Game/Map/Map';
+import EditMap from './Game/Map/Edit/EditMap';
+import EditHeroes from './Game/Heroes/Edit/EditHeroes';
+import New from './Game/NewLabel/New';
 
 function ExistingGame({ gameObj }: { gameObj: GameData }) {
   const {
@@ -19,20 +18,9 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
     unselectGame,
     selectedGame,
     isUpdatingGame,
+    isCreatingGame,
     setIsUpdatingGame,
   } = gameStore();
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsUpdatingGame(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [setIsUpdatingGame]);
 
   const handleGameSelection = (game: GameData) => {
     if (isUpdatingGame) {
@@ -70,7 +58,8 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
           className={`${getGameContainerClassName(
             gameObj,
             selectedGame,
-            isUpdatingGame
+            isUpdatingGame,
+            isCreatingGame
           )} gameHistory_container game relative`}
         >
           <div className="Map_container w-[45%] lg:w[40%] mapImage_container ">
@@ -81,7 +70,7 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
           </div>
           <div className="details_container flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
             <div className="gamebuttons_container flexdiv relative">
-              <GameButtons gameObj={gameObj} />
+              <EditGameButtons gameObj={gameObj} />
             </div>
             <div className="Result_container md:w-[25%] w-[30%]">
               <ResultComponent gameObj={gameObj} />

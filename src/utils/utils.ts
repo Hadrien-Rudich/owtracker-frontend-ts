@@ -116,9 +116,13 @@ const getResultClassNameFromResult = (result: string): string => {
 const getGameContainerClassName = (
   game: GameData,
   selectedGame: GameData,
-  isUpdatingGame: boolean
+  isUpdatingGame: boolean,
+  isCreatingGame: boolean
 ): string => {
-  if (game.id === selectedGame.id) {
+  if (isCreatingGame) {
+    return 'grayscale hover:cursor-default';
+  }
+  if (game.id === selectedGame.id && isUpdatingGame) {
     return 'selected z-10';
   }
   if (!isUpdatingGame) {

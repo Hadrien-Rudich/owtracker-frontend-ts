@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 // import type { GameData } from '../../../../../types/store/gameTypes';
@@ -6,74 +5,47 @@ import Heroes from '../Heroes';
 import { gameReportStore } from '../../../../../store/gameReportStore';
 
 interface HeroesDropDownProps {
-  // gameObj: GameData;
   toggleDropDown: () => void;
 }
 
-function HeroesDropDown({
-  // gameObj,
-  toggleDropDown,
-}: HeroesDropDownProps) {
-  const {
-    selectedGame,
-    selectedGameHeroes,
-    selectGameHero,
-    unselectGameHero,
-    updateSelectedGame,
-  } = gameStore();
+function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
+  const { selectedGameHeroes, selectGameHero, unselectGameHero } = gameStore();
 
   const { rolesData, heroesData } = gameReportStore();
-  // const [currentGame, setCurrentGame] = useState(gameObj);
-
-  // useEffect(() => {
-  //   setCurrentGame((prevGame) => ({
-  //     ...prevGame,
-  //     heroes: selectedGameHeroes,
-  //     heroesImageUrl: selectedGame.heroesImageUrl,
-  //   }));
-  // }, [selectedGameHeroes, selectedGame.heroesImageUrl]);
 
   const selectHero = (hero: string, heroImage: string) => {
     const heroInList = selectedGameHeroes.includes(hero);
     if (!heroInList) {
       selectGameHero(hero, heroImage);
-      updateSelectedGame({
-        ...selectedGame,
-        heroes: [...selectedGame.heroes, hero],
-        heroesImageUrl: [...selectedGame.heroesImageUrl, heroImage],
-      });
     } else {
       if (selectedGameHeroes.length === 1) return;
-      const updatedSelectedHeroes = selectedGameHeroes.filter(
-        (selectedHero) => selectedHero !== hero
-      );
-      const updatedSelectedHeroesImageUrl = selectedGame.heroesImageUrl.filter(
-        (_, index) => selectedGameHeroes[index] !== hero
-      );
 
-      updateSelectedGame({
-        ...selectedGame,
-        heroes: updatedSelectedHeroes,
-        heroesImageUrl: updatedSelectedHeroesImageUrl,
-      });
       unselectGameHero(hero, heroImage);
     }
   };
 
   return (
-    <div className="heroesImages_container ring-2 ring-thirdColor bg-activeColor">
-      {/* <button
-        className="w-full relative"
+    <div className="heroesImages_container ring-2 ring-fourthColor bg-mainColor">
+      <button
+        className="w-full relative pt-2"
         type="button"
         onClick={toggleDropDown}
       >
-        <div className="currentHeroes_container flexdiv pt-2">
-          <Heroes gameObj={currentGame} imgHeight="h-8" />
+        <div className="currentHeroes_container flexdiv ">
+          {heroesData
+            .filter((hero) => selectedGameHeroes.includes(hero.slug))
+            .map((heroObj) => (
+              <Heroes
+                key={(heroObj.id, heroObj.label)}
+                heroObj={heroObj}
+                imgHeight="h-8"
+              />
+            ))}
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" /> */}
+      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
 
-      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
+      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-6">
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
             <div className="heroes_container flexdiv">

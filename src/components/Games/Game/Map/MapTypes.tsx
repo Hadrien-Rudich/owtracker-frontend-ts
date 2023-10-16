@@ -35,7 +35,10 @@ function MapTypes() {
             >
               <img
                 className="h-8 w-20 drop-shadow-lg"
-                src={`images/mapTypes/${mtype.imageUrl}`}
+                src={`images/mapTypes/${`${mtype.imageUrl.replace(
+                  '.svg',
+                  '_black.svg'
+                )}`}`}
                 alt="map type icon"
               />
             </button>

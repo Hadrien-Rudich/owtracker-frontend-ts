@@ -1,13 +1,13 @@
-import CancelGameEdit from '../GameEdit/CancelGameEdit';
-import UpdateGame from '../GameEdit/UpdateGame';
+import CancelGameEdit from './CancelGameEdit';
+import UpdateGame from './UpdateGame';
 import { gameStore } from '../../../store/gameStore';
-import DeleteGame from '../GameEdit/DeleteGame';
-import EditGame from '../GameEdit/EditGame';
+import DeleteGame from './DeleteGame';
+import EditGameMode from './EditGameMode';
 
 import type { GameData } from '../../../types/store/gameTypes';
 
-function GameButtons({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame, isUpdatingGame } = gameStore();
+function EditGameButtons({ gameObj }: { gameObj: GameData }) {
+  const { selectedGame, isUpdatingGame, isCreatingGame } = gameStore();
 
   return (
     <div
@@ -18,12 +18,15 @@ function GameButtons({ gameObj }: { gameObj: GameData }) {
       } GameButtons_container`}
     >
       <div className="xl:gap-3 lg:gap-1 gap-4 flexdiv">
-        {!isUpdatingGame && gameObj.id === selectedGame.id ? (
+        {!isUpdatingGame &&
+        !isCreatingGame &&
+        gameObj.id === selectedGame.id ? (
           <>
-            <EditGame gameObj={gameObj} />
+            <EditGameMode gameObj={gameObj} />
             <DeleteGame gameObj={gameObj} />
           </>
         ) : (
+          !isCreatingGame &&
           gameObj.id === selectedGame.id && (
             <>
               <UpdateGame gameObj={gameObj} />
@@ -36,4 +39,4 @@ function GameButtons({ gameObj }: { gameObj: GameData }) {
   );
 }
 
-export default GameButtons;
+export default EditGameButtons;

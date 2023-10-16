@@ -63,6 +63,8 @@ interface GameStore {
   setCurrentMonth: (month: number) => void;
 
   setGameSavedToast: (value: boolean) => void;
+
+  clearNewGame: () => void;
   reset: () => void;
 }
 
