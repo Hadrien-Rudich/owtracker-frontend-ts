@@ -122,13 +122,13 @@ const getGameContainerClassName = (
   if (isCreatingGame) {
     return 'grayscale hover:cursor-default';
   }
-  if (game.id === selectedGame.id && isUpdatingGame) {
+  if (game.id === selectedGame.id) {
     return 'selected z-10';
   }
   if (!isUpdatingGame) {
     return 'unselected z-0';
   }
-  return 'grayscale hover:cursor-default';
+  return ' grayscale hover:cursor-default';
 };
 
 const verifyProfileLabelAvailability = (

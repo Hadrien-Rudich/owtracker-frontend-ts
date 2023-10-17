@@ -2,7 +2,7 @@
 import { ImCross } from 'react-icons/im';
 import { gameStore } from '../../../store/gameStore';
 
-function CancelGameCreation() {
+function CancelNewGame() {
   const { setIsCreatingGame } = gameStore();
 
   const handleCancelCreation = () => {
@@ -21,4 +21,4 @@ function CancelGameCreation() {
   );
 }
 
-export default CancelGameCreation;
+export default CancelNewGame;

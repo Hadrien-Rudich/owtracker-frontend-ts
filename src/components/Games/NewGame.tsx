@@ -1,8 +1,8 @@
-import NewGameMap from './Game/Map/Creation/NewGameMap';
-import NewGameHeroes from './Game/Heroes/Creation/NewGameHeroes';
-import NewGameResult from './Game/Result/Creation/NewGameResult';
+import NewGameMap from './Game/Map/NewGame/NewGameMap';
+import NewGameHeroes from './Game/Heroes/NewGame/NewGameHeroes';
+import NewGameResult from './Game/Result/NewGame/NewGameResult';
 import NewGameDate from './Game/Date/Creation/NewGameDate';
-import GameCreationButtons from './GameCreation/GameCreationButtons';
+import NewGameButtons from './NewGame/NewGameButtons';
 
 function NewGame() {
   return (
@@ -20,8 +20,8 @@ function NewGame() {
             <NewGameHeroes />
           </div>
           <div className="details_container flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
-            <div className="gamebuttons_container flexdiv">
-              <GameCreationButtons />
+            <div className="gamebuttons_container flexdiv relative">
+              <NewGameButtons />
             </div>
             <div className="Result_container md:w-[25%] w-[30%]">
               <NewGameResult />

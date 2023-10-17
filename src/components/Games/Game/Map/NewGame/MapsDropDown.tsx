@@ -15,6 +15,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
 
   const selectMap = (map: string, mapImage: string) => {
     selectGameMap(map, mapImage);
+    console.log(selectedGameMap, selectedGameMapType);
     toggleDropDown();
   };
 
@@ -48,17 +49,20 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
         <div className="filteredMaps_container flex flex-col divide-y-2 divide-activeColor pb-[0.15rem]">
           {mapsData
             .filter((map) => map.type === selectedGameMapType)
-            .map((map) => (
-              <div key={map.label} className="map_container h-14">
-                <button
-                  type="button"
-                  className="w-full h-14"
-                  onClick={() => selectMap(map.label, map.imageUrl)}
-                >
-                  <Map mapObj={map} imgHeight="h-14" />
-                </button>
-              </div>
-            ))}
+            .map(
+              (map) =>
+                map.label !== selectedGameMap && (
+                  <div key={map.label} className="map_container h-14">
+                    <button
+                      type="button"
+                      className="w-full h-14"
+                      onClick={() => selectMap(map.label, map.imageUrl)}
+                    >
+                      <Map mapObj={map} imgHeight="h-14" />
+                    </button>
+                  </div>
+                )
+            )}
         </div>
       </div>
     </div>

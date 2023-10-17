@@ -46,7 +46,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
       </button>
       <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
 
-      <ul className="">
+      <ul className="results_container">
         {results.map(
           (result) =>
             result.label.toLowerCase() !==

@@ -41,7 +41,7 @@ function NewGameHeroes() {
               >
                 <div className="map_container flexdiv ">
                   <div className="flexdiv">
-                    <p className="text-xl tracking-wider">HEROS</p>
+                    <p className="text-xl tracking-wider">HEROES</p>
                   </div>
                 </div>
               </button>

@@ -11,10 +11,10 @@ interface MapProps {
 }
 
 function Map({ gameObj, mapObj, imgHeight }: MapProps) {
-  const { isUpdatingGame } = gameStore();
+  const { isUpdatingGame, isCreatingGame } = gameStore();
   return (
     <>
-      {gameObj && !isUpdatingGame ? (
+      {gameObj && !isUpdatingGame && !isCreatingGame ? (
         <div className="">
           <img
             className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
@@ -40,7 +40,7 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
         </div>
       ) : (
         gameObj &&
-        isUpdatingGame && (
+        (isUpdatingGame || isCreatingGame) && (
           <div className="">
             <img
               className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}

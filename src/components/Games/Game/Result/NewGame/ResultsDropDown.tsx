@@ -25,17 +25,20 @@ function ResultsDropDown({ toggleDropDown }: ResultsDropDownProps) {
 
   return (
     <div className="ResultsDropDown_container ring-2 ring-fourthColor">
-      <button
-        className={`${getResultClassNameFromResult(
-          selectedGameResult
-        )} w-full relative`}
-        type="button"
-        onClick={toggleDropDown}
-      >
-        <p>{selectedGameResult}</p>
-      </button>
+      {selectedGameResult !== '' && (
+        <button
+          className={`${getResultClassNameFromResult(
+            selectedGameResult
+          )} w-full relative`}
+          type="button"
+          onClick={toggleDropDown}
+        >
+          <p>{selectedGameResult}</p>
+        </button>
+      )}
+
       <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
-      <ul className="">
+      <ul className="results_container">
         {results.map(
           (result) =>
             result.label.toLowerCase() !== selectedGameResult && (
@@ -50,7 +53,6 @@ function ResultsDropDown({ toggleDropDown }: ResultsDropDownProps) {
                 </button>
               </li>
             )
-          // )
         )}
       </ul>
     </div>

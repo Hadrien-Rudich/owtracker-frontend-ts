@@ -60,11 +60,11 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
   return (
     <div className="heroesImages_container ring-2 ring-thirdColor bg-activeColor">
       <button
-        className="w-full relative"
+        className="w-full relative h-12"
         type="button"
         onClick={toggleDropDown}
       >
-        <div className="currentHeroes_container flexdiv pt-2">
+        <div className="currentHeroes_container flexdiv ">
           <Heroes gameObj={currentGame} imgHeight="h-8" />
         </div>
       </button>

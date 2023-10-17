@@ -7,15 +7,12 @@ import SavedToast from '../SavedToast';
 import { useGamesQuery } from '../../hooks/games/useGamesQuery';
 import MonthTabs from './MonthTabs';
 import Game from './Game';
-import NewGame from './NewGame';
-import CreateGameMode from './GameCreation/CreateGameMode';
 
 function Games() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = authStore();
-  const { gamesData, gameSavedToast, setGameSavedToast, isCreatingGame } =
-    gameStore();
+  const { gamesData, gameSavedToast, setGameSavedToast } = gameStore();
 
   const { isLoading, isFetching, isError, isSuccess } = useGamesQuery();
 

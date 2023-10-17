@@ -17,19 +17,45 @@ function useGameAddMutation() {
     setSavingGameInProgress,
     reset,
   } = gameReportStore();
+
+  const {
+    selectedGameHeroes,
+    selectedGameMap,
+    selectedGameMapImage,
+    selectedGameResult,
+    selectedGameMapType,
+    selectedGameHeroesImages,
+    setIsCreatingGame,
+    addGame,
+    setGameSavedToast,
+  } = gameStore();
+
   const { userData } = authStore();
   const { selectedProfile } = profileStore();
-  const { addGame, setGameSavedToast } = gameStore();
 
   const { mutate } = useMutation({
     mutationFn: () =>
       addGameToApi(userData.id, selectedProfile.id, {
-        result: selectedResult,
-        map: selectedMap,
-        mapType: selectedMapType,
-        mapImageUrl: selectedMapImageUrl,
-        heroes: selectedHeroes,
-        heroesImageUrl: selectedHeroesImageUrl,
+        // result: selectedResult,
+        // map: selectedMap,
+        // mapType: selectedMapType,
+        // mapImageUrl: selectedMapImageUrl,
+        // heroes: selectedHeroes,
+        // heroesImageUrl: selectedHeroesImageUrl,
+        result: selectedGameResult === '' ? selectedResult : selectedGameResult,
+        map: selectedGameMap === '' ? selectedMap : selectedGameMap,
+        mapType:
+          selectedGameMapType === '' ? selectedMapType : selectedGameMapType,
+        mapImageUrl:
+          selectedGameMapImage === ''
+            ? selectedMapImageUrl
+            : selectedGameMapImage,
+        heroes:
+          selectedGameHeroes.length === 0 ? selectedHeroes : selectedGameHeroes,
+        heroesImageUrl:
+          selectedGameHeroesImages.length === 0
+            ? selectedHeroesImageUrl
+            : selectedGameHeroesImages,
       }),
     onSuccess: (newGameAddedToApi: GameAddedToApi) => {
       addGame(newGameAddedToApi.game);

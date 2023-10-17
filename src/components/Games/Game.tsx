@@ -4,7 +4,7 @@ import { useHeroesQueries } from '../../hooks/queries/useHeroesQueries';
 import { useMapsQueries } from '../../hooks/queries/useMapsQueries';
 import { filterGamesByMonth } from '../../utils/utils';
 import ExistingGame from './ExistingGame';
-import CreateGameMode from './GameCreation/CreateGameMode';
+import NewGameMode from './NewGame/NewGameMode';
 import NewGame from './NewGame';
 
 function Game() {
@@ -15,6 +15,7 @@ function Game() {
     gamesData,
     currentMonth,
     isCreatingGame,
+    isUpdatingGame,
     setIsUpdatingGame,
     setIsCreatingGame,
     clearNewGame,
@@ -38,9 +39,14 @@ function Game() {
 
   return (
     <div className="games_container flexdiv col tracking-wider z-30 w-full">
-      <div className="CreateGame_container w-full flexdiv h-12">
-        {!isCreatingGame ? <CreateGameMode /> : <NewGame />}
+      <div
+        className={`${
+          isUpdatingGame ? 'backdrop-grayscale pointer-events-none' : ''
+        }  CreateGame_container w-full flexdiv h-12`}
+      >
+        {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
+
       <div className="existingGames_container flexdiv col w-full">
         {filteredGames.map((game) => (
           <ExistingGame gameObj={game} key={game.id} />

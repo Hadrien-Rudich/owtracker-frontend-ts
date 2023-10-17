@@ -25,13 +25,13 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container ring-2 ring-fourthColor bg-mainColor">
+    <div className="heroesImages_container ring-2 ring-fourthColor bg-activeColor">
       <button
-        className="w-full relative pt-2"
+        className="w-full relative h-12"
         type="button"
         onClick={toggleDropDown}
       >
-        <div className="currentHeroes_container flexdiv ">
+        <div className="currentHeroes_container flexdiv">
           {heroesData
             .filter((hero) => selectedGameHeroes.includes(hero.slug))
             .map((heroObj) => (
@@ -45,7 +45,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
       </button>
       <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
 
-      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-6">
+      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
             <div className="heroes_container flexdiv">

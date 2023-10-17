@@ -3,7 +3,7 @@ import { getGameContainerClassName } from '../../utils/utils';
 import Result from './Game/Result/Result';
 import EditResult from './Game/Result/Edit/EditResult';
 import Date from './Game/Date/Date';
-import EditGameButtons from './GameEdit/EditGameButtons';
+import EditGameButtons from './EditGame/EditGameButtons';
 import type { GameData } from '../../types/store/gameTypes';
 import EditDate from './Game/Date/Edit/EditDate';
 import Heroes from './Game/Heroes/Heroes';
