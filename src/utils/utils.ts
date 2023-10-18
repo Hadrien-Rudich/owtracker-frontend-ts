@@ -1,5 +1,5 @@
 import type { GameData } from '../types/store/gameTypes';
-import type { MapData } from '../types/store/gameReportTypes';
+import type { MapData } from '../types/store/gameDataTypes';
 import type { Month, Outcome } from '../types/utilsTypes';
 import type { ProfileData } from '../types/store/profileTypes';
 

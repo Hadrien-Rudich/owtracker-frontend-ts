@@ -7,7 +7,7 @@ import type {
   MapData,
   MapTypeData,
   RoleData,
-} from '../../types/store/gameReportTypes';
+} from '../../types/store/gameDataTypes';
 
 const api = axios.create({
   baseURL: 'http://localhost:3002/',

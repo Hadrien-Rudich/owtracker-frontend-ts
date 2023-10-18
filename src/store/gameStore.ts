@@ -153,6 +153,9 @@ export const gameStore = create<GameStore>()((set) => ({
       currentMonth: 0,
     }));
   },
+  savingGameInProgress: false,
+  setSavingGameInProgress: (value: boolean) =>
+    set(() => ({ savingGameInProgress: value })),
 }));
 
 export default gameStore;

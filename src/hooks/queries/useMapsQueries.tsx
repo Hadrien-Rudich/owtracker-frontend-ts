@@ -3,12 +3,12 @@ import {
   fetchMapsFromApi,
   fetchMapTypesFromApi,
 } from '../../services/API/gameReport';
-import { gameReportStore } from '../../store/gameReportStore';
+import { gameDataStore } from '../../store/gameDataStore';
 
-import type { MapData, MapTypeData } from '../../types/store/gameReportTypes';
+import type { MapData, MapTypeData } from '../../types/store/gameDataTypes';
 
 export const useMapsQueries = () => {
-  const { addMapsData, addMapTypesData } = gameReportStore();
+  const { addMapsData, addMapTypesData } = gameDataStore();
 
   useQueries({
     queries: [

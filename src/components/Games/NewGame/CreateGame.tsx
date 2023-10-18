@@ -2,12 +2,10 @@ import { FormEvent } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import useGameAddMutation from '../../../hooks/games/useGameAddMutation';
 import { gameStore } from '../../../store/gameStore';
-import { gameReportStore } from '../../../store/gameReportStore';
 
 function CreateNewGame() {
-  const { setSavingGameInProgress } = gameReportStore();
-
-  const { setGameSavedToast, setIsCreatingGame } = gameStore();
+  const { setGameSavedToast, setIsCreatingGame, setSavingGameInProgress } =
+    gameStore();
 
   const mutateGame = useGameAddMutation();
 

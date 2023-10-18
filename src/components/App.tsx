@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import GameReport from './GameReport/GameReport';
 import Header from './Header/Header';
 import LogInForm from './Homepage/LogInForm';
 import RegisterForm from './Homepage/RegisterForm';
@@ -19,7 +18,6 @@ function App() {
         <Route path="/login" element={<LogInForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/games" element={<Games />} />
-        <Route path="/game" element={<GameReport />} />
         <Route path="/stats" element={<Stats />} />
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/account" element={<Account />} />

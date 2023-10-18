@@ -2,7 +2,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 // import type { GameData } from '../../../../../types/store/gameTypes';
 import Heroes from '../Heroes';
-import { gameReportStore } from '../../../../../store/gameReportStore';
+import { gameDataStore } from '../../../../../store/gameDataStore';
 
 interface HeroesDropDownProps {
   toggleDropDown: () => void;
@@ -11,7 +11,7 @@ interface HeroesDropDownProps {
 function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
   const { selectedGameHeroes, selectGameHero, unselectGameHero } = gameStore();
 
-  const { rolesData, heroesData } = gameReportStore();
+  const { rolesData, heroesData } = gameDataStore();
 
   const selectHero = (hero: string, heroImage: string) => {
     const heroInList = selectedGameHeroes.includes(hero);

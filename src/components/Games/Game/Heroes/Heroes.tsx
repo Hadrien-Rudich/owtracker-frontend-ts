@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import type { GameData } from '../../../../types/store/gameTypes';
-import type { HeroData } from '../../../../types/store/gameReportTypes';
+import type { HeroData } from '../../../../types/store/gameDataTypes';
 
 interface HeroesProps {
   gameObj?: GameData;

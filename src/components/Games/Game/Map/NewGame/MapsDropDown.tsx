@@ -1,7 +1,7 @@
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import Map from '../Map';
-import { gameReportStore } from '../../../../../store/gameReportStore';
+import { gameDataStore } from '../../../../../store/gameDataStore';
 import MapTypes from '../MapTypes';
 
 interface MapsDropDownProps {
@@ -11,7 +11,7 @@ interface MapsDropDownProps {
 function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
   const { selectedGameMapType, selectedGameMap, selectGameMap } = gameStore();
 
-  const { mapsData } = gameReportStore();
+  const { mapsData } = gameDataStore();
 
   const selectMap = (map: string, mapImage: string) => {
     selectGameMap(map, mapImage);

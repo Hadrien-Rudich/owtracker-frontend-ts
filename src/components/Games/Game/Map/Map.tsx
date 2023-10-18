@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import type { GameData } from '../../../../types/store/gameTypes';
-import type { MapData } from '../../../../types/store/gameReportTypes';
+import type { MapData } from '../../../../types/store/gameDataTypes';
 import { capitalizeFirstLetter } from '../../../../utils/utils';
 import { gameStore } from '../../../../store/gameStore';
 

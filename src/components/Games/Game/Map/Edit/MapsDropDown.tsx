@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import type { GameData } from '../../../../../types/store/gameTypes';
 import Map from '../Map';
-import { gameReportStore } from '../../../../../store/gameReportStore';
+import { gameDataStore } from '../../../../../store/gameDataStore';
 import MapTypes from '../MapTypes';
 
 interface MapsDropDownProps {
@@ -19,7 +19,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
     updateSelectedGame,
   } = gameStore();
 
-  const { mapsData } = gameReportStore();
+  const { mapsData } = gameDataStore();
   const [currentGame, setCurrentGame] = useState(gameObj);
 
   useEffect(() => {

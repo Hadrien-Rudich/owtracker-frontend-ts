@@ -3,12 +3,12 @@ import {
   fetchHeroesFromApi,
   fetchRolesFromApi,
 } from '../../services/API/gameReport';
-import { gameReportStore } from '../../store/gameReportStore';
+import { gameDataStore } from '../../store/gameDataStore';
 
-import type { HeroData, RoleData } from '../../types/store/gameReportTypes';
+import type { HeroData, RoleData } from '../../types/store/gameDataTypes';
 
 export const useHeroesQueries = () => {
-  const { addHeroesData, addRolesData } = gameReportStore();
+  const { addHeroesData, addRolesData } = gameDataStore();
 
   useQueries({
     queries: [

@@ -4,7 +4,7 @@ import type {
   MapData,
   MapTypeData,
   RoleData,
-} from '../../types/store/gameReportTypes';
+} from '../../types/store/gameDataTypes';
 
 export const fetchHeroesFromApi = async (): Promise<HeroData[]> => {
   const endpoint = 'heroes';

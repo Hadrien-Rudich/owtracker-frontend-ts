@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import MapsDropDown from './MapsDropDown';
 import { gameStore } from '../../../../../store/gameStore';
-import { gameReportStore } from '../../../../../store/gameReportStore';
+import { gameDataStore } from '../../../../../store/gameDataStore';
 import Map from '../Map';
 
 function NewGameMap() {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  const { mapsData } = gameReportStore();
+  const { mapsData } = gameDataStore();
   const { selectedGameMap } = gameStore();
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);

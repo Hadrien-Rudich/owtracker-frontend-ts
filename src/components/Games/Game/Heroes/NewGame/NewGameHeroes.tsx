@@ -3,11 +3,11 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import HeroesDropDown from './HeroesDropDown';
 import Heroes from '../Heroes';
 import { gameStore } from '../../../../../store/gameStore';
-import { gameReportStore } from '../../../../../store/gameReportStore';
+import { gameDataStore } from '../../../../../store/gameDataStore';
 
 function NewGameHeroes() {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  const { heroesData } = gameReportStore();
+  const { heroesData } = gameDataStore();
   const { selectedGameHeroes } = gameStore();
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
