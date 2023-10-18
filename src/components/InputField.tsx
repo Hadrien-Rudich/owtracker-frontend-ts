@@ -44,7 +44,10 @@ function InputField({
         }
       />
       {invalid && (
-        <div className="flexdiv absolute sm:w-36 sm:h-10 w-28 h-8 mt-[-0.95rem]">
+        <div
+          className="flexdiv absolute sm:w-36 sm:h-10 w-28 h-8 
+          sm:mt-[-1rem] mt-[-0.95rem]"
+        >
           <p className="absolute text-sm text-warning tracking-wide italic animate-blink">
             {invalidMessage}
           </p>

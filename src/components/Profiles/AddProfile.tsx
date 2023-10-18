@@ -94,7 +94,7 @@ function AddProfile() {
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 ref={newProfileInputRef}
-                className="profile card scale-110"
+                className="profile card scale-110 outline-none ring-2"
                 name="profile"
                 required
                 value={newProfile}

@@ -10,6 +10,8 @@ function RegisterForm() {
   const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [createUser, setCreateUser] = useState(false);
+  const [invalidFormat, setInvalidFormat] = useState(false);
+  const [passwordDoesNotMatch, setPasswordDoesNotMatch] = useState(false);
 
   const mutateUser = useUserRegisterMutation({
     email,
@@ -43,6 +45,10 @@ function RegisterForm() {
 
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (password !== confirmPassword) {
+      setPasswordDoesNotMatch(true);
+      return;
+    }
     setCreateUser(true);
     setTimeout(() => {
       mutateUser();
@@ -75,6 +81,9 @@ function RegisterForm() {
               value={password}
               required
               onChange={handlePasswordChange}
+              invalid={passwordDoesNotMatch}
+              setInvalid={setPasswordDoesNotMatch}
+              invalidMessage="Passwords do not match"
             />
 
             <InputField
@@ -83,6 +92,9 @@ function RegisterForm() {
               value={confirmPassword}
               required
               onChange={handleConfirmPasswordChange}
+              invalid={passwordDoesNotMatch}
+              setInvalid={setPasswordDoesNotMatch}
+              invalidMessage="Passwords do not match"
             />
           </div>
           <div className="button_container flexdiv gap-6 relative h-10">
