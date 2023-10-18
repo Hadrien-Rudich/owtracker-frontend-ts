@@ -9,5 +9,8 @@ export interface InputFieldProps {
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   required?: boolean;
+  invalid?: boolean;
+  setInvalid?: (invalid: boolean) => void;
+  invalidMessage?: string;
   htmlFor?: string;
 }

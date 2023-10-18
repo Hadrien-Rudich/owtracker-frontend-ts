@@ -34,7 +34,7 @@ function Games() {
 
   if (isSuccess && gamesData.length > 0) {
     return (
-      <div className="Games_container lg:mt-[6rem] my-24 container mx-auto rounded-sm bg-mainColor">
+      <div className="Games_container lg:mt-[6rem] my-24 container mx-auto rounded-sm">
         <SavedToast
           topPosition="top-[12.5rem]"
           toastText="Game updated!"

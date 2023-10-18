@@ -9,6 +9,7 @@ function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userAuthenticated, setUserAuthenticated] = useState(false);
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
 
   const { isLoggedIn } = authStore();
 
@@ -18,6 +19,7 @@ function LogInForm() {
     email,
     password,
     setUserAuthenticated,
+    setInvalidCredentials,
   });
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +36,8 @@ function LogInForm() {
 
   function handleLogIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    setInvalidCredentials(false);
     setUserAuthenticated(true);
     setTimeout(() => {
       mutateUser();
@@ -49,14 +53,17 @@ function LogInForm() {
   return (
     <form onSubmit={handleLogIn}>
       <div className="login_container flexdiv lg:mt-44 my-24">
-        <div className=" inputandbutton_container containerbox">
-          <div className="input_container flexdiv col gap-4">
+        <div className=" inputandbutton_container containerbox ">
+          <div className="input_container flexdiv col gap-4 ">
             <InputField
               label="email"
               type="email"
               value={email}
               required
               onChange={handleEmailChange}
+              invalid={invalidCredentials}
+              setInvalid={setInvalidCredentials}
+              invalidMessage="Invalid credentials"
             />
 
             <InputField
@@ -65,6 +72,9 @@ function LogInForm() {
               value={password}
               required
               onChange={handlePasswordChange}
+              invalid={invalidCredentials}
+              setInvalid={setInvalidCredentials}
+              invalidMessage="Invalid credentials"
             />
           </div>
           <div className="button_container flexdiv gap-6">

@@ -10,7 +10,12 @@ const options = {
     legend: {
       display: true,
       position: 'top',
+
       labels: {
+        font: {
+          size: 15,
+          family: 'Big Noodle Titling',
+        },
         usePointStyle: false,
         pointStyle: 'rectRot',
         boxWidth: 20,
@@ -35,7 +40,7 @@ const textCenter = {
   beforeDatasetsDraw(chart, args, pluginOptions) {
     const { ctx, data } = chart;
     ctx.save();
-    ctx.font = '15px sans-serif';
+    ctx.font = '20px Big Noodle Titling';
     ctx.fillStyle = '#000080'; // Navy Blue
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -59,9 +64,9 @@ const textInsideDoughnut = {
     const segments = chart.getDatasetMeta(0).data;
     const total = data.reduce((acc, value) => acc + value, 0);
 
-    ctx.font = '15px sans-serif';
-    ctx.fillStyle = '#000080'; // Navy Blue
-    ctx.textAlign = 'center';
+    ctx.font = '20px Big Noodle Titling';
+    color: '#000080', // Navy Blue
+      (ctx.textAlign = 'center');
     ctx.textBaseline = 'middle';
 
     segments.forEach((segment, index) => {
@@ -104,14 +109,22 @@ function DoughnutChart() {
         ],
         hoverBorderColor: ['none'],
         hoverBorderWidth: 0,
-        hoverOffset: 20,
+        hoverOffset: 5,
         borderWidth: 1,
       },
     ],
   };
-
+  const chartStyles = {
+    // Define your custom styles here
+    letterSpacing: '1.5px', // Adjust the letter-spacing as needed
+    font: 'Big Noodle Titling',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    color: '#000080', // Navy Blue
+    textAlign: 'center',
+  };
   return (
-    <div className="Doughnut_container">
+    <div className="Doughnut_container" style={chartStyles}>
       <Doughnut
         data={data}
         options={options}

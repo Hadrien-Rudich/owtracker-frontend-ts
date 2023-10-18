@@ -281,16 +281,6 @@ sm:text-xl text-lg text-secondaryText;
   0% {
     opacity: 0;
   }
-  /*
-  25% {
-    opacity: 0.33;
-  }
-  50% {
-    opacity: 0.66;
-  }
-  75% {
-    opacity: 1;
-  } */
 
   50% {
     opacity: 1;
@@ -301,6 +291,6 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .animate-blink {
-  animation: blink 1.5s infinite; /* Adjust the animation duration as needed */
+  animation: blink 1.5s 2.5; /* Play the animation twice (adjust the animation duration and count as needed) */
   transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
 }

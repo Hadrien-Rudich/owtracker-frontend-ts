@@ -78,11 +78,12 @@ function AddProfile() {
       {!inputField && (
         <button
           type="button"
-          className="addbutton_container hover:scale-110 "
+          className="addbutton_container hover:scale-110 flexdiv gap-4 sign"
           onClick={handlePlusClick}
         >
-          <span className="sr-only">Add Profile</span>
-          <ImPlus className="sign h-7 w-7" />
+          <ImPlus className="h-7 w-7" />
+          <p className=" text-2xl">NEW PROFILE</p>
+          <span className="sr-only">Add new profile</span>
         </button>
       )}
       {inputField && (
