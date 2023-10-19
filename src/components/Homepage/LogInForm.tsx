@@ -4,12 +4,17 @@ import InputField from '../InputField';
 import { authStore } from '../../store/authStore';
 import LoadingSpinner from '../LoadingSpinner';
 import useUserLoginMutation from '../../hooks/users/useUserLoginMutation';
+import { LoginSchema } from '../../validation/dataValidation';
 
 function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userAuthenticated, setUserAuthenticated] = useState(false);
-  const [invalidCredentials, setInvalidCredentials] = useState(false);
+  const [invalidPassword, setInvalidPassword] = useState(false);
+  const [invalidPasswordError, setInvalidPasswordError] = useState('');
+  const [userNotFound, setUserNotFound] = useState(false);
+  const [userNotFoundError, setUserNotFoundError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const { isLoggedIn } = authStore();
 
@@ -19,7 +24,11 @@ function LogInForm() {
     email,
     password,
     setUserAuthenticated,
-    setInvalidCredentials,
+    setInvalidPassword,
+    setInvalidPasswordError,
+    setUserNotFound,
+    setUserNotFoundError,
+    setIsLoading,
   });
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,12 +45,25 @@ function LogInForm() {
 
   function handleLogIn(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsLoading(true);
 
-    setInvalidCredentials(false);
-    setUserAuthenticated(true);
-    setTimeout(() => {
+    const results = LoginSchema.safeParse({ email, password });
+
+    if (results.success) {
+      setUserAuthenticated(true);
       mutateUser();
-    }, 1500);
+    } else if (!results.success) {
+      results.error.errors.forEach((error) => {
+        switch (error.path[0]) {
+          case 'password':
+            setInvalidPasswordError(error.message);
+            setInvalidPassword(true);
+            break;
+          default:
+            break;
+        }
+      });
+    }
   }
 
   useEffect(() => {
@@ -61,9 +83,9 @@ function LogInForm() {
               value={email}
               required
               onChange={handleEmailChange}
-              invalid={invalidCredentials}
-              setInvalid={setInvalidCredentials}
-              invalidMessage="Invalid credentials"
+              invalid={userNotFound}
+              setInvalid={setUserNotFound}
+              invalidMessage={userNotFoundError}
             />
 
             <InputField
@@ -72,9 +94,9 @@ function LogInForm() {
               value={password}
               required
               onChange={handlePasswordChange}
-              invalid={invalidCredentials}
-              setInvalid={setInvalidCredentials}
-              invalidMessage="Invalid credentials"
+              invalid={invalidPassword}
+              setInvalid={setInvalidPassword}
+              invalidMessage={invalidPasswordError}
             />
           </div>
           <div className="button_container flexdiv gap-6">

@@ -6,25 +6,44 @@ function useUserLoginMutation({
   email,
   password,
   setUserAuthenticated,
-  setInvalidCredentials,
+  setInvalidPassword,
+  setInvalidPasswordError,
+  setUserNotFound,
+  setUserNotFoundError,
+  setIsLoading,
 }: {
   email: string;
   password: string;
   setUserAuthenticated: (value: boolean) => void;
-  setInvalidCredentials: (value: boolean) => void;
+  setInvalidPassword: (value: boolean) => void;
+  setInvalidPasswordError: (value: string) => void;
+  setUserNotFound: (value: boolean) => void;
+  setUserNotFoundError: (value: string) => void;
+  setIsLoading: (value: boolean) => void;
 }) {
   const { setLoggedIn, setUserData } = authStore();
 
   const { mutate } = useMutation({
     mutationFn: () => logIn(email, password),
     onSuccess: (fetchedData: UserVerified) => {
+      setIsLoading(false);
       setUserData(fetchedData.user);
       setLoggedIn();
       setUserAuthenticated(false);
     },
-    onError: () => {
+    onError: (error) => {
+      if (error.response?.status === 401) {
+        setInvalidPassword(true);
+        setInvalidPasswordError('Invalid password');
+      } else if (error.response?.status === 404) {
+        setUserNotFound(true);
+        setUserNotFoundError('User not found');
+      } else if (error.response?.status === 400) {
+        setInvalidPassword(true);
+        setInvalidPasswordError('Invalid format');
+      }
+      setIsLoading(false);
       setUserAuthenticated(false);
-      setInvalidCredentials(true);
     },
     retry: 1,
   });

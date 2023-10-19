@@ -20,7 +20,7 @@ export const fetchDataFromApi = async <T>(
     });
     return response.data;
   } catch (error) {
-    console.error('zoooob', error);
+    console.error(error);
     throw error;
   }
 };
@@ -31,6 +31,10 @@ export const postDataToApi = async <T>(
 ): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await api.post(endpoint, data);
+    console.log(response.data);
+    if (response.data.message === 'Email is already in use') {
+      throw new Error('Email is already in use');
+    }
     return response.data;
   } catch (error) {
     console.error(error);

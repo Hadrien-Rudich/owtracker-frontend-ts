@@ -7,11 +7,13 @@ function useUserRegisterMutation({
   password,
   battleTag,
   setCreateUser,
+  setIsLoading,
 }: {
   email: string;
   password: string;
   battleTag: string;
   setCreateUser: (value: boolean) => void;
+  setIsLoading: (value: boolean) => void;
 }) {
   const navigate = useNavigate();
   const { mutate } = useMutation({
@@ -19,6 +21,20 @@ function useUserRegisterMutation({
     onSuccess: () => {
       navigate('/login');
       setCreateUser(false);
+      setIsLoading(false);
+    },
+    onError: (error) => {
+      console.log(error);
+      if (
+        error.response &&
+        error.response.data.message === 'Email is already in use'
+      ) {
+        const customErrorMessage = error.response.data.message;
+        console.log('Custom Error:', customErrorMessage);
+      }
+
+      setCreateUser(false);
+      setIsLoading(false);
     },
     retry: 1,
   });

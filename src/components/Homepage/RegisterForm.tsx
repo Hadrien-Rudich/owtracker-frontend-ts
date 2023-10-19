@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import useUserRegisterMutation from '../../hooks/users/useUserRegisterMutation';
 import LoadingSpinner from '../LoadingSpinner';
+import { RegisterSchema } from '../../validation/dataValidation';
 
 function RegisterForm() {
   const [email, setEmail] = useState('');
@@ -10,7 +11,13 @@ function RegisterForm() {
   const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [createUser, setCreateUser] = useState(false);
-  const [invalidFormat, setInvalidFormat] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [emailIsInvalid, setEmailIsInvalid] = useState(false);
+  const [battleTagError, setBattleTagError] = useState('');
+  const [battleTagIsInvalid, setBattleTagIsInvalid] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
   const [passwordDoesNotMatch, setPasswordDoesNotMatch] = useState(false);
 
   const mutateUser = useUserRegisterMutation({
@@ -18,6 +25,7 @@ function RegisterForm() {
     password,
     battleTag,
     setCreateUser,
+    setIsLoading,
   });
 
   const navigate = useNavigate();
@@ -45,14 +53,43 @@ function RegisterForm() {
 
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (password !== confirmPassword) {
       setPasswordDoesNotMatch(true);
       return;
     }
-    setCreateUser(true);
-    setTimeout(() => {
-      mutateUser();
-    }, 1500);
+
+    const results = RegisterSchema.safeParse({ email, battleTag, password });
+
+    if (!results.success) {
+      results.error.errors.forEach((error) => {
+        switch (error.path[0]) {
+          case 'email':
+            setEmailError(error.message);
+            setEmailIsInvalid(true);
+            break;
+          case 'battleTag':
+            setBattleTagError(error.message);
+            setBattleTagIsInvalid(true);
+            break;
+          case 'password':
+            setPasswordError(error.message);
+            setPasswordIsInvalid(true);
+            break;
+          default:
+            break;
+        }
+      });
+      return;
+    }
+
+    if (RegisterSchema.parse({ email, battleTag, password })) {
+      setCreateUser(true);
+      setIsLoading(true);
+      setTimeout(() => {
+        mutateUser();
+      }, 1000);
+    }
   };
 
   return (
@@ -66,6 +103,9 @@ function RegisterForm() {
               value={email}
               required
               onChange={handleEmailChange}
+              invalid={emailIsInvalid}
+              setInvalid={setEmailIsInvalid}
+              invalidMessage={emailError}
             />
             <InputField
               label="BattleTag"
@@ -73,6 +113,9 @@ function RegisterForm() {
               value={battleTag}
               required
               onChange={handleBattleTagChange}
+              invalid={battleTagIsInvalid}
+              setInvalid={setBattleTagIsInvalid}
+              invalidMessage={battleTagError}
             />
 
             <InputField
@@ -81,9 +124,9 @@ function RegisterForm() {
               value={password}
               required
               onChange={handlePasswordChange}
-              invalid={passwordDoesNotMatch}
-              setInvalid={setPasswordDoesNotMatch}
-              invalidMessage="Passwords do not match"
+              invalid={passwordIsInvalid}
+              setInvalid={setPasswordIsInvalid}
+              invalidMessage={passwordError}
             />
 
             <InputField
