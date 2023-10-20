@@ -15,7 +15,6 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
 
   const selectMap = (map: string, mapImage: string) => {
     selectGameMap(map, mapImage);
-    console.log(selectedGameMap, selectedGameMapType);
     toggleDropDown();
   };
 

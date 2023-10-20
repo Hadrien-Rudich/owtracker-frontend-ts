@@ -32,11 +32,33 @@ interface NewUserCreated {
   };
 }
 
+// export const register = async (
+//   email: string,
+//   password: string,
+//   battleTag: string
+// ): Promise<boolean> => {
+//   const endpoint = 'register';
+//   try {
+//     const response: NewUserCreated = await postDataToApi(endpoint, {
+//       email,
+//       password,
+//       battleTag,
+//     });
+//     if (response.message === 'New User created') {
+//       return true;
+//     }
+
+//     return false;
+//   } catch (error) {
+//     return false;
+//   }
+// };
+
 export const register = async (
   email: string,
   password: string,
   battleTag: string
-): Promise<boolean> => {
+): Promise<{ success: boolean; message: string }> => {
   const endpoint = 'register';
   try {
     const response: NewUserCreated = await postDataToApi(endpoint, {
@@ -45,11 +67,16 @@ export const register = async (
       battleTag,
     });
     if (response.message === 'New User created') {
-      return true;
+      return { success: true, message: 'New User created' };
     }
-    return false;
+
+    if (response.message === 'Email is already in use') {
+      return { success: false, message: 'Email is already in use' };
+    }
+
+    return { success: false, message: 'Unexpected error' };
   } catch (error) {
-    return false;
+    return { success: false, message: 'Unexpected error' };
   }
 };
 

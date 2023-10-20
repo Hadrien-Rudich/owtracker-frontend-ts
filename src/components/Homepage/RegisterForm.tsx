@@ -12,13 +12,13 @@ function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [createUser, setCreateUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [emailIsInvalid, setEmailIsInvalid] = useState(false);
   const [battleTagError, setBattleTagError] = useState('');
   const [battleTagIsInvalid, setBattleTagIsInvalid] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
   const [passwordDoesNotMatch, setPasswordDoesNotMatch] = useState(false);
+  const [emailAlreadyInUse, setEmailAlreadyInUse] = useState(false);
+  const [emailAlreadyInUseError, setEmailAlreadyInUseError] = useState('');
 
   const mutateUser = useUserRegisterMutation({
     email,
@@ -26,6 +26,8 @@ function RegisterForm() {
     battleTag,
     setCreateUser,
     setIsLoading,
+    setEmailAlreadyInUse,
+    setEmailAlreadyInUseError,
   });
 
   const navigate = useNavigate();
@@ -64,10 +66,6 @@ function RegisterForm() {
     if (!results.success) {
       results.error.errors.forEach((error) => {
         switch (error.path[0]) {
-          case 'email':
-            setEmailError(error.message);
-            setEmailIsInvalid(true);
-            break;
           case 'battleTag':
             setBattleTagError(error.message);
             setBattleTagIsInvalid(true);
@@ -86,9 +84,8 @@ function RegisterForm() {
     if (RegisterSchema.parse({ email, battleTag, password })) {
       setCreateUser(true);
       setIsLoading(true);
-      setTimeout(() => {
-        mutateUser();
-      }, 1000);
+
+      mutateUser();
     }
   };
 
@@ -103,9 +100,9 @@ function RegisterForm() {
               value={email}
               required
               onChange={handleEmailChange}
-              invalid={emailIsInvalid}
-              setInvalid={setEmailIsInvalid}
-              invalidMessage={emailError}
+              invalid={emailAlreadyInUse}
+              setInvalid={setEmailAlreadyInUse}
+              invalidMessage={emailAlreadyInUseError}
             />
             <InputField
               label="BattleTag"

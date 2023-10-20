@@ -32,9 +32,6 @@ export const postDataToApi = async <T>(
   try {
     const response: AxiosResponse<T> = await api.post(endpoint, data);
     console.log(response.data);
-    if (response.data.message === 'Email is already in use') {
-      throw new Error('Email is already in use');
-    }
     return response.data;
   } catch (error) {
     console.error(error);
