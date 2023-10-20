@@ -50,20 +50,20 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   return (
     <div className="flexdiv row gap-6">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          key={profileObj.id}
-          value={updatedProfileLabel}
-          onChange={handleOnChange}
-          onKeyDown={handleKeyDown}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
-          className={`${
-            profileObj.label === selectedProfile.label
-              ? 'scale-110 bg-activeColor shadow-lg'
-              : 'bg-secondaryColor shadow-inner opacity-60 hover:opacity-100'
-          } profilecard_container profile card hover:bg-activeColor hover:scale-110`}
-        />
+        {profileObj.label === selectedProfile.label && (
+          <button className=" bg-activeColor scale-110" type="button">
+            <input
+              type="text"
+              key={profileObj.id}
+              value={updatedProfileLabel}
+              onChange={handleOnChange}
+              onKeyDown={handleKeyDown}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+              className="inputField component outline-altColor outline-offset-0"
+            />
+          </button>
+        )}
       </form>
       <div className="button_container flexdiv row gap-2">
         <button

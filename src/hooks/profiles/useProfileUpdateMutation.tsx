@@ -12,12 +12,16 @@ function useProfileUpdateMutation({ profileObj }: { profileObj: ProfileData }) {
     setIsUpdatingProfile,
     updateProfileLabel,
     selectProfile,
+    setProfileToastMessage,
+    setProfileToast,
   } = profileStore();
 
   const { mutate } = useMutation({
     mutationFn: () =>
       updateProfileOnApi(profileObj.userId, profileObj.id, updatedProfileLabel),
     onSuccess: (updatedProfile: ProfileAddedtoApi) => {
+      setProfileToast(true);
+      setProfileToastMessage('Profile Updated!');
       updateProfileLabel(profileObj.id, updatedProfileLabel);
       setIsUpdatingProfile(false);
       selectProfile(updatedProfile.profile);

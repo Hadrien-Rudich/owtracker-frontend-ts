@@ -3,8 +3,13 @@ import NewGameHeroes from './Game/Heroes/NewGame/NewGameHeroes';
 import NewGameResult from './Game/Result/NewGame/NewGameResult';
 import NewGameDate from './Game/Date/Creation/NewGameDate';
 import NewGameButtons from './NewGame/NewGameButtons';
+import { useHeroesQueries } from '../../hooks/queries/useHeroesQueries';
+import { useMapsQueries } from '../../hooks/queries/useMapsQueries';
 
 function NewGame() {
+  useHeroesQueries();
+  useMapsQueries();
+
   return (
     <div className="NewGame_container flexdiv col tracking-wider w-full z-50">
       <div

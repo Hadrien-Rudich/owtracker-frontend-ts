@@ -48,8 +48,9 @@ body {
 }
 
 .containerbox {
-  @apply flex flex-col items-center justify-center content-center sm:gap-10 gap-5
-  sm:w-80 sm:py-10 w-60 py-5
+  @apply flex flex-col items-center justify-center content-center
+   sm:gap-10 gap-5 py-5 sm:py-10
+  sm:w-80  w-60 
   bg-mainColor shadow-lg rounded-sm;
 }
 
@@ -172,8 +173,16 @@ right-0;
   @apply bg-secondaryColor text-mainText;
 }
 
-.input {
-  @apply sm:w-36 sm:h-10 w-28 h-8 my-2 text-center shadow-inner rounded-sm tracking-wider;
+.inputField {
+  @apply sm:w-36 w-28 text-center shadow-inner rounded-sm tracking-wider;
+}
+
+.inputField.component {
+  @apply sm:h-10 h-8;
+}
+
+.inputField.profile {
+  @apply sm:h-8 h-6;
 }
 
 .profile {
@@ -207,7 +216,7 @@ right-0;
 sm:text-xl text-lg text-secondaryText;
 }
 
-.input.disabled {
+.inputField.disabled {
   @apply w-36 h-10 my-2 bg-secondaryColor text-center shadow-inner rounded-sm;
 }
 
@@ -291,6 +300,11 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .animate-blink {
-  animation: blink 1.5s 2.5; /* Play the animation twice (adjust the animation duration and count as needed) */
+  animation: blink 1.5s 2.5; /* Play the animation tw ice (adjust the animation duration and count as needed) */
+  transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
+}
+
+.animate-blink2 {
+  animation: blink 1.75s infinite; /* Play the animation twice (adjust the animation duration and count as needed) */
   transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
 }

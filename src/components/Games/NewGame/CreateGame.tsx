@@ -4,8 +4,11 @@ import useGameAddMutation from '../../../hooks/games/useGameAddMutation';
 import { gameStore } from '../../../store/gameStore';
 
 function CreateNewGame() {
-  const { setGameSavedToast, setIsCreatingGame, setSavingGameInProgress } =
-    gameStore();
+  const {
+    setGameToast: setGameSavedToast,
+    setIsCreatingGame,
+    setSavingGameInProgress,
+  } = gameStore();
 
   const mutateGame = useGameAddMutation();
 

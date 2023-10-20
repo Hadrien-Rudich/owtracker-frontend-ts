@@ -12,8 +12,12 @@ function Games() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = authStore();
-  const { gamesData, gameSavedToast, setGameSavedToast } = gameStore();
-
+  const {
+    gamesData,
+    gameToast: gameSavedToast,
+    setGameToast: setGameSavedToast,
+    gameToastMessage: gameSavedToastMessage,
+  } = gameStore();
   const { isLoading, isFetching, isError, isSuccess } = useGamesQuery();
 
   useEffect(() => {
@@ -26,30 +30,27 @@ function Games() {
     return <LoadingSpinner />;
   }
 
-  if (isError) {
-    return (
-      <div className="mt-24 text-5xl text-activeColor">NO GAMES FOUND</div>
-    );
-  }
-
-  if (isSuccess && gamesData.length > 0) {
-    return (
-      <div className="Games_container lg:mt-[6rem] my-24 container mx-auto rounded-sm">
-        <SavedToast
-          topPosition="top-[12.5rem]"
-          toastText="Game updated!"
-          booleanProp={gameSavedToast}
-          setBooleanProp={setGameSavedToast}
-        />
-        {/* <div className="MonthTabs_container">
+  return (
+    <div className="Games_container lg:mt-[8.5rem] mt-[4.5rem] container mx-auto rounded-sm relative">
+      {isError && gamesData.length === 0 && (
+        <div className="absolute top-[-5.5rem] right-1/4 left-1/4 text-5xl w-1/2 text-activeColor ">
+          NO GAMES FOUND
+        </div>
+      )}
+      <SavedToast
+        toastText={gameSavedToastMessage}
+        booleanProp={gameSavedToast}
+        setBooleanProp={setGameSavedToast}
+      />
+      {/* <div className="MonthTabs_container">
           <MonthTabs />
         </div> */}
 
-        <div className="Game_container">
-          <Game />
-        </div>
+      <div className="Game_container">
+        <Game />
       </div>
-    );
-  }
+    </div>
+  );
 }
+
 export default Games;

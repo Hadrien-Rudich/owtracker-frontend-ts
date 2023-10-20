@@ -12,7 +12,8 @@ function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
     selectedGameHeroes,
     selectedGameHeroesImages,
     setIsUpdatingGame,
-    setGameSavedToast,
+    setGameToast: setGameSavedToast,
+    setGameToastMessage: setGameSavedToastMessage,
     updateGame,
   } = gameStore();
 
@@ -30,6 +31,8 @@ function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
     onSuccess: (UpdatedGameOnApi: GameAddedToApi) => {
       setIsUpdatingGame(false);
       setGameSavedToast(true);
+      setGameSavedToastMessage('Game Updated!');
+
       updateGame(UpdatedGameOnApi.game.id, UpdatedGameOnApi.game);
     },
     retry: 1,

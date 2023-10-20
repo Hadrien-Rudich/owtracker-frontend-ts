@@ -12,7 +12,7 @@ function Profile() {
     selectProfile,
     unselectProfile,
     isUpdatingProfile,
-    setProfileSavedToast,
+    setProfileToast: setProfileSavedToast,
   } = profileStore();
 
   const handleProfileClick = (

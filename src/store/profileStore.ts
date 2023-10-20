@@ -56,9 +56,11 @@ export const profileStore = create<ProfileStore>()((set) => ({
       profile: '',
     }));
   },
-  profileSavedToast: false,
-  setProfileSavedToast: (value: boolean) =>
-    set(() => ({ profileSavedToast: value })),
+  profileToastMessage: '',
+  setProfileToastMessage: (message: string) =>
+    set(() => ({ profileToastMessage: message })),
+  profileToast: false,
+  setProfileToast: (value: boolean) => set(() => ({ profileToast: value })),
   reset: () => {
     set(() => ({
       profilesData: [],

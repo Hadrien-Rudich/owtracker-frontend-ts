@@ -14,8 +14,9 @@ function useGameAddMutation() {
     selectedGameMapType,
     selectedGameHeroesImages,
     setSavingGameInProgress,
+    setGameToastMessage: setGameSavedToastMessage,
     addGame,
-    setGameSavedToast,
+    setGameToast: setGameSavedToast,
   } = gameStore();
 
   const { userData } = authStore();
@@ -36,6 +37,7 @@ function useGameAddMutation() {
       setTimeout(() => {
         setSavingGameInProgress(false);
         setGameSavedToast(true);
+        setGameSavedToastMessage('Game Created!');
       }, 1000);
     },
     retry: 1,

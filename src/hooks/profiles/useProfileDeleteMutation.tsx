@@ -4,12 +4,19 @@ import type { ProfileData } from '../../types/store/profileTypes';
 import { deleteProfileFromApi } from '../../services/API/profiles';
 
 function useProfileDeleteMutation({ profileObj }: { profileObj: ProfileData }) {
-  const { unselectProfile, deleteProfile } = profileStore();
+  const {
+    unselectProfile,
+    deleteProfile,
+    setProfileToast: setProfileSavedToast,
+    setProfileToastMessage: setProfileSavedToastMessage,
+  } = profileStore();
 
   const { mutate } = useMutation({
     mutationFn: () => deleteProfileFromApi(profileObj.userId, profileObj.id),
     onSuccess: () => {
       deleteProfile(profileObj.label);
+      setProfileSavedToastMessage('Profile Deleted!');
+      setProfileSavedToast(true);
       unselectProfile();
     },
     retry: 1,

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface SavedToastProps {
-  topPosition: string;
   toastText: string;
   booleanProp: boolean;
   setBooleanProp: (value: boolean) => void;
@@ -12,7 +11,6 @@ function SavedToast({
   toastText,
   booleanProp,
   setBooleanProp,
-  topPosition,
 }: SavedToastProps) {
   const location = useLocation();
   const [isMounted, setIsMounted] = useState(true);
@@ -23,7 +21,7 @@ function SavedToast({
     if (booleanProp) {
       timeoutId = setTimeout(() => {
         setBooleanProp(false);
-      }, 3000);
+      }, 4500);
     }
 
     return () => {
@@ -44,10 +42,10 @@ function SavedToast({
         booleanProp
           ? 'absolute bg-altColor scale-150 opacity-100 '
           : 'absolute bg-mainColor scale-0 opacity-0 '
-      }  animate-blink 
+      }  animate-blink2
       duration-1000 ease-in-out 
       w-[10rem] z-50 text-center 
-      left-1/2 ${topPosition} 0 transform -translate-x-1/2 -translate-y-1/2 
+      left-1/2 lg:top-[-4.5rem] top-[-2.25rem] 0 transform -translate-x-1/2 -translate-y-1/2 
       shadow-lg rounded-sm`}
     >
       <p className="tracking-widest">{toastText}</p>

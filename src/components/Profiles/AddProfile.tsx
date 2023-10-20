@@ -1,28 +1,15 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useState,
-  MouseEvent,
-  KeyboardEvent,
-  useRef,
-} from 'react';
-import { ImPlus, ImCross } from 'react-icons/im';
+import { ChangeEvent, FormEvent, useState, KeyboardEvent, useRef } from 'react';
+import { ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
 import { profileStore } from '../../store/profileStore';
 import useOutsideClick from '../useOutsideClick';
 import useProfileAddMutation from '../../hooks/profiles/useProfileAddMutation';
+import NewProfileMode from './NewProfileMode';
 
 function AddProfile() {
-  const {
-    profilesData,
-    newProfile,
-    setNewProfile,
-    clearNewProfile,
-    unselectProfile,
-    setIsUpdatingProfile,
-    setProfileSavedToast,
-  } = profileStore();
+  const { profilesData, newProfile, setNewProfile, clearNewProfile } =
+    profileStore();
   const [inputField, setInputField] = useState(false);
   const newProfileInputRef = useRef<HTMLInputElement>(null);
 
@@ -30,12 +17,6 @@ function AddProfile() {
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewProfile(event.target.value);
-  };
-  const handlePlusClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setIsUpdatingProfile(false);
-    setInputField(true);
-    unselectProfile();
   };
 
   const handleCancel = () => {
@@ -58,7 +39,6 @@ function AddProfile() {
     if (profileLabelIsAvailable) {
       mutateProfile();
       setInputField(false);
-      setProfileSavedToast(true);
     }
   };
 
@@ -75,17 +55,7 @@ function AddProfile() {
 
   return (
     <div className="addprofile_container h-12 flexdiv" ref={newProfileInputRef}>
-      {!inputField && (
-        <button
-          type="button"
-          className="addbutton_container hover:scale-110 flexdiv gap-4 sign"
-          onClick={handlePlusClick}
-        >
-          <ImPlus className="h-7 w-7" />
-          <p className=" text-2xl">NEW PROFILE</p>
-          <span className="sr-only">Add new profile</span>
-        </button>
-      )}
+      {!inputField && <NewProfileMode setInputField={setInputField} />}
       {inputField && (
         <form onSubmit={handleSubmit}>
           <div className="form_container ml-16 flex gap-6">
@@ -94,7 +64,7 @@ function AddProfile() {
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 ref={newProfileInputRef}
-                className="profile card scale-110 outline-none ring-2"
+                className="inputField profile outline-altColor outline-offset-0 scale-110"
                 name="profile"
                 required
                 value={newProfile}

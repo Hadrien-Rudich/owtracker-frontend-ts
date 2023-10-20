@@ -39,8 +39,8 @@ function InputField({
         onKeyDown={onKeyDown}
         className={
           !invalid
-            ? 'input outline-altColor outline-offset-0 relative'
-            : 'input outline-warning outline-none relative '
+            ? 'inputField component outline-altColor outline-offset-0 relative'
+            : 'inputField component outline-warning outline-none relative '
         }
       />
       {invalid && (

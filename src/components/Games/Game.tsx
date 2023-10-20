@@ -1,16 +1,11 @@
 import { useEffect } from 'react';
 import { gameStore } from '../../store/gameStore';
-import { useHeroesQueries } from '../../hooks/queries/useHeroesQueries';
-import { useMapsQueries } from '../../hooks/queries/useMapsQueries';
 import { filterGamesByMonth } from '../../utils/utils';
 import ExistingGame from './ExistingGame';
 import NewGameMode from './NewGame/NewGameMode';
 import NewGame from './NewGame';
 
 function Game() {
-  useHeroesQueries();
-  useMapsQueries();
-
   const {
     gamesData,
     currentMonth,
@@ -42,7 +37,7 @@ function Game() {
       <div
         className={`${
           isUpdatingGame ? 'backdrop-grayscale pointer-events-none' : ''
-        }  CreateGame_container w-full flexdiv h-12`}
+        }  CreateGame_container w-full flexdiv h-12 mb-12`}
       >
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
