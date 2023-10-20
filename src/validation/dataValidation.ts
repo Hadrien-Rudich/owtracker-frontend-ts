@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
 const battleTagRegex = /^(?=.*[#])[A-Za-z\d#]{3,20}$/;
 
 export type NewUser = z.infer<typeof RegisterSchema>;
