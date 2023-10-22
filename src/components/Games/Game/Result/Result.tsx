@@ -1,4 +1,4 @@
-import { getResultClassNameFromGame } from '../../../../utils/utils';
+import { getResultClassNameFromGame } from '../../../../utils/classNameUtils';
 import type { GameData } from '../../../../types/store/gameTypes';
 
 function Result({ gameObj }: { gameObj: GameData }) {

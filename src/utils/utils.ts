@@ -31,16 +31,6 @@ const filterGamesByMonth = (
   );
 };
 
-const filterGamesByResult = (gameData: GameData[]): number[] => {
-  const wins = gameData.filter((game) => game.result === 'win');
-  const losses = gameData.filter((game) => game.result === 'loss');
-  const draws = gameData.filter((game) => game.result === 'draw');
-
-  const results = [wins.length, losses.length, draws.length];
-
-  return results;
-};
-
 const filterMapTypes = (mapsData: MapData[], mapType: string): MapData[] => {
   const result = mapsData.filter((map) => map.type === mapType);
   return result;
@@ -75,62 +65,6 @@ const convertDateToDatePickerFormat = (date: string): Date => {
 const capitalizeFirstLetter = (string: string): string =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
-const getResultClassName = (gameResult: string, outcome: Outcome): string => {
-  if (gameResult === outcome.label) {
-    return `result bg-active${
-      outcome.label.charAt(0).toUpperCase() + outcome.label.slice(1)
-    }`;
-  }
-  if (gameResult !== outcome.label) {
-    return 'hover:bg-activeColor hover:scale-105 hover:z-50';
-  }
-  return '';
-};
-
-const getResultClassNameFromGame = (game: GameData): string => {
-  switch (game.result) {
-    case 'win':
-      return 'bg-activeWin';
-    case 'loss':
-      return 'bg-activeLoss';
-    case 'draw':
-      return 'bg-activeDraw';
-    default:
-      return '';
-  }
-};
-
-const getResultClassNameFromResult = (result: string): string => {
-  switch (result) {
-    case 'win':
-      return 'bg-activeWin';
-    case 'loss':
-      return 'bg-activeLoss';
-    case 'draw':
-      return 'bg-activeDraw';
-    default:
-      return '';
-  }
-};
-
-const getGameContainerClassName = (
-  game: GameData,
-  selectedGame: GameData,
-  isUpdatingGame: boolean,
-  isCreatingGame: boolean
-): string => {
-  if (isCreatingGame) {
-    return 'grayscale hover:cursor-default';
-  }
-  if (game.id === selectedGame.id) {
-    return 'selected z-10';
-  }
-  if (!isUpdatingGame) {
-    return 'unselected z-0';
-  }
-  return ' grayscale hover:cursor-default';
-};
-
 const verifyProfileLabelAvailability = (
   newProfileLabel: string,
   profilesData: ProfileData[]
@@ -150,16 +84,11 @@ const verifyProfileLabelAvailability = (
 
 export {
   filterGamesByMonth,
-  filterGamesByResult,
   filterMapTypes,
   formatDateForGameEdit,
   convertDateToDatePickerFormat,
   dateNowInGameFormat,
   capitalizeFirstLetter,
-  getResultClassName,
-  getResultClassNameFromGame,
-  getResultClassNameFromResult,
-  getGameContainerClassName,
   verifyProfileLabelAvailability,
   months,
 };

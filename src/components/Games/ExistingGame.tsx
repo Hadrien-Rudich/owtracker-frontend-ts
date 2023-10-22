@@ -1,5 +1,5 @@
 import { gameStore } from '../../store/gameStore';
-import { getGameContainerClassName } from '../../utils/utils';
+import { getGameContainerClassName } from '../../utils/classNameUtils';
 import Result from './Game/Result/Result';
 import EditResult from './Game/Result/Edit/EditResult';
 import Date from './Game/Date/Date';

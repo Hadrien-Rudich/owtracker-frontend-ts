@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
-import { getResultClassNameFromResult } from '../../../../../utils/utils';
+import { getResultClassNameFromResult } from '../../../../../utils/classNameUtils';
 import ResultsDropDown from './ResultsDropDown';
 
 function NewGameResult() {

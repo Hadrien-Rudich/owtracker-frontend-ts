@@ -1,7 +1,10 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { gameStore } from '../../store/gameStore';
-import { filterGamesByResult } from '../../utils/utils';
+import {
+  filterGamesByResult,
+  generateTextCenterCallback,
+} from '../../utils/chartsUtils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -37,23 +40,7 @@ const options = {
 
 const textCenter = {
   id: 'textCenter',
-  beforeDatasetsDraw(chart, args, pluginOptions) {
-    const { ctx, data } = chart;
-    ctx.save();
-    ctx.font = '20px Big Noodle Titling';
-    ctx.fillStyle = '#000080'; // Navy Blue
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(
-      `${
-        data.datasets[0].data[0] +
-        data.datasets[0].data[1] +
-        data.datasets[0].data[2]
-      } Games`,
-      chart.getDatasetMeta(0).data[0].x,
-      chart.getDatasetMeta(0).data[0].y
-    );
-  },
+  beforeDatasetsDraw: generateTextCenterCallback,
 };
 
 const textInsideDoughnut = {
@@ -65,18 +52,20 @@ const textInsideDoughnut = {
     const total = data.reduce((acc, value) => acc + value, 0);
 
     ctx.font = '20px Big Noodle Titling';
-    color: '#000080', // Navy Blue
-      (ctx.textAlign = 'center');
+    ctx.fillStyle = '#000080'; // Navy Blue
+    ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
     segments.forEach((segment, index) => {
       const model = segment.getCenterPoint();
       const segmentValue = data[index];
       const percentage = ((segmentValue / total) * 100).toFixed(0);
-      ctx.fillText(`${percentage}%`, model.x, model.y);
+      ctx.fillText(`${percentage}%`, model.x, model.y); // Add a percentage sign (%) to the label
     });
   },
 };
+
+// ...
 
 function DoughnutChart() {
   const { gamesData } = gameStore();

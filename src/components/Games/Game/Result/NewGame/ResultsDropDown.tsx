@@ -1,6 +1,6 @@
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
-import { getResultClassNameFromResult } from '../../../../../utils/utils';
+import { getResultClassNameFromResult } from '../../../../../utils/classNameUtils';
 
 interface ResultsDropDownProps {
   toggleDropDown: () => void;

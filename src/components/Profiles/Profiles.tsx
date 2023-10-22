@@ -28,7 +28,7 @@ function Profiles() {
   }
 
   return (
-    <div className="Profiles_container flexdiv col lg:mt-[8.5rem] mt-[4.5rem] relative">
+    <div className="Profiles_container flexdiv col lg:my-[8.5rem] my-[4.5rem] relative">
       {isError && profilesData.length === 0 && (
         <div className="absolute lg:top-[-5.5rem] top-[-3.5rem] right-1/4 left-1/4 lg:text-5xl text-3xl w-1/2 text-activeColor ">
           NO PROFILES FOUND
