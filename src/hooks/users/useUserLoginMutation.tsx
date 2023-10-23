@@ -31,7 +31,7 @@ function useUserLoginMutation({
       setLoggedIn();
       setUserAuthenticated(false);
     },
-    onError: (error) => {
+    onError: (error: any) => {
       if (error.response?.status === 401) {
         setInvalidPassword(true);
         setInvalidPasswordError('Invalid password');

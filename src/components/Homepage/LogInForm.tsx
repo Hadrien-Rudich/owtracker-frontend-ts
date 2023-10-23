@@ -14,7 +14,11 @@ function LogInForm() {
   const [invalidPasswordError, setInvalidPasswordError] = useState('');
   const [userNotFound, setUserNotFound] = useState(false);
   const [userNotFoundError, setUserNotFoundError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [
+    ,
+    // isLoading
+    setIsLoading,
+  ] = useState(false);
 
   const { isLoggedIn } = authStore();
 

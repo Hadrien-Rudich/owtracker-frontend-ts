@@ -6,7 +6,11 @@ interface NotificationProps {
   onClose: () => void;
 }
 
-function Notification({ message, type, onClose }: NotificationProps) {
+function Notification({
+  message,
+  type,
+}: //  onClose
+NotificationProps) {
   return (
     <div
       className={`notification ${type} flexdiv border rounded-sm h-18 w-40 absolute z-50]`}

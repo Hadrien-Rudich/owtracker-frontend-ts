@@ -1,3 +1,4 @@
+import { Chart as ChartJS } from 'chart.js';
 import type { GameData } from '../types/store/gameTypes';
 
 const filterGamesByMonth = (
@@ -11,6 +12,20 @@ const filterGamesByMonth = (
     (game) => Number(game.date.slice(3, 5)) === Number(month)
   );
 };
+
+const backgroundColors: (string | CanvasGradient)[] = [
+  'rgba(75, 192, 128, 0.8)',
+  'rgba(255, 99, 132,0.8)',
+  'rgba(255, 206, 86,0.8)',
+];
+
+function getBackgroundColor(index: number): string | CanvasGradient {
+  const backgroundColor = backgroundColors[index];
+  if (backgroundColor !== undefined) {
+    return backgroundColor;
+  }
+  return 'gray'; // Return a default value if the index is out of bounds
+}
 
 const filterGamesByResult = (gameData: GameData[]): number[] => {
   const wins = gameData.filter((game) => game.result === 'win');
@@ -44,7 +59,7 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount: number) {
 
   // Calculate hero stats
   gamesData.forEach((game) => {
-    const { result, heroes, heroesImageUrl } = game;
+    const { result, heroes } = game;
     heroes.forEach((hero) => {
       const heroStats = heroStatsMap.get(hero) || { wins: 0, games: 0 };
       heroStats.games += 1;
@@ -59,13 +74,13 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount: number) {
   const heroStatsArray = Array.from(
     heroStatsMap,
     ([hero, { wins, games }]) => ({
-      hero: { label: hero, heroImageUrl: hero.heroImageUrl }, // Add heroImageUrl
+      hero,
       gamesPlayed: games, // Add games played
       wins, // Add number of wins
       winRatio: games > 0 ? Math.round((wins / games) * 100) : 0, // Convert to percentage
     })
   );
-  console.log(heroStatsArray);
+
   // Sort heroes by win ratio in descending order
   heroStatsArray.sort((a, b) => b.winRatio - a.winRatio);
 
@@ -75,7 +90,7 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount: number) {
   return topHeroes;
 }
 
-function generateTextCenterCallback(chart) {
+function generateTextCenterCallback(chart: ChartJS<'doughnut'>) {
   const { ctx, data } = chart;
   ctx.save();
   ctx.font = '20px Big Noodle Titling';
@@ -99,4 +114,5 @@ export {
   getHeroesByWinRatio,
   getColorForWinPercentage,
   generateTextCenterCallback,
+  getBackgroundColor,
 };

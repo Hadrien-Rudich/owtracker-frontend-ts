@@ -8,7 +8,7 @@ function NewGameResult() {
   const { selectedGameResult } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
+  // const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
 

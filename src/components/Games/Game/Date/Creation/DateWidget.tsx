@@ -13,7 +13,10 @@ function DateWidget({
   const { selectGameDate, selectGameDateInFormat, selectedGameDate } =
     gameStore();
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [
+    startDate,
+    // setStartDate
+  ] = useState(new Date());
 
   return (
     <div className="flexdiv relative">

@@ -21,7 +21,12 @@ function Profiles() {
     }
   }, [isLoggedIn, navigate]);
 
-  const { isLoading, isFetching, isError, isSuccess } = useProfilesQuery();
+  const {
+    isLoading,
+    isFetching,
+    isError,
+    //  isSuccess
+  } = useProfilesQuery();
 
   if (isLoading || isFetching) {
     return <LoadingSpinner />;

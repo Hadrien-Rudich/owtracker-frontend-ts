@@ -11,7 +11,11 @@ function RegisterForm() {
   const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [createUser, setCreateUser] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [
+    ,
+    // isLoading
+    setIsLoading,
+  ] = useState(false);
   const [battleTagError, setBattleTagError] = useState('');
   const [battleTagIsInvalid, setBattleTagIsInvalid] = useState(false);
   const [passwordError, setPasswordError] = useState('');

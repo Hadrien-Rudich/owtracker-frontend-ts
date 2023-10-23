@@ -26,7 +26,11 @@ ChartJS.register(
 
 const imageItems = {
   id: 'imageItems',
-  beforeDatasetsDraw(chart, args, pluginOptions) {
+  beforeDatasetsDraw(
+    chart: { ctx: any; data: any; options: any; scales: { x: any; y: any } },
+    args: any,
+    pluginOptions: any
+  ) {
     const {
       ctx,
       data,
@@ -36,7 +40,7 @@ const imageItems = {
     const imageSize = options.layout.padding.left;
     ctx.save();
 
-    data.datasets[0].image.forEach((imageLink, index) => {
+    data.datasets[0].image.forEach((imageLink: string, index: any) => {
       const logo = new Image();
       logo.src = imageLink;
       ctx.drawImage(
@@ -81,14 +85,20 @@ const options = {
     datalabels: {
       color: '#000080',
       font: {
-        size: 20,
+        size: 15,
         family: 'Big Noodle Titling',
       },
       anchor: 'center',
       align: 'right',
-      formatter: (value, context) => {
+      formatter: (
+        value: any,
+        context: {
+          dataset: { data: { [x: string]: string } };
+          dataIndex: string | number;
+        }
+      ) => {
         // Display the win percentage in the middle of the bar
-        return context.dataset.data[context.dataIndex] + '%';
+        return `${context.dataset.data[context.dataIndex]}%`;
       },
     },
   },
@@ -104,7 +114,7 @@ const options = {
   },
 };
 
-const chartStyles = {
+const chartStyles: React.CSSProperties = {
   letterSpacing: '1px',
   font: 'Big Noodle Titling',
   fontSize: '10px',
@@ -120,7 +130,7 @@ function HorizontalBarChart() {
   const topFiveHeroes = getHeroesByWinRatio(gamesData, 5);
 
   // Extract labels and datasets from the topFiveHeroes data
-  const labels = topFiveHeroes.map((hero) => hero.hero.label);
+  const labels = topFiveHeroes.map((hero) => hero.hero);
   const datasets = [
     {
       label: 'Wins',
@@ -134,19 +144,12 @@ function HorizontalBarChart() {
       hoverOffset: 5,
       borderWidth: 1,
       image: [
-        '/images/heroes/Sigma.png',
-        '/images/heroes/Reinhardt.png',
-        '/images/heroes/Cassidy.png',
-        '/images/heroes/Bastion.png',
-        '/images/heroes/Ashe.png',
+        `/images/heroes/${topFiveHeroes[0].hero}.png`,
+        `/images/heroes/${topFiveHeroes[1].hero}.png`,
+        `/images/heroes/${topFiveHeroes[2].hero}.png`,
+        `/images/heroes/${topFiveHeroes[3].hero}.png`,
+        `/images/heroes/${topFiveHeroes[4].hero}.png`,
       ],
-      // image: [
-      //   `../../../public/images/heroes/${topFiveHeroes[0].hero.heroImageUrl}`,
-      //   `../../../public/images/heroes/${topFiveHeroes[1].hero.heroImageUrl}`,
-      //   `../../../public/images/heroes/${topFiveHeroes[2].hero.heroImageUrl}`,
-      //   `../../../public/images/heroes/${topFiveHeroes[3].hero.heroImageUrl}`,
-      //   `../../../public/images/heroes/${topFiveHeroes[4].hero.heroImageUrl}`,
-      // ],
     },
   ];
 
@@ -158,8 +161,8 @@ function HorizontalBarChart() {
   return (
     <div style={chartStyles}>
       <Bar
-        plugins={[ChartDataLabels, imageItems]}
         options={options}
+        plugins={[ChartDataLabels, imageItems]}
         height={250}
         data={data}
       />

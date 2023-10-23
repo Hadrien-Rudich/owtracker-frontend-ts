@@ -5,20 +5,20 @@ import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
 import SavedToast from '../SavedToast';
 import { useGamesQuery } from '../../hooks/games/useGamesQuery';
-import MonthTabs from './MonthTabs';
+// import MonthTabs from './MonthTabs';
 import Game from './Game';
 
 function Games() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = authStore();
+  const { gamesData, gameToast, setGameToast, gameToastMessage } = gameStore();
   const {
-    gamesData,
-    gameToast: gameSavedToast,
-    setGameToast: setGameSavedToast,
-    gameToastMessage: gameSavedToastMessage,
-  } = gameStore();
-  const { isLoading, isFetching, isError, isSuccess } = useGamesQuery();
+    isLoading,
+    isFetching,
+    isError,
+    // isSuccess
+  } = useGamesQuery();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -38,9 +38,9 @@ function Games() {
         </div>
       )}
       <SavedToast
-        toastText={gameSavedToastMessage}
-        booleanProp={gameSavedToast}
-        setBooleanProp={setGameSavedToast}
+        toastText={gameToastMessage}
+        booleanProp={gameToast}
+        setBooleanProp={setGameToast}
       />
       {/* <div className="MonthTabs_container">
           <MonthTabs />
