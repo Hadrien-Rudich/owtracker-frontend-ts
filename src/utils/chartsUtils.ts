@@ -39,12 +39,12 @@ function getColorForWinPercentage(winPercentage: number) {
   return color;
 }
 
-function getHeroesByWinRatio(gamesData, topCount) {
+function getHeroesByWinRatio(gamesData: GameData[], topCount: number) {
   const heroStatsMap = new Map();
 
   // Calculate hero stats
   gamesData.forEach((game) => {
-    const { result, heroes } = game;
+    const { result, heroes, heroesImageUrl } = game;
     heroes.forEach((hero) => {
       const heroStats = heroStatsMap.get(hero) || { wins: 0, games: 0 };
       heroStats.games += 1;
@@ -59,13 +59,13 @@ function getHeroesByWinRatio(gamesData, topCount) {
   const heroStatsArray = Array.from(
     heroStatsMap,
     ([hero, { wins, games }]) => ({
-      hero,
+      hero: { label: hero, heroImageUrl: hero.heroImageUrl }, // Add heroImageUrl
       gamesPlayed: games, // Add games played
-      wins: wins, // Add number of wins
+      wins, // Add number of wins
       winRatio: games > 0 ? Math.round((wins / games) * 100) : 0, // Convert to percentage
     })
   );
-
+  console.log(heroStatsArray);
   // Sort heroes by win ratio in descending order
   heroStatsArray.sort((a, b) => b.winRatio - a.winRatio);
 

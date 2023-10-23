@@ -12,7 +12,7 @@ const options = {
   plugins: {
     legend: {
       display: true,
-      position: 'top',
+      position: 'bottom',
 
       labels: {
         font: {
@@ -33,6 +33,15 @@ const options = {
           return [];
         },
       },
+    },
+    title: {
+      display: true,
+      text: 'Game Results',
+      font: {
+        size: 20,
+        family: 'Big Noodle Titling',
+      },
+      color: '#000080',
     },
   },
   // ...

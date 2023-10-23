@@ -13,7 +13,6 @@ import { gameStore } from '../../store/gameStore';
 import {
   getHeroesByWinRatio,
   getColorForWinPercentage,
-  generateTextCenterCallback,
 } from '../../utils/chartsUtils';
 
 ChartJS.register(
@@ -25,15 +24,60 @@ ChartJS.register(
   Legend
 );
 
+const imageItems = {
+  id: 'imageItems',
+  beforeDatasetsDraw(chart, args, pluginOptions) {
+    const {
+      ctx,
+      data,
+      options,
+      scales: { x, y },
+    } = chart;
+    const imageSize = options.layout.padding.left;
+    ctx.save();
+
+    data.datasets[0].image.forEach((imageLink, index) => {
+      const logo = new Image();
+      logo.src = imageLink;
+      ctx.drawImage(
+        logo,
+        0,
+        y.getPixelForValue(index) - imageSize / 2,
+        imageSize,
+        imageSize
+      );
+    });
+  },
+};
+
 const options = {
-  indexAxis: 'y' as const,
+  maintainAspectRatio: false,
+  indexAxis: 'y',
   elements: {
     bar: {
       borderWidth: 2,
     },
   },
+  layout: {
+    padding: {
+      left: 30,
+    },
+  },
   responsive: true,
   plugins: {
+    legend: {
+      position: 'bottom',
+      display: false,
+    },
+    title: {
+      display: true,
+      text: 'Top 5 Heroes',
+      font: {
+        size: 20,
+        family: 'Big Noodle Titling',
+      },
+      color: '#000080',
+    },
     datalabels: {
       color: '#000080',
       font: {
@@ -41,24 +85,18 @@ const options = {
         family: 'Big Noodle Titling',
       },
       anchor: 'center',
-      align: 'center',
+      align: 'right',
       formatter: (value, context) => {
         // Display the win percentage in the middle of the bar
         return context.dataset.data[context.dataIndex] + '%';
       },
     },
-    legend: {
-      position: 'left' as const,
-      display: false,
-    },
-    title: {
-      display: true,
-      text: 'Top 5 Heroes',
-    },
   },
   scales: {
     x: {
       display: false,
+      min: 0,
+      max: 100,
     },
     y: {
       display: false,
@@ -82,7 +120,7 @@ function HorizontalBarChart() {
   const topFiveHeroes = getHeroesByWinRatio(gamesData, 5);
 
   // Extract labels and datasets from the topFiveHeroes data
-  const labels = topFiveHeroes.map((hero) => hero.hero);
+  const labels = topFiveHeroes.map((hero) => hero.hero.label);
   const datasets = [
     {
       label: 'Wins',
@@ -90,10 +128,25 @@ function HorizontalBarChart() {
       backgroundColor: topFiveHeroes.map((hero) =>
         getColorForWinPercentage(hero.winRatio)
       ),
-      hoverBorderColor: topFiveHeroes.map((_) => 'none'),
-      hoverBorderWidth: topFiveHeroes.map((_) => 0),
-      hoverOffset: topFiveHeroes.map((_) => 5),
-      borderWidth: topFiveHeroes.map((_) => 1),
+
+      hoverBorderColor: 'none',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      image: [
+        '/images/heroes/Sigma.png',
+        '/images/heroes/Reinhardt.png',
+        '/images/heroes/Cassidy.png',
+        '/images/heroes/Bastion.png',
+        '/images/heroes/Ashe.png',
+      ],
+      // image: [
+      //   `../../../public/images/heroes/${topFiveHeroes[0].hero.heroImageUrl}`,
+      //   `../../../public/images/heroes/${topFiveHeroes[1].hero.heroImageUrl}`,
+      //   `../../../public/images/heroes/${topFiveHeroes[2].hero.heroImageUrl}`,
+      //   `../../../public/images/heroes/${topFiveHeroes[3].hero.heroImageUrl}`,
+      //   `../../../public/images/heroes/${topFiveHeroes[4].hero.heroImageUrl}`,
+      // ],
     },
   ];
 
@@ -102,19 +155,12 @@ function HorizontalBarChart() {
     datasets,
   };
 
-  // const textCenter = {
-  //   id: 'textCenter',
-  //   beforeDatasetsDraw: generateTextCenterCallback,
-  // };
-
   return (
     <div style={chartStyles}>
       <Bar
-        plugins={[
-          ChartDataLabels,
-          //  textCenter
-        ]}
+        plugins={[ChartDataLabels, imageItems]}
         options={options}
+        height={250}
         data={data}
       />
     </div>
