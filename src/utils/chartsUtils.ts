@@ -1,4 +1,4 @@
-import { Chart as ChartJS } from 'chart.js';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { GameData } from '../types/store/gameTypes';
 
 const filterGamesByMonth = (
@@ -18,6 +18,15 @@ const backgroundColors: (string | CanvasGradient)[] = [
   'rgba(255, 99, 132,0.8)',
   'rgba(255, 206, 86,0.8)',
 ];
+
+const chartStyles: React.CSSProperties = {
+  letterSpacing: '1px',
+  font: 'Big Noodle Titling',
+  fontSize: '10px',
+  fontWeight: 'bold',
+  color: '#000080',
+  textAlign: 'center',
+};
 
 function getBackgroundColor(index: number): string | CanvasGradient {
   const backgroundColor = backgroundColors[index];
@@ -54,7 +63,7 @@ function getColorForWinPercentage(winPercentage: number) {
   return color;
 }
 
-function getHeroesByWinRatio(gamesData: GameData[], topCount: number) {
+function getHeroesByWinRatio(gamesData: GameData[], topCount = 5) {
   const heroStatsMap = new Map();
 
   // Calculate hero stats
@@ -84,28 +93,16 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount: number) {
   // Sort heroes by win ratio in descending order
   heroStatsArray.sort((a, b) => b.winRatio - a.winRatio);
 
+  // Determine the number of heroes to show, ensuring it's at least 1
+  const numberOfHeroesToShow = Math.max(
+    Math.min(topCount, heroStatsArray.length),
+    1
+  );
+
   // Take the top N heroes
-  const topHeroes = heroStatsArray.slice(0, topCount);
+  const topHeroes = heroStatsArray.slice(0, numberOfHeroesToShow);
 
   return topHeroes;
-}
-
-function generateTextCenterCallback(chart: ChartJS<'doughnut'>) {
-  const { ctx, data } = chart;
-  ctx.save();
-  ctx.font = '20px Big Noodle Titling';
-  ctx.fillStyle = '#000080'; // Navy Blue
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(
-    `${
-      data.datasets[0].data[0] +
-      data.datasets[0].data[1] +
-      data.datasets[0].data[2]
-    } Games`,
-    chart.getDatasetMeta(0).data[0].x,
-    chart.getDatasetMeta(0).data[0].y
-  );
 }
 
 export {
@@ -113,6 +110,6 @@ export {
   filterGamesByResult,
   getHeroesByWinRatio,
   getColorForWinPercentage,
-  generateTextCenterCallback,
   getBackgroundColor,
+  chartStyles,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,14 +9,21 @@ import {
   Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import ChartjsPluginStacked100 from 'chartjs-plugin-stacked100';
 import { Bar } from 'react-chartjs-2';
 import { gameStore } from '../../store/gameStore';
 import {
   getHeroesByWinRatio,
   getColorForWinPercentage,
+  chartStyles,
 } from '../../utils/chartsUtils';
+import {
+  generateLeftHandSideHeroImg,
+  generateRightHandSideTotalGamesText,
+} from '../../utils/horizontalBarUtils';
 
 ChartJS.register(
+  ChartjsPluginStacked100,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -24,38 +32,32 @@ ChartJS.register(
   Legend
 );
 
-const imageItems = {
-  id: 'imageItems',
-  beforeDatasetsDraw(
-    chart: { ctx: any; data: any; options: any; scales: { x: any; y: any } },
-    args: any,
-    pluginOptions: any
-  ) {
-    const {
-      ctx,
-      data,
-      options,
-      scales: { x, y },
-    } = chart;
-    const imageSize = options.layout.padding.left;
-    ctx.save();
+const leftHandSideHeroImg = {
+  id: 'leftHandSideHeroImg',
+  beforeDatasetsDraw(chart: {
+    ctx: any;
+    data: any;
+    options: any;
+    scales: { x: any; y: any };
+  }) {
+    generateLeftHandSideHeroImg(chart);
+  },
+};
 
-    data.datasets[0].image.forEach((imageLink: string, index: any) => {
-      const logo = new Image();
-      logo.src = imageLink;
-      ctx.drawImage(
-        logo,
-        0,
-        y.getPixelForValue(index) - imageSize / 2,
-        imageSize,
-        imageSize
-      );
-    });
+const rightHandSideTotalGamesText = {
+  id: 'rightHandSideTotalGamesText',
+  beforeDatasetsDraw(chart: {
+    ctx: any;
+    data: any;
+    options: any;
+    scales: { x: any; y: any };
+  }) {
+    generateRightHandSideTotalGamesText(chart);
   },
 };
 
 const options = {
-  maintainAspectRatio: false,
+  // maintainAspectRatio: true,
   indexAxis: 'y',
   elements: {
     bar: {
@@ -64,7 +66,8 @@ const options = {
   },
   layout: {
     padding: {
-      left: 30,
+      left: 35,
+      right: 35,
     },
   },
   responsive: true,
@@ -82,24 +85,9 @@ const options = {
       },
       color: '#000080',
     },
-    datalabels: {
-      color: '#000080',
-      font: {
-        size: 15,
-        family: 'Big Noodle Titling',
-      },
-      anchor: 'center',
-      align: 'right',
-      formatter: (
-        value: any,
-        context: {
-          dataset: { data: { [x: string]: string } };
-          dataIndex: string | number;
-        }
-      ) => {
-        // Display the win percentage in the middle of the bar
-        return `${context.dataset.data[context.dataIndex]}%`;
-      },
+    stacked100: {
+      enable: true,
+      replaceTooltipLabel: false,
     },
   },
   scales: {
@@ -114,57 +102,79 @@ const options = {
   },
 };
 
-const chartStyles: React.CSSProperties = {
-  letterSpacing: '1px',
-  font: 'Big Noodle Titling',
-  fontSize: '10px',
-  fontWeight: 'bold',
-  color: '#000080',
-  textAlign: 'center',
-};
-
 function HorizontalBarChart() {
   const { gamesData } = gameStore();
 
-  // Use the updated getHeroesByWinRatio function
-  const topFiveHeroes = getHeroesByWinRatio(gamesData, 5);
+  const topHeroes = getHeroesByWinRatio(gamesData, 5); // Request the top 5 heroes
+  const labels = topHeroes.map((hero) => hero.hero);
 
-  // Extract labels and datasets from the topFiveHeroes data
-  const labels = topFiveHeroes.map((hero) => hero.hero);
+  // Calculate the data as fractions (win ratio)
+  const data = topHeroes.map((hero) => {
+    const winFraction = hero.wins / hero.gamesPlayed;
+    const gamesFraction = 1 - winFraction;
+    return [winFraction, gamesFraction];
+  });
+
   const datasets = [
     {
       label: 'Wins',
-      data: topFiveHeroes.map((hero) => hero.winRatio),
-      backgroundColor: topFiveHeroes.map((hero) =>
+      data: data.map((fractions) => fractions[0]), // Win fractions
+      backgroundColor: topHeroes.map((hero) =>
         getColorForWinPercentage(hero.winRatio)
       ),
-
       hoverBorderColor: 'none',
       hoverBorderWidth: 0,
       hoverOffset: 5,
       borderWidth: 1,
-      image: [
-        `/images/heroes/${topFiveHeroes[0].hero}.png`,
-        `/images/heroes/${topFiveHeroes[1].hero}.png`,
-        `/images/heroes/${topFiveHeroes[2].hero}.png`,
-        `/images/heroes/${topFiveHeroes[3].hero}.png`,
-        `/images/heroes/${topFiveHeroes[4].hero}.png`,
-      ],
+      barThickness: 30, // Set the bar width
+      image: topHeroes.map((hero) => `/images/heroes/${hero.hero}.png`),
+      // Configure data labels for this dataset
+      datalabels: {
+        display: true,
+        color: '#000080',
+        font: {
+          size: 20,
+          family: 'Big Noodle Titling',
+        },
+        anchor: 'center',
+        align: 'right', // Change the align property to 'center'
+        formatter: (value: any) => `${(value * 100).toFixed(0)}%`,
+      },
+    },
+    {
+      label: 'Total Games',
+      data: data.map((fractions) => fractions[1]), // Games fractions
+      backgroundColor: 'light gray',
+      hoverBorderColor: 'none',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      barThickness: 30, // Set the bar width
+      rightText: topHeroes.map((hero) => hero.gamesPlayed),
+      datalabels: {
+        display: false, // Hide data labels for this dataset
+      },
     },
   ];
-
-  const data = {
-    labels,
-    datasets,
-  };
 
   return (
     <div style={chartStyles}>
       <Bar
+        // @ts-ignore
         options={options}
-        plugins={[ChartDataLabels, imageItems]}
-        height={250}
-        data={data}
+        plugins={[
+          ChartDataLabels,
+          // @ts-ignore
+          leftHandSideHeroImg,
+          // @ts-ignore
+          rightHandSideTotalGamesText,
+        ]}
+        height={300}
+        data={{
+          labels,
+          // @ts-ignore
+          datasets,
+        }}
       />
     </div>
   );

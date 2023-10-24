@@ -24,7 +24,7 @@ function Stats() {
       )}
       {isSuccess && gamesData.length > 0 && (
         <div className="flexdiv w-full">
-          <div className="my-6 bg-mainColor w-3/4 flexdiv">
+          <div className="my-6 bg-mainColor w-full flexdiv">
             <div className="bg-mainColor mt-24 container mx-auto flexdiv gap-24">
               <LineChart />
             </div>
