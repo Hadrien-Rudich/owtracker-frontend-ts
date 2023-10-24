@@ -1,6 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Chart as ChartJS } from 'chart.js';
 
+function generateToolTipLabel(context: {
+  chart: { data: { datasets: any[] } };
+  dataIndex: string | number;
+}) {
+  const winsDataset = context.chart.data.datasets[0];
+  const gamesDataset = context.chart.data.datasets[1];
+
+  // Retrieve the data for the current index
+  const wins = winsDataset.data[context.dataIndex];
+
+  // Retrieve the rightText from the "Total Games" dataset
+  const totalGames = gamesDataset.rightText[context.dataIndex];
+  const totalWins = Math.round(wins * totalGames);
+  const totalLosses = totalGames - totalWins;
+
+  return ` Wins: ${totalWins}, Losses: ${totalLosses}`;
+}
+
 function generateTextInsideDouhgnutHole(chart: ChartJS<'doughnut'>) {
   const { ctx, data } = chart;
   ctx.save();
@@ -60,7 +78,7 @@ function generateRightHandSideTotalGamesText(chart: {
     options,
     scales: { x, y },
   } = chart;
-  const rightPadding = 225;
+  const rightPadding = 175;
   const textSize = options.layout.padding.right;
   ctx.save();
 
@@ -70,13 +88,13 @@ function generateRightHandSideTotalGamesText(chart: {
     const yPosition = y.getPixelForValue(index);
 
     // Set the font properties
-    ctx.font = '20px Big Noodle Titling';
+    ctx.font = '15px Big Noodle Titling';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#000080';
 
     // Display the number of games
-    ctx.fillText(numberOfGames, xPosition, yPosition);
+    ctx.fillText(`${numberOfGames} games`, xPosition, yPosition);
   });
 }
 
@@ -105,4 +123,5 @@ export {
   generateTextInsideDoughnutSegments,
   generateLeftHandSideHeroImg,
   generateRightHandSideTotalGamesText,
+  generateToolTipLabel,
 };

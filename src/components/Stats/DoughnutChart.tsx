@@ -17,12 +17,25 @@ import {
 import {
   generateTextInsideDouhgnutHole,
   generateTextInsideDoughnutSegments,
+  generateToolTipLabel,
 } from '../../utils/doughnutUtils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const chartOptions = {
   plugins: {
+    tooltip: {
+      callbacks: {
+        title() {
+          return null;
+        },
+        afterTitle() {
+          return null;
+        },
+
+        label: generateToolTipLabel,
+      },
+    },
     legend: {
       display: true,
       position: 'bottom',

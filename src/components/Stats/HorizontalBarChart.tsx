@@ -20,6 +20,7 @@ import {
 import {
   generateLeftHandSideHeroImg,
   generateRightHandSideTotalGamesText,
+  generateToolTipLabel,
 } from '../../utils/horizontalBarUtils';
 
 ChartJS.register(
@@ -67,13 +68,12 @@ const options = {
   layout: {
     padding: {
       left: 35,
-      right: 35,
+      right: 30,
     },
   },
   responsive: true,
   plugins: {
     legend: {
-      position: 'bottom',
       display: false,
     },
     title: {
@@ -89,15 +89,31 @@ const options = {
       enable: true,
       replaceTooltipLabel: false,
     },
+    tooltip: {
+      callbacks: {
+        title(context: { label: string }[]) {
+          return `${context[0].label.toUpperCase()} stats`;
+        },
+        afterTitle() {
+          return '------------------------';
+        },
+        label: generateToolTipLabel,
+      },
+    },
   },
+
   scales: {
     x: {
       display: false,
       min: 0,
       max: 100,
+      grace: 5,
     },
     y: {
       display: false,
+      min: 0,
+      max: 100,
+      grace: 5,
     },
   },
 };
@@ -137,7 +153,7 @@ function HorizontalBarChart() {
           family: 'Big Noodle Titling',
         },
         anchor: 'center',
-        align: 'right', // Change the align property to 'center'
+        align: 'center', // Change the align property to 'center'
         formatter: (value: any) => `${(value * 100).toFixed(0)}%`,
       },
     },
@@ -146,6 +162,7 @@ function HorizontalBarChart() {
       data: data.map((fractions) => fractions[1]), // Games fractions
       backgroundColor: 'light gray',
       hoverBorderColor: 'none',
+      hoverBackgroundColor: 'white',
       hoverBorderWidth: 0,
       hoverOffset: 5,
       borderWidth: 1,

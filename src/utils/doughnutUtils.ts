@@ -1,6 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Chart as ChartJS } from 'chart.js';
 
+function generateToolTipLabel(context: {
+  chart: { data: { datasets: any[] } };
+  dataIndex: string | number;
+}) {
+  const totalWins = context.chart.data.datasets[0].data[0];
+  const totalLosses = context.chart.data.datasets[0].data[1];
+
+  // Check the index to determine which segment is being hovered
+  const index = context.dataIndex;
+  const label = index === 0 ? 'Wins' : 'Losses';
+
+  const value = index === 0 ? totalWins : totalLosses;
+
+  return ` ${value} ${label.toLocaleLowerCase()}`;
+}
+
 function generateTextInsideDouhgnutHole(chart: ChartJS<'doughnut'>) {
   const { ctx, data } = chart;
   ctx.save();
@@ -39,4 +55,8 @@ function generateTextInsideDoughnutSegments(chart: ChartJS<'doughnut'>) {
   });
 }
 
-export { generateTextInsideDouhgnutHole, generateTextInsideDoughnutSegments };
+export {
+  generateTextInsideDouhgnutHole,
+  generateTextInsideDoughnutSegments,
+  generateToolTipLabel,
+};
