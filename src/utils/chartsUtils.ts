@@ -49,10 +49,10 @@ const filterGamesByResult = (gameData: GameData[]): number[] => {
 // Define a custom color scale function based on win percentage
 function getColorForWinPercentage(winPercentage: number) {
   let color;
-  if (winPercentage >= 0 && winPercentage <= 39) {
+  if (winPercentage >= 0 && winPercentage <= 0.39) {
     // Red for values from 0% to 39%
     color = 'rgba(255, 99, 132,0.8)';
-  } else if (winPercentage >= 40 && winPercentage <= 50) {
+  } else if (winPercentage >= 0.4 && winPercentage <= 0.5) {
     // Yellow for values from 40% to 50%
     color = 'rgba(255, 206, 86,0.8)';
   } else {
@@ -70,10 +70,21 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount = 5) {
   gamesData.forEach((game) => {
     const { result, heroes } = game;
     heroes.forEach((hero) => {
-      const heroStats = heroStatsMap.get(hero) || { wins: 0, games: 0 };
+      const heroStats = heroStatsMap.get(hero) || {
+        wins: 0,
+        draws: 0,
+        losses: 0,
+        games: 0,
+      };
       heroStats.games += 1;
       if (result === 'win') {
         heroStats.wins += 1;
+      }
+      if (result === 'draw') {
+        heroStats.draws += 1;
+      }
+      if (result === 'loss') {
+        heroStats.losses += 1;
       }
       heroStatsMap.set(hero, heroStats);
     });
@@ -82,14 +93,16 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount = 5) {
   // Calculate win ratios and store them in an array of objects
   const heroStatsArray = Array.from(
     heroStatsMap,
-    ([hero, { wins, games }]) => ({
+    ([hero, { wins, draws, losses, games }]) => ({
       hero,
       gamesPlayed: games, // Add games played
       wins, // Add number of wins
-      winRatio: games > 0 ? Math.round((wins / games) * 100) : 0, // Convert to percentage
+      losses, // Add number of losses
+      draws, // Add number of draws
+      winRatio: games > 0 ? wins / games : 0, // Calculate win ratio
     })
   );
-
+  console.log(heroStatsArray);
   // Sort heroes by win ratio in descending order
   heroStatsArray.sort((a, b) => b.winRatio - a.winRatio);
 

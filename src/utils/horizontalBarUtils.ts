@@ -1,40 +1,136 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Chart as ChartJS } from 'chart.js';
+import type { GameData } from '../types/store/gameTypes';
+import { getHeroesByWinRatio, getColorForWinPercentage } from './chartsUtils';
+
+function processHorizontalBarChartData(gamesData: GameData[]) {
+  const topHeroes = getHeroesByWinRatio(gamesData, 5); // Request the top 5 heroes
+  const labels = topHeroes.map((hero) => hero.hero);
+
+  // Calculate the data as fractions
+  const data = topHeroes.map((hero) => {
+    const { wins, losses, draws, gamesPlayed } = hero;
+
+    console.log(
+      'wins',
+      wins,
+      'losses',
+      losses,
+      'draws',
+      draws,
+      'gamesPlayed',
+      gamesPlayed
+    );
+
+    // Calculate the fraction of wins/draws/losses
+    const winFraction = gamesPlayed > 0 ? wins / gamesPlayed : 0;
+    const lossFraction = gamesPlayed > 0 ? losses / gamesPlayed : 0;
+    const drawFraction = gamesPlayed > 0 ? draws / gamesPlayed : 0;
+    // change value (1) to cause error
+    const gamesFraction = 1 - winFraction;
+
+    console.log(winFraction, gamesFraction, lossFraction, drawFraction);
+
+    return [winFraction, gamesFraction, lossFraction, drawFraction];
+  });
+
+  const datasets = [
+    {
+      label: 'Wins',
+      data: data.map((fractions) => fractions[0]), // Win fractions
+      backgroundColor: topHeroes.map((hero) =>
+        getColorForWinPercentage(hero.winRatio)
+      ),
+      hoverBorderColor: 'none',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      barThickness: 30, // Set the bar width
+      image: topHeroes.map((hero) => `/images/heroes/${hero.hero}.png`),
+      // Configure data labels for this dataset
+      datalabels: {
+        display: true,
+        color: '#000080',
+        font: {
+          size: 20,
+          family: 'Big Noodle Titling',
+        },
+        anchor: 'center',
+        align: 'center',
+        formatter: (value: number) => `${(value * 100).toFixed(0)}%`,
+      },
+    },
+    {
+      label: 'Total Games',
+      data: data.map((fractions) => fractions[1]), // Game fractions
+      backgroundColor: 'light gray',
+      hoverBorderColor: 'none',
+      hoverBackgroundColor: 'white',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      barThickness: 30, // Set the bar width
+      rightText: topHeroes.map((hero) => hero.gamesPlayed),
+      datalabels: {
+        display: false, // Hide data labels for this dataset
+      },
+    },
+    {
+      label: 'Losses',
+      data: data.map((fractions) => fractions[2]), // Games fractions
+      backgroundColor: 'light gray',
+      hoverBorderColor: 'none',
+      hoverBackgroundColor: 'white',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      hidden: true,
+      datalabels: {
+        display: false, // Hide data labels for this dataset
+      },
+    },
+    {
+      label: 'Draws',
+      data: data.map((fractions) => fractions[3]), // Games fractions
+      backgroundColor: 'light gray',
+      hoverBorderColor: 'none',
+      hoverBackgroundColor: 'white',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      hidden: true,
+      datalabels: {
+        display: false, // Hide data labels for this dataset
+      },
+    },
+  ];
+
+  return {
+    labels,
+    datasets,
+  };
+}
 
 function generateToolTipLabel(context: {
   chart: { data: { datasets: any[] } };
   dataIndex: string | number;
 }) {
-  const winsDataset = context.chart.data.datasets[0];
-  const gamesDataset = context.chart.data.datasets[1];
+  const { chart } = context;
+  const { dataIndex } = context;
+  const { datasets } = chart.data;
+  const wins = datasets[0].data[dataIndex];
+  const totalGames = datasets[1].rightText[dataIndex];
+  const losses = datasets[2].data[dataIndex];
+  const draws = datasets[3].data[dataIndex];
 
-  // Retrieve the data for the current index
-  const wins = winsDataset.data[context.dataIndex];
+  const formatLabel = (value: number, singular: string, plural: string) => {
+    return `${value} ${value <= 1 ? singular : plural}`;
+  };
 
-  // Retrieve the rightText from the "Total Games" dataset
-  const totalGames = gamesDataset.rightText[context.dataIndex];
-  const totalWins = Math.round(wins * totalGames);
-  const totalLosses = totalGames - totalWins;
+  const totalWinsLabel = formatLabel(totalGames * wins, 'win', 'wins');
+  const totalLossesLabel = formatLabel(totalGames * losses, 'loss', 'losses');
+  const totalDrawsLabel = formatLabel(totalGames * draws, 'draw', 'draws');
 
-  return ` Wins: ${totalWins}, Losses: ${totalLosses}`;
-}
-
-function generateTextInsideDouhgnutHole(chart: ChartJS<'doughnut'>) {
-  const { ctx, data } = chart;
-  ctx.save();
-  ctx.font = '20px Big Noodle Titling';
-  ctx.fillStyle = '#000080'; // Navy Blue
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(
-    `${
-      data.datasets[0].data[0] +
-      data.datasets[0].data[1] +
-      data.datasets[0].data[2]
-    } Games`,
-    chart.getDatasetMeta(0).data[0].x,
-    chart.getDatasetMeta(0).data[0].y
-  );
+  return `${totalWinsLabel} - ${totalLossesLabel} - ${totalDrawsLabel}`;
 }
 
 function generateLeftHandSideHeroImg(chart: {
@@ -98,29 +194,8 @@ function generateRightHandSideTotalGamesText(chart: {
   });
 }
 
-function generateTextInsideDoughnutSegments(chart: ChartJS<'doughnut'>) {
-  const { ctx } = chart;
-  const { data } = chart.data.datasets[0];
-  const segments = chart.getDatasetMeta(0).data;
-  const total = data.reduce((acc: number, value: number) => acc + value, 0);
-
-  ctx.font = '20px Big Noodle Titling';
-  ctx.fillStyle = '#000080'; // Navy Blue
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-
-  // @ts-ignore
-  segments.forEach((segment: Chart.ArcElement, index: number) => {
-    const model = segment.getCenterPoint();
-    const segmentValue = data[index];
-    const percentage = ((segmentValue / total) * 100).toFixed(0);
-    ctx.fillText(`${percentage}%`, model.x, model.y); // Display the percentage
-  });
-}
-
 export {
-  generateTextInsideDouhgnutHole,
-  generateTextInsideDoughnutSegments,
+  processHorizontalBarChartData,
   generateLeftHandSideHeroImg,
   generateRightHandSideTotalGamesText,
   generateToolTipLabel,

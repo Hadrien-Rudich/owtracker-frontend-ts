@@ -12,12 +12,15 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import ChartjsPluginStacked100 from 'chartjs-plugin-stacked100';
 import { Bar } from 'react-chartjs-2';
 import { gameStore } from '../../store/gameStore';
-import { chartStyles } from '../../utils/chartsUtils';
+import {
+  getHeroesByWinRatio,
+  getColorForWinPercentage,
+  chartStyles,
+} from '../../utils/chartsUtils';
 import {
   generateLeftHandSideHeroImg,
   generateRightHandSideTotalGamesText,
   generateToolTipLabel,
-  processHorizontalBarChartData,
 } from '../../utils/horizontalBarUtils';
 
 ChartJS.register(
@@ -87,16 +90,12 @@ const options = {
       replaceTooltipLabel: false,
     },
     tooltip: {
-      position: 'average',
-      yAlign: 'bottom',
-      xAlign: 'left',
-      caretSize: 0,
       callbacks: {
-        title() {
-          return null;
+        title(context: { label: string }[]) {
+          return `${context[0].label.toUpperCase()} stats`;
         },
         afterTitle() {
-          return null;
+          return '------------------------';
         },
         label: generateToolTipLabel,
       },
@@ -121,7 +120,59 @@ const options = {
 
 function HorizontalBarChart() {
   const { gamesData } = gameStore();
-  const chartData = processHorizontalBarChartData(gamesData);
+
+  const topHeroes = getHeroesByWinRatio(gamesData, 5); // Request the top 5 heroes
+  const labels = topHeroes.map((hero) => hero.hero);
+
+  // Calculate the data as fractions (win ratio)
+  const data = topHeroes.map((hero) => {
+    const winFraction = hero.wins / hero.gamesPlayed;
+    const gamesFraction = 1 - winFraction;
+    return [winFraction, gamesFraction];
+  });
+
+  const datasets = [
+    {
+      label: 'Wins',
+      data: data.map((fractions) => fractions[0]), // Win fractions
+      backgroundColor: topHeroes.map((hero) =>
+        getColorForWinPercentage(hero.winRatio)
+      ),
+      hoverBorderColor: 'none',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      barThickness: 30, // Set the bar width
+      image: topHeroes.map((hero) => `/images/heroes/${hero.hero}.png`),
+      // Configure data labels for this dataset
+      datalabels: {
+        display: true,
+        color: '#000080',
+        font: {
+          size: 20,
+          family: 'Big Noodle Titling',
+        },
+        anchor: 'center',
+        align: 'center', // Change the align property to 'center'
+        formatter: (value: any) => `${(value * 100).toFixed(0)}%`,
+      },
+    },
+    {
+      label: 'Total Games',
+      data: data.map((fractions) => fractions[1]), // Games fractions
+      backgroundColor: 'light gray',
+      hoverBorderColor: 'none',
+      hoverBackgroundColor: 'white',
+      hoverBorderWidth: 0,
+      hoverOffset: 5,
+      borderWidth: 1,
+      barThickness: 30, // Set the bar width
+      rightText: topHeroes.map((hero) => hero.gamesPlayed),
+      datalabels: {
+        display: false, // Hide data labels for this dataset
+      },
+    },
+  ];
 
   return (
     <div style={chartStyles}>
@@ -135,9 +186,12 @@ function HorizontalBarChart() {
           // @ts-ignore
           rightHandSideTotalGamesText,
         ]}
-        height={250}
-        // @ts-ignore
-        data={chartData}
+        height={300}
+        data={{
+          labels,
+          // @ts-ignore
+          datasets,
+        }}
       />
     </div>
   );
