@@ -41,7 +41,6 @@ function Game() {
       >
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
-
       <div className="existingGames_container flexdiv col w-full">
         {filteredGames.map((game) => (
           <ExistingGame gameObj={game} key={game.id} />

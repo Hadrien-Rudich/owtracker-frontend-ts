@@ -102,7 +102,6 @@ function getHeroesByWinRatio(gamesData: GameData[], topCount = 5) {
       winRatio: games > 0 ? wins / games : 0, // Calculate win ratio
     })
   );
-  console.log(heroStatsArray);
   // Sort heroes by win ratio in descending order
   heroStatsArray.sort((a, b) => b.winRatio - a.winRatio);
 

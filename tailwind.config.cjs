@@ -30,6 +30,7 @@ export default {
       activeWin: '#6BBF59',
       activeDraw: ' #F5B041',
       activeLoss: '#D9534F',
+      errorBackground: 'rgba(255, 99, 132,1)',
       warning: '#D32F2F',
       validate: '#43A047',
       new: '#009e38',

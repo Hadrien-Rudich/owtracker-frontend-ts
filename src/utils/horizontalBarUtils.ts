@@ -28,8 +28,6 @@ function processHorizontalBarChartData(gamesData: GameData[]) {
     // change value (1) to cause error
     const gamesFraction = 1 - winFraction;
 
-    console.log(winFraction, gamesFraction, lossFraction, drawFraction);
-
     return [winFraction, gamesFraction, lossFraction, drawFraction];
   });
 

@@ -69,7 +69,7 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
             <HeroesComponent gameObj={gameObj} imgHeight="h-10" />
           </div>
           <div className="details_container flex lg:justify-center justify-end p-2 items-center xl:gap-2 gap-1 w-[20%] lg:w[10%] xs:text-base text-sm">
-            <div className="gamebuttons_container flexdiv relative">
+            <div className="relative gamebuttons_container flexdiv">
               <EditGameButtons gameObj={gameObj} />
             </div>
             <div className="Result_container md:w-[25%] w-[30%]">

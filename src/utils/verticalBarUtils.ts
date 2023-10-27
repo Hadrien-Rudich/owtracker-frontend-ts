@@ -5,16 +5,15 @@ import { Point } from 'chart.js/auto';
 function generateTopLabelInVerticalLineChart(chart: ChartJS<'line'>) {
   const {
     ctx,
-    scales: { x, y },
+    scales: { x },
   } = chart;
 
-  chart.data.datasets[0].data.forEach((datapoint, index) => {
+  chart.data.datasets[0].data.forEach((_datapoint, index) => {
     const datasetArray: number[] = [];
 
     chart.data.datasets.forEach((dataset) => {
       datasetArray.push(dataset.data[index] as number);
     });
-    console.log(datasetArray);
 
     const totalSum = (total: number, values: number) => {
       return total + values;

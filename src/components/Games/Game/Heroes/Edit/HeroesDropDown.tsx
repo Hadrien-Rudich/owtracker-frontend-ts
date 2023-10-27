@@ -40,7 +40,6 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
         heroesImageUrl: [...selectedGame.heroesImageUrl, heroImage],
       });
     } else {
-      if (selectedGameHeroes.length === 1) return;
       const updatedSelectedHeroes = selectedGameHeroes.filter(
         (selectedHero) => selectedHero !== hero
       );
