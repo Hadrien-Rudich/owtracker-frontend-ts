@@ -10,17 +10,6 @@ function processHorizontalBarChartData(gamesData: GameData[]) {
   const data = topHeroes.map((hero) => {
     const { wins, losses, draws, gamesPlayed } = hero;
 
-    console.log(
-      'wins',
-      wins,
-      'losses',
-      losses,
-      'draws',
-      draws,
-      'gamesPlayed',
-      gamesPlayed
-    );
-
     // Calculate the fraction of wins/draws/losses
     const winFraction = gamesPlayed > 0 ? wins / gamesPlayed : 0;
     const lossFraction = gamesPlayed > 0 ? losses / gamesPlayed : 0;

@@ -4,6 +4,7 @@ import { gameStore } from '../../../../../store/gameStore';
 import type { GameData } from '../../../../../types/store/gameTypes';
 import Heroes from '../Heroes';
 import { gameDataStore } from '../../../../../store/gameDataStore';
+import ErrorToast from '../../../../ErrorToast';
 
 interface HeroesDropDownProps {
   gameObj: GameData;
@@ -21,6 +22,21 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
 
   const { rolesData, heroesData } = gameDataStore();
   const [currentGame, setCurrentGame] = useState(gameObj);
+  const [errorToast, setErrorToast] = useState(false);
+  const [errorToastMessage, setErrorToastMessage] = useState('');
+
+  const verifyHeroesArrayValidity = (heroesArray: string[]) => {
+    if (heroesArray.length >= 0 && heroesArray.length <= 4) {
+      return true;
+    }
+    setErrorToastMessage('Game requires 1-4 heroes');
+    setErrorToast(true);
+    setTimeout(() => {
+      setErrorToast(false);
+    }, 4500);
+    setErrorToast(true);
+    return false;
+  };
 
   useEffect(() => {
     setCurrentGame((prevGame) => ({
@@ -32,27 +48,38 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
 
   const selectHero = (hero: string, heroImage: string) => {
     const heroInList = selectedGameHeroes.includes(hero);
-    if (!heroInList) {
-      selectGameHero(hero, heroImage);
-      updateSelectedGame({
-        ...selectedGame,
-        heroes: [...selectedGame.heroes, hero],
-        heroesImageUrl: [...selectedGame.heroesImageUrl, heroImage],
-      });
-    } else {
-      const updatedSelectedHeroes = selectedGameHeroes.filter(
-        (selectedHero) => selectedHero !== hero
-      );
-      const updatedSelectedHeroesImageUrl = selectedGame.heroesImageUrl.filter(
-        (_, index) => selectedGameHeroes[index] !== hero
-      );
 
-      updateSelectedGame({
-        ...selectedGame,
-        heroes: updatedSelectedHeroes,
-        heroesImageUrl: updatedSelectedHeroesImageUrl,
-      });
-      unselectGameHero(hero, heroImage);
+    // The following line calculates heroesArrayHasValidLength based on the potential new state.
+    const heroesArrayHasValidLength = verifyHeroesArrayValidity(
+      heroInList
+        ? selectedGameHeroes.filter((selectedHero) => selectedHero !== hero)
+        : [...selectedGameHeroes, hero]
+    );
+
+    if (heroesArrayHasValidLength) {
+      if (!heroInList) {
+        selectGameHero(hero, heroImage);
+        updateSelectedGame({
+          ...selectedGame,
+          heroes: [...selectedGame.heroes, hero],
+          heroesImageUrl: [...selectedGame.heroesImageUrl, heroImage],
+        });
+      } else {
+        const updatedSelectedHeroes = selectedGameHeroes.filter(
+          (selectedHero) => selectedHero !== hero
+        );
+        const updatedSelectedHeroesImageUrl =
+          selectedGame.heroesImageUrl.filter(
+            (_, index) => selectedGameHeroes[index] !== hero
+          );
+
+        updateSelectedGame({
+          ...selectedGame,
+          heroes: updatedSelectedHeroes,
+          heroesImageUrl: updatedSelectedHeroesImageUrl,
+        });
+        unselectGameHero(hero, heroImage);
+      }
     }
   };
 
@@ -63,6 +90,14 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
         type="button"
         onClick={toggleDropDown}
       >
+        {errorToast && (
+          <ErrorToast
+            toastText={errorToastMessage}
+            booleanProp={errorToast}
+            topProp="top-[-4rem]"
+            leftProp="right-[11.25rem]"
+          />
+        )}
         <div className="currentHeroes_container flexdiv ">
           <Heroes gameObj={currentGame} imgHeight="h-8" />
         </div>

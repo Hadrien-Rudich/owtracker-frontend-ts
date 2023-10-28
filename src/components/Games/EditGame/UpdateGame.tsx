@@ -4,6 +4,7 @@ import { gameStore } from '../../../store/gameStore';
 import type { GameData } from '../../../types/store/gameTypes';
 import useGameUpdateMutation from '../../../hooks/games/useGameUpdateMutation';
 import ErrorToast from '../../ErrorToast';
+import { GameUpdateSchema } from '../../../validation/dataValidation';
 
 function UpdateGame({ gameObj }: { gameObj: GameData }) {
   const {
@@ -32,15 +33,31 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       }, 4500);
       throw new Error('Game is identical');
     }
-    if (selectedGameHeroes.length < 1) {
-      setErrorToastMessage('Game requires a hero');
-      setErrorToast(true);
-      setTimeout(() => {
-        setErrorToast(false);
-      }, 4500);
-      throw new Error('Game requires a hero');
+
+    const results = GameUpdateSchema.safeParse({
+      result: selectedGameResult,
+      map: selectedGameMap,
+      heroes: selectedGameHeroes,
+      date: selectedGameDateInFormat,
+    });
+    if (results.success) {
+      mutateGame();
+    } else if (!results.success) {
+      results.error.errors.forEach((error) => {
+        switch (error.path[0]) {
+          case 'heroes':
+            setErrorToast(true);
+            setErrorToastMessage(error.message);
+            break;
+          case 'date':
+            setErrorToast(true);
+            setErrorToastMessage(error.message);
+            break;
+          default:
+            break;
+        }
+      });
     }
-    mutateGame();
   };
 
   return (
@@ -53,7 +70,12 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
         <FaCheck className="sign lg:h-[1.2rem] lg:w-[1.2rem] h-[1.4rem] w-[1.4rem]" />
       </button>
       {errorToast && (
-        <ErrorToast toastText={errorToastMessage} booleanProp={errorToast} />
+        <ErrorToast
+          toastText={errorToastMessage}
+          booleanProp={errorToast}
+          topProp="top-[-4.4rem]"
+          leftProp="left-[-4.25rem]"
+        />
       )}
     </>
   );
