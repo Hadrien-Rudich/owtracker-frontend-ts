@@ -24,6 +24,30 @@ export const LoginSchema = z.object({
   }),
 });
 
+export const NewGameSchema = z.object({
+  result: z
+    .string()
+    .refine((result) => ['win', 'loss', 'draw'].includes(result), {
+      message: 'Game requires a result',
+    }),
+  map: z
+    .string()
+    .min(1)
+    .refine((map) => map.length >= 1, {
+      message: 'Game requires a map',
+    }),
+  heroes: z
+    .array(z.string())
+    .min(1)
+    .max(4)
+    .refine((heroes) => heroes.length >= 1 && heroes.length <= 4, {
+      message: 'Game requires 1-4 heroes',
+    }),
+  date: z.string().refine((date) => dateFormatRegex.test(date), {
+    message: 'Game requires a date',
+  }),
+});
+
 export const GameUpdateSchema = z.object({
   result: z
     .string()

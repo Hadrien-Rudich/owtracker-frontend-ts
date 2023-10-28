@@ -2,18 +2,33 @@ import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import HeroesDropDown from './HeroesDropDown';
 import Heroes from '../Heroes';
+import ErrorToast from '../../../../ErrorToast';
 import { gameStore } from '../../../../../store/gameStore';
 import { gameDataStore } from '../../../../../store/gameDataStore';
 
 function NewGameHeroes() {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const { heroesData } = gameDataStore();
-  const { selectedGameHeroes } = gameStore();
+  const {
+    selectedGameHeroes,
+    heroesErrorToast,
+    heroesErrorToastMessage,
+    setHeroesErrorToast,
+  } = gameStore();
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
 
   return (
     <div className="NewGameHeroes_container relative flexdiv w-[85%]">
+      {heroesErrorToast && (
+        <ErrorToast
+          toastText={heroesErrorToastMessage}
+          booleanProp={heroesErrorToast}
+          booleanPropSetter={setHeroesErrorToast}
+          topProp="top-[-5.45rem]"
+          leftProp="right-[10.85rem]"
+        />
+      )}
       <div className="w-full absolute top-[-1rem] right-[-0.4rem]  bg-activeColor">
         {isDropDownActive ? (
           <HeroesDropDown toggleDropDown={toggleDropDown} />

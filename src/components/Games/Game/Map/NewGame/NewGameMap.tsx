@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import MapsDropDown from './MapsDropDown';
+import ErrorToast from '../../../../ErrorToast';
 import { gameStore } from '../../../../../store/gameStore';
 import { gameDataStore } from '../../../../../store/gameDataStore';
 import Map from '../Map';
@@ -8,12 +9,26 @@ import Map from '../Map';
 function NewGameMap() {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const { mapsData } = gameDataStore();
-  const { selectedGameMap } = gameStore();
+  const {
+    selectedGameMap,
+    mapErrorToast,
+    mapErrorToastMessage,
+    setMapErrorToast,
+  } = gameStore();
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
 
   return (
     <div className="NewGameMap_container relative flexdiv w-[98%]">
+      {mapErrorToast && (
+        <ErrorToast
+          toastText={mapErrorToastMessage}
+          booleanProp={mapErrorToast}
+          booleanPropSetter={setMapErrorToast}
+          topProp="top-[-4rem]"
+          leftProp="right-[13.75rem]"
+        />
+      )}
       <div className="w-full absolute top-[0.5rem] right-[-0.4rem] bg-activeColor">
         {isDropDownActive ? (
           <MapsDropDown toggleDropDown={toggleDropDown} />

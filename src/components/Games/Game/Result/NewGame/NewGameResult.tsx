@@ -3,17 +3,32 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import { getResultClassNameFromResult } from '../../../../../utils/classNameUtils';
 import ResultsDropDown from './ResultsDropDown';
+import ErrorToast from '../../../../ErrorToast';
 
 function NewGameResult() {
-  const { selectedGameResult } = gameStore();
+  const {
+    selectedGameResult,
+    resultErrorToast,
+    resultErrorToastMessage,
+    setResultErrorToast,
+  } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
-  // const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
 
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
 
   return (
     <div className="NewGameResult_container relative">
+      {resultErrorToast && (
+        <ErrorToast
+          toastText={resultErrorToastMessage}
+          booleanProp={resultErrorToast}
+          booleanPropSetter={setResultErrorToast}
+          topProp="top-[-5.45rem]"
+          leftProp="right-[-3rem]"
+        />
+      )}
+
       <div className="absolute w-full top-[-0.75rem] right-0  bg-activeColor">
         {isDropDownActive ? (
           <ResultsDropDown toggleDropDown={toggleDropDown} />

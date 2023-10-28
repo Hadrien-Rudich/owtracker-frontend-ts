@@ -29,7 +29,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
     if (heroesArray.length >= 0 && heroesArray.length <= 4) {
       return true;
     }
-    setErrorToastMessage('Game requires 1-4 heroes');
+    setErrorToastMessage('4 heroes maximum');
     setErrorToast(true);
     setTimeout(() => {
       setErrorToast(false);
@@ -94,7 +94,8 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
           <ErrorToast
             toastText={errorToastMessage}
             booleanProp={errorToast}
-            topProp="top-[-4rem]"
+            booleanPropSetter={setErrorToast}
+            topProp="top-[-4.5rem]"
             leftProp="right-[11.25rem]"
           />
         )}

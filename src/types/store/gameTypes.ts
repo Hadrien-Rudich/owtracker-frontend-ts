@@ -68,6 +68,26 @@ interface GameStore {
   setGameToast: (value: boolean) => void;
   setSavingGameInProgress: (value: boolean) => void;
 
+  mapErrorToast: boolean;
+  setMapErrorToast: (value: boolean) => void;
+  mapErrorToastMessage: string;
+  setMapErrorToastMessage: (value: string) => void;
+
+  heroesErrorToast: boolean;
+  setHeroesErrorToast: (value: boolean) => void;
+  heroesErrorToastMessage: string;
+  setHeroesErrorToastMessage: (value: string) => void;
+
+  resultErrorToast: boolean;
+  setResultErrorToast: (value: boolean) => void;
+  resultErrorToastMessage: string;
+  setResultErrorToastMessage: (value: string) => void;
+
+  dateErrorToast: boolean;
+  setDateErrorToast: (value: boolean) => void;
+  dateErrorToastMessage: string;
+  setDateErrorToastMessage: (value: string) => void;
+
   clearNewGame: () => void;
   reset: () => void;
 }

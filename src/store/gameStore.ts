@@ -150,6 +150,33 @@ export const gameStore = create<GameStore>()((set) => ({
     set(() => ({ gameToastMessage: message })),
   gameToast: false,
   setGameToast: (value: boolean) => set(() => ({ gameToast: value })),
+
+  mapErrorToast: false,
+  setMapErrorToast: (value: boolean) => set(() => ({ mapErrorToast: value })),
+  mapErrorToastMessage: '',
+  setMapErrorToastMessage: (message: string) =>
+    set(() => ({ mapErrorToastMessage: message })),
+
+  heroesErrorToast: false,
+  setHeroesErrorToast: (value: boolean) =>
+    set(() => ({ heroesErrorToast: value })),
+  heroesErrorToastMessage: '',
+  setHeroesErrorToastMessage: (message: string) =>
+    set(() => ({ heroesErrorToastMessage: message })),
+
+  resultErrorToast: false,
+  setResultErrorToast: (value: boolean) =>
+    set(() => ({ resultErrorToast: value })),
+  resultErrorToastMessage: '',
+  setResultErrorToastMessage: (message: string) =>
+    set(() => ({ resultErrorToastMessage: message })),
+
+  dateErrorToast: false,
+  setDateErrorToast: (value: boolean) => set(() => ({ dateErrorToast: value })),
+  dateErrorToastMessage: '',
+  setDateErrorToastMessage: (message: string) =>
+    set(() => ({ dateErrorToastMessage: message })),
+
   reset: () => {
     set(() => ({
       gamesData: [],

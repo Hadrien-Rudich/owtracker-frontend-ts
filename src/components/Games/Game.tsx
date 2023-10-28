@@ -36,7 +36,7 @@ function Game() {
     <div className="games_container flexdiv col tracking-wider z-30 w-full">
       <div
         className={`${
-          isUpdatingGame ? 'backdrop-grayscale pointer-events-none' : ''
+          isUpdatingGame ? 'grayscale pointer-events-none' : ''
         }  CreateGame_container w-full flexdiv h-12 mb-12`}
       >
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}

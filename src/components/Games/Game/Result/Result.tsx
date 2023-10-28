@@ -7,8 +7,6 @@ function Result({ gameObj }: { gameObj: GameData }) {
       className={`${getResultClassNameFromGame(gameObj)}     
  result_container`}
     >
-      {/* {gameObj.result.slice(0, 1)} */}
-
       {gameObj.result}
     </p>
   );

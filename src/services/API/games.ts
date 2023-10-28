@@ -22,13 +22,14 @@ export interface GameAddedToApi {
   };
 }
 
-interface GameReportForm {
+interface NewGame {
   result: string;
   map: string;
   mapType: string;
   mapImageUrl: string;
   heroes: string[];
   heroesImageUrl: string[];
+  date: string;
 }
 
 interface GameDeletedFromApi {
@@ -46,7 +47,7 @@ export const fetchGamesFromApi = async (
 export const addGameToApi = async (
   userId: number,
   profileId: number,
-  gameObj: GameReportForm
+  gameObj: NewGame
 ): Promise<GameAddedToApi> => {
   const endpoint = `user/${userId}/profiles/${profileId}/games`;
   const response = await postDataToApi<GameAddedToApi>(endpoint, {

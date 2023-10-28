@@ -28,9 +28,6 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
     ) {
       setErrorToastMessage('Game is identical');
       setErrorToast(true);
-      setTimeout(() => {
-        setErrorToast(false);
-      }, 4500);
       throw new Error('Game is identical');
     }
 
@@ -46,10 +43,6 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       results.error.errors.forEach((error) => {
         switch (error.path[0]) {
           case 'heroes':
-            setErrorToast(true);
-            setErrorToastMessage(error.message);
-            break;
-          case 'date':
             setErrorToast(true);
             setErrorToastMessage(error.message);
             break;
@@ -73,7 +66,8 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
         <ErrorToast
           toastText={errorToastMessage}
           booleanProp={errorToast}
-          topProp="top-[-4.4rem]"
+          booleanPropSetter={setErrorToast}
+          topProp="top-[-4.9rem]"
           leftProp="left-[-4.25rem]"
         />
       )}

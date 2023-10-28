@@ -1,6 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import { formatDateForGameEdit } from '../../../../../utils/utils';
@@ -10,13 +10,20 @@ function DateWidget({
 }: {
   setIsDropDownActive: (value: boolean) => void;
 }) {
-  const { selectGameDate, selectGameDateInFormat, selectedGameDate } =
-    gameStore();
+  const {
+    selectGameDate,
+    selectGameDateInFormat,
+    selectedGameDateInFormat,
+    selectedGameDate,
+  } = gameStore();
 
-  const [
-    startDate,
-    // setStartDate
-  ] = useState(new Date());
+  const [startDate] = useState(new Date());
+
+  useEffect(() => {
+    if (selectedGameDateInFormat === '') {
+      selectGameDateInFormat(formatDateForGameEdit(startDate));
+    }
+  }, [selectGameDateInFormat, selectedGameDateInFormat, startDate]);
 
   return (
     <div className="flexdiv relative">

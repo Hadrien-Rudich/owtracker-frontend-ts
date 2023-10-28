@@ -24,7 +24,7 @@ function ResultsDropDown({ toggleDropDown }: ResultsDropDownProps) {
   };
 
   return (
-    <div className="ResultsDropDown_container ring-2 ring-fourthColor">
+    <div className="ResultsDropDown_container ring-2 ring-fourthColor relative">
       {selectedGameResult !== '' && (
         <button
           className={`${getResultClassNameFromResult(
