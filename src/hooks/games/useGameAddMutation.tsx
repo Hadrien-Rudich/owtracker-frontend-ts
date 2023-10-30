@@ -34,6 +34,7 @@ function useGameAddMutation() {
         heroesImageUrl: selectedGameHeroesImages,
         date: selectedGameDateInFormat,
       }),
+
     onSuccess: (newGameAddedToApi: GameAddedToApi) => {
       addGame(newGameAddedToApi.game);
       setTimeout(() => {

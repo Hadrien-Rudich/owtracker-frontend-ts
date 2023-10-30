@@ -14,9 +14,11 @@ interface GameData {
 interface GameStore {
   gamesData: GameData[] | [];
   addGamesData: (games: GameData[]) => void;
+
   removeGamesData: () => void;
 
   addGame: (game: GameData) => void;
+  addMockGames: (mockGames: GameData[]) => void;
   updateGame: (gameId: number, updatedGameObj: GameData) => void;
   updateSelectedGame: (updatedProperties: Partial<GameData>) => void;
   deleteGame: (gameId: number) => void;

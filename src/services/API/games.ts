@@ -22,6 +22,22 @@ export interface GameAddedToApi {
   };
 }
 
+export interface MockGamesAddedToApi {
+  message: string;
+  games: {
+    id: number;
+    userId: number;
+    profileId: number;
+    result: string;
+    map: string;
+    mapType: string;
+    mapImageUrl: string;
+    heroes: string[];
+    heroesImageUrl: string[];
+    date: string;
+  }[];
+}
+
 interface NewGame {
   result: string;
   map: string;
@@ -58,6 +74,29 @@ export const addGameToApi = async (
   return {
     message: response.message,
     game: response.game,
+  };
+};
+
+export const addMockGamesToApi = async (
+  userId: number,
+  profileId: number,
+  gameObjArray: NewGame[]
+): Promise<MockGamesAddedToApi> => {
+  // Add userId and profileId to each game object in the array
+  const gamesWithIds = gameObjArray.map((gameObj) => ({
+    ...gameObj,
+    userId,
+    profileId,
+  }));
+
+  const endpoint = `user/${userId}/profiles/${profileId}/games/mock`;
+  const response = await postDataToApi<MockGamesAddedToApi>(
+    endpoint,
+    gamesWithIds
+  );
+  return {
+    message: response.message,
+    games: response.games,
   };
 };
 

@@ -10,9 +10,15 @@ export const gameStore = create<GameStore>()((set) => ({
     }));
   },
   selectedGame: {} as GameData,
+
   addGame: (gameData) =>
     set((state) => ({
       gamesData: [...state.gamesData, gameData],
+    })),
+
+  addMockGames: (mockGames) =>
+    set((state) => ({
+      gamesData: [...state.gamesData, ...mockGames],
     })),
 
   updateSelectedGame: (updatedProperties: Partial<GameData>) =>

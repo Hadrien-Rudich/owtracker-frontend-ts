@@ -7,6 +7,7 @@ import SavedToast from '../SavedToast';
 import { useGamesQuery } from '../../hooks/games/useGamesQuery';
 // import MonthTabs from './MonthTabs';
 import Game from './Game';
+import MockGamesCreation from './MockGamesCreation';
 
 function Games() {
   const navigate = useNavigate();
@@ -42,9 +43,7 @@ function Games() {
         booleanProp={gameToast}
         setBooleanProp={setGameToast}
       />
-      {/* <div className="MonthTabs_container">
-          <MonthTabs />
-        </div> */}
+      <MockGamesCreation />
 
       <div className="Game_container">
         <Game />
