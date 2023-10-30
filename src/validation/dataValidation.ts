@@ -2,16 +2,16 @@ import { z } from 'zod';
 
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-const battleTagRegex = /^(?=.*[#])[A-Za-z\d#]{3,20}$/;
+// const battleTagRegex = /^(?=.*[#])[A-Za-z\d#]{3,20}$/;
 const dateFormatRegex = /^\d{2}\/\d{2}\/\d{2}$/;
 
 export type NewUser = z.infer<typeof RegisterSchema>;
 
 export const RegisterSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  battleTag: z.string().refine((value) => battleTagRegex.test(value), {
-    message: 'Invalid BattleTag Format',
-  }),
+  // battleTag: z.string().refine((value) => battleTagRegex.test(value), {
+  //   message: 'Invalid BattleTag Format',
+  // }),
   password: z.string().refine((value) => passwordRegex.test(value), {
     message: 'Invalid Password Format',
   }),

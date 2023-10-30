@@ -5,7 +5,7 @@ import { register } from '../../services/API/users';
 function useUserRegisterMutation({
   email,
   password,
-  battleTag,
+  // battleTag,
   setCreateUser,
   setIsLoading,
   setEmailAlreadyInUse,
@@ -13,7 +13,7 @@ function useUserRegisterMutation({
 }: {
   email: string;
   password: string;
-  battleTag: string;
+  // battleTag: string;
   setCreateUser: (value: boolean) => void;
   setIsLoading: (value: boolean) => void;
   setEmailAlreadyInUse: (value: boolean) => void;
@@ -21,7 +21,12 @@ function useUserRegisterMutation({
 }) {
   const navigate = useNavigate();
   const { mutate } = useMutation({
-    mutationFn: () => register(email, password, battleTag),
+    mutationFn: () =>
+      register(
+        email,
+        password
+        // battleTag
+      ),
     onSuccess: (data) => {
       if (data.success) {
         navigate('/login');

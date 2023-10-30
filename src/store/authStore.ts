@@ -17,7 +17,7 @@ export const authStore = create<AuthStore>()((set) => ({
         newEmail: '',
         newPassword: '',
         confirmNewPassword: '',
-        newBattleTag: '',
+        // newBattleTag: '',
         activeTab: 'details',
       };
     }),
@@ -38,9 +38,9 @@ export const authStore = create<AuthStore>()((set) => ({
   setConfirmNewPassword: (password) =>
     set(() => ({ confirmNewPassword: password })),
   clearConfirmNewPassword: () => set(() => ({ confirmNewPassword: '' })),
-  newBattleTag: '',
-  setNewBattleTag: (battleTag) => set(() => ({ newBattleTag: battleTag })),
-  clearNewBattleTag: () => set(() => ({ newBattleTag: '' })),
+  // newBattleTag: '',
+  // setNewBattleTag: (battleTag) => set(() => ({ newBattleTag: battleTag })),
+  // clearNewBattleTag: () => set(() => ({ newBattleTag: '' })),
   activeTab: 'details',
   setActiveTab: (tab) =>
     set(() => ({ activeTab: tab, editAccount: false, editSecurity: false })),

@@ -1,7 +1,7 @@
 interface UserData {
   id: number;
   email: string;
-  battleTag: string;
+  // battleTag: string;
   refreshToken: string;
 }
 interface UserCredentials {
@@ -28,9 +28,9 @@ interface AuthStore {
   confirmNewPassword: string;
   setConfirmNewPassword: (password: string) => void;
   clearConfirmNewPassword: () => void;
-  newBattleTag: string;
-  setNewBattleTag: (battleTag: string) => void;
-  clearNewBattleTag: () => void;
+  // newBattleTag: string;
+  // setNewBattleTag: (battleTag: string) => void;
+  // clearNewBattleTag: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
   clearActiveTab: () => void;

@@ -22,13 +22,13 @@ function Details() {
               required={false}
             />
 
-            <InputField
+            {/* <InputField
               label="BattleTag"
               type="text"
               value={userData.battleTag}
               disabled
               required={false}
-            />
+            /> */}
           </div>
           <div className="button_container flexdiv col gap-4">
             <button

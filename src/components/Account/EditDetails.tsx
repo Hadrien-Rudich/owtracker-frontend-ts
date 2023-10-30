@@ -9,23 +9,23 @@ function EditDetails() {
     newEmail,
     setNewEmail,
     clearNewEmail,
-    newBattleTag,
-    setNewBattleTag,
-    clearNewBattleTag,
+    // newBattleTag,
+    // setNewBattleTag,
+    // clearNewBattleTag,
   } = authStore();
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewEmail(event.target.value);
   };
 
-  const handleBattleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewBattleTag(event.target.value);
-  };
+  // const handleBattleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setNewBattleTag(event.target.value);
+  // };
 
   const handleCancelClick = () => {
     toggleEditAccount();
     clearNewEmail();
-    clearNewBattleTag();
+    // clearNewBattleTag();
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -50,7 +50,7 @@ function EditDetails() {
               onKeyDown={handleKeyDown}
             />
 
-            <InputField
+            {/* <InputField
               label="BattleTag"
               type="text"
               value={newBattleTag}
@@ -59,7 +59,7 @@ function EditDetails() {
               required={false}
               onChange={handleBattleTagChange}
               onKeyDown={handleKeyDown}
-            />
+            /> */}
           </div>
           <div className="button_container flexdiv gap-4">
             <button

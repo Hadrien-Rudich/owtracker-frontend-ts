@@ -8,7 +8,7 @@ import { RegisterSchema } from '../../validation/dataValidation';
 function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [battleTag, setBattleTag] = useState('');
+  // const [battleTag, setBattleTag] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [createUser, setCreateUser] = useState(false);
   const [
@@ -16,8 +16,8 @@ function RegisterForm() {
     // isLoading
     setIsLoading,
   ] = useState(false);
-  const [battleTagError, setBattleTagError] = useState('');
-  const [battleTagIsInvalid, setBattleTagIsInvalid] = useState(false);
+  // const [battleTagError, setBattleTagError] = useState('');
+  // const [battleTagIsInvalid, setBattleTagIsInvalid] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
   const [passwordDoesNotMatch, setPasswordDoesNotMatch] = useState(false);
@@ -27,7 +27,7 @@ function RegisterForm() {
   const mutateUser = useUserRegisterMutation({
     email,
     password,
-    battleTag,
+    // battleTag,
     setCreateUser,
     setIsLoading,
     setEmailAlreadyInUse,
@@ -40,9 +40,9 @@ function RegisterForm() {
     setEmail(event.target.value);
   };
 
-  const handleBattleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setBattleTag(event.target.value);
-  };
+  // const handleBattleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setBattleTag(event.target.value);
+  // };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -65,15 +65,19 @@ function RegisterForm() {
       return;
     }
 
-    const results = RegisterSchema.safeParse({ email, battleTag, password });
+    const results = RegisterSchema.safeParse({
+      email,
+      //  battleTag,
+      password,
+    });
 
     if (!results.success) {
       results.error.errors.forEach((error) => {
         switch (error.path[0]) {
-          case 'battleTag':
-            setBattleTagError(error.message);
-            setBattleTagIsInvalid(true);
-            break;
+          // case 'battleTag':
+          //   setBattleTagError(error.message);
+          //   setBattleTagIsInvalid(true);
+          //   break;
           case 'password':
             setPasswordError(error.message);
             setPasswordIsInvalid(true);
@@ -85,7 +89,13 @@ function RegisterForm() {
       return;
     }
 
-    if (RegisterSchema.parse({ email, battleTag, password })) {
+    if (
+      RegisterSchema.parse({
+        email,
+        //  battleTag,
+        password,
+      })
+    ) {
       setCreateUser(true);
       setIsLoading(true);
 
@@ -108,7 +118,7 @@ function RegisterForm() {
               setInvalid={setEmailAlreadyInUse}
               invalidMessage={emailAlreadyInUseError}
             />
-            <InputField
+            {/* <InputField
               label="BattleTag"
               type="text"
               value={battleTag}
@@ -117,7 +127,7 @@ function RegisterForm() {
               invalid={battleTagIsInvalid}
               setInvalid={setBattleTagIsInvalid}
               invalidMessage={battleTagError}
-            />
+            /> */}
 
             <InputField
               label="Password"

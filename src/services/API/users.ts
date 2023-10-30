@@ -4,7 +4,12 @@ import { postDataToApi, fetchDataFromApi } from './general';
 
 export interface UserVerified {
   accessToken: string;
-  user: { id: number; email: string; battleTag: string; refreshToken: string };
+  user: {
+    id: number;
+    email: string;
+    // battleTag: string;
+    refreshToken: string;
+  };
 }
 
 export const logIn = async (
@@ -28,7 +33,7 @@ interface NewUserCreated {
     id: number;
     email: string;
     password: string;
-    battleTag: string;
+    // battleTag: string;
   };
 }
 
@@ -56,15 +61,15 @@ interface NewUserCreated {
 
 export const register = async (
   email: string,
-  password: string,
-  battleTag: string
+  password: string
+  // battleTag: string
 ): Promise<{ success: boolean; message: string }> => {
   const endpoint = 'register';
   try {
     const response: NewUserCreated = await postDataToApi(endpoint, {
       email,
       password,
-      battleTag,
+      // battleTag,
     });
     if (response.message === 'New User created') {
       return { success: true, message: 'New User created' };
