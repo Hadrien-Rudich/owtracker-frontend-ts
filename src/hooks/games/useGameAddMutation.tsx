@@ -14,10 +14,9 @@ function useGameAddMutation() {
     selectedGameMapType,
     selectedGameHeroesImages,
     selectedGameDateInFormat,
-    setSavingGameInProgress,
-    setGameToastMessage,
+    setGameSavedToastMessage,
     addGame,
-    setGameToast,
+    setGameSavedToast,
   } = gameStore();
 
   const { userData } = authStore();
@@ -36,12 +35,9 @@ function useGameAddMutation() {
       }),
 
     onSuccess: (newGameAddedToApi: GameAddedToApi) => {
+      setGameSavedToastMessage('Game created');
+      setGameSavedToast(true);
       addGame(newGameAddedToApi.game);
-      setTimeout(() => {
-        setSavingGameInProgress(false);
-        setGameToast(true);
-        setGameToastMessage('Game Created!');
-      }, 1000);
     },
     retry: 1,
   });

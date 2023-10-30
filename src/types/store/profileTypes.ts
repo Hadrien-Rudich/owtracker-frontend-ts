@@ -21,10 +21,10 @@ interface ProfileStore {
   clearUpdatedProfileLabel: () => void;
   updateProfileLabel: (profileId: number, newProfileLabel: string) => void;
   deleteProfile: (profile: string) => void;
-  profileToast: boolean;
-  setProfileToast: (value: boolean) => void;
-  setProfileToastMessage: (message: string) => void;
-  profileToastMessage: string;
+  profileSavedToast: boolean;
+  setProfileSavedToast: (value: boolean) => void;
+  setProfileSavedToastMessage: (message: string) => void;
+  profileSavedToastMessage: string;
 
   reset: () => void;
 }

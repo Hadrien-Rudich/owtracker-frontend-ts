@@ -1,6 +1,6 @@
 const mockGames = [
   {
-    result: 'win',
+    result: 'loss',
     map: 'nepal',
     mapType: 'control',
     mapImageUrl: 'nepal.png',
@@ -67,6 +67,15 @@ const mockGames = [
     heroesImageUrl: ['cassidy.png', 'hanzo.png'],
     date: '13/02/2023',
   },
+  {
+    result: 'loss',
+    map: 'colosseo',
+    mapType: 'push',
+    mapImageUrl: 'colosseo.png',
+    heroes: ['cassidy', 'hanzo'],
+    heroesImageUrl: ['cassidy.png', 'hanzo.png'],
+    date: '13/02/2023',
+  },
 
   {
     result: 'win',
@@ -78,7 +87,25 @@ const mockGames = [
     date: '14/02/2023',
   },
   {
+    result: 'loss',
+    map: 'busan',
+    mapType: 'control',
+    mapImageUrl: 'busan.png',
+    heroes: ['hanzo', 'sigma'],
+    heroesImageUrl: ['hanzo.png', 'sigma.png'],
+    date: '14/02/2023',
+  },
+  {
     result: 'win',
+    map: 'esperanca',
+    mapType: 'push',
+    mapImageUrl: 'esperanca.png',
+    heroes: ['junker-queen', 'sigma'],
+    heroesImageUrl: ['junker-queen.png', 'sigma.png'],
+    date: '14/02/2023',
+  },
+  {
+    result: 'loss',
     map: 'hollywood',
     mapType: 'hybrid',
     mapImageUrl: 'hollywood.png',

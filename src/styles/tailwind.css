@@ -308,3 +308,19 @@ sm:text-xl text-lg text-secondaryText;
   animation: blink 1.75s infinite; /* Play the animation twice (adjust the animation duration and count as needed) */
   transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
 }
+
+.fadeInAndOut {
+  animation: blink 4s infinite; /* Increase the animation duration to slow it down */
+  transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
+}
+
+.success-toast {
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+  display: none;
+}
+
+.success-toast.visible {
+  opacity: 1;
+  display: block;
+}

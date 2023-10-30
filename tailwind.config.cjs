@@ -31,6 +31,7 @@ export default {
       activeDraw: ' #F5B041',
       activeLoss: '#D9534F',
       errorBackground: 'rgba(255, 99, 132,1)',
+      savedBackground: 'rgba(75, 192, 128, 1)',
       warning: '#D32F2F',
       validate: '#43A047',
       new: '#009e38',

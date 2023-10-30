@@ -10,9 +10,8 @@ function CreateNewGame() {
     selectedGameMap,
     selectedGameResult,
     selectedGameDateInFormat,
-    setGameToast,
+    setGameSavedToast,
     setIsCreatingGame,
-    setSavingGameInProgress,
     setMapErrorToastMessage,
     setMapErrorToast,
     setHeroesErrorToastMessage,
@@ -27,7 +26,6 @@ function CreateNewGame() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSavingGameInProgress(true);
     const results = NewGameSchema.safeParse({
       result: selectedGameResult,
       map: selectedGameMap,
@@ -63,7 +61,7 @@ function CreateNewGame() {
       });
     }
 
-    setGameToast(false);
+    setGameSavedToast(false);
   };
 
   return (

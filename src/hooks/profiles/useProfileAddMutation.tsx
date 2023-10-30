@@ -11,8 +11,8 @@ function useProfileAddMutation() {
     newProfile,
     clearNewProfile,
     addNewProfile,
-    setProfileToastMessage: setProfileSavedToastMessage,
-    setProfileToast: setProfileSavedToast,
+    setProfileSavedToastMessage,
+    setProfileSavedToast,
   } = profileStore();
 
   const { userData } = authStore();
@@ -20,7 +20,7 @@ function useProfileAddMutation() {
   const { mutate } = useMutation({
     mutationFn: () => addProfileToApi(userData.id, newProfile),
     onSuccess: (newProfileAddedToApi: ProfileAddedtoApi) => {
-      setProfileSavedToastMessage('Profile Created!');
+      setProfileSavedToastMessage('Profile created');
       setProfileSavedToast(true);
       addNewProfile(newProfileAddedToApi.profile);
       clearNewProfile();

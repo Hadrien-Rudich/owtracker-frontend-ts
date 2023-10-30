@@ -1,5 +1,5 @@
 import { ImPlus } from 'react-icons/im';
-
+import CreateMockGames from '../CreateMockGames';
 import { gameStore } from '../../../store/gameStore';
 
 function NewGameMode() {
@@ -11,7 +11,7 @@ function NewGameMode() {
   };
 
   return (
-    <div className="flexdiv bg-mainColor w-full h-12  rounded-sm">
+    <div className="flex justify-around bg-mainColor w-full h-12  rounded-sm">
       <button
         className="sign flexdiv gap-4"
         type="button"
@@ -21,6 +21,7 @@ function NewGameMode() {
         <p className=" text-2xl">NEW GAME</p>
         <span className="sr-only">Add new game</span>
       </button>
+      <CreateMockGames />
     </div>
   );
 }

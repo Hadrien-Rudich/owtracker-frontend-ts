@@ -3,17 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LoadingSpinner';
 import { authStore } from '../../store/authStore';
 import { gameStore } from '../../store/gameStore';
-import SavedToast from '../SavedToast';
+import SuccessToast from '../SuccessToast';
 import { useGamesQuery } from '../../hooks/games/useGamesQuery';
 // import MonthTabs from './MonthTabs';
 import Game from './Game';
-import MockGamesCreation from './MockGamesCreation';
 
 function Games() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = authStore();
-  const { gamesData, gameToast, setGameToast, gameToastMessage } = gameStore();
+  const {
+    gamesData,
+    gameSavedToast,
+    setGameSavedToast,
+    setGameSavedToastMessage,
+    gameSavedToastMessage,
+  } = gameStore();
   const {
     isLoading,
     isFetching,
@@ -38,12 +43,15 @@ function Games() {
           NO GAMES FOUND
         </div>
       )}
-      <SavedToast
-        toastText={gameToastMessage}
-        booleanProp={gameToast}
-        setBooleanProp={setGameToast}
-      />
-      <MockGamesCreation />
+
+      {gameSavedToast && (
+        <SuccessToast
+          toastText={gameSavedToastMessage}
+          setToastText={setGameSavedToastMessage}
+          isVisible={gameSavedToast}
+          setIsVisible={setGameSavedToast}
+        />
+      )}
 
       <div className="Game_container">
         <Game />

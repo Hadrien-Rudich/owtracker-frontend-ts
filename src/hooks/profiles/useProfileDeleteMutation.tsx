@@ -7,15 +7,15 @@ function useProfileDeleteMutation({ profileObj }: { profileObj: ProfileData }) {
   const {
     unselectProfile,
     deleteProfile,
-    setProfileToast: setProfileSavedToast,
-    setProfileToastMessage: setProfileSavedToastMessage,
+    setProfileSavedToast,
+    setProfileSavedToastMessage,
   } = profileStore();
 
   const { mutate } = useMutation({
     mutationFn: () => deleteProfileFromApi(profileObj.userId, profileObj.id),
     onSuccess: () => {
       deleteProfile(profileObj.label);
-      setProfileSavedToastMessage('Profile Deleted!');
+      setProfileSavedToastMessage('Profile deleted');
       setProfileSavedToast(true);
       unselectProfile();
     },

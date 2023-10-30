@@ -4,15 +4,19 @@ import { deleteGameFromApi } from '../../services/API/games';
 import type { GameData } from '../../types/store/gameTypes';
 
 function useGameDeleteMutation({ gameObj }: { gameObj: GameData }) {
-  const { deleteGame, unselectGame, setGameToast, setGameToastMessage } =
-    gameStore();
+  const {
+    deleteGame,
+    unselectGame,
+    setGameSavedToast,
+    setGameSavedToastMessage,
+  } = gameStore();
 
   const { mutate } = useMutation({
     mutationFn: () =>
       deleteGameFromApi(gameObj.userId, gameObj.profileId, gameObj.id),
     onSuccess: () => {
-      setGameToast(true);
-      setGameToastMessage('Game Deleted!');
+      setGameSavedToastMessage('Game deleted');
+      setGameSavedToast(true);
       deleteGame(gameObj.id);
       unselectGame();
     },

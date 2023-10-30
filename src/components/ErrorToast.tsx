@@ -18,7 +18,7 @@ function ErrorToast({
   useEffect(() => {
     setTimeout(() => {
       booleanPropSetter(false);
-    }, 4500);
+    }, 4000);
   });
 
   return (

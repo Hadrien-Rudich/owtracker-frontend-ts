@@ -10,12 +10,8 @@ import {
 } from '../../services/API/games';
 
 function useMockGameAddMutation() {
-  const {
-    setSavingGameInProgress,
-    setGameToastMessage,
-    addMockGames,
-    setGameToast,
-  } = gameStore();
+  const { setGameSavedToastMessage, addMockGames, setGameSavedToast } =
+    gameStore();
 
   const { userData } = authStore();
   const { selectedProfile } = profileStore();
@@ -24,12 +20,9 @@ function useMockGameAddMutation() {
     mutationFn: () =>
       addMockGamesToApi(userData.id, selectedProfile.id, mockGames),
     onSuccess: (newGamesAddedToApi: MockGamesAddedToApi) => {
+      setGameSavedToastMessage('Mock games created');
+      setGameSavedToast(true);
       addMockGames(newGamesAddedToApi.games);
-      setTimeout(() => {
-        setSavingGameInProgress(false);
-        setGameToast(true);
-        setGameToastMessage('Game Created!');
-      }, 1000);
     },
     retry: 1,
   });
