@@ -22,6 +22,9 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
     }
     setErrorToastMessage('4 heroes maximum');
     setErrorToast(true);
+    setTimeout(() => {
+      setErrorToast(false);
+    }, 2000);
     return false;
   };
 
@@ -53,9 +56,8 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
           <ErrorToast
             toastText={errorToastMessage}
             booleanProp={errorToast}
-            booleanPropSetter={setErrorToast}
-            topProp="top-[-4.5rem]"
-            leftProp="right-[11.25rem]"
+            topProp="top-[-3.45rem]"
+            leftProp="right-[7.35rem]"
           />
         )}
         <div className="currentHeroes_container flexdiv">

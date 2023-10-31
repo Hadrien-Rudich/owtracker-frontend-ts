@@ -79,10 +79,9 @@ body {
 }
 
 .hamburger.inactive {
-  @apply top-[-10rem] ease-in
+  @apply top-[-13.5rem] ease-in
   xxs:right-[-0.8rem] sm:right-[-1rem] right-[-0.65rem]
-
-  bg-mainColor;
+  bg-activeColor;
 }
 
 .accountdropdowncontainer {
@@ -101,11 +100,11 @@ right-0;
 }
 
 .accountdropdown.active {
-  @apply top-0 ease-out shadow-lg bg-activeColor;
+  @apply top-0 ease-out shadow-lg bg-mainColor;
 }
 
 .accountdropdown.inactive {
-  @apply top-[-300px] ease-in bg-mainColor;
+  @apply top-[-300px] ease-in bg-activeColor;
 }
 
 .accountdropdownoption {
@@ -118,7 +117,7 @@ right-0;
   @apply bg-thirdColor text-secondaryText;
 }
 .accountdropdownoption.inactive {
-  @apply hover:bg-secondaryColor hover:shadow-lg;
+  @apply hover:bg-fifthColor hover:shadow-lg;
 }
 
 .result {
@@ -138,7 +137,7 @@ right-0;
 }
 
 .headertab.inactive {
-  @apply hover:bg-activeColor hover:shadow-lg;
+  @apply hover:bg-fifthColor hover:shadow-lg;
 }
 
 .accounttab {
@@ -320,7 +319,7 @@ sm:text-xl text-lg text-secondaryText;
   display: none;
 }
 
-.success-toast.visible {
+.success-toast.viisii {
   opacity: 1;
   display: block;
 }

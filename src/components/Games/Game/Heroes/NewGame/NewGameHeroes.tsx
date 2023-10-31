@@ -16,7 +16,10 @@ function NewGameHeroes() {
     setHeroesErrorToast,
   } = gameStore();
 
-  const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
+  const toggleDropDown = () => {
+    setHeroesErrorToast(false);
+    setIsDropDownActive(!isDropDownActive);
+  };
 
   return (
     <div className="NewGameHeroes_container relative flexdiv w-[85%]">
@@ -24,9 +27,8 @@ function NewGameHeroes() {
         <ErrorToast
           toastText={heroesErrorToastMessage}
           booleanProp={heroesErrorToast}
-          booleanPropSetter={setHeroesErrorToast}
-          topProp="top-[-5.45rem]"
-          leftProp="right-[10.85rem]"
+          topProp="top-[-4.5rem]"
+          leftProp="right-[7.15rem]"
         />
       )}
       <div className="w-full absolute top-[-1rem] right-[-0.4rem]  bg-activeColor">

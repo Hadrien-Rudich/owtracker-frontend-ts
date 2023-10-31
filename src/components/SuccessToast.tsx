@@ -26,7 +26,7 @@ function SuccessToast({
       flexdiv col absolute 
       top-[-5.5rem]
       right-[42.5%] left-[42.5%] w-[15%] 
-      z-50 h-12
+      z-50 h-12 
       bg-savedBackground ring-[0.1rem] ring-validate
        shadow-lg rounded-sm`}
     >

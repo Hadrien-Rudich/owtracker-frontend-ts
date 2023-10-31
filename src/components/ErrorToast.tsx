@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 interface SavedToastProps {
   toastText: string;
   booleanProp: boolean;
-  booleanPropSetter: (boolean: boolean) => void;
   topProp: string;
   leftProp: string;
 }
@@ -11,24 +10,27 @@ interface SavedToastProps {
 function ErrorToast({
   toastText,
   booleanProp,
-  booleanPropSetter,
   topProp,
   leftProp,
 }: SavedToastProps) {
-  useEffect(() => {
-    setTimeout(() => {
-      booleanPropSetter(false);
-    }, 4000);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     booleanPropSetter(false);
+  //   }, 4000);
+  // });
 
   return (
     <div
-      className={`${booleanProp ? '  animate-blink2' : null}  
+      className={`${
+        booleanProp
+          ? ' transition opacity-100 ease-in-out duration-500'
+          : ' transition opacity-0 ease-in-out duration-500'
+      }  
       flexdiv col absolute
     ${topProp} ${leftProp}
-      w-40 h-14 z-50   p-2
+      w-48 h-12 z-50
       bg-errorBackground ring-[0.1rem] ring-warning
-       shadow-lg rounded-sm`}
+       shadow-lg rounded-sm opacity-0`}
     >
       <p className="text-activeColor tracking-widest ">{toastText}</p>
     </div>

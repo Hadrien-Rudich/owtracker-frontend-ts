@@ -3,10 +3,18 @@ import { ImCross } from 'react-icons/im';
 import { gameStore } from '../../../store/gameStore';
 
 function CancelNewGame() {
-  const { setIsCreatingGame } = gameStore();
+  const {
+    setIsCreatingGame,
+    setHeroesErrorToast,
+    setResultErrorToast,
+    setMapErrorToast,
+  } = gameStore();
 
   const handleCancelCreation = () => {
     setIsCreatingGame(false);
+    setHeroesErrorToast(false);
+    setResultErrorToast(false);
+    setMapErrorToast(false);
   };
 
   return (

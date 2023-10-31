@@ -41,8 +41,8 @@ function AccountDropDown() {
         onMouseEnter={toggleAccountDropdown}
         className={`${
           showAccountDropDown
-            ? 'bg-activeColor'
-            : 'bg-mainColor hover:bg-activeColor hover:shadow-lg'
+            ? 'bg-mainColor'
+            : 'bg-activeColor hover:bg-fifthColor hover:shadow-lg'
         }  accounticon flexdiv duration-[800ms]`}
       >
         <FaRegUser className="h-10 w-10 drop-shadow-lg" />

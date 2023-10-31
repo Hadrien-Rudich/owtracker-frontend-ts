@@ -8,17 +8,17 @@ import Tabs from './Tabs';
 
 function Header() {
   const { isLoggedIn } = authStore();
-  const { selectedProfile: profileData } = profileStore();
+  const { selectedProfile } = profileStore();
 
   const renderLoggedInHeader = () => {
-    if (profileData.id) {
+    if (selectedProfile.id) {
       return (
-        <div className="flex justify-center items-end">
-          <div className="Tabs_container hidden md:block ">
+        <div className="flex  justify-center items-end bg-activeColor">
+          <div className="Tabs_container hidden md:block">
             <Tabs />
           </div>
 
-          <div className=" menu_container ">
+          <div className="menu_container">
             <div className="hamburgermenucontainer">
               <HamburgerMenu />
             </div>
@@ -48,7 +48,11 @@ function Header() {
   };
 
   return (
-    <div className="Header_container bg-mainColor">
+    <div
+      className={`Header_container ${
+        isLoggedIn ? 'bg-activeColor sticky top-0 z-30' : 'bg-activeColor'
+      }`}
+    >
       <div className="LogoTitle_container relative z-40">
         <LogoTitle />
       </div>

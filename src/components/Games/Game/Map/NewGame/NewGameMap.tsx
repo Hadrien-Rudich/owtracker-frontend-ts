@@ -16,17 +16,18 @@ function NewGameMap() {
     setMapErrorToast,
   } = gameStore();
 
-  const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
-
+  const toggleDropDown = () => {
+    setMapErrorToast(false);
+    setIsDropDownActive(!isDropDownActive);
+  };
   return (
     <div className="NewGameMap_container relative flexdiv w-[98%]">
       {mapErrorToast && (
         <ErrorToast
           toastText={mapErrorToastMessage}
           booleanProp={mapErrorToast}
-          booleanPropSetter={setMapErrorToast}
-          topProp="top-[-4rem]"
-          leftProp="right-[13.75rem]"
+          topProp="top-[-3rem]"
+          leftProp="right-[9.65rem]"
         />
       )}
       <div className="w-full absolute top-[0.5rem] right-[-0.4rem] bg-activeColor">

@@ -15,17 +15,18 @@ function NewGameResult() {
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
 
-  const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
-
+  const toggleDropDown = () => {
+    setResultErrorToast(false);
+    setIsDropDownActive(!isDropDownActive);
+  };
   return (
     <div className="NewGameResult_container relative">
       {resultErrorToast && (
         <ErrorToast
           toastText={resultErrorToastMessage}
           booleanProp={resultErrorToast}
-          booleanPropSetter={setResultErrorToast}
-          topProp="top-[-5.45rem]"
-          leftProp="right-[-3rem]"
+          topProp="top-[-4.45rem]"
+          leftProp="right-[-4.5rem]"
         />
       )}
 

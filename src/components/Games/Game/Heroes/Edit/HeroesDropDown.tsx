@@ -33,8 +33,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
     setErrorToast(true);
     setTimeout(() => {
       setErrorToast(false);
-    }, 4500);
-    setErrorToast(true);
+    }, 2000);
     return false;
   };
 
@@ -94,9 +93,8 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
           <ErrorToast
             toastText={errorToastMessage}
             booleanProp={errorToast}
-            booleanPropSetter={setErrorToast}
-            topProp="top-[-4.5rem]"
-            leftProp="right-[11.25rem]"
+            topProp="top-[-3.5rem]"
+            leftProp="right-[7.3rem]"
           />
         )}
         <div className="currentHeroes_container flexdiv ">

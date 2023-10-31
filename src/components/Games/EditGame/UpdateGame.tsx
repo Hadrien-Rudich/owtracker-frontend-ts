@@ -28,7 +28,9 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
     ) {
       setErrorToastMessage('Game is identical');
       setErrorToast(true);
-      throw new Error('Game is identical');
+      setTimeout(() => {
+        setErrorToast(false);
+      }, 2000);
     }
 
     const results = GameUpdateSchema.safeParse({
@@ -66,9 +68,8 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
         <ErrorToast
           toastText={errorToastMessage}
           booleanProp={errorToast}
-          booleanPropSetter={setErrorToast}
-          topProp="top-[-4.9rem]"
-          leftProp="left-[-4.25rem]"
+          topProp="top-[-3.9rem]"
+          leftProp="left-[-5.5rem]"
         />
       )}
     </>
