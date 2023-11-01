@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import LogInForm from './Homepage/LogInForm';
-import RegisterForm from './Homepage/RegisterForm';
+import RegisterForm from './Homepage/RegisterForm/RegisterForm';
 import HomePage from './Homepage/HomePage';
 import Games from './Games/Games';
 import Profiles from './Profiles/Profiles';

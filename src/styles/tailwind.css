@@ -184,6 +184,14 @@ right-0;
   @apply sm:h-8 h-6;
 }
 
+.passwordFormatBox {
+  @apply group-hover:grid grid-cols-2 
+  divide-x-[0.05rem] divide-mainText 
+  absolute w-48 h-20 hidden  top-2 right-[-13.5rem]  
+  bg-activeColor opacity-75 text-sm text-left rounded-sm tracking-wide
+  border border-mainText  shadow-lg;
+}
+
 .profile {
   @apply text-center tracking-wider rounded-sm
         

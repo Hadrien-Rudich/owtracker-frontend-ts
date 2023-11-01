@@ -37,11 +37,9 @@ function InputField({
         disabled={disabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        className={
-          !invalid
-            ? 'inputField component outline-altColor outline-offset-0 relative'
-            : 'inputField component outline-warning outline-none relative '
-        }
+        className={`inputField component relative outline-offset-0 ${
+          !invalid ? 'outline-altColor' : 'outline-warning outline-none'
+        }`}
       />
       {invalid && (
         <div
