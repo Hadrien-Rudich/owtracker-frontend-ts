@@ -29,7 +29,7 @@ function useGameUpdateMutation({ gameObj }: { gameObj: GameData }) {
         heroesImageUrl: selectedGameHeroesImages,
       }),
     onSuccess: (UpdatedGameOnApi: GameAddedToApi) => {
-      setGameSavedToastMessage('Game updated');
+      setGameSavedToastMessage('Game updated...');
       setIsUpdatingGame(false);
       setGameSavedToast(true);
       updateGame(UpdatedGameOnApi.game.id, UpdatedGameOnApi.game);

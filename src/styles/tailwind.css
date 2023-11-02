@@ -186,10 +186,10 @@ right-0;
 
 .passwordFormatBox {
   @apply group-hover:grid grid-cols-2 
-  divide-x-[0.05rem] divide-mainText 
-  absolute w-48 h-20 hidden  top-2 right-[-13.5rem]  
-  bg-activeColor opacity-75 text-sm text-left rounded-sm tracking-wide
-  border border-mainText  shadow-lg;
+  /* divide-x-[0.05rem] divide-mainText  */
+  absolute hidden  top-3 right-[-11rem]  
+  bg-activeColor text-sm text-left rounded-sm tracking-wide
+  ring-[0.1rem] ring-activeGrayColor  shadow-lg;
 }
 
 .profile {
@@ -199,21 +199,20 @@ right-0;
 }
 
 .profile.card {
-  @apply w-36 h-10;
+  @apply w-36 h-10 bg-activeColor;
 }
 
 .profile.selected {
-  @apply scale-110 bg-activeColor shadow-lg;
+  @apply scale-110 ring-2 ring-thirdColor shadow-lg;
 }
 
 .profile.card.active {
-  @apply bg-secondaryColor 
-  shadow-inner 
-  hover:shadow-lg hover:bg-activeColor  duration-150;
+  @apply shadow-inner 
+  hover:shadow-lg duration-150;
 }
 
 .profile.card.disabled {
-  @apply bg-secondaryColor shadow-inner opacity-60;
+  @apply bg-disabled shadow-inner  pointer-events-none;
 }
 
 .profileheader {
@@ -292,6 +291,19 @@ sm:text-xl text-lg text-secondaryText;
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s;
+}
+
 /* Define the custom animation */
 @keyframes blink {
   0% {
@@ -306,18 +318,6 @@ sm:text-xl text-lg text-secondaryText;
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  animation: fadeIn 2s;
-}
 .animate-blink {
   animation: blink 1.5s 2.5; /* Play the animation tw ice (adjust the animation duration and count as needed) */
   transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
@@ -326,15 +326,4 @@ sm:text-xl text-lg text-secondaryText;
 .animate-blink2 {
   animation: blink 1.75s infinite; /* Play the animation twice (adjust the animation duration and count as needed) */
   transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
-}
-
-.success-toast {
-  transition: opacity 1s ease-in-out;
-  opacity: 0;
-  display: none;
-}
-
-.success-toast.viisii {
-  opacity: 1;
-  display: block;
 }

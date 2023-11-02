@@ -20,7 +20,7 @@ function useMockGameAddMutation() {
     mutationFn: () =>
       addMockGamesToApi(userData.id, selectedProfile.id, mockGames),
     onSuccess: (newGamesAddedToApi: MockGamesAddedToApi) => {
-      setGameSavedToastMessage('Mock games created');
+      setGameSavedToastMessage('Mock games created...');
       setGameSavedToast(true);
       addMockGames(newGamesAddedToApi.games);
     },

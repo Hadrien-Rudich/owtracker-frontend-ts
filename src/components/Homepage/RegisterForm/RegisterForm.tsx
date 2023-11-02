@@ -112,7 +112,7 @@ function RegisterForm() {
               setInvalid={setEmailAlreadyInUse}
               invalidMessage={emailAlreadyInUseError}
             />
-            <div className="group relative">
+            <div className="relative">
               <InputField
                 label="Password"
                 type="password"
@@ -123,13 +123,15 @@ function RegisterForm() {
                 setInvalid={setPasswordIsInvalid}
                 invalidMessage={passwordError}
               />
-              <PwdFormat
-                oneLowerCase={oneLowerCase}
-                oneUpperCase={oneUpperCase}
-                oneDigit={oneDigit}
-                oneSpecialChar={oneSpecialChar}
-                eightToTwentyChars={eightToTwentyChars}
-              />
+              <div className="group">
+                <PwdFormat
+                  oneLowerCase={oneLowerCase}
+                  oneUpperCase={oneUpperCase}
+                  oneDigit={oneDigit}
+                  oneSpecialChar={oneSpecialChar}
+                  eightToTwentyChars={eightToTwentyChars}
+                />
+              </div>
             </div>
 
             <InputField

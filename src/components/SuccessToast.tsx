@@ -17,20 +17,20 @@ function SuccessToast({
     setTimeout(() => {
       setIsVisible(false);
       setToastText('');
-    }, 4500);
+    }, 3000);
   });
 
   return (
     <div
-      className={`${isVisible ? 'animate-blink2' : null}  
-      flexdiv col absolute 
-      top-[-5.5rem]
-      right-[42.5%] left-[42.5%] w-[15%] 
-      z-50 h-12 
+      className={`${isVisible ? 'fadeIn' : null}  
+      flexdiv col fixed bottom-[0.2rem] right-[0.25rem]
+      z-50
+      w-[15%] 
+      h-10
       bg-savedBackground ring-[0.1rem] ring-validate
-       shadow-lg rounded-sm`}
+       shadow-lg rounded-sm `}
     >
-      <p className="text-activeColor tracking-widest text-xl ">{toastText}</p>
+      <p className="text-activeColor text-lg tracking-widest ">{toastText}</p>
     </div>
   );
 }

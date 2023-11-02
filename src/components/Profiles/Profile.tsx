@@ -4,6 +4,7 @@ import UpdateProfile from './UpdateProfile';
 import type { ProfileData } from '../../types/store/profileTypes';
 import DeleteProfile from './DeleteProfile';
 import EditProfile from './EditProfile';
+import { getProfileCardClassName } from '../../utils/classNameUtils';
 
 function Profile() {
   const {
@@ -12,7 +13,8 @@ function Profile() {
     selectProfile,
     unselectProfile,
     isUpdatingProfile,
-    setProfileSavedToast: setProfileSavedToast,
+    isCreatingProfile,
+    setProfileSavedToast,
   } = profileStore();
 
   const handleProfileClick = (
@@ -33,6 +35,9 @@ function Profile() {
   };
 
   return (
+    // className={`${isCreatingGame ? 'bg-mainColor grayscale' : null}
+    // Profile_container flex flex-col gap-4`}
+
     <div className="Profile_container flex flex-col gap-4 ">
       {profilesData.map((p) => (
         <div
@@ -51,17 +56,20 @@ function Profile() {
                 })
               }
               type="button"
-              disabled={isUpdatingProfile}
-              className={`${
-                // eslint-disable-next-line no-nested-ternary
-                p.label === selectedProfile.label
-                  ? 'selected'
-                  : isUpdatingProfile
-                  ? 'disabled'
-                  : 'active'
-              } profilecard_container profile card`}
+              className={getProfileCardClassName(
+                p,
+                selectedProfile,
+                isUpdatingProfile,
+                isCreatingProfile
+              )}
             >
-              {p.label}
+              <p
+                className={`${
+                  isUpdatingProfile ? 'opacity-40' : 'opacity-100'
+                }  `}
+              >
+                {p.label}
+              </p>
             </button>
           )}
 

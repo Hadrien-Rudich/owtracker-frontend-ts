@@ -8,11 +8,13 @@ function NewProfileMode({
 }: {
   setInputField: (value: boolean) => void;
 }) {
-  const { unselectProfile, setIsUpdatingProfile } = profileStore();
+  const { unselectProfile, setIsUpdatingProfile, setIsCreatingProfile } =
+    profileStore();
 
   const handlePlusClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setIsUpdatingProfile(false);
+    setIsCreatingProfile(true);
     setInputField(true);
     unselectProfile();
   };

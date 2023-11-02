@@ -23,33 +23,33 @@ function PwdFormat({
       >
         <IoIosInformationCircleOutline />
       </button>
-      <div className="passwordFormatBox">
-        <div className="text-activeColor opacity-100 px-2 py-2">
+      <div className="passwordFormatBox px-2 py-2  text-activeColor">
+        <div className="leading-tight">
           <p
             className={`${oneLowerCase ? 'text-validate' : 'text-warning '}  
       `}
           >
-            - 1 lowercase
+            1 lowercase
           </p>
           <p
             className={`${oneUpperCase ? 'text-validate' : 'text-warning '}  
       `}
           >
-            - 1 uppercase
+            1 uppercase
           </p>
           <p
             className={`${oneDigit ? 'text-validate' : 'text-warning '}  
       `}
           >
-            - 1 digit
+            1 digit
           </p>
         </div>
-        <div className="text-activeColor opacity-100  px-2 py-2">
+        <div className=" leading-tight">
           <p
             className={`${oneSpecialChar ? 'text-validate' : 'text-warning '}  
       `}
           >
-            - 1 special char
+            1 special char
           </p>
           <p
             className={`${
@@ -57,7 +57,7 @@ function PwdFormat({
             }  
       `}
           >
-            - 8-20 chars
+            8-20 chars
           </p>
         </div>
       </div>

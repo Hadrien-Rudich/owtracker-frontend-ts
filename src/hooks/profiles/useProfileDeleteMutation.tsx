@@ -15,7 +15,7 @@ function useProfileDeleteMutation({ profileObj }: { profileObj: ProfileData }) {
     mutationFn: () => deleteProfileFromApi(profileObj.userId, profileObj.id),
     onSuccess: () => {
       deleteProfile(profileObj.label);
-      setProfileSavedToastMessage('Profile deleted');
+      setProfileSavedToastMessage('Profile deleted...');
       setProfileSavedToast(true);
       unselectProfile();
     },

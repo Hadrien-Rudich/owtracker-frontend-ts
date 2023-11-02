@@ -43,6 +43,7 @@ export const profileStore = create<ProfileStore>()((set) => ({
     set(() => ({
       isUpdatingProfile: boolean,
     })),
+
   updateProfileLabel(profileId, newProfileLabel) {
     set((state) => ({
       profilesData: state.profilesData.map((p) =>
@@ -50,6 +51,11 @@ export const profileStore = create<ProfileStore>()((set) => ({
       ),
     }));
   },
+  isCreatingProfile: false,
+  setIsCreatingProfile: (boolean: boolean) =>
+    set(() => ({
+      isCreatingProfile: boolean,
+    })),
   deleteProfile: (profile) => {
     set((state) => ({
       profilesData: state.profilesData.filter((p) => p.label !== profile),

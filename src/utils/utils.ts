@@ -71,18 +71,15 @@ const capitalizeFirstLetter = (string: string): string =>
 const verifyProfileLabelAvailability = (
   newProfileLabel: string,
   profilesData: ProfileData[]
-): boolean => {
+): void => {
   if (newProfileLabel === '') {
-    console.log('Profile name cannot be empty');
-    return false;
+    throw new Error('Name cannot be empty');
   }
 
   if (profilesData.some((profile) => profile.label === newProfileLabel)) {
-    console.log(`You already have a profile with that name`);
-    return false;
+    throw new Error('Name is unavailable');
   }
-
-  return true;
+  // No errors, continue with your logic.
 };
 
 export {

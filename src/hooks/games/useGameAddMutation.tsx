@@ -35,7 +35,7 @@ function useGameAddMutation() {
       }),
 
     onSuccess: (newGameAddedToApi: GameAddedToApi) => {
-      setGameSavedToastMessage('Game created');
+      setGameSavedToastMessage('Game created...');
       setGameSavedToast(true);
       addGame(newGameAddedToApi.game);
     },

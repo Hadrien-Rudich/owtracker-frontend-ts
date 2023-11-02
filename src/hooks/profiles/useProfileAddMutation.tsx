@@ -13,6 +13,7 @@ function useProfileAddMutation() {
     addNewProfile,
     setProfileSavedToastMessage,
     setProfileSavedToast,
+    setIsCreatingProfile,
   } = profileStore();
 
   const { userData } = authStore();
@@ -20,10 +21,11 @@ function useProfileAddMutation() {
   const { mutate } = useMutation({
     mutationFn: () => addProfileToApi(userData.id, newProfile),
     onSuccess: (newProfileAddedToApi: ProfileAddedtoApi) => {
-      setProfileSavedToastMessage('Profile created');
+      setProfileSavedToastMessage('Profile created...');
       setProfileSavedToast(true);
       addNewProfile(newProfileAddedToApi.profile);
       clearNewProfile();
+      setIsCreatingProfile(false);
     },
     retry: 1,
   });

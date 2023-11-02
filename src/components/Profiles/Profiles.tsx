@@ -15,6 +15,7 @@ function Profiles() {
   const {
     profilesData,
     profileSavedToast,
+    isUpdatingProfile,
     setProfileSavedToast,
     setProfileSavedToastMessage,
     profileSavedToastMessage,
@@ -44,7 +45,14 @@ function Profiles() {
           NO PROFILES FOUND
         </div>
       )}
-      <div className="flexdiv sm:w-80 w-60 h-12 mb-12 bg-mainColor">
+      <div
+        // className="flexdiv sm:w-80 w-60 h-12 mb-12 bg-mainColor">
+
+        className={`${
+          isUpdatingProfile ? 'grayscale pointer-events-none' : ''
+        }  
+      flexdiv sm:w-80 w-60 h-12 mb-12 bg-mainColor`}
+      >
         <AddProfile />
       </div>
       <div className="containerbox">

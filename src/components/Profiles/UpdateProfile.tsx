@@ -1,10 +1,11 @@
-import { ChangeEvent, KeyboardEvent, FormEvent } from 'react';
+import { ChangeEvent, KeyboardEvent, FormEvent, useState } from 'react';
 import { ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { profileStore } from '../../store/profileStore';
 import type { ProfileData } from '../../types/store/profileTypes';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
 import useProfileUpdateMutation from '../../hooks/profiles/useProfileUpdateMutation';
+import ErrorToast from '../ErrorToast';
 
 function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   const {
@@ -16,17 +17,24 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
     clearUpdatedProfileLabel,
   } = profileStore();
 
+  const [errorToast, setErrorToast] = useState(false);
+  const [errorToastMessage, setErrorToastMessage] = useState('');
+
   const mutateProfile = useProfileUpdateMutation({ profileObj });
 
   const handleUpdateProfile = async () => {
-    const profileLabelIsAvailable = verifyProfileLabelAvailability(
-      updatedProfileLabel,
-      profilesData
-    );
-    if (profileLabelIsAvailable) {
+    try {
+      verifyProfileLabelAvailability(updatedProfileLabel, profilesData);
       mutateProfile();
+    } catch (error) {
+      setErrorToastMessage((error as Error).message);
+      setErrorToast(true);
+      setTimeout(() => {
+        setErrorToast(false);
+      }, 2000);
     }
   };
+
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Escape') {
       clearUpdatedProfileLabel();
@@ -50,6 +58,15 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   return (
     <div className="flexdiv row gap-6">
       <form onSubmit={handleSubmit}>
+        {errorToast && (
+          <ErrorToast
+            toastText={errorToastMessage}
+            booleanProp={errorToast}
+            topProp="top-[-3.25rem]"
+            leftProp="right-[0.6rem]"
+          />
+        )}
+
         {profileObj.label === selectedProfile.label && (
           <button className=" bg-activeColor scale-110" type="button">
             <input

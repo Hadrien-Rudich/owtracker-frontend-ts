@@ -35,6 +35,7 @@ export default {
       warning: '#D32F2F',
       validate: '#43A047',
       new: '#009e38',
+      disabled: '#D6D6D6',
     },
     screens: {
       xs: '520px',

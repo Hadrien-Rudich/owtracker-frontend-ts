@@ -3,15 +3,24 @@ import { ImCross } from 'react-icons/im';
 import { FaCheck } from 'react-icons/fa';
 import { verifyProfileLabelAvailability } from '../../utils/utils';
 import { profileStore } from '../../store/profileStore';
-import useOutsideClick from '../useOutsideClick';
+// import useOutsideClick from '../useOutsideClick';
 import useProfileAddMutation from '../../hooks/profiles/useProfileAddMutation';
 import NewProfileMode from './NewProfileMode';
+import ErrorToast from '../ErrorToast';
 
 function AddProfile() {
-  const { profilesData, newProfile, setNewProfile, clearNewProfile } =
-    profileStore();
+  const {
+    profilesData,
+    newProfile,
+    setNewProfile,
+    clearNewProfile,
+    setIsCreatingProfile,
+  } = profileStore();
   const [inputField, setInputField] = useState(false);
-  const newProfileInputRef = useRef<HTMLInputElement>(null);
+  const [errorToast, setErrorToast] = useState(false);
+  const [errorToastMessage, setErrorToastMessage] = useState('');
+
+  // const newProfileInputRef = useRef<HTMLInputElement>(null);
 
   const mutateProfile = useProfileAddMutation();
 
@@ -22,23 +31,28 @@ function AddProfile() {
   const handleCancel = () => {
     clearNewProfile();
     setInputField(false);
+    setIsCreatingProfile(false);
   };
 
-  const handleOutsideClick = () => {
-    setInputField(false);
-    clearNewProfile();
-  };
+  // const handleOutsideClick = () => {
+  //   setInputField(false);
+  //   console.log('je suis la');
+  //   clearNewProfile();
+  // };
 
-  useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
+  // useOutsideClick(newProfileInputRef, handleOutsideClick, ['click']);
 
   const handleAddProfile = () => {
-    const profileLabelIsAvailable = verifyProfileLabelAvailability(
-      newProfile,
-      profilesData
-    );
-    if (profileLabelIsAvailable) {
+    try {
+      verifyProfileLabelAvailability(newProfile, profilesData);
       mutateProfile();
       setInputField(false);
+    } catch (error) {
+      setErrorToastMessage((error as Error).message);
+      setErrorToast(true);
+      setTimeout(() => {
+        setErrorToast(false);
+      }, 2000);
     }
   };
 
@@ -54,16 +68,27 @@ function AddProfile() {
   };
 
   return (
-    <div className="addprofile_container h-12 flexdiv" ref={newProfileInputRef}>
+    <div
+      className="addprofile_container h-12 flexdiv"
+      //  ref={newProfileInputRef}
+    >
       {!inputField && <NewProfileMode setInputField={setInputField} />}
       {inputField && (
         <form onSubmit={handleSubmit}>
-          <div className="form_container ml-16 flex gap-6">
+          <div className="form_container ml-16 flex gap-6 relative">
+            {errorToast && (
+              <ErrorToast
+                toastText={errorToastMessage}
+                booleanProp={errorToast}
+                topProp="top-[-3.1rem]"
+                leftProp="left-[-1.5rem]"
+              />
+            )}
             <label htmlFor="newProfile">
               <input
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
-                ref={newProfileInputRef}
+                // ref={newProfileInputRef}
                 className="inputField profile outline-altColor outline-offset-0 scale-110"
                 name="profile"
                 required

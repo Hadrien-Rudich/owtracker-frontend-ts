@@ -1,4 +1,5 @@
 import type { GameData } from '../types/store/gameTypes';
+import type { ProfileData } from '../types/store/profileTypes';
 import type { Outcome } from '../types/utilsTypes';
 
 const getResultClassName = (gameResult: string, outcome: Outcome): string => {
@@ -57,9 +58,26 @@ const getGameContainerClassName = (
   return ' grayscale hover:cursor-default';
 };
 
+function getProfileCardClassName(
+  p: ProfileData,
+  selectedProfile: ProfileData,
+  isUpdatingProfile: boolean,
+  isCreatingProfile: boolean
+) {
+  if (isUpdatingProfile || isCreatingProfile) {
+    return 'profilecard_container profile card disabled';
+  }
+
+  if (p.label === selectedProfile.label) {
+    return 'profilecard_container profile card selected';
+  }
+  return 'profilecard_container profile card active';
+}
+
 export {
   getResultClassName,
   getResultClassNameFromGame,
   getResultClassNameFromResult,
   getGameContainerClassName,
+  getProfileCardClassName,
 };

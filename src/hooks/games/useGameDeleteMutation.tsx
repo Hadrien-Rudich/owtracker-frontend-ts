@@ -15,7 +15,7 @@ function useGameDeleteMutation({ gameObj }: { gameObj: GameData }) {
     mutationFn: () =>
       deleteGameFromApi(gameObj.userId, gameObj.profileId, gameObj.id),
     onSuccess: () => {
-      setGameSavedToastMessage('Game deleted');
+      setGameSavedToastMessage('Game deleted...');
       setGameSavedToast(true);
       deleteGame(gameObj.id);
       unselectGame();
