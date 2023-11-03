@@ -25,8 +25,9 @@ function NewGameResult() {
         <ErrorToast
           toastText={resultErrorToastMessage}
           booleanProp={resultErrorToast}
-          topProp="top-[-4.45rem]"
-          leftProp="right-[-4.5rem]"
+          widthProp="sm:w-[200%] w-[300%]"
+          topProp="sm:top-[-3.45rem] top-[-2.95rem] "
+          centeringProp="left-[-50%] right-[-50%] "
         />
       )}
 

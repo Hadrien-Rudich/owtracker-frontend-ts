@@ -27,8 +27,10 @@ function NewGameHeroes() {
         <ErrorToast
           toastText={heroesErrorToastMessage}
           booleanProp={heroesErrorToast}
-          topProp="top-[-4.5rem]"
-          leftProp="right-[7.15rem]"
+          widthProp="lg:w-[34%] sm:w-[67%] w-[100%]"
+          topProp="sm:top-[-3.5rem] top-[-3rem] "
+          centeringProp="lg:left-[33%] lg:right-[33%] sm:left-[16.5%] sm:right-[16.5%] left-[4%] right-[4%]"
+          // leftProp="right-[7.15rem]"
         />
       )}
       <div className="w-full absolute top-[-1rem] right-[-0.4rem]  bg-activeColor">

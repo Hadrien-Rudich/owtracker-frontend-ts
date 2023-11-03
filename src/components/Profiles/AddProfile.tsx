@@ -81,7 +81,7 @@ function AddProfile() {
                 toastText={errorToastMessage}
                 booleanProp={errorToast}
                 topProp="top-[-3.1rem]"
-                leftProp="left-[-1.5rem]"
+                centeringProp="left-[-1.5rem]"
               />
             )}
             <label htmlFor="newProfile">

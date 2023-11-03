@@ -1,15 +1,17 @@
 interface SavedToastProps {
   toastText: string;
   booleanProp: boolean;
+  widthProp: string;
   topProp: string;
-  leftProp: string;
+  centeringProp: string;
 }
 
 function ErrorToast({
   toastText,
   booleanProp,
+  widthProp,
   topProp,
-  leftProp,
+  centeringProp,
 }: SavedToastProps) {
   // useEffect(() => {
   //   setTimeout(() => {
@@ -21,12 +23,14 @@ function ErrorToast({
     <div
       className={`${booleanProp ? 'fadeIn' : ' '}  
       flexdiv col absolute
-    ${topProp} ${leftProp}
-      w-48 h-12 z-50
+      ${widthProp} ${topProp} ${centeringProp}
+      sm:h-8 h-6 z-50
       bg-errorBackground ring-[0.1rem] ring-warning
        shadow-lg rounded-sm`}
     >
-      <p className="text-activeColor tracking-widest ">{toastText}</p>
+      <p className="text-activeColor tracking-widest xl:text-base lg:text-sm text-xs">
+        {toastText}
+      </p>
     </div>
   );
 }

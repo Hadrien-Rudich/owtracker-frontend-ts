@@ -26,8 +26,10 @@ function NewGameMap() {
         <ErrorToast
           toastText={mapErrorToastMessage}
           booleanProp={mapErrorToast}
-          topProp="top-[-3rem]"
-          leftProp="right-[9.65rem]"
+          widthProp="lg:w-[34%] w-[67%]"
+          topProp="sm:top-[-2rem] top-[-1.5rem]"
+          centeringProp="lg:left-[33%] lg:right-[33%] left-[16.5%] right-[16.5%]"
+          // leftProp="right-[9.65rem]"
         />
       )}
       <div className="w-full absolute top-[0.5rem] right-[-0.4rem] bg-activeColor">

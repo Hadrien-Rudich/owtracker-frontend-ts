@@ -31,6 +31,8 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       setTimeout(() => {
         setErrorToast(false);
       }, 2000);
+
+      return;
     }
 
     const results = GameUpdateSchema.safeParse({
@@ -39,6 +41,7 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       heroes: selectedGameHeroes,
       date: selectedGameDateInFormat,
     });
+
     if (results.success) {
       mutateGame();
     } else if (!results.success) {
@@ -68,8 +71,9 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
         <ErrorToast
           toastText={errorToastMessage}
           booleanProp={errorToast}
-          topProp="top-[-3.9rem]"
-          leftProp="left-[-5.5rem]"
+          widthProp="lg:w-[500%] w-[200%]"
+          topProp="sm:top-[-2.75rem] top-[-2.25rem] "
+          centeringProp="lg:left-[-250%] lg:right-[-250%] "
         />
       )}
     </>

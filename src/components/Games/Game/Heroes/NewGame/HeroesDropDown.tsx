@@ -20,7 +20,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
     if (heroesArray.length >= 0 && heroesArray.length <= 4) {
       return true;
     }
-    setErrorToastMessage('4 heroes maximum');
+    setErrorToastMessage('Max 4 heroes');
     setErrorToast(true);
     setTimeout(() => {
       setErrorToast(false);
@@ -56,11 +56,12 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
           <ErrorToast
             toastText={errorToastMessage}
             booleanProp={errorToast}
-            topProp="top-[-3.45rem]"
-            leftProp="right-[7.35rem]"
+            widthProp="lg:w-[34%] sm:w-[67%] w-[100%]"
+            topProp="sm:top-[-2.45rem] top-[-1.95rem] "
+            centeringProp="lg:left-[33%] lg:right-[33%] sm:left-[16.5%] sm:right-[16.5%] left-[0%] right-[0%]"
           />
         )}
-        <div className="currentHeroes_container flexdiv">
+        <div className="currentHeroes_container flexdiv gap-1">
           {heroesData
             .filter((hero) => selectedGameHeroes.includes(hero.slug))
             .map((heroObj) => (
@@ -85,7 +86,11 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
                   )
                   .map((h) => (
                     <div
-                      className="heroes_container bg-activeColor rounded-sm h-9 hover:scale-110"
+                      className={`${
+                        selectedGameHeroes.includes(h.slug)
+                          ? 'ring ring-thirdColor'
+                          : 'hover:scale-110 '
+                      }    heroes_container bg-activeColor rounded-sm h-9`}
                       key={h.slug}
                     >
                       <button

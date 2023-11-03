@@ -63,7 +63,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
             toastText={errorToastMessage}
             booleanProp={errorToast}
             topProp="top-[-3.25rem]"
-            leftProp="right-[0.6rem]"
+            centeringProp="right-[0.6rem]"
           />
         )}
 

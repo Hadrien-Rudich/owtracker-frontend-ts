@@ -65,7 +65,9 @@ function Profile() {
             >
               <p
                 className={`${
-                  isUpdatingProfile ? 'opacity-40' : 'opacity-100'
+                  isUpdatingProfile || isCreatingProfile
+                    ? 'opacity-40'
+                    : 'opacity-100'
                 }  `}
               >
                 {p.label}
