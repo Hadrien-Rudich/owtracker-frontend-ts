@@ -25,9 +25,9 @@ function NewGameResult() {
         <ErrorToast
           toastText={resultErrorToastMessage}
           booleanProp={resultErrorToast}
-          widthProp="sm:w-[200%] w-[300%]"
-          topProp="sm:top-[-3.45rem] top-[-2.95rem] "
-          centeringProp="left-[-50%] right-[-50%] "
+          widthProp="w-[250%]"
+          topProp="sm:top-[-2.85rem] top-[-2.30rem] "
+          centeringProp="left-[-75%] right-[-75%]"
         />
       )}
 
@@ -61,7 +61,7 @@ function NewGameResult() {
                 </div>
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
+            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

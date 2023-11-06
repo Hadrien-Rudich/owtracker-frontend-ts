@@ -93,16 +93,16 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
           <ErrorToast
             toastText={errorToastMessage}
             booleanProp={errorToast}
-            widthProp="w-[30%]"
-            topProp="top-[-3.5rem]"
-            centeringProp="left-[35%] right-[35%]"
+            widthProp="w-[100%]"
+            topProp="top-[-2rem]"
+            centeringProp="left-[0%] right-[0%]"
           />
         )}
         <div className="currentHeroes_container flexdiv ">
           <Heroes gameObj={currentGame} imgHeight="h-8" />
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
+      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
 
       <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
         {rolesData.map((r) => (

@@ -24,12 +24,12 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
 
           <div className="absolute inset-0">
             <div className="flexdiv gap-4 absolute top-1/2 left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-              <p className="flex items-center sm:h-12 sm:w-40 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
+              <p className="flex items-center sm:h-12 sm:w-28 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
                 {gameObj.map}
               </p>
 
               <img
-                className="sm:h-12 sm:w-8 sm:block hidden"
+                className="sm:h-8 sm:w-8 sm:block hidden"
                 src={`images/mapTypes/${capitalizeFirstLetter(
                   gameObj.mapType
                 )}_icon.svg`}

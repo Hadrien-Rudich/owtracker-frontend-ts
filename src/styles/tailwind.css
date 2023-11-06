@@ -180,10 +180,6 @@ right-0;
   @apply sm:h-10 h-8;
 }
 
-.inputField.profile {
-  @apply sm:h-8 h-6;
-}
-
 .passwordFormatBox {
   @apply group-hover:grid grid-cols-2 
   /* divide-x-[0.05rem] divide-mainText  */

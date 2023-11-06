@@ -14,7 +14,7 @@ function DeleteGame({ gameObj }: { gameObj: GameData }) {
       onClick={handleDeleteClick}
       className=" text-warning hover:scale-125"
     >
-      <FaTrashAlt className="sign lg:h-[1.2rem] lg:w-[1.2rem] h-[1.4rem] w-[1.4rem]" />
+      <FaTrashAlt className="sign lg:h-[1.4rem] lg:w-[1.4rem] h-[1.1rem] w-[1.1rem]" />
     </button>
   );
 }

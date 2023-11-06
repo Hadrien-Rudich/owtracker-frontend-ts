@@ -31,7 +31,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
       setErrorToast(true);
       setTimeout(() => {
         setErrorToast(false);
-      }, 2000);
+      }, 22000);
     }
   };
 
@@ -58,15 +58,6 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   return (
     <div className="flexdiv row gap-6">
       <form onSubmit={handleSubmit}>
-        {errorToast && (
-          <ErrorToast
-            toastText={errorToastMessage}
-            booleanProp={errorToast}
-            topProp="top-[-3.25rem]"
-            centeringProp="right-[0.6rem]"
-          />
-        )}
-
         {profileObj.label === selectedProfile.label && (
           <button className=" bg-activeColor scale-110" type="button">
             <input
@@ -77,25 +68,37 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
               onKeyDown={handleKeyDown}
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
-              className="inputField component outline-altColor outline-offset-0"
+              className="profile card outline-altColor outline-offset-0 relative"
             />
           </button>
         )}
+        {errorToast && (
+          <ErrorToast
+            toastText={errorToastMessage}
+            booleanProp={errorToast}
+            widthProp="w-[100%]"
+            topProp="sm:top-[-2.25rem] top-[-1.75rem]"
+            centeringProp="left-[-9%] right-[0%]"
+          />
+        )}
       </form>
-      <div className="button_container flexdiv row gap-2">
-        <button
-          type="button"
-          onClick={handleCancel}
-          className="text-warning hover:scale-125"
-        >
-          <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
-        </button>
+      <div
+        className="button_container flex sm:flex-row flex-col gap-2 absolute justify-center content-center items-center 
+      sm:right-[-2rem] right-[-0.35rem]"
+      >
         <button
           type="submit"
           onClick={handleUpdateProfile}
           className="text-validate hover:scale-125"
         >
           <FaCheck className="sign h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="text-warning hover:scale-125"
+        >
+          <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
         </button>
       </div>
     </div>

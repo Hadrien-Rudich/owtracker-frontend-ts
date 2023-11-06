@@ -13,7 +13,7 @@ function CancelGameEdit() {
     <button type="button" className="text-warning hover:scale-125">
       <ImCross
         onClick={handleCancelEdit}
-        className="sign lg:h-[1.2rem] lg:w-[1.2rem] h-[1.4rem] w-[1.4rem]"
+        className="sign lg:h-[1.3rem] lg:w-[1.3rem] h-[1rem] w-[1rem]"
       />
     </button>
   );

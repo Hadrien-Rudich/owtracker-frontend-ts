@@ -27,13 +27,12 @@ function NewGameHeroes() {
         <ErrorToast
           toastText={heroesErrorToastMessage}
           booleanProp={heroesErrorToast}
-          widthProp="lg:w-[34%] sm:w-[67%] w-[100%]"
-          topProp="sm:top-[-3.5rem] top-[-3rem] "
-          centeringProp="lg:left-[33%] lg:right-[33%] sm:left-[16.5%] sm:right-[16.5%] left-[4%] right-[4%]"
-          // leftProp="right-[7.15rem]"
+          widthProp="sm:w-[50%] w-[100%]"
+          topProp="sm:top-[-3.15rem] top-[-2.6rem] "
+          centeringProp=""
         />
       )}
-      <div className="w-full absolute top-[-1rem] right-[-0.4rem]  bg-activeColor">
+      <div className="w-full absolute top-[-1rem]   bg-activeColor">
         {isDropDownActive ? (
           <HeroesDropDown toggleDropDown={toggleDropDown} />
         ) : (
@@ -65,7 +64,7 @@ function NewGameHeroes() {
                 </div>
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
+            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

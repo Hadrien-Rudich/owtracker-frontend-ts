@@ -23,14 +23,16 @@ function SuccessToast({
   return (
     <div
       className={`${isVisible ? 'fadeIn' : null}  
-      flexdiv col fixed bottom-[0.2rem] right-[0.25rem]
+      flexdiv fixed bottom-[0.2rem] right-[0.25rem]
       z-50
-      w-[15%] 
+      lg:w-[20%] sm:w-[30%] w-[50%]
       h-10
       bg-savedBackground ring-[0.1rem] ring-validate
        shadow-lg rounded-sm `}
     >
-      <p className="text-activeColor text-lg tracking-widest ">{toastText}</p>
+      <p className="text-activeColor lg:text-lg text-sm  tracking-widest ">
+        {toastText}
+      </p>
     </div>
   );
 }

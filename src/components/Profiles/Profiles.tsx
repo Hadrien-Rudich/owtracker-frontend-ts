@@ -51,7 +51,7 @@ function Profiles() {
         className={`${
           isUpdatingProfile ? 'grayscale pointer-events-none' : ''
         }  
-      flexdiv sm:w-80 w-60 h-12 mb-12 bg-mainColor`}
+      flexdiv sm:w-80 w-60 h-16 mb-12 bg-mainColor`}
       >
         <AddProfile />
       </div>

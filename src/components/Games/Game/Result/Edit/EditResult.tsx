@@ -45,7 +45,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
                 <Result gameObj={selectedGame} />
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
+            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

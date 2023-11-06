@@ -40,7 +40,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
             ))}
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none " />
+      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container  bg-mainColor">
         <div className="MapTypes_container flexdiv pb-5 ">
           <MapTypes />

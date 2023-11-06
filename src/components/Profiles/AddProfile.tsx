@@ -52,7 +52,7 @@ function AddProfile() {
       setErrorToast(true);
       setTimeout(() => {
         setErrorToast(false);
-      }, 2000);
+      }, 22000);
     }
   };
 
@@ -69,19 +69,20 @@ function AddProfile() {
 
   return (
     <div
-      className="addprofile_container h-12 flexdiv"
+      className="addprofile_container flexdiv"
       //  ref={newProfileInputRef}
     >
       {!inputField && <NewProfileMode setInputField={setInputField} />}
       {inputField && (
         <form onSubmit={handleSubmit}>
-          <div className="form_container ml-16 flex gap-6 relative">
+          <div className="form_container flexdiv relative">
             {errorToast && (
               <ErrorToast
                 toastText={errorToastMessage}
                 booleanProp={errorToast}
-                topProp="top-[-3.1rem]"
-                centeringProp="left-[-1.5rem]"
+                widthProp="w-[100%]"
+                topProp="sm:top-[-2.7rem] top-[-2.2rem]"
+                centeringProp=" left-[-0%] right-[0%]"
               />
             )}
             <label htmlFor="newProfile">
@@ -89,7 +90,7 @@ function AddProfile() {
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
                 // ref={newProfileInputRef}
-                className="inputField profile outline-altColor outline-offset-0 scale-110"
+                className="profile card outline-altColor outline-offset-0 scale-110"
                 name="profile"
                 required
                 value={newProfile}
@@ -98,7 +99,10 @@ function AddProfile() {
                 type="text"
               />
             </label>
-            <div className="button_container flexdiv row gap-2">
+            <div
+              className="button_container absolute flex sm:flex-row flex-col gap-2  justify-center content-center items-center 
+      sm:right-[-4.25rem] right-[-2.45rem]"
+            >
               <button
                 type="submit"
                 onClick={handleAddProfile}

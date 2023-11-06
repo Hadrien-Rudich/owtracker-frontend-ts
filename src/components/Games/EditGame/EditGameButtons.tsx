@@ -12,12 +12,10 @@ function EditGameButtons({ gameObj }: { gameObj: GameData }) {
   return (
     <div
       className={`${
-        gameObj.id === selectedGame.id
-          ? 'absolute 2xl:left-[-3rem] xl:left-[-3rem] lg:left-[-4rem] md:left-[-5rem] sm:left-[-5rem] xs:right-[1.5rem] xxs:right-[2.2rem] right-[1rem]'
-          : 'hidden'
+        gameObj.id === selectedGame.id ? 'flex' : 'hidden'
       } GameButtons_container`}
     >
-      <div className="xl:gap-3 lg:gap-1 gap-4 flexdiv">
+      <div className="flexdiv gap-2">
         {!isUpdatingGame &&
         !isCreatingGame &&
         gameObj.id === selectedGame.id ? (

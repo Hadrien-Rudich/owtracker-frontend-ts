@@ -18,7 +18,7 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
 
   return (
     <div className="EditMap_container relative flexdiv w-[98%]">
-      <div className="w-full absolute top-[-1rem] right-[-0.4rem]">
+      <div className="w-full absolute top-[-1rem] right-[-0.2rem]">
         {isDropDownActive ? (
           <MapDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
@@ -54,7 +54,7 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
                 </div>
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
+            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

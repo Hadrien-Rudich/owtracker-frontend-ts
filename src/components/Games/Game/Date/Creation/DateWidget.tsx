@@ -40,7 +40,7 @@ function DateWidget({
         className="ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-fourthColor focus:outline-none"
         wrapperClassName="w-full"
       />
-      <MdOutlineKeyboardArrowDown className="absolute w-4 h-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
+      <MdOutlineKeyboardArrowDown className="absolute w-4 h-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden " />
     </div>
   );
 }

@@ -10,7 +10,8 @@ interface HeroesProps {
 
 function Heroes({ gameObj, heroObj, imgHeight }: HeroesProps) {
   return (
-    <div className="Heroes_container flexdiv gap-1">
+    <div className="Heroes_container flexdiv sm:gap-1 gap-0">
+      {/* <div className="Heroes_container grid grid-cols-2 justify-center gap-"> */}
       {gameObj &&
         gameObj.heroesImageUrl.map((heroImage) => (
           <div

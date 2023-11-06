@@ -15,6 +15,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
     gameStore();
 
   const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
+  const isLargeScreen = window.innerWidth > 768;
 
   const [currentGame, setCurrentGame] = useState<GameData>(gameObj);
 
@@ -44,7 +45,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
       >
         <Result gameObj={currentGame} />
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none" />
+      <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
 
       <ul className="results_container">
         {results.map(
@@ -58,7 +59,10 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
                   onClick={() => selectResult(result.label)}
                   id={result.label}
                 >
-                  <p>{result.label}</p>
+                  <p>
+                    {' '}
+                    {isLargeScreen ? result.label : result.label.slice(0, 1)}
+                  </p>
                 </button>
               </li>
             )

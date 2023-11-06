@@ -52,7 +52,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
           </div>
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
+      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container">
         <div className="MapTypes_container h-14 flexdiv">
           <MapTypes />

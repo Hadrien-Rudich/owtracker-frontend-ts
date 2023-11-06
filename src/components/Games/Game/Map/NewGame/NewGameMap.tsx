@@ -21,18 +21,17 @@ function NewGameMap() {
     setIsDropDownActive(!isDropDownActive);
   };
   return (
-    <div className="NewGameMap_container relative flexdiv w-[98%]">
+    <div className="NewGameMap_container pl-4 relative flexdiv w-[98%]">
       {mapErrorToast && (
         <ErrorToast
           toastText={mapErrorToastMessage}
           booleanProp={mapErrorToast}
-          widthProp="lg:w-[34%] w-[67%]"
-          topProp="sm:top-[-2rem] top-[-1.5rem]"
-          centeringProp="lg:left-[33%] lg:right-[33%] left-[16.5%] right-[16.5%]"
-          // leftProp="right-[9.65rem]"
+          widthProp="sm:w-[50%] w-[100%]"
+          topProp="sm:top-[-1.65rem] top-[-1.1rem] "
+          centeringProp=""
         />
       )}
-      <div className="w-full absolute top-[0.5rem] right-[-0.4rem] bg-activeColor">
+      <div className="w-full absolute top-[0.5rem] bg-activeColor">
         {isDropDownActive ? (
           <MapsDropDown toggleDropDown={toggleDropDown} />
         ) : (
@@ -71,7 +70,7 @@ function NewGameMap() {
                 </div>
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
+            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

@@ -13,11 +13,11 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
   const toggleDropDown = () => setIsDropDownActive(!isDropDownActive);
 
   if (selectedGame.id !== gameObj.id) {
-    return <Heroes gameObj={gameObj} imgHeight="h-10" />;
+    return <Heroes gameObj={gameObj} imgHeight="sm:h-[2.25rem] h-[2rem]" />;
   }
   return (
     <div className="EditHeroes_container relative flexdiv w-[85%]">
-      <div className="w-full absolute top-[-1rem] right-[-0.4rem]">
+      <div className="w-full absolute top-[-1rem]">
         {isDropDownActive ? (
           <HeroesDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
@@ -39,7 +39,7 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
                 <Heroes gameObj={selectedGame} imgHeight="h-8" />
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none" />
+            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>
