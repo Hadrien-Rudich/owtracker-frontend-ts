@@ -37,7 +37,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container ring-2  ring-thirdColor bg-mainColor">
+    <div className="mapImage_container w-full absolute top-[-1rem] ring-2  ring-thirdColor bg-mainColor">
       <button
         className="w-full relative"
         type="button"
@@ -45,8 +45,8 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
       >
         <div className="currentMap_container">
           <Map gameObj={currentGame} imgHeight="h-8" />
-          <div className="absolute flexdiv top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2  px-1 bg-mainText bg-opacity-40 h-8 w-1/4 ">
-            <p className="text-xl truncate tracking-wider text-secondaryText text-center">
+          <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 xl:w-1/4 md:w-1/2 w-full h-6">
+            <p className="sm:text-xl text-lg absolute truncate sm:tracking-wider tracking-normal text-secondaryText">
               {currentGame.map}
             </p>
           </div>
@@ -54,7 +54,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
       </button>
       <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container">
-        <div className="MapTypes_container h-14 flexdiv">
+        <div className="MapTypes_container sm:h-14 h-10 flexdiv">
           <MapTypes />
         </div>
         <div className="filteredMaps_container flex flex-col divide-y-2 divide-activeColor pb-[0.15rem]">

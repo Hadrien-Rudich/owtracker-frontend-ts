@@ -10,11 +10,11 @@ function EditDate({ gameObj }: { gameObj: GameData }) {
   const [, setIsDropDownActive] = useState(false);
 
   return (
-    <div className="EditDate_container relative">
+    <div className="EditDate_container flexdiv relative">
       {selectedGame.id !== gameObj.id ? (
         <Date gameObj={gameObj} />
       ) : (
-        <div className=" absolute top-[-0.75rem] right-0 w-full bg-activeColor">
+        <div className=" w-[75%] bg-activeColor">
           <DateWidget
             setIsDropDownActive={setIsDropDownActive}
             gameObj={gameObj}

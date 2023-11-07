@@ -62,23 +62,23 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
             isCreatingGame
           )} gameHistory_container game relative flexdiv gap-2`}
         >
-          <div className="Map_container md:w-[40%] w-[30%] mapImage_container ">
+          <div className="Map_container md:w-[40%] w-[30%] mapImage_container">
             <MapComponent gameObj={gameObj} imgHeight="h-12" />
           </div>
-          <div className="Heroes_container flex md:justify-center justify-start gap-0.5 md:w-[40%] w-[37%] sm:pl-4 pl-1">
+          <div className="Heroes_container flex md:justify-center justify-start gap-0.5 md:w-[40%] w-[37%]">
             <HeroesComponent
               gameObj={gameObj}
               imgHeight="sm:h-[2.25rem] h-[2rem]"
             />
           </div>
           <div className="details_container flex md:justify-center justify-start items-center md:w-[20%] w-[33%]">
-            <div className="Result_container  md:w-[37.5%] w-[17.5%]">
+            <div className="Result_container md:w-[37.5%] w-[17.5%]">
               <ResultComponent gameObj={gameObj} />
             </div>
-            <div className="Date_container  w-[42.5%]">
+            <div className="Date_container w-[40%]">
               <DateComponent gameObj={gameObj} />
             </div>
-            <div className="gamebuttons_container flex  justify-around md:w-[25%] w-[40%]">
+            <div className="gamebuttons_container flex  justify-around md:w-[22.5%] w-[40%]">
               <EditGameButtons gameObj={gameObj} />
             </div>
           </div>

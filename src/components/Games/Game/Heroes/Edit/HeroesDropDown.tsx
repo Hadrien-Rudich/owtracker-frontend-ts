@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import type { GameData } from '../../../../../types/store/gameTypes';
 import Heroes from '../Heroes';
@@ -83,7 +83,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container ring-2 ring-thirdColor bg-activeColor">
+    <div className="heroesImages_container w-full ring-2 ring-thirdColor bg-activeColor absolute top-[-1rem]">
       <button
         className="w-full relative h-12"
         type="button"
@@ -102,7 +102,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
           <Heroes gameObj={currentGame} imgHeight="h-8" />
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
 
       <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
         {rolesData.map((r) => (

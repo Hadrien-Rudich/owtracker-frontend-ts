@@ -1,6 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import type { GameData } from '../../../../../types/store/gameTypes';
@@ -25,6 +25,14 @@ function DateWidget({
     convertDateToDatePickerFormat(gameObj.date)
   );
 
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const datePickerRef = useRef(null);
+
+  const handleCalendarToggle = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
   return (
     <div className="flexdiv relative">
       <DatePicker
@@ -33,7 +41,10 @@ function DateWidget({
         selected={
           selectedGameDate === gameObjectDate ? selectedGameDate : uneditedDate
         }
-        onClickOutside={() => setIsDropDownActive(false)}
+        onClickOutside={() => {
+          setIsDropDownActive(false);
+          setIsCalendarOpen(false);
+        }}
         onChange={(date) => date && selectGameDate(date)}
         onSelect={(date) => {
           selectGameDate(date);
@@ -42,8 +53,16 @@ function DateWidget({
         }}
         className="ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-thirdColor focus:outline-none"
         wrapperClassName="w-full"
+        onCalendarOpen={() => setIsCalendarOpen(true)}
+        onCalendarClose={() => setIsCalendarOpen(false)}
+        ref={datePickerRef}
       />
-      <MdOutlineKeyboardArrowDown className="absolute w-4 h-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
+      {isCalendarOpen ? null : (
+        <MdOutlineKeyboardArrowDown
+          onClick={handleCalendarToggle}
+          className="absolute w-4 h-4 top-[0.3rem] right-[-0.15rem] pointer-events-none lg:block hidden"
+        />
+      )}
     </div>
   );
 }

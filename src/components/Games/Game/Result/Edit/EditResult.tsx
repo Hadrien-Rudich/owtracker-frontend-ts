@@ -18,12 +18,12 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
   }
 
   return (
-    <div className="EditResult_container relative">
-      <div className="absolute w-full top-[-0.75rem] right-0 ">
+    <div className="EditResult_container">
+      <div className="results_container flexdiv w-full relative ">
         {isDropDownActive ? (
           <ResultsDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
-          <div>
+          <div className="w-[90%]">
             {selectedGame.result === gameObj.result ? (
               <button
                 className={`${getResultClassNameFromResult(
@@ -45,7 +45,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
                 <Result gameObj={selectedGame} />
               </button>
             )}
-            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
+            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[0.22rem] pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

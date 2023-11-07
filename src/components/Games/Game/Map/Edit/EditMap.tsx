@@ -17,13 +17,14 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
   }
 
   return (
-    <div className="EditMap_container relative flexdiv w-[98%]">
-      <div className="w-full absolute top-[-1rem] right-[-0.2rem]">
-        {isDropDownActive ? (
-          <MapDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
-        ) : (
-          <div className="mapimage_container flexdiv">
-            {selectedGameMap === selectedGame.map ? (
+    <div className="EditMap_container flexdiv">
+      <div className="relative w-[95%]">
+        <div className="w-full">
+          {isDropDownActive ? (
+            <MapDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
+          ) : (
+            <div className="mapimage_container flexdiv">
+              {/* {selectedGameMap === selectedGame.map ? (
               <button
                 className="w-full relative ring-2"
                 type="button"
@@ -38,7 +39,7 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
                   </div>
                 </div>
               </button>
-            ) : (
+            ) : ( */}
               <button
                 className="w-full relative ring-2"
                 type="button"
@@ -46,17 +47,18 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               >
                 <Map gameObj={selectedGame} imgHeight="h-8" />
                 <div className="map_container flexdiv">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6">
-                    <p className="text-xl absolute truncate tracking-wider text-secondaryText">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 xl:w-1/4 md:w-1/2 w-full h-6">
+                    <p className="sm:text-xl text-lg absolute truncate sm:tracking-wider tracking-normal text-secondaryText">
                       {selectedGame.map}
                     </p>
                   </div>
                 </div>
               </button>
-            )}
-            <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
-          </div>
-        )}
+              {/* )} */}
+              <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

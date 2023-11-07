@@ -52,7 +52,7 @@ function AddProfile() {
       setErrorToast(true);
       setTimeout(() => {
         setErrorToast(false);
-      }, 22000);
+      }, 2000);
     }
   };
 

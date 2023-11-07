@@ -16,13 +16,13 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
     return <Heroes gameObj={gameObj} imgHeight="sm:h-[2.25rem] h-[2rem]" />;
   }
   return (
-    <div className="EditHeroes_container relative flexdiv w-[85%]">
-      <div className="w-full absolute top-[-1rem]">
+    <div className="EditHeroes_container relative flexdiv sm:w-[80%] w-full">
+      <div className="w-full relative">
         {isDropDownActive ? (
           <HeroesDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
-          <div className="heroesImages_container flexdiv">
-            {selectedGameHeroes === selectedGame.heroes ? (
+          <div className="heroesImages_container w-full flexdiv">
+            {/* {selectedGameHeroes === selectedGame.heroes ? (
               <button
                 className="w-full relative ring-2"
                 type="button"
@@ -30,15 +30,15 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
               >
                 <Heroes gameObj={selectedGame} imgHeight="h-8" />
               </button>
-            ) : (
-              <button
-                className="w-full relative ring-2 flexdiv"
-                type="button"
-                onClick={toggleDropDown}
-              >
-                <Heroes gameObj={selectedGame} imgHeight="h-8" />
-              </button>
-            )}
+            ) : ( */}
+            <button
+              className="w-full relative ring-2 "
+              type="button"
+              onClick={toggleDropDown}
+            >
+              <Heroes gameObj={selectedGame} imgHeight="h-8" />
+            </button>
+            {/* )} */}
             <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
           </div>
         )}

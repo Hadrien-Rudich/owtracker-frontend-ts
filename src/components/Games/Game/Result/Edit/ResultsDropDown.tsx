@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import { getResultClassNameFromResult } from '../../../../../utils/classNameUtils';
 import type { GameData } from '../../../../../types/store/gameTypes';
@@ -34,7 +34,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
   };
 
   return (
-    <div className="ResultsDropDown_container ring-2 ring-thirdColor">
+    <div className="ResultsDropDown_container w-[90%] ring-2 ring-thirdColor absolute top-[-0.75rem]">
       <button
         className={`${getResultClassNameFromResult(
           currentGame.result.charAt(0).toUpperCase() +
@@ -45,7 +45,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
       >
         <Result gameObj={currentGame} />
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
 
       <ul className="results_container">
         {results.map(

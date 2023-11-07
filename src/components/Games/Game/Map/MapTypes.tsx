@@ -34,7 +34,7 @@ function MapTypes() {
               } flexdiv rounded-sm `}
             >
               <img
-                className="h-8 w-20 drop-shadow-lg"
+                className="sm:h-8 sm:w-20 h-4 w-8 drop-shadow-lg"
                 src={`images/mapTypes/${`${mtype.imageUrl.replace(
                   '.svg',
                   '_black.svg'

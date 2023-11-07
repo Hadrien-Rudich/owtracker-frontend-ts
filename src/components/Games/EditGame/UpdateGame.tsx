@@ -30,7 +30,7 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       setErrorToast(true);
       setTimeout(() => {
         setErrorToast(false);
-      }, 2000);
+      }, 22000);
 
       return;
     }
@@ -63,7 +63,7 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       <button
         onClick={handleSubmit}
         type="submit"
-        className="text-validate hover:scale-125 relative"
+        className="text-validate hover:scale-125"
       >
         <FaCheck className="sign lg:h-[1.5rem] lg:w-[1.5rem] h-[1.2rem] w-[1.2rem]" />
       </button>
@@ -71,9 +71,9 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
         <ErrorToast
           toastText={errorToastMessage}
           booleanProp={errorToast}
-          widthProp="lg:w-[500%] w-[200%]"
-          topProp="sm:top-[-2.75rem] top-[-2.25rem] "
-          centeringProp="lg:left-[-250%] lg:right-[-250%] "
+          widthProp="sm:w-[15%] w-[25%]"
+          topProp="sm:top-[-2rem] top-[-1.5rem] "
+          centeringProp="right-0"
         />
       )}
     </>

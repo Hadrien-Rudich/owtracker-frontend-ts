@@ -31,7 +31,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
       setErrorToast(true);
       setTimeout(() => {
         setErrorToast(false);
-      }, 22000);
+      }, 2000);
     }
   };
 
