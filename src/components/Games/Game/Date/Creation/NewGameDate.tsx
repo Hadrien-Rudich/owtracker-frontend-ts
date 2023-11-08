@@ -8,8 +8,8 @@ function NewGameDate() {
   const [, setIsDropDownActive] = useState(false);
 
   return (
-    <div className="EditDate_container relative">
-      <div className=" absolute top-[-0.75rem] right-0 w-full bg-activeColor">
+    <div className="NewGameDate_container flexdiv relative">
+      <div className=" w-[75%] bg-activeColor">
         <DateWidget setIsDropDownActive={setIsDropDownActive} />
       </div>
     </div>

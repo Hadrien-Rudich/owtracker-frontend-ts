@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 // import type { GameData } from '../../../../../types/store/gameTypes';
 import Heroes from '../Heroes';
@@ -24,7 +24,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
     setErrorToast(true);
     setTimeout(() => {
       setErrorToast(false);
-    }, 2000);
+    }, 22000);
     return false;
   };
 
@@ -46,22 +46,22 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container ring-2 ring-fourthColor bg-activeColor">
+    <div className="heroesImages_container absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor">
+      {errorToast && (
+        <ErrorToast
+          toastText={errorToastMessage}
+          booleanProp={errorToast}
+          widthProp="sm:w-[50%] w-[100%]"
+          topProp="sm:top-[-2.15rem] top-[-1.6rem] "
+          centeringProp="sm:left-[25%] sm:right-[25%] left-[0%] right-[0%]"
+        />
+      )}
       <button
         className="w-full relative h-12"
         type="button"
         onClick={toggleDropDown}
       >
-        {errorToast && (
-          <ErrorToast
-            toastText={errorToastMessage}
-            booleanProp={errorToast}
-            widthProp="lg:w-[34%] sm:w-[67%] w-[100%]"
-            topProp="sm:top-[-2.45rem] top-[-1.95rem] "
-            centeringProp="lg:left-[33%] lg:right-[33%] sm:left-[16.5%] sm:right-[16.5%] left-[0%] right-[0%]"
-          />
-        )}
-        <div className="currentHeroes_container flexdiv gap-1">
+        <div className="currentHeroes_container flexdiv">
           {heroesData
             .filter((hero) => selectedGameHeroes.includes(hero.slug))
             .map((heroObj) => (
@@ -73,7 +73,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
             ))}
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
 
       <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
         {rolesData.map((r) => (

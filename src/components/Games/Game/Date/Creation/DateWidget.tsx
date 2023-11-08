@@ -1,6 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import { formatDateForGameEdit } from '../../../../../utils/utils';
@@ -18,6 +18,13 @@ function DateWidget({
   } = gameStore();
 
   const [startDate] = useState(new Date());
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  const handleCalendarToggle = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
+  const datePickerRef = useRef(null);
 
   useEffect(() => {
     if (selectedGameDateInFormat === '') {
@@ -31,16 +38,27 @@ function DateWidget({
         locale="en"
         dateFormat="dd/MM"
         selected={startDate === selectedGameDate ? startDate : selectedGameDate}
-        onClickOutside={() => setIsDropDownActive(false)}
+        onClickOutside={() => {
+          setIsDropDownActive(false);
+          setIsCalendarOpen(false);
+        }}
         onChange={(date) => date && selectGameDate(date)}
         onSelect={(date) => {
           selectGameDate(date);
           selectGameDateInFormat(formatDateForGameEdit(date));
         }}
-        className="ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-fourthColor focus:outline-none"
+        className="ring-2 w-full h-8 z-50 text-center hover:cursor-pointer focus:ring-fourthColor focus:outline-none tracking-widest"
         wrapperClassName="w-full"
+        onCalendarOpen={() => setIsCalendarOpen(true)}
+        onCalendarClose={() => setIsCalendarOpen(false)}
+        ref={datePickerRef}
       />
-      <MdOutlineKeyboardArrowDown className="absolute w-4 h-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden " />
+      {isCalendarOpen ? null : (
+        <MdOutlineKeyboardArrowDown
+          onClick={handleCalendarToggle}
+          className="absolute w-4 h-4 top-[0.5rem] right-[-0.15rem] pointer-events-none lg:block hidden "
+        />
+      )}
     </div>
   );
 }

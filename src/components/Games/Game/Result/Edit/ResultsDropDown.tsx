@@ -34,7 +34,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
   };
 
   return (
-    <div className="ResultsDropDown_container w-[90%] ring-2 ring-thirdColor absolute top-[-0.75rem]">
+    <div className="ResultsDropDown_container w-[75%] ring-2 ring-thirdColor absolute top-[-1rem]">
       <button
         className={`${getResultClassNameFromResult(
           currentGame.result.charAt(0).toUpperCase() +
@@ -43,9 +43,11 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
         type="button"
         onClick={toggleDropDown}
       >
-        <Result gameObj={currentGame} />
+        <div className="w-[133.33%]">
+          <Result gameObj={currentGame} />
+        </div>
       </button>
-      <MdOutlineKeyboardArrowUp className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-4 w-4 top-[1rem] right-[-0.05rem] pointer-events-none lg:block hidden" />
 
       <ul className="results_container">
         {results.map(
@@ -55,12 +57,11 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
               <li key={(gameObj.id, result.label)}>
                 <button
                   type="button"
-                  className={`w-full bg-activeColor bg-active${result.label} hover:bg-activeColor`}
+                  className={`w-full h-8 bg-activeColor bg-active${result.label} hover:bg-activeColor`}
                   onClick={() => selectResult(result.label)}
                   id={result.label}
                 >
                   <p>
-                    {' '}
                     {isLargeScreen ? result.label : result.label.slice(0, 1)}
                   </p>
                 </button>

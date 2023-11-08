@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { gameStore } from '../../../store/gameStore';
 import type { GameData } from '../../../types/store/gameTypes';
@@ -19,7 +19,8 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
 
   const mutateGame = useGameUpdateMutation({ gameObj });
 
-  const handleSubmit = () => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (
       gameObj.result === selectedGameResult &&
       gameObj.date === selectedGameDateInFormat &&
@@ -30,7 +31,7 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
       setErrorToast(true);
       setTimeout(() => {
         setErrorToast(false);
-      }, 22000);
+      }, 2000);
 
       return;
     }
@@ -59,24 +60,20 @@ function UpdateGame({ gameObj }: { gameObj: GameData }) {
   };
 
   return (
-    <>
-      <button
-        onClick={handleSubmit}
-        type="submit"
-        className="text-validate hover:scale-125"
-      >
+    <form onSubmit={handleSubmit} action="submit">
+      <button type="submit" className="text-validate hover:scale-125">
         <FaCheck className="sign lg:h-[1.5rem] lg:w-[1.5rem] h-[1.2rem] w-[1.2rem]" />
       </button>
       {errorToast && (
         <ErrorToast
           toastText={errorToastMessage}
           booleanProp={errorToast}
-          widthProp="sm:w-[15%] w-[25%]"
-          topProp="sm:top-[-2rem] top-[-1.5rem] "
+          widthProp="sm:w-[10%] w-[20%]"
+          topProp="sm:top-[-2rem] top-[-1.45rem]"
           centeringProp="right-0"
         />
       )}
-    </>
+    </form>
   );
 }
 

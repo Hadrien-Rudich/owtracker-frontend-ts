@@ -1,5 +1,5 @@
 // import { KeyboardEvent } from 'react';
-import { ImCross } from 'react-icons/im';
+import { FaTimes } from 'react-icons/fa';
 import { gameStore } from '../../../store/gameStore';
 
 function CancelGameEdit() {
@@ -11,9 +11,9 @@ function CancelGameEdit() {
 
   return (
     <button type="button" className="text-warning hover:scale-125">
-      <ImCross
+      <FaTimes
         onClick={handleCancelEdit}
-        className="sign lg:h-[1.3rem] lg:w-[1.3rem] h-[1rem] w-[1rem]"
+        className="sign lg:h-[1.5rem] lg:w-[1.5rem] h-[1.2rem] w-[1.2rem]"
       />
     </button>
   );

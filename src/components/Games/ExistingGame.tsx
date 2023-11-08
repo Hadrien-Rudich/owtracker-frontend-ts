@@ -40,7 +40,7 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
   const HeroesComponent = isUpdatingGame ? EditHeroes : Heroes;
 
   return (
-    <div className="ExistingGame_container flexdiv col tracking-wider w-full">
+    <div className="ExistingGame_container w-full tracking-widest">
       <div
         key={gameObj.id}
         onClick={() => handleGameSelection(gameObj)}
@@ -60,30 +60,30 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
             selectedGame,
             isUpdatingGame,
             isCreatingGame
-          )} gameHistory_container game relative flexdiv gap-2`}
+          )} newGame_container game relative flexdiv`}
         >
-          <div className="Map_container md:w-[40%] w-[30%] mapImage_container">
+          <div className="Map_container sm:w-[50%] w-[30%]">
             <MapComponent gameObj={gameObj} imgHeight="h-12" />
           </div>
-          <div className="Heroes_container flex md:justify-center justify-start gap-0.5 md:w-[40%] w-[37%]">
+          <div className="Heroes_container flexdiv gap-0.5 sm:w-[30%] w-[35%]">
             <HeroesComponent
               gameObj={gameObj}
               imgHeight="sm:h-[2.25rem] h-[2rem]"
             />
           </div>
-          <div className="details_container flex md:justify-center justify-start items-center md:w-[20%] w-[33%]">
-            <div className="Result_container md:w-[37.5%] w-[17.5%]">
+          <div className="details_container flexdiv sm:w-[20%] w-[35%]">
+            <div className="Result_container w-[35%] flexdiv">
               <ResultComponent gameObj={gameObj} />
             </div>
-            <div className="Date_container w-[40%]">
+            <div className="Date_container w-[35%] flexdiv ">
               <DateComponent gameObj={gameObj} />
             </div>
-            <div className="gamebuttons_container flex  justify-around md:w-[22.5%] w-[40%]">
+            <div className="gamebuttons_container w-[30%] flexdiv">
               <EditGameButtons gameObj={gameObj} />
             </div>
           </div>
           {!isUpdatingGame && (
-            <div className="New_container">
+            <div className="New_container flexdiv">
               <New gameObj={gameObj} />
             </div>
           )}

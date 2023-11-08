@@ -22,17 +22,17 @@ function NewGameHeroes() {
   };
 
   return (
-    <div className="NewGameHeroes_container relative flexdiv w-[85%]">
+    <div className="NewGameHeroes_container relative flexdiv w-[90%] ">
       {heroesErrorToast && (
         <ErrorToast
           toastText={heroesErrorToastMessage}
           booleanProp={heroesErrorToast}
           widthProp="sm:w-[50%] w-[100%]"
-          topProp="sm:top-[-3.15rem] top-[-2.6rem] "
+          topProp="sm:top-[-2.1rem] top-[-1.55rem] "
           centeringProp=""
         />
       )}
-      <div className="w-full absolute top-[-1rem]   bg-activeColor">
+      <div className="w-full bg-activeColor">
         {isDropDownActive ? (
           <HeroesDropDown toggleDropDown={toggleDropDown} />
         ) : (
@@ -59,7 +59,9 @@ function NewGameHeroes() {
               >
                 <div className="map_container flexdiv ">
                   <div className="flexdiv">
-                    <p className="text-xl tracking-wider">HEROES</p>
+                    <p className="sm:text-lg text-base tracking-widest">
+                      HEROES
+                    </p>
                   </div>
                 </div>
               </button>

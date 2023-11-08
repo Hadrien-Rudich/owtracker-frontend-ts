@@ -1,5 +1,6 @@
 // import { KeyboardEvent } from 'react';
-import { ImCross } from 'react-icons/im';
+import { FaTimes } from 'react-icons/fa';
+
 import { gameStore } from '../../../store/gameStore';
 
 function CancelNewGame() {
@@ -18,14 +19,12 @@ function CancelNewGame() {
   };
 
   return (
-    <div className="flex">
-      <button type="button" className="text-warning hover:scale-125">
-        <ImCross
-          onClick={handleCancelCreation}
-          className="sign lg:h-[1.2rem] lg:w-[1.2rem] h-[1.4rem] w-[1.4rem]"
-        />
-      </button>
-    </div>
+    <button type="button" className="text-warning">
+      <FaTimes
+        onClick={handleCancelCreation}
+        className="sign lg:h-[1.5rem] lg:w-[1.5rem] h-[1.2rem] w-[1.2rem]"
+      />
+    </button>
   );
 }
 

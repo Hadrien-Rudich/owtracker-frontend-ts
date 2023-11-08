@@ -23,18 +23,20 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
           />
 
           <div className="absolute inset-0">
-            <div className="flexdiv gap-4 absolute top-1/2 left-0 transform -translate-y-1/2 text-secondaryText px-1 bg-mainText bg-opacity-40">
-              <p className="flex items-center sm:h-12 sm:w-28 h-6 w-16 sm:text-lg sm:tracking-wider text-base truncate text-left">
-                {gameObj.map}
-              </p>
+            <div className="flexdiv absolute  top-0 left-0 text-secondaryText px-1 bg-mainText bg-opacity-40 xl:w-[15%] lg:w-[18%] sm:w-[22%] sm:h-6 h-5">
+              <div className="flexdiv w-full gap-2">
+                <p className="w-full sm:text-base text-sm tracking-widest  truncate text-left">
+                  {gameObj.map}
+                </p>
 
-              <img
-                className="sm:h-8 sm:w-8 sm:block hidden"
-                src={`images/mapTypes/${capitalizeFirstLetter(
-                  gameObj.mapType
-                )}_icon.svg`}
-                alt="map type icon"
-              />
+                <img
+                  className="sm:h-6 sm:w-6 sm:block hidden"
+                  src={`images/mapTypes/${capitalizeFirstLetter(
+                    gameObj.mapType
+                  )}_icon.svg`}
+                  alt="map type icon"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -58,8 +60,8 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
             src={`images/maps/${mapObj.imageUrl}`}
             alt=""
           />
-          <div className="absolute flexdiv px-1 bg-mainText bg-opacity-40 w-1/4 h-6  invisible group-hover:visible ">
-            <p className="text-xl absolute truncate tracking-wider text-secondaryText invisible group-hover:visible ">
+          <div className="absolute flexdiv px-1 bg-mainText bg-opacity-40 sm:w-1/4 h-6  invisible group-hover:visible ">
+            <p className="sm:text-base text-sm absolute truncate tracking-widest text-secondaryText invisible group-hover:visible ">
               {mapObj.label}
             </p>
           </div>

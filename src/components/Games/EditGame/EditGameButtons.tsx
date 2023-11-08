@@ -13,9 +13,9 @@ function EditGameButtons({ gameObj }: { gameObj: GameData }) {
     <div
       className={`${
         gameObj.id === selectedGame.id ? 'flex' : 'hidden'
-      } GameButtons_container`}
+      } EditGameButtons_container`}
     >
-      <div className="flexdiv gap-2">
+      <div className="flex gap-1 justify-around">
         {!isUpdatingGame &&
         !isCreatingGame &&
         gameObj.id === selectedGame.id ? (

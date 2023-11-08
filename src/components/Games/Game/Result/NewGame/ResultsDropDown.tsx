@@ -1,4 +1,4 @@
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import { getResultClassNameFromResult } from '../../../../../utils/classNameUtils';
 
@@ -15,6 +15,7 @@ function ResultsDropDown({ toggleDropDown }: ResultsDropDownProps) {
   } = gameStore();
 
   const results = [{ label: 'Win' }, { label: 'Loss' }, { label: 'Draw' }];
+  const isLargeScreen = window.innerWidth > 768;
 
   const selectResult = (result: string) => {
     const formattedResult = result.toLowerCase();
@@ -24,20 +25,24 @@ function ResultsDropDown({ toggleDropDown }: ResultsDropDownProps) {
   };
 
   return (
-    <div className="ResultsDropDown_container ring-2 ring-fourthColor relative">
+    <div className="ResultsDropDown_container w-[75%] ring-2 ring-fourthColor absolute top-[-1rem]">
       {selectedGameResult !== '' && (
         <button
           className={`${getResultClassNameFromResult(
             selectedGameResult
-          )} w-full relative`}
+          )} w-full relative h-8`}
           type="button"
           onClick={toggleDropDown}
         >
-          <p>{selectedGameResult}</p>
+          <p>
+            {isLargeScreen
+              ? selectedGameResult
+              : selectedGameResult.slice(0, 1)}
+          </p>
         </button>
       )}
 
-      <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-4 w-4 top-[0.5rem] right-[-0.1rem] pointer-events-none lg:block hidden" />
       <ul className="results_container">
         {results.map(
           (result) =>
@@ -45,11 +50,11 @@ function ResultsDropDown({ toggleDropDown }: ResultsDropDownProps) {
               <li key={result.label}>
                 <button
                   type="button"
-                  className={`w-full bg-activeColor bg-active${result.label} hover:bg-activeColor`}
+                  className={`w-full bg-activeColor bg-active${result.label} hover:bg-activeColor h-8`}
                   onClick={() => selectResult(result.label)}
                   id={result.label}
                 >
-                  <p>{result.label}</p>
+                  {isLargeScreen ? result.label : result.label.slice(0, 1)}
                 </button>
               </li>
             )

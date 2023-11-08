@@ -31,9 +31,9 @@ function EditGameMode({ gameObj }: { gameObj: GameData }) {
           type="button"
           value={gameObj.id}
           onClick={handleEdit}
-          className="hover:scale-125"
+          className=""
         >
-          <RiEditFill className="sign lg:h-[1.55rem] lg:w-[1.55rem] h-[1.25rem] w-[1.25rem]" />
+          <RiEditFill className="sign lg:h-[1.5rem] lg:w-[1.5rem] h-[1.2rem] w-[1.2rem]" />
         </button>
       )}
     </div>

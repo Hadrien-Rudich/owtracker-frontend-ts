@@ -16,7 +16,7 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
     return <Heroes gameObj={gameObj} imgHeight="sm:h-[2.25rem] h-[2rem]" />;
   }
   return (
-    <div className="EditHeroes_container relative flexdiv sm:w-[80%] w-full">
+    <div className="EditHeroes_container relative flexdiv w-[90%]">
       <div className="w-full relative">
         {isDropDownActive ? (
           <HeroesDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />

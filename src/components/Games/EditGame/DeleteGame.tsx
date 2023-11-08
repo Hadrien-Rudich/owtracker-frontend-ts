@@ -9,11 +9,7 @@ function DeleteGame({ gameObj }: { gameObj: GameData }) {
     mutateGame();
   };
   return (
-    <button
-      type="button"
-      onClick={handleDeleteClick}
-      className=" text-warning hover:scale-125"
-    >
+    <button type="button" onClick={handleDeleteClick} className=" text-warning">
       <FaTrashAlt className="sign lg:h-[1.4rem] lg:w-[1.4rem] h-[1.1rem] w-[1.1rem]" />
     </button>
   );

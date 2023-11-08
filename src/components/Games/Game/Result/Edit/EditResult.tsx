@@ -18,13 +18,13 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
   }
 
   return (
-    <div className="EditResult_container">
-      <div className="results_container flexdiv w-full relative ">
+    <div className="EditResult_container w-full ">
+      <div className="results_container relative flexdiv w-full">
         {isDropDownActive ? (
           <ResultsDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
-          <div className="w-[90%]">
-            {selectedGame.result === gameObj.result ? (
+          <div className="w-[75%] relative">
+            {/* {selectedGame.result === gameObj.result ? (
               <button
                 className={`${getResultClassNameFromResult(
                   gameObj.result
@@ -34,18 +34,18 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
               >
                 <Result gameObj={gameObj} />
               </button>
-            ) : (
-              <button
-                className={`${getResultClassNameFromResult(
-                  selectedGame.result
-                )} w-full relative ring-2`}
-                type="button"
-                onClick={toggleDropDown}
-              >
-                <Result gameObj={selectedGame} />
-              </button>
-            )}
-            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-[0.3rem] right-[0.22rem] pointer-events-none lg:block hidden" />
+            ) : ( */}
+            <button
+              className={`${getResultClassNameFromResult(
+                selectedGame.result
+              )} w-full ring-2 flexdiv tracking-widest`}
+              type="button"
+              onClick={toggleDropDown}
+            >
+              <Result gameObj={selectedGame} />
+            </button>
+            {/* )} */}
+            <MdOutlineKeyboardArrowDown className="absolute h-4 w-4 top-1/2 right-[-0.1rem] pointer-events-none lg:block hidden" />
           </div>
         )}
       </div>

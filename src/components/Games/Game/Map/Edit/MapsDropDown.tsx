@@ -46,7 +46,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
         <div className="currentMap_container">
           <Map gameObj={currentGame} imgHeight="h-8" />
           <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 xl:w-1/4 md:w-1/2 w-full h-6">
-            <p className="sm:text-xl text-lg absolute truncate sm:tracking-wider tracking-normal text-secondaryText">
+            <p className="sm:text-lg text-base absolute truncate sm:tracking-widest text-secondaryText">
               {currentGame.map}
             </p>
           </div>

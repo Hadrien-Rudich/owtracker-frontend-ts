@@ -94,7 +94,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
             toastText={errorToastMessage}
             booleanProp={errorToast}
             widthProp="w-[100%]"
-            topProp="top-[-2rem]"
+            topProp="sm:top-[-2rem] top-[-1.45rem]"
             centeringProp="left-[0%] right-[0%]"
           />
         )}

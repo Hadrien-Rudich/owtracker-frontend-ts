@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import type { GameData } from '../../../../../types/store/gameTypes';
 import Map from '../Map';
-import MapDropDown from './MapsDropDown';
+import MapsDropDown from './MapsDropDown';
 
 function EditMap({ gameObj }: { gameObj: GameData }) {
   const { selectedGame, selectedGameMap } = gameStore();
@@ -17,11 +17,11 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
   }
 
   return (
-    <div className="EditMap_container flexdiv">
-      <div className="relative w-[95%]">
+    <div className="EditMap_container flexdiv pl-[0.05rem] sm:pl-[0.25rem]">
+      <div className="relative w-[95%] ">
         <div className="w-full">
           {isDropDownActive ? (
-            <MapDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
+            <MapsDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
           ) : (
             <div className="mapimage_container flexdiv">
               {/* {selectedGameMap === selectedGame.map ? (
@@ -47,8 +47,8 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               >
                 <Map gameObj={selectedGame} imgHeight="h-8" />
                 <div className="map_container flexdiv">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 xl:w-1/4 md:w-1/2 w-full h-6">
-                    <p className="sm:text-xl text-lg absolute truncate sm:tracking-wider tracking-normal text-secondaryText">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 sm:h-6 h-5">
+                    <p className="sm:text-lg text-base truncate text-secondaryText tracking-widest">
                       {selectedGame.map}
                     </p>
                   </div>

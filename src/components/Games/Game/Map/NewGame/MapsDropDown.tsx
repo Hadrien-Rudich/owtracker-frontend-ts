@@ -1,4 +1,4 @@
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import Map from '../Map';
 import { gameDataStore } from '../../../../../store/gameDataStore';
@@ -19,7 +19,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container ring-2  ring-fourthColor bg-mainColor ">
+    <div className="mapImage_container w-full absolute top-[-1rem] ring-2 ring-fourthColor bg-mainColor">
       <button
         className="w-full relative"
         type="button"
@@ -40,7 +40,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
             ))}
         </div>
       </button>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container  bg-mainColor">
         <div className="MapTypes_container flexdiv pb-5 ">
           <MapTypes />
