@@ -51,7 +51,7 @@ function DateWidget({
           setGameObjectDate(date);
           selectGameDateInFormat(formatDateForGameEdit(date));
         }}
-        className="h-8 ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-thirdColor focus:outline-none tracking-widest"
+        className="h-8 ring-2 w-full z-50 text-center hover:cursor-pointer focus:ring-thirdColor focus:outline-none tracking-widest shadow-md"
         wrapperClassName="w-full"
         onCalendarOpen={() => setIsCalendarOpen(true)}
         onCalendarClose={() => setIsCalendarOpen(false)}

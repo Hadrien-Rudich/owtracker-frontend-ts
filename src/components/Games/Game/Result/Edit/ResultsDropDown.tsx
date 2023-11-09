@@ -34,7 +34,7 @@ function ResultsDropDown({ gameObj, toggleDropDown }: ResultsDropDownProps) {
   };
 
   return (
-    <div className="ResultsDropDown_container w-[75%] ring-2 ring-thirdColor absolute top-[-1rem]">
+    <div className="ResultsDropDown_container w-[75%] ring-2 ring-thirdColor absolute top-[-1rem] shadow-md">
       <button
         className={`${getResultClassNameFromResult(
           currentGame.result.charAt(0).toUpperCase() +

@@ -10,6 +10,12 @@
   font-style: normal;
 }
 
+@media (-webkit-device-pixel-ratio: 2.5) {
+  * {
+    zoom: 99%;
+  }
+}
+
 .bg-image2 {
   position: fixed;
   top: 0;
@@ -51,19 +57,19 @@ body {
   @apply flex flex-col items-center justify-center content-center
    sm:gap-10 gap-5 py-5 sm:py-10
   sm:w-80  w-60 
-  bg-mainColor shadow-lg rounded-sm;
+  bg-mainColor shadow-md rounded-sm;
 }
 
 .hamburgermenucontainer {
   @apply md:hidden flex absolute 
-  xxs:top-1 xs:top-[0.4rem] sm:top-2 md:top-0 top-[0.05rem]
+  xxs:top-1 xs:top-[0.4rem] sm:top-1 md:top-0 top-[0.05rem]
   xxs:right-[0.8rem] sm:right-[1rem] right-[0.65rem];
 }
 
 .hamburgericon {
   @apply sm:w-20 xs:w-[4.5rem] w-16
   sm:h-20  xs:h-[4.5rem] h-16 
-  drop-shadow-lg;
+  drop-shadow-md;
 }
 
 .hamburger {
@@ -75,11 +81,11 @@ body {
 .hamburger.active {
   @apply xs:top-[4.25rem] sm:top-[5.5rem] top-[3.9rem] 
   xxs:right-[-0.8rem] sm:right-[-1rem] right-[-0.65rem]
-  ease-out shadow-lg bg-activeColor;
+  ease-out shadow-md bg-activeColor;
 }
 
 .hamburger.inactive {
-  @apply top-[-13.5rem] ease-in
+  @apply top-[-16rem] ease-in
   xxs:right-[-0.8rem] sm:right-[-1rem] right-[-0.65rem]
   bg-activeColor;
 }
@@ -100,7 +106,7 @@ right-0;
 }
 
 .accountdropdown.active {
-  @apply top-0 ease-out shadow-lg bg-mainColor;
+  @apply top-0 ease-out shadow-md bg-mainColor;
 }
 
 .accountdropdown.inactive {
@@ -117,11 +123,11 @@ right-0;
   @apply bg-thirdColor text-secondaryText;
 }
 .accountdropdownoption.inactive {
-  @apply hover:bg-fifthColor hover:shadow-lg;
+  @apply hover:bg-fifthColor hover:shadow-md;
 }
 
 .result {
-  @apply text-mainText shadow-lg;
+  @apply text-mainText shadow-md;
 }
 
 .headertab {
@@ -133,11 +139,11 @@ right-0;
 }
 
 .headertab.active {
-  @apply bg-thirdColor text-secondaryText shadow-lg;
+  @apply bg-thirdColor text-secondaryText shadow-md;
 }
 
 .headertab.inactive {
-  @apply hover:bg-fifthColor hover:shadow-lg;
+  @apply hover:bg-fifthColor hover:shadow-md;
 }
 
 .accounttab {
@@ -150,7 +156,7 @@ right-0;
 
 .accounttab.active {
   @apply bg-thirdColor text-secondaryText 
-  shadow-lg z-20;
+  shadow-md z-20;
 }
 
 .accounttab.inactive {
@@ -185,7 +191,7 @@ right-0;
   /* divide-x-[0.05rem] divide-mainText  */
   absolute hidden  top-3 right-[-11rem]  
   bg-activeColor text-sm text-left rounded-sm tracking-wide
-  ring-[0.1rem] ring-activeGrayColor  shadow-lg;
+  ring-[0.1rem] ring-activeGrayColor shadow-md;
 }
 
 .profile {
@@ -199,12 +205,12 @@ right-0;
 }
 
 .profile.selected {
-  @apply scale-110 ring-2 ring-thirdColor shadow-lg;
+  @apply scale-110 ring-2 ring-thirdColor shadow-md;
 }
 
 .profile.card.active {
   @apply shadow-inner 
-  hover:shadow-lg duration-150;
+  hover:shadow-md duration-150;
 }
 
 .profile.card.disabled {
@@ -213,7 +219,7 @@ right-0;
 
 .profileheader {
   @apply bg-thirdColor sm:w-80 w-60 sm:h-10 h-8
-      tracking-widest rounded-b-none rounded-sm shadow-lg absolute
+      tracking-widest rounded-b-none rounded-sm shadow-md absolute
       sm:top-[-2.5rem] top-[-2rem]
 sm:text-xl text-lg text-secondaryText;
 }
@@ -230,11 +236,11 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .list {
-  @apply shadow-lg rounded-sm;
+  @apply shadow-md rounded-sm;
 }
 
 .list.selected {
-  @apply scale-105 z-10 rounded-sm ring-2 ring-thirdColor;
+  @apply scale-105 z-10 rounded-sm ring-2 ring-thirdColor shadow-md;
 }
 
 .list.unselected {
@@ -242,11 +248,11 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .game {
-  @apply flexdiv w-full h-12 bg-mainColor hover:shadow-lg;
+  @apply flexdiv w-full h-12 bg-mainColor hover:shadow-md;
 }
 
 .game.selected {
-  @apply bg-activeColor opacity-100 ring-2 ring-thirdColor shadow-lg;
+  @apply bg-activeColor opacity-100 ring-2 ring-thirdColor shadow-md;
 }
 
 .game.unselected {
@@ -254,7 +260,7 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .sign {
-  @apply hover:scale-110 drop-shadow-lg  opacity-40 hover:opacity-100 duration-150 ease-in-out;
+  @apply hover:scale-110 drop-shadow-md  opacity-40 hover:opacity-100 duration-150 ease-in-out;
 }
 
 .progressBar {

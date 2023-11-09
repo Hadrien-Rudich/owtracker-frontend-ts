@@ -5,6 +5,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import LineChart from './LineChart';
 import DoughnutChart from './DoughnutChart';
 import HorizontalBarChart from './HorizontalBarChart';
+import NotFound from '../NotFound';
 
 function Stats() {
   const { gamesData } = gameStore();
@@ -17,11 +18,7 @@ function Stats() {
 
   return (
     <div className="Stats_container flexdiv w-full lg:my-[8.5rem] my-[4.5rem] container mx-auto rounded-sm relative">
-      {isError && gamesData.length === 0 && (
-        <div className="absolute top-[-5.5rem] right-1/4 left-1/4 text-5xl w-1/2 text-activeColor ">
-          NO STATS FOUND
-        </div>
-      )}
+      {isError && gamesData.length === 0 && <NotFound propText="STATS" />}
       {isSuccess && gamesData.length > 0 && (
         <div className="flexdiv w-full">
           <div className="my-6 bg-mainColor w-full flexdiv">

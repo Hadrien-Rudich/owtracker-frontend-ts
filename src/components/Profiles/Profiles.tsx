@@ -7,6 +7,7 @@ import AddProfile from './AddProfile';
 import Profile from './Profile';
 import useProfilesQuery from '../../hooks/profiles/useProfilesQuery';
 import SuccessToast from '../SuccessToast';
+import NotFound from '../NotFound';
 
 function Profiles() {
   const navigate = useNavigate();
@@ -40,14 +41,8 @@ function Profiles() {
 
   return (
     <div className="Profiles_container flexdiv col lg:my-[8.5rem] my-[4.5rem] relative">
-      {isError && profilesData.length === 0 && (
-        <div className="absolute lg:top-[-5.5rem] top-[-3.5rem] right-1/4 left-1/4 lg:text-5xl text-3xl w-1/2 text-activeColor ">
-          NO PROFILES FOUND
-        </div>
-      )}
+      {isError && profilesData.length === 0 && <NotFound propText="PROFILES" />}
       <div
-        // className="flexdiv sm:w-80 w-60 h-12 mb-12 bg-mainColor">
-
         className={`${
           isUpdatingProfile ? 'grayscale pointer-events-none' : ''
         }  

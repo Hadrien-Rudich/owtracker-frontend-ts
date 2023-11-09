@@ -56,7 +56,7 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
   };
 
   return (
-    <div className="flexdiv row gap-6">
+    <div className="flexdiv">
       <form onSubmit={handleSubmit}>
         {profileObj.label === selectedProfile.label && (
           <button className=" bg-activeColor scale-110" type="button">
@@ -78,13 +78,13 @@ function UpdateProfile({ profileObj }: { profileObj: ProfileData }) {
             booleanProp={errorToast}
             widthProp="w-[100%]"
             topProp="sm:top-[-2.25rem] top-[-1.75rem]"
-            centeringProp="left-[-9%] right-[0%]"
+            centeringProp=""
           />
         )}
       </form>
       <div
         className="button_container flex sm:flex-row flex-col gap-2 absolute justify-center content-center items-center 
-      sm:right-[-2rem] right-[-0.35rem]"
+      sm:right-[-4rem] right-[-2.25rem]"
       >
         <button
           type="submit"

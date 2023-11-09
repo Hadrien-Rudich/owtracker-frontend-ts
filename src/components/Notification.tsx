@@ -3,7 +3,7 @@
 interface NotificationProps {
   message: string;
   type: string;
-  onClose: () => void;
+  // onClose: () => void;
 }
 
 function Notification({

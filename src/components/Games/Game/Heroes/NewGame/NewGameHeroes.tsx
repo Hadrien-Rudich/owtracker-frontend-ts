@@ -39,7 +39,7 @@ function NewGameHeroes() {
           <div className="heroesImages_container flexdiv ">
             {selectedGameHeroes.length > 0 ? (
               <button
-                className="w-full relative ring-2 flexdiv"
+                className="flexdiv w-full relative ring-2 shadow-md"
                 type="button"
                 onClick={toggleDropDown}
               >
@@ -53,7 +53,7 @@ function NewGameHeroes() {
               </button>
             ) : (
               <button
-                className="w-full relative ring-2 flexdiv h-8"
+                className="flexdiv w-full relative ring-2  h-8 shadow-md"
                 type="button"
                 onClick={toggleDropDown}
               >

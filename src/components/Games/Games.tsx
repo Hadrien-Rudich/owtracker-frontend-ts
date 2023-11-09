@@ -7,6 +7,7 @@ import SuccessToast from '../SuccessToast';
 import { useGamesQuery } from '../../hooks/games/useGamesQuery';
 // import MonthTabs from './MonthTabs';
 import Game from './Game';
+import NotFound from '../NotFound';
 
 function Games() {
   const navigate = useNavigate();
@@ -38,11 +39,7 @@ function Games() {
 
   return (
     <div className="Games_container lg:my-[8.5rem] my-[4.5rem] container mx-auto rounded-sm relative">
-      {isError && gamesData.length === 0 && (
-        <div className="absolute top-[-5.5rem] right-1/4 left-1/4 text-5xl w-1/2 text-activeColor ">
-          NO GAMES FOUND
-        </div>
-      )}
+      {isError && gamesData.length === 0 && <NotFound propText="GAMES" />}
 
       {gameSavedToast && (
         <SuccessToast

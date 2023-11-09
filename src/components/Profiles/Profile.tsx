@@ -38,12 +38,9 @@ function Profile() {
     // className={`${isCreatingGame ? 'bg-mainColor grayscale' : null}
     // Profile_container flex flex-col gap-4`}
 
-    <div className="Profile_container flex flex-col gap-4 ">
+    <div className="Profile_container flexdiv col gap-4 ">
       {profilesData.map((p) => (
-        <div
-          className="profile_container flex ml-8 gap-2 relative"
-          key={p.label}
-        >
+        <div className="profile_container flexdiv gap-2 relative" key={p.label}>
           {isUpdatingProfile && p.label === selectedProfile.label ? (
             <UpdateProfile profileObj={p} />
           ) : (
@@ -76,10 +73,10 @@ function Profile() {
           )}
 
           {p.label === selectedProfile.label && !isUpdatingProfile && (
-            <div className="button_container">
+            <>
               <DeleteProfile profileObj={p} />
               <EditProfile profileObj={p} />
-            </div>
+            </>
           )}
         </div>
       ))}

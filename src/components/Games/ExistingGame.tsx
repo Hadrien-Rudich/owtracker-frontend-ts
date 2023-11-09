@@ -46,7 +46,7 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
         onClick={() => handleGameSelection(gameObj)}
         role="button"
         tabIndex={0}
-        className="w-full flexdiv border-[0.01rem] border-activeColor"
+        className="w-full flexdiv border-[0.01rem] border-activeColor shadow-md"
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             handleGameSelection(gameObj);

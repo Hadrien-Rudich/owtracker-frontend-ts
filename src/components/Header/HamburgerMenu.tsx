@@ -71,6 +71,20 @@ function HamburgerMenu() {
               {location.label}
             </NavLink>
           ))}
+          <NavLink
+            key="account"
+            className={({ isActive }) =>
+              ` ${
+                isActive
+                  ? 'bg-thirdColor text-secondaryText'
+                  : 'hover:bg-secondaryColor'
+              } w-36 rounded-sm `
+            }
+            to="/account"
+            onClick={toggleHamburgerMenu}
+          >
+            Account
+          </NavLink>
           <button
             type="button"
             onClick={handleLogOut}

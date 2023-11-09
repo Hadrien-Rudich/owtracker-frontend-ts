@@ -42,10 +42,10 @@ function AccountDropDown() {
         className={`${
           showAccountDropDown
             ? 'bg-mainColor'
-            : 'bg-activeColor hover:bg-fifthColor hover:shadow-lg'
+            : 'bg-activeColor hover:bg-fifthColor hover:shadow-md '
         }  accounticon flexdiv duration-[800ms]`}
       >
-        <FaRegUser className="h-10 w-10 drop-shadow-lg" />
+        <FaRegUser className="h-10 w-10 drop-shadow-md" />
       </button>
       <div className="relative">
         <ul

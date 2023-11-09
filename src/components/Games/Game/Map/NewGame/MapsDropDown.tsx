@@ -19,30 +19,37 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container w-full absolute top-[-1rem] ring-2 ring-fourthColor bg-mainColor">
-      <button
-        className="w-full relative"
-        type="button"
+    <div className="mapImage_container w-full absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor shadow-md">
+      <div
+        className="h-8 w-full relative "
         onClick={toggleDropDown}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            toggleDropDown();
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
-        <div className="currentMap_container">
-          {mapsData
-            .filter((map) => map.label === selectedGameMap)
-            .map((mapObj) => (
-              <div key={(mapObj.id, mapObj.label)}>
-                <Map mapObj={mapObj} imgHeight="h-8" />
-                <div className="absolute flexdiv top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2  px-1 bg-mainText bg-opacity-40 h-8 w-1/4 ">
-                  <p className="text-xl truncate tracking-wider text-secondaryText text-center">
-                    {selectedGameMap}
-                  </p>
+        {selectedGameMap !== '' ? (
+          <div className="currentMap_container bg-activeColor">
+            {mapsData
+              .filter((map) => map.label === selectedGameMap)
+              .map((mapObj) => (
+                <div key={mapObj.id}>
+                  <Map mapObj={mapObj} imgHeight="h-8" />
                 </div>
-              </div>
-            ))}
-        </div>
-      </button>
+              ))}
+          </div>
+        ) : (
+          <div className="h-8 flexdiv bg-activeColor">
+            <p className="sm:text-lg text-sm truncate tracking-wider">MAP</p>
+          </div>
+        )}
+      </div>
       <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
-      <div className="mapsDropDown_container  bg-mainColor">
-        <div className="MapTypes_container flexdiv pb-5 ">
+      <div className="mapsDropDown_container bg-mainColor">
+        <div className="MapTypes_container flexdiv h-16">
           <MapTypes />
         </div>
         <div className="filteredMaps_container flex flex-col divide-y-2 divide-activeColor pb-[0.15rem]">

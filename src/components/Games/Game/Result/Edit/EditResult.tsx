@@ -38,7 +38,7 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
             <button
               className={`${getResultClassNameFromResult(
                 selectedGame.result
-              )} w-full ring-2 flexdiv tracking-widest`}
+              )} flexdiv w-full ring-2  tracking-widest shadow-md`}
               type="button"
               onClick={toggleDropDown}
             >

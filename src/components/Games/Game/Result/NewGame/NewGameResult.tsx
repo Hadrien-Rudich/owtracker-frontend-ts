@@ -41,7 +41,7 @@ function NewGameResult() {
               <button
                 className={`${getResultClassNameFromResult(
                   selectedGameResult
-                )} w-full ring-2 h-8`}
+                )} w-full ring-2 h-8 shadow-md`}
                 type="button"
                 onClick={toggleDropDown}
               >
@@ -53,7 +53,7 @@ function NewGameResult() {
               <button
                 className={`${getResultClassNameFromResult(
                   selectedGameResult
-                )} w-full relative ring-2 h-8 `}
+                )} w-full relative ring-2 h-8 shadow-md`}
                 type="button"
                 onClick={toggleDropDown}
               >

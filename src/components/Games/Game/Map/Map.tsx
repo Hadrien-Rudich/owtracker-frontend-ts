@@ -23,9 +23,9 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
           />
 
           <div className="absolute inset-0">
-            <div className="flexdiv absolute  top-0 left-0 text-secondaryText px-1 bg-mainText bg-opacity-40 xl:w-[15%] lg:w-[18%] sm:w-[22%] sm:h-6 h-5">
+            <div className="flexdiv absolute  top-0 left-0 text-secondaryText sm:px-1 px-0.5 bg-mainText bg-opacity-40 xl:w-[15%] lg:w-[18%] sm:w-[22%] sm:h-12 h-4">
               <div className="flexdiv w-full gap-2">
-                <p className="w-full sm:text-base text-sm tracking-widest  truncate text-left">
+                <p className="w-full sm:text-base text-sm sm:tracking-widest tracking-wider truncate text-left">
                   {gameObj.map}
                 </p>
 
@@ -43,17 +43,15 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
       ) : (
         gameObj &&
         (isUpdatingGame || isCreatingGame) && (
-          <div className="">
-            <img
-              className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
-              src={`images/maps/${gameObj.mapImageUrl}`}
-              alt=""
-            />
-          </div>
+          <img
+            className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
+            src={`images/maps/${gameObj.mapImageUrl}`}
+            alt=""
+          />
         )
       )}
 
-      {mapObj && (
+      {mapObj && !isUpdatingGame && !isCreatingGame ? (
         <div className="map_container flexdiv group">
           <img
             className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none h-14`}
@@ -61,11 +59,27 @@ function Map({ gameObj, mapObj, imgHeight }: MapProps) {
             alt=""
           />
           <div className="absolute flexdiv px-1 bg-mainText bg-opacity-40 sm:w-1/4 h-6  invisible group-hover:visible ">
-            <p className="sm:text-base text-sm absolute truncate tracking-widest text-secondaryText invisible group-hover:visible ">
+            <p className="sm:text-base text-sm absolute truncate sm:tracking-widest tracking-wider text-secondaryText invisible group-hover:visible ">
               {mapObj.label}
             </p>
           </div>
         </div>
+      ) : (
+        mapObj &&
+        (isUpdatingGame || isCreatingGame) && (
+          <div className="relative">
+            <img
+              className={`${imgHeight} w-full object-cover rounded-sm rounded-r-none`}
+              src={`images/maps/${mapObj.imageUrl}`}
+              alt=""
+            />
+            <div className="flexdiv absolute  top-0 left-0 sm:px-1 px-0.5 bg-mainText bg-opacity-40 sm:h-6 h-4">
+              <p className=" text-activeColor sm:text-base text-sm sm:tracking-widest tracking-wider">
+                {mapObj.label}
+              </p>
+            </div>
+          </div>
+        )
       )}
     </>
   );

@@ -41,14 +41,14 @@ function EditMap({ gameObj }: { gameObj: GameData }) {
               </button>
             ) : ( */}
               <button
-                className="w-full relative ring-2"
+                className="w-full relative ring-2 shadow-md"
                 type="button"
                 onClick={toggleDropDown}
               >
                 <Map gameObj={selectedGame} imgHeight="h-8" />
                 <div className="map_container flexdiv">
-                  <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 sm:h-6 h-5">
-                    <p className="sm:text-lg text-base truncate text-secondaryText tracking-widest">
+                  <div className="flexdiv absolute  top-0 left-0 sm:px-1 px-0.5 bg-mainText bg-opacity-40 sm:h-6 h-4">
+                    <p className=" text-activeColor sm:text-base text-sm sm:tracking-widest tracking-wider">
                       {selectedGame.map}
                     </p>
                   </div>

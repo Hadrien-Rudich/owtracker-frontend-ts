@@ -15,7 +15,7 @@ function NewGame() {
       <div
         role="button"
         tabIndex={0}
-        className="w-full flexdiv border-[0.01rem] border-activeColor"
+        className="w-full flexdiv border-[0.01rem] border-activeColor shadow-md"
       >
         <div className="newGame_container game relative">
           <div className="Map_container sm:w-[50%] w-[30%]">

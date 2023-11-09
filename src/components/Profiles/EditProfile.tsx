@@ -15,7 +15,7 @@ function EditProfile({ profileObj }: { profileObj: ProfileData }) {
       type="button"
       value={profileObj.label}
       onClick={handleEditClick}
-      className="absolute top-[0.65rem] left-0 hover:scale-110"
+      className="absolute top-[0.65rem] left-[-0.1rem]"
     >
       <RiEditFill className="sign h-5 w-5" />
     </button>

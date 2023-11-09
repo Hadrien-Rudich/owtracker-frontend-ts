@@ -24,7 +24,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
     setErrorToast(true);
     setTimeout(() => {
       setErrorToast(false);
-    }, 22000);
+    }, 2000);
     return false;
   };
 
@@ -46,7 +46,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor">
+    <div className="heroesImages_container absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor shadow-md">
       {errorToast && (
         <ErrorToast
           toastText={errorToastMessage}
@@ -56,25 +56,36 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
           centeringProp="sm:left-[25%] sm:right-[25%] left-[0%] right-[0%]"
         />
       )}
-      <button
-        className="w-full relative h-12"
-        type="button"
+      <div
+        className="h-8 w-full relative "
         onClick={toggleDropDown}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            toggleDropDown();
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
-        <div className="currentHeroes_container flexdiv">
-          {heroesData
-            .filter((hero) => selectedGameHeroes.includes(hero.slug))
-            .map((heroObj) => (
-              <Heroes
-                key={(heroObj.id, heroObj.label)}
-                heroObj={heroObj}
-                imgHeight="h-8"
-              />
-            ))}
-        </div>
-      </button>
+        {selectedGameHeroes.length > 0 ? (
+          <div className="currentHeroes_container flexdiv">
+            {heroesData
+              .filter((hero) => selectedGameHeroes.includes(hero.slug))
+              .map((heroObj) => (
+                <Heroes
+                  key={(heroObj.id, heroObj.label)}
+                  heroObj={heroObj}
+                  imgHeight="h-8"
+                />
+              ))}
+          </div>
+        ) : (
+          <div className="flexdiv h-8">
+            <p className="sm:text-lg text-base tracking-widest">HEROES</p>
+          </div>
+        )}
+      </div>
       <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
-
       <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor justify-center content-center bg-mainColor py-2">
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
@@ -88,7 +99,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
                     <div
                       className={`${
                         selectedGameHeroes.includes(h.slug)
-                          ? 'ring ring-thirdColor'
+                          ? 'ring ring-thirdColor shadow-md'
                           : 'hover:scale-110 '
                       }    heroes_container bg-activeColor rounded-sm h-9`}
                       key={h.slug}

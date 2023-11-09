@@ -37,21 +37,27 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container w-full absolute top-[-1rem] ring-2  ring-thirdColor bg-mainColor">
-      <button
-        className="w-full relative"
-        type="button"
+    <div className="mapImage_container w-full absolute top-[-1rem] ring-2  ring-thirdColor bg-mainColor shadow-md">
+      <div
+        className="h-8 w-full relative "
         onClick={toggleDropDown}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            toggleDropDown();
+          }
+        }}
+        role="button"
+        tabIndex={0}
       >
         <div className="currentMap_container">
           <Map gameObj={currentGame} imgHeight="h-8" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 flexdiv px-1 bg-mainText bg-opacity-40 xl:w-1/4 md:w-1/2 w-full h-6">
-            <p className="sm:text-lg text-base absolute truncate sm:tracking-widest text-secondaryText">
+          <div className="flexdiv absolute  top-0 left-0 sm:px-1 px-0.5 bg-mainText bg-opacity-40 sm:h-6 h-4">
+            <p className=" text-activeColor sm:text-base text-sm sm:tracking-widest tracking-wider">
               {currentGame.map}
             </p>
           </div>
         </div>
-      </button>
+      </div>
       <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container">
         <div className="MapTypes_container sm:h-14 h-10 flexdiv">

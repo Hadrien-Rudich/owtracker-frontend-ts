@@ -25,8 +25,8 @@ function ErrorToast({
       flexdiv col absolute
       ${widthProp} ${topProp} ${centeringProp}
       sm:h-8 h-6 z-50
-      bg-errorBackground ring-[0.1rem] ring-warning
-       shadow-lg rounded-sm`}
+      bg-errorBackground ring-[0.1rem] ring-warning 
+       shadow-md rounded-sm`}
     >
       <p className="text-activeColor tracking-widest xl:text-base lg:text-sm text-xs">
         {toastText}
