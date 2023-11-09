@@ -82,11 +82,11 @@ function ExistingGame({ gameObj }: { gameObj: GameData }) {
               <EditGameButtons gameObj={gameObj} />
             </div>
           </div>
-          {!isUpdatingGame && (
+          {/* {!isUpdatingGame && (
             <div className="New_container flexdiv">
               <New gameObj={gameObj} />
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

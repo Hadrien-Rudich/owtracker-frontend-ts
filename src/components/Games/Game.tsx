@@ -4,6 +4,7 @@ import { filterGamesByMonth } from '../../utils/utils';
 import ExistingGame from './ExistingGame';
 import NewGameMode from './NewGame/NewGameMode';
 import NewGame from './NewGame';
+import Filters from './Filters/Filter';
 
 function Game() {
   const {
@@ -41,7 +42,8 @@ function Game() {
       >
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
-      <div className="existingGames_container flexdiv col w-full">
+      <div className="existingGames_container flexdiv col w-full relative">
+        {filteredGames.length !== 0 && <Filters />}
         {filteredGames.map((game) => (
           <ExistingGame gameObj={game} key={game.id} />
         ))}
