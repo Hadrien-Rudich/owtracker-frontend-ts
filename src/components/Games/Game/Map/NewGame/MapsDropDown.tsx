@@ -19,7 +19,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container w-full absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor shadow-md">
+    <div className="mapImage_container w-full absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor shadow-md rounded-sm">
       <div
         className="h-8 w-full relative "
         onClick={toggleDropDown}
@@ -43,7 +43,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
           </div>
         ) : (
           <div className="h-8 flexdiv bg-activeColor">
-            <p className="sm:text-lg text-sm truncate tracking-wider">MAP</p>
+            <p className="sm:text-lg text-sm truncate tracking-widest">MAP</p>
           </div>
         )}
       </div>

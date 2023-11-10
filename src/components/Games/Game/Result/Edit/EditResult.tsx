@@ -24,21 +24,10 @@ function EditResult({ gameObj }: { gameObj: GameData }) {
           <ResultsDropDown gameObj={gameObj} toggleDropDown={toggleDropDown} />
         ) : (
           <div className="w-[75%] relative">
-            {/* {selectedGame.result === gameObj.result ? (
-              <button
-                className={`${getResultClassNameFromResult(
-                  gameObj.result
-                )} w-full relative ring-2`}
-                type="button"
-                onClick={toggleDropDown}
-              >
-                <Result gameObj={gameObj} />
-              </button>
-            ) : ( */}
             <button
               className={`${getResultClassNameFromResult(
                 selectedGame.result
-              )} flexdiv w-full ring-2  tracking-widest shadow-md`}
+              )} flexdiv w-full ring-2  tracking-widest shadow-md rounded-sm`}
               type="button"
               onClick={toggleDropDown}
             >

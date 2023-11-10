@@ -106,14 +106,14 @@ function AddProfile() {
               <button
                 type="submit"
                 onClick={handleAddProfile}
-                className="text-validate hover:scale-125"
+                className="text-validate"
               >
                 <FaCheck className="sign h-5 w-5" />
               </button>
               <button
                 onClick={handleCancel}
                 type="button"
-                className="text-warning hover:scale-125"
+                className="text-warning"
               >
                 <ImCross className="sign h-[0.9rem] w-[0.9rem]" />
               </button>

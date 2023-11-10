@@ -47,7 +47,7 @@ function DateWidget({
           selectGameDate(date);
           selectGameDateInFormat(formatDateForGameEdit(date));
         }}
-        className="ring-2 w-full h-8 z-50 text-center hover:cursor-pointer focus:ring-fourthColor focus:outline-none tracking-widest shadow-md"
+        className="ring-2 w-full h-8 z-50 text-center hover:cursor-pointer focus:ring-fourthColor focus:outline-none tracking-widest shadow-md rounded-sm"
         wrapperClassName="w-full"
         onCalendarOpen={() => setIsCalendarOpen(true)}
         onCalendarClose={() => setIsCalendarOpen(false)}

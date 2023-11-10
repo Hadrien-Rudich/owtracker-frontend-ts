@@ -32,7 +32,7 @@ function EditHeroes({ gameObj }: { gameObj: GameData }) {
               </button>
             ) : ( */}
             <button
-              className="w-full relative ring-2 shadow-md"
+              className="w-full relative ring-2 shadow-md rounded-sm"
               type="button"
               onClick={toggleDropDown}
             >

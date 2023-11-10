@@ -37,7 +37,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
   };
 
   return (
-    <div className="mapImage_container w-full absolute top-[-1rem] ring-2  ring-thirdColor bg-mainColor shadow-md">
+    <div className="mapImage_container w-full absolute top-[-1rem] ring-2  ring-thirdColor bg-mainColor shadow-md rounded-sm">
       <div
         className="h-8 w-full relative "
         onClick={toggleDropDown}

@@ -46,7 +46,7 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor shadow-md">
+    <div className="heroesImages_container absolute top-[-1rem] ring-2 ring-fourthColor bg-activeColor shadow-md rounded-sm">
       {errorToast && (
         <ErrorToast
           toastText={errorToastMessage}

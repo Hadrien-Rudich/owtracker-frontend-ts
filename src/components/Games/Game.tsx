@@ -1,12 +1,19 @@
 import { useEffect } from 'react';
 import { gameStore } from '../../store/gameStore';
+import { filterStore } from '../../store/filterStore';
 import { filterGamesByMonth } from '../../utils/utils';
 import ExistingGame from './ExistingGame';
 import NewGameMode from './NewGame/NewGameMode';
 import NewGame from './NewGame';
-import Filters from './Filters/Filter';
+import Filters from './Filters/Filters';
+import { useHeroesQueries } from '../../hooks/queries/useHeroesQueries';
+import { useMapsQueries } from '../../hooks/queries/useMapsQueries';
+import FiltersDropDown from './Filters/FiltersDropDown';
 
 function Game() {
+  useHeroesQueries();
+  useMapsQueries();
+
   const {
     gamesData,
     currentMonth,
@@ -16,6 +23,8 @@ function Game() {
     setIsCreatingGame,
     clearNewGame,
   } = gameStore();
+
+  const { filterDropDown } = filterStore();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -43,7 +52,13 @@ function Game() {
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
       <div className="existingGames_container flexdiv col w-full relative">
-        {filteredGames.length !== 0 && <Filters />}
+        {filteredGames.length !== 0 && (
+          <>
+            <Filters />
+            {filterDropDown && <FiltersDropDown />}
+          </>
+        )}
+
         {filteredGames.map((game) => (
           <ExistingGame gameObj={game} key={game.id} />
         ))}

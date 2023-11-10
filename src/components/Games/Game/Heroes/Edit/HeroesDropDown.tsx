@@ -83,7 +83,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
   };
 
   return (
-    <div className="heroesImages_container w-full ring-2 ring-thirdColor bg-activeColor absolute top-[-1rem] shadow-md">
+    <div className="heroesImages_container w-full ring-2 ring-thirdColor bg-activeColor absolute top-[-1rem] shadow-md rounded-sm">
       {errorToast && (
         <ErrorToast
           toastText={errorToastMessage}

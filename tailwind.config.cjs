@@ -20,6 +20,7 @@ export default {
       fifthColor: '#E6DACF',
       sixthColor: '#2F67A9',
       altColor: '#51E5FF',
+      ringColor: '#83ACF3',
       inactiveColor: '#347FD3',
       activeColor: '#FFFFFF',
       activeGrayColor: '#ADB7C6',

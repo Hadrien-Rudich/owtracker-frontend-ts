@@ -329,3 +329,17 @@ sm:text-xl text-lg text-secondaryText;
   animation: blink 1.75s infinite; /* Play the animation twice (adjust the animation duration and count as needed) */
   transition: opacity 1s ease-in-out; /* Add a smooth opacity transition */
 }
+
+.filter {
+  @apply w-1/2 h-6 shadow-md rounded-sm text-sm;
+}
+
+.filter.inactive {
+  @apply grayscale opacity-40 bg-mainColor 
+hover:opacity-100 hover:grayscale-0 hover:scale-110
+shadow-md;
+}
+
+.filter.active {
+  @apply grayscale-0 opacity-100 scale-110;
+}
