@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { gameStore } from '../../../../../store/gameStore';
 import type { GameData } from '../../../../../types/store/gameTypes';
 import Map from '../Map';
@@ -58,7 +58,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
           </div>
         </div>
       </div>
-      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
+      <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container">
         <div className="MapTypes_container sm:h-14 h-10 flexdiv">
           <MapTypes />

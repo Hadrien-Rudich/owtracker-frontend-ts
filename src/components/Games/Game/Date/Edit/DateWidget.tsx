@@ -60,7 +60,7 @@ function DateWidget({
       {isCalendarOpen ? null : (
         <MdOutlineKeyboardArrowDown
           onClick={handleCalendarToggle}
-          className="absolute w-4 h-4 top-1/2 right-[-0.15rem] pointer-events-none lg:block hidden"
+          className="absolute w-4 h-4 top-[0.5rem] xl:right-0 right-[-0.1rem]pointer-events-none lg:block hidden"
         />
       )}
     </div>

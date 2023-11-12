@@ -1,20 +1,12 @@
 import { ImCross } from 'react-icons/im';
 
 interface FilterProps {
-  winBooleanSetter: (value: boolean) => void;
-  lossBooleanSetter: (value: boolean) => void;
-  drawBooleanSetter: (value: boolean) => void;
+  tickedHeroesSetter: (value: string[]) => void;
 }
 
-function ClearResultFilters({
-  winBooleanSetter,
-  lossBooleanSetter,
-  drawBooleanSetter,
-}: FilterProps) {
+function clearHeroesFilters({ tickedHeroesSetter }: FilterProps) {
   const handleClearClick = () => {
-    winBooleanSetter(false);
-    lossBooleanSetter(false);
-    drawBooleanSetter(false);
+    tickedHeroesSetter([]);
   };
 
   return (
@@ -35,4 +27,4 @@ function ClearResultFilters({
   );
 }
 
-export default ClearResultFilters;
+export default clearHeroesFilters;

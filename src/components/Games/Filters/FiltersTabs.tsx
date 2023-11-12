@@ -6,7 +6,7 @@ import ActiveFilter from './ActiveFilter';
 
 function FiltersTabs() {
   return (
-    <div className="FilterOptions_container flex sm:w-1/2 w-full z-20 bg-activeColor absolute top-0 left-0 ring-2 shadow-md rounded-sm">
+    <div className="FilterOptions_container flex xl:w-1/2 w-full z-20 bg-activeColor absolute top-0 left-0 ring-2 shadow-md rounded-sm">
       <ul className="tabs_container flex flex-col lg:w-[25%] sm:w-[40%] w-[25%]  border-r-2 divide-y-2 divide-ringColor border-ringColor">
         <li className="">
           <MapTab />
@@ -22,7 +22,7 @@ function FiltersTabs() {
         </li>
       </ul>
       <div className="flex justify-start items-center lg:w-[75%] sm:w-[60%] w-[75%]">
-        <div className="bg-thirdColor w-1/4 ">
+        <div className="flexdiv w-full relative">
           <ActiveFilter />
         </div>
       </div>

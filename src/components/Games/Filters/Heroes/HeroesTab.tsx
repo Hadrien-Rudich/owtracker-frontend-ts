@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import { FaRegSquare, FaCheck } from 'react-icons/fa';
 import { gameDataStore } from '../../../../store/gameDataStore';
+import { filterStore } from '../../../../store/filterStore';
 import Heroes from '../../Game/Heroes/Heroes';
 // import ClearResultFilters from './ClearResultFilters';
 
 function HeroesTab() {
   const { heroesData } = gameDataStore();
+  const { setActiveFilter, clearActiveFilter, activeFilter } = filterStore();
 
   const [filterBoxIsTicked, setFilterBoxIsTicked] = useState(false);
 
   const handleFilterClick = () => {
+    if (activeFilter === 'heroes') {
+      clearActiveFilter();
+    } else {
+      setActiveFilter('heroes');
+    }
     setFilterBoxIsTicked(!filterBoxIsTicked);
   };
-
   return (
     <div className="Filter_container relative">
       <div className="flex flex-col">
@@ -37,22 +43,6 @@ function HeroesTab() {
             </button>
           </div>
         </div>
-        {filterBoxIsTicked && (
-          <div className="p-4 bg-mainColor flexdiv col">
-            <ul className="heroes_container w-full h-full  flex flex-wrap gap-0.5">
-              {heroesData.map((hero) => (
-                <li key={hero.id}>
-                  <button
-                    type="button"
-                    className="hero_button bg-activeColor rounded-sm"
-                  >
-                    <Heroes heroObj={hero} imgHeight="h-9" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </div>
   );

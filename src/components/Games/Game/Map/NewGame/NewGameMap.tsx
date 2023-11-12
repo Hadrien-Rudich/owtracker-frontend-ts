@@ -62,11 +62,11 @@ function NewGameMap() {
                       <p className="sm:text-lg text-base tracking-widest">
                         MAP
                       </p>
+                      <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
                     </div>
                   </div>
                 </button>
               )}
-              <MdOutlineKeyboardArrowDown className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
             </div>
           )}
         </div>

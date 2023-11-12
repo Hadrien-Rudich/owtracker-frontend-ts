@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { FaRegSquare, FaCheck } from 'react-icons/fa';
-import ClearResultFilters from './ClearResultFilters';
+
 import { filterStore } from '../../../../store/filterStore';
 
 function ResultsTab() {
   const [filterBoxIsTicked, setFilterBoxIsTicked] = useState(false);
-  const [winIsTicked, setWinIsTicked] = useState(false);
-  const [lossIsTicked, setLossIsTicked] = useState(false);
-  const [drawIsTicked, setDrawIsTicked] = useState(false);
 
   const { setActiveFilter, clearActiveFilter, activeFilter } = filterStore();
 
@@ -30,15 +27,15 @@ function ResultsTab() {
             </p>
           </div>
           <div className="button_container flex items-center sm:justify-center justify-end w-[40%]">
-            <div className="relative">
+            <div className="relative ">
               <button
                 type="button"
                 className="w-5 h-5 hover:scale-110"
                 onClick={handleFilterClick}
               >
-                <FaRegSquare className="z-10 w-5 h-5 relative" />
+                <FaRegSquare className="z-10 w-5 h-5 relative " />
                 {activeFilter === 'results' && (
-                  <div className="absolute top-[0.15rem] right-[0.1rem] bg-ringColor w-4 h-4 rounded-sm">
+                  <div className="absolute top-[0.15rem] right-[0.125rem] bg-ringColor w-4 h-4 rounded-sm">
                     <FaCheck className="z-0 absolute top-0.5 right-0.5 w-3 h-3" />
                   </div>
                 )}
@@ -47,17 +44,6 @@ function ResultsTab() {
           </div>
         </div>
       </div>
-      {activeFilter === 'results' && (
-        <div className="clearFilter_container">
-          {!lossIsTicked && !winIsTicked && !drawIsTicked ? null : (
-            <ClearResultFilters
-              winBooleanSetter={setWinIsTicked}
-              lossBooleanSetter={setLossIsTicked}
-              drawBooleanSetter={setDrawIsTicked}
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 }
