@@ -29,6 +29,9 @@
 interface FilterStore {
   filterDropDown: boolean;
   setFilterDropDown: (value: boolean) => void;
+  activeFilter: string;
+  setActiveFilter: (value: string) => void;
+  clearActiveFilter: () => void;
 }
 
 export type {

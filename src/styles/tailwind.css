@@ -195,7 +195,7 @@ right-0;
 }
 
 .profile {
-  @apply text-center tracking-wider rounded-sm
+  @apply text-center tracking-wider rounded-sm shadow-md
         
       ease-in-out;
 }
@@ -205,11 +205,11 @@ right-0;
 }
 
 .profile.selected {
-  @apply scale-110 ring-2 ring-thirdColor shadow-md;
+  @apply scale-110 ring-2 ring-thirdColor;
 }
 
 .profile.card.active {
-  @apply shadow-inner 
+  @apply hover:scale-110 
   hover:shadow-md duration-150;
 }
 

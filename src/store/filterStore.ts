@@ -4,6 +4,9 @@ import type { FilterStore } from '../types/store/filterTypes';
 export const filterStore = create<FilterStore>()((set) => ({
   filterDropDown: false,
   setFilterDropDown: (value) => set(() => ({ filterDropDown: value })),
+  activeFilter: ' ',
+  setActiveFilter: (value) => set(() => ({ activeFilter: value })),
+  clearActiveFilter: () => set(() => ({ activeFilter: ' ' })),
 
   // heroesData: [],
   // rolesData: [],

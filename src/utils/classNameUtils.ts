@@ -71,7 +71,7 @@ function getProfileCardClassName(
   if (p.label === selectedProfile.label) {
     return 'profilecard_container profile card selected';
   }
-  return 'profilecard_container profile card active';
+  return 'profilecard_container profile card active ';
 }
 
 export {

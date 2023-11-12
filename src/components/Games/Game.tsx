@@ -8,7 +8,7 @@ import NewGame from './NewGame';
 import Filters from './Filters/Filters';
 import { useHeroesQueries } from '../../hooks/queries/useHeroesQueries';
 import { useMapsQueries } from '../../hooks/queries/useMapsQueries';
-import FiltersDropDown from './Filters/FiltersDropDown';
+import FiltersTabs from './Filters/FiltersTabs';
 
 function Game() {
   useHeroesQueries();
@@ -55,7 +55,7 @@ function Game() {
         {filteredGames.length !== 0 && (
           <>
             <Filters />
-            {filterDropDown && <FiltersDropDown />}
+            {filterDropDown && <FiltersTabs />}
           </>
         )}
 
