@@ -29,9 +29,29 @@
 interface FilterStore {
   filterDropDown: boolean;
   setFilterDropDown: (value: boolean) => void;
+
+  expandedFilter: string;
+  setExpandedFilter: (value: string) => void;
+  clearExpandedFilter: () => void;
+
   activeFilter: string;
   setActiveFilter: (value: string) => void;
   clearActiveFilter: () => void;
+
+  filteredHeroes: string[];
+  filterHero: (hero: string) => void;
+  unfilterHero: (hero: string) => void;
+  clearFilteredHeroes: () => void;
+
+  filteredMaps: string[];
+  filterMap: (map: string) => void;
+  unfilterMap: (map: string) => void;
+  clearFilteredMaps: () => void;
+
+  filteredResults: string[];
+  filterResult: (result: string) => void;
+  unfilterResult: (result: string) => void;
+  clearFilteredResults: () => void;
 }
 
 export type {

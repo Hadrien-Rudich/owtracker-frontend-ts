@@ -99,9 +99,9 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
                     <div
                       className={`${
                         selectedGameHeroes.includes(h.slug)
-                          ? 'ring ring-thirdColor shadow-md'
+                          ? 'ring ring-thirdColor '
                           : 'hover:scale-110 '
-                      }    heroes_container bg-activeColor rounded-sm h-9`}
+                      }    heroes_container bg-activeColor rounded-sm h-9 shadow-md`}
                       key={h.slug}
                     >
                       <button

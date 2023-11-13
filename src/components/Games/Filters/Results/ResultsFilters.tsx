@@ -1,32 +1,27 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { filterStore } from '../../../../store/filterStore';
 import ClearResultFilters from './ClearResultFilters';
 
 function ResultsFilters() {
-  const { activeFilter } = filterStore();
-  const [winIsTicked, setWinIsTicked] = useState(false);
-  const [lossIsTicked, setLossIsTicked] = useState(false);
-  const [drawIsTicked, setDrawIsTicked] = useState(false);
+  const { activeFilter, filterResult, unfilterResult, filteredResults } =
+    filterStore();
 
-  const handleWinClick = () => {
-    setWinIsTicked(!winIsTicked);
+  const handleResultClick = (result: string) => {
+    if (filteredResults.includes(result)) {
+      unfilterResult(result);
+    } else {
+      filterResult(result);
+    }
   };
 
-  const handleLossClick = () => {
-    setLossIsTicked(!lossIsTicked);
-  };
-
-  const handleDrawClick = () => {
-    setDrawIsTicked(!drawIsTicked);
-  };
   return (
     <div className="ResultsFilters_container w-1/4">
       <div className="options_container flexdiv col w-full gap-3">
         <button
           type="button"
-          onClick={handleWinClick}
+          onClick={() => handleResultClick('win')}
           className={`${
-            winIsTicked
+            filteredResults.includes('win')
               ? 'active bg-activeWin '
               : 'inactive hover:bg-activeWin '
           }              
@@ -36,9 +31,9 @@ function ResultsFilters() {
         </button>
         <button
           type="button"
-          onClick={handleLossClick}
+          onClick={() => handleResultClick('loss')}
           className={`${
-            lossIsTicked
+            filteredResults.includes('loss')
               ? 'active bg-activeLoss '
               : 'inactive hover:bg-activeLoss'
           }              
@@ -48,9 +43,9 @@ function ResultsFilters() {
         </button>
         <button
           type="button"
-          onClick={handleDrawClick}
+          onClick={() => handleResultClick('draw')}
           className={`${
-            drawIsTicked
+            filteredResults.includes('draw')
               ? 'active bg-activeDraw '
               : 'inactive hover:bg-activeDraw'
           }              
@@ -59,16 +54,8 @@ function ResultsFilters() {
           <p className="xl:tracking-widest">draw</p>
         </button>
       </div>
-      {activeFilter === 'results' && (
-        <div className="clearFilter_container absolute bottom-[-2rem] left-[0.75rem]">
-          {!lossIsTicked && !winIsTicked && !drawIsTicked ? null : (
-            <ClearResultFilters
-              winBooleanSetter={setWinIsTicked}
-              lossBooleanSetter={setLossIsTicked}
-              drawBooleanSetter={setDrawIsTicked}
-            />
-          )}
-        </div>
+      {activeFilter === 'results' && filteredResults.length > 0 && (
+        <ClearResultFilters />
       )}
     </div>
   );

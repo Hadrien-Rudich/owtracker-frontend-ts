@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FaRegSquare, FaCheck } from 'react-icons/fa';
-
 import { filterStore } from '../../../../store/filterStore';
 
 function ResultsTab() {

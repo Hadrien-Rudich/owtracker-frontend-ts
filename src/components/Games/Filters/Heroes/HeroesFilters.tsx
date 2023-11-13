@@ -1,50 +1,56 @@
-import { useState } from 'react';
 import { gameDataStore } from '../../../../store/gameDataStore';
+import { filterStore } from '../../../../store/filterStore';
 import Heroes from '../../Game/Heroes/Heroes';
 import ClearHeroesFilters from './ClearHeroesFilters';
-import { filterStore } from '../../../../store/filterStore';
 
 function HeroesFilters() {
-  const { heroesData } = gameDataStore();
-  const { activeFilter } = filterStore();
-  const [tickedHeroes, setTickedHeroes] = useState<string[]>([]);
+  const { heroesData, rolesData } = gameDataStore();
+  const { activeFilter, filterHero, unfilterHero, filteredHeroes } =
+    filterStore();
 
   const handleHeroClick = (hero: string) => {
-    if (tickedHeroes.includes(hero)) {
-      setTickedHeroes(
-        tickedHeroes.filter((existingHero) => existingHero !== hero)
-      );
+    if (filteredHeroes.includes(hero)) {
+      unfilterHero(hero);
     } else {
-      setTickedHeroes([...tickedHeroes, hero]);
+      filterHero(hero);
     }
   };
 
   return (
-    <div className="HeroesFilters_container  flexdiv col p-4">
-      <ul className="heroes_container flexdiv flex-wrap gap-2">
-        {heroesData.map((hero) => (
-          <li className="h-7" key={hero.id}>
-            <button
-              type="button"
-              className={`${
-                tickedHeroes.includes(hero.label)
-                  ? 'ring-2 ring-thirdColor scale-110 '
-                  : 'hover:scale-110 '
-              }          
-              hero_button  rounded-sm  `}
-              onClick={() => handleHeroClick(hero.label)}
-            >
-              <Heroes heroObj={hero} imgHeight="h-8" />
-            </button>
-          </li>
+    <div className="HeroesFilters_container h-full">
+      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor  bg-mainColor h-full flexdiv">
+        {rolesData.map((r) => (
+          <div key={r.label} className="heroesByRoles_container">
+            <div className="heroes_container">
+              <div className="flexdiv flex-wrap gap-1">
+                {heroesData
+                  .filter(
+                    (hero) => hero.role.toLowerCase() === r.label.toLowerCase()
+                  )
+                  .map((h) => (
+                    <div
+                      className={`${
+                        filteredHeroes.includes(h.slug)
+                          ? 'ring-2 ring-thirdColor '
+                          : 'hover:scale-110 '
+                      }    hero_button bg-activeColor rounded-sm h-8 shadow-md`}
+                      key={h.slug}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleHeroClick(h.slug)}
+                      >
+                        <Heroes heroObj={h} imgHeight="h-8" />
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
-      {activeFilter === 'heroes' && (
-        <div className="clearFilter_container absolute bottom-[-1rem] left-[0.5rem]">
-          {tickedHeroes.length > 0 && (
-            <ClearHeroesFilters tickedHeroesSetter={setTickedHeroes} />
-          )}
-        </div>
+      </div>
+      {activeFilter === 'heroes' && filteredHeroes.length > 0 && (
+        <ClearHeroesFilters />
       )}
     </div>
   );

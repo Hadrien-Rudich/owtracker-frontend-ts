@@ -2,24 +2,24 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from 'react-icons/md';
-
-import HeroesFiltersOptions from './HeroesFiltersOptions';
+import MapsFiltersOptions from './FiltersOptions';
 import { filterStore } from '../../../../store/filterStore';
 
-function HeroesTab() {
+function MapTab() {
   const {
     expandedFilter,
     setExpandedFilter,
     clearExpandedFilter,
     clearActiveFilter,
   } = filterStore();
+
   const handleFilterExpandClick = () => {
-    if (expandedFilter === 'heroes') {
+    if (expandedFilter === 'maps') {
       clearExpandedFilter();
       return;
     }
     clearActiveFilter();
-    setExpandedFilter('heroes');
+    setExpandedFilter('maps');
   };
 
   return (
@@ -33,28 +33,28 @@ function HeroesTab() {
           <div className="option_container h-10 flex justify-around w-full ">
             <div className="flex justify-start items-center w-1/2">
               <p className="sm:pl-2 pl-0.5 sm:text-base text-sm tracking-widest ">
-                Heroes
+                Maps
               </p>
             </div>
             <div className="button_container relative flex items-center justify-end w-[40%]">
               <div className="relative ">
                 {expandedFilter === 'maps' ? (
-                  <MdOutlineKeyboardArrowUp className="z-10 w-4 h-4 relative " />
+                  <MdOutlineKeyboardArrowUp className="z-10 w-4 h-4" />
                 ) : (
-                  <MdOutlineKeyboardArrowDown className="z-10 w-4 h-4 relative " />
+                  <MdOutlineKeyboardArrowDown className="z-10 w-4 h-4" />
                 )}
               </div>
             </div>
           </div>
         </button>
       </div>
-      {expandedFilter === 'heroes' && (
+      {expandedFilter === 'maps' && (
         <div className="">
-          <HeroesFiltersOptions />
+          <MapsFiltersOptions />
         </div>
       )}
     </div>
   );
 }
 
-export default HeroesTab;
+export default MapTab;

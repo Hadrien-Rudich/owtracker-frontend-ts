@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { FaRegSquare, FaCheck } from 'react-icons/fa';
-import DateFilters from './DateFilters';
+import { filterStore } from '../../../../store/filterStore';
 
 function DateTab() {
   const [filterBoxIsTicked, setFilterBoxIsTicked] = useState(false);
+  const { setActiveFilter, clearActiveFilter, activeFilter } = filterStore();
 
   const handleFilterClick = () => {
+    if (activeFilter === 'date') {
+      clearActiveFilter();
+    } else {
+      setActiveFilter('date');
+    }
     setFilterBoxIsTicked(!filterBoxIsTicked);
   };
 
@@ -19,21 +25,22 @@ function DateTab() {
             </p>
           </div>
           <div className="button_container flex items-center sm:justify-center justify-end w-[40%]">
-            <button
-              type="button"
-              className="w-5 h-5 hover:scale-110"
-              onClick={handleFilterClick}
-            >
-              <FaRegSquare className="z-10 w-5 h-5 relative" />
-              {filterBoxIsTicked && (
-                <div className="z-0 absolute top-[0.15rem] right-[0.15rem] bg-ringColor w-4 h-4 rounded-sm">
-                  <FaCheck className="absolute top-0.5 right-0.5 w-3 h-3 z-0" />
-                </div>
-              )}
-            </button>
+            <div className="relative ">
+              <button
+                type="button"
+                className="w-5 h-5 hover:scale-110"
+                onClick={handleFilterClick}
+              >
+                <FaRegSquare className="z-10 w-5 h-5 relative " />
+                {activeFilter === 'date' && (
+                  <div className="absolute top-[0.15rem] right-[0.125rem] bg-ringColor w-4 h-4 rounded-sm">
+                    <FaCheck className="z-0 absolute top-0.5 right-0.5 w-3 h-3" />
+                  </div>
+                )}
+              </button>
+            </div>
           </div>
         </div>
-        {filterBoxIsTicked && <DateFilters />}
       </div>
     </div>
   );

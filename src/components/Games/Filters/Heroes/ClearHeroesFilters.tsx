@@ -1,16 +1,15 @@
 import { ImCross } from 'react-icons/im';
+import { filterStore } from '../../../../store/filterStore';
 
-interface FilterProps {
-  tickedHeroesSetter: (value: string[]) => void;
-}
+function clearHeroesFilters() {
+  const { clearFilteredHeroes } = filterStore();
 
-function clearHeroesFilters({ tickedHeroesSetter }: FilterProps) {
   const handleClearClick = () => {
-    tickedHeroesSetter([]);
+    clearFilteredHeroes();
   };
 
   return (
-    <div className="clearOptions_container flex justify-around w-full gap-2">
+    <div className="clearOptions_container flex justify-around  gap-2 absolute bottom-0 left-0 bg-fifthColor px-2 py-1 ring-2 ring-warning">
       <div className="flexdiv w-1/2">
         <p className="tracking-widest">clear</p>
       </div>

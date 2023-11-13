@@ -331,13 +331,12 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .filter {
-  @apply w-1/2 h-6 shadow-md rounded-sm text-sm;
+  @apply w-1/2 h-6 shadow-md rounded-sm text-sm hover:scale-110;
 }
 
 .filter.inactive {
   @apply grayscale opacity-40 bg-mainColor 
-hover:opacity-100 hover:grayscale-0 hover:scale-110
-shadow-md;
+hover:opacity-100 hover:grayscale-0 hover:scale-110;
 }
 
 .filter.active {

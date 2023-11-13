@@ -1,16 +1,20 @@
 import FilterTab from './Headers/Filters';
 import ClearFilterTab from './Headers/ClearFilters';
+import { filterStore } from '../../../store/filterStore';
 
 function Filters() {
+  const { activeFilter } = filterStore();
   return (
-    <div className="filters_container w-full">
-      <div className="lg:w-[12.5%] sm:w-[20%] w-[25%] flex ring-2 ring-fourthColor  divide-x-2 divide-fourthColor absolute top-[-2.15rem] left-[0rem] shadow-md rounded-sm">
-        <div className="w-1/2">
+    <div className="filters_container w-full ">
+      <div className="bg-fifthColor shadow-md rounded-sm flex ring-1 divide-x-[0.063rem] divide-ringColor absolute top-[-2.15rem] left-[0rem] lg:w-[12.5%] sm:w-[20%] w-[25%]">
+        <div className={`${activeFilter !== '' ? 'w-1/2' : 'w-full '}`}>
           <FilterTab />
         </div>
-        <div className="w-1/2">
-          <ClearFilterTab />
-        </div>
+        {activeFilter !== '' && (
+          <div className="w-1/2">
+            <ClearFilterTab />
+          </div>
+        )}
       </div>
     </div>
   );
