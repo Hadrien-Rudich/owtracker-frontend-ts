@@ -1,10 +1,15 @@
 // import { useState } from 'react';
 import { filterStore } from '../../../../store/filterStore';
-import ClearResultFilters from './ClearResultFilters';
+import ClearFilters from '../ClearFilters';
 
 function ResultsFilters() {
-  const { activeFilter, filterResult, unfilterResult, filteredResults } =
-    filterStore();
+  const {
+    activeFilter,
+    filterResult,
+    unfilterResult,
+    filteredResults,
+    clearFilteredResults,
+  } = filterStore();
 
   const handleResultClick = (result: string) => {
     if (filteredResults.includes(result)) {
@@ -15,17 +20,17 @@ function ResultsFilters() {
   };
 
   return (
-    <div className="ResultsFilters_container w-1/4">
-      <div className="options_container flexdiv col w-full gap-3">
+    <div className="ResultsFilters_container w-[12rem] flexdiv h-full  bg-mainColor border-l-[0.125rem] border-ringColor">
+      <div className="options_container flexdiv col w-1/2 gap-3">
         <button
           type="button"
           onClick={() => handleResultClick('win')}
           className={`${
             filteredResults.includes('win')
               ? 'active bg-activeWin '
-              : 'inactive hover:bg-activeWin '
+              : 'inactive bg-disabled hover:bg-activeWin '
           }              
-      filter`}
+      filter shadow-md `}
         >
           <p className="xl:tracking-widest">win</p>
         </button>
@@ -35,9 +40,9 @@ function ResultsFilters() {
           className={`${
             filteredResults.includes('loss')
               ? 'active bg-activeLoss '
-              : 'inactive hover:bg-activeLoss'
+              : 'inactive bg-disabled hover:bg-activeLoss'
           }              
-      filter`}
+      filter shadow-md`}
         >
           <p className="xl:tracking-widest">loss</p>
         </button>
@@ -47,15 +52,15 @@ function ResultsFilters() {
           className={`${
             filteredResults.includes('draw')
               ? 'active bg-activeDraw '
-              : 'inactive hover:bg-activeDraw'
+              : 'inactive bg-disabled hover:bg-activeDraw'
           }              
-      filter`}
+      filter shadow-md`}
         >
           <p className="xl:tracking-widest">draw</p>
         </button>
       </div>
       {activeFilter === 'results' && filteredResults.length > 0 && (
-        <ClearResultFilters />
+        <ClearFilters clearFilteredArray={clearFilteredResults} />
       )}
     </div>
   );

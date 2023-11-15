@@ -25,6 +25,33 @@ export const filterStore = create<FilterStore>()((set) => ({
     })),
   clearFilteredHeroes: () => set(() => ({ filteredHeroes: [] })),
 
+  filteredHeroRoles: [],
+  filterHeroRole: (heroRole: string) =>
+    set((state) => ({
+      filteredHeroRoles: [...state.filteredHeroRoles, heroRole],
+    })),
+  unfilterHeroRole: (heroRole: string) =>
+    set((state) => ({
+      filteredHeroRoles: state.filteredHeroRoles.filter(
+        (hr: string) => hr !== heroRole
+      ),
+    })),
+  clearFilteredHeroRole: () => set(() => ({ filteredHeroRoles: [] })),
+
+  filteredMapTypes: [],
+  filterMapType: (mapType: string) =>
+    set((state) => ({
+      filteredMapTypes: [...state.filteredMapTypes, mapType],
+    })),
+  unfilterMapType: (mapType: string) =>
+    set((state) => ({
+      filteredMapTypes: state.filteredMapTypes.filter(
+        (m: string) => m !== mapType
+      ),
+    })),
+
+  clearFilteredMapTypes: () => set(() => ({ filteredMapTypes: [] })),
+
   filteredMaps: [],
   filterMap: (map: string) =>
     set((state) => ({
@@ -49,6 +76,8 @@ export const filterStore = create<FilterStore>()((set) => ({
       ),
     })),
   clearFilteredResults: () => set(() => ({ filteredResults: [] })),
+
+  filteredDates: [],
 }));
 
 export default filterStore;

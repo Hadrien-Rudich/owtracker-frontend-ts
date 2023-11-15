@@ -43,6 +43,16 @@ interface FilterStore {
   unfilterHero: (hero: string) => void;
   clearFilteredHeroes: () => void;
 
+  filteredHeroRoles: string[];
+  filterHeroRole: (heroRole: string) => void;
+  unfilterHeroRole: (heroRole: string) => void;
+  clearFilteredHeroRole: () => void;
+
+  filteredMapTypes: string[];
+  filterMapType: (mapType: string) => void;
+  unfilterMapType: (mapType: string) => void;
+  clearFilteredMapTypes: () => void;
+
   filteredMaps: string[];
   filterMap: (map: string) => void;
   unfilterMap: (map: string) => void;
@@ -52,6 +62,8 @@ interface FilterStore {
   filterResult: (result: string) => void;
   unfilterResult: (result: string) => void;
   clearFilteredResults: () => void;
+
+  filteredDates: string[];
 }
 
 export type {

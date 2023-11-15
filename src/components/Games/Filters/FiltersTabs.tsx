@@ -1,15 +1,14 @@
 import HeroesTab from './Heroes/HeroesTab';
+import MapsTab from './Maps/MapsTab';
 import ResultsTab from './Results/ResultsTab';
-import MapTab from './Maps/Tab';
-import DateTab from './Dates/DateTab';
-import ActiveFilter from './ActiveFilter';
+import DatesTab from './Dates/DatesTab';
+import ActiveFilterDetails from './ActiveFilterDetails';
 import { filterStore } from '../../../store/filterStore';
-
 function FiltersTabs() {
-  const { expandedFilter } = filterStore();
+  const { expandedFilter, activeFilter } = filterStore();
   return (
-    <div className="FilterOptions_container flex xl:w-1/2 w-full z-20  absolute top-0 left-0 ring-2 shadow-md rounded-sm bg-fifthColor">
-      <ul className="tabs_container flex flex-col lg:w-[25%] sm:w-[40%] w-[25%]  border-r-2 divide-y-2 divide-ringColor border-ringColor">
+    <div className="FilterOptions_container flex z-20  absolute top-0 left-0 ring-2 shadow-md rounded-sm bg-fifthColor">
+      <ul className="tabs_container flex flex-col w-[12rem] divide-y-[0.125rem] divide-ringColor ">
         <li
           className={`${
             expandedFilter === 'maps'
@@ -17,7 +16,7 @@ function FiltersTabs() {
               : ' hover:bg-activeColor'
           }`}
         >
-          <MapTab />
+          <MapsTab />
         </li>
 
         <li
@@ -31,7 +30,7 @@ function FiltersTabs() {
         </li>
         <li
           className={`${
-            expandedFilter === 'results'
+            activeFilter === 'results'
               ? 'bg-activeColor'
               : ' hover:bg-activeColor'
           }`}
@@ -40,16 +39,16 @@ function FiltersTabs() {
         </li>
         <li
           className={`${
-            expandedFilter === 'date'
+            activeFilter === 'dates'
               ? 'bg-activeColor'
               : ' hover:bg-activeColor'
           }`}
         >
-          <DateTab />
+          <DatesTab />
         </li>
       </ul>
-      <div className="relative lg:w-[75%] sm:w-[60%] w-[75%]">
-        <ActiveFilter />
+      <div className="relative">
+        <ActiveFilterDetails />
       </div>
     </div>
   );

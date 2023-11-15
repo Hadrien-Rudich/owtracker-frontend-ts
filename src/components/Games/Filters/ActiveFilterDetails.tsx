@@ -1,10 +1,12 @@
 import { filterStore } from '../../../store/filterStore';
 import ResultsFilters from './Results/ResultsFilters';
-import HeroesFilters from './Heroes/HeroesFilters';
+import HeroesFilters from './Heroes/Heroes/HeroesFilters';
 import MapsFilters from './Maps/Maps/MapsFilters';
 import MapTypesFilters from './Maps/MapTypes/MapTypesFilters';
+import HeroRolesFilters from './Heroes/HeroRoles/HeroRolesFilters';
+import DatesFilters from './Dates/DatesFilters';
 
-function FilterPage() {
+function ActiveFilterDetails() {
   const { activeFilter } = filterStore();
 
   const activeTabComponent = () => {
@@ -13,12 +15,14 @@ function FilterPage() {
         return <ResultsFilters />;
       case 'heroes':
         return <HeroesFilters />;
+      case 'heroRoles':
+        return <HeroRolesFilters />;
       case 'maps':
         return <MapsFilters />;
       case 'mapTypes':
         return <MapTypesFilters />;
-      case 'date':
-        return <HeroesFilters />;
+      case 'dates':
+        return <DatesFilters />;
       default:
         return null;
     }
@@ -26,4 +30,4 @@ function FilterPage() {
   return activeTabComponent();
 }
 
-export default FilterPage;
+export default ActiveFilterDetails;

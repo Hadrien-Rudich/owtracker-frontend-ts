@@ -6,7 +6,7 @@ import Map from '../Map';
 import MapsDropDown from './MapsDropDown';
 
 function EditMap({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame, selectedGameMap } = gameStore();
+  const { selectedGame } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
 

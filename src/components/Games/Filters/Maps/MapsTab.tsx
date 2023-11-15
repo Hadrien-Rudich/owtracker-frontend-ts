@@ -1,25 +1,15 @@
+import { useState } from 'react';
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from 'react-icons/md';
-import MapsFiltersOptions from './FiltersOptions';
-import { filterStore } from '../../../../store/filterStore';
+import ExpandedTab from './ExpandedTab';
 
-function MapTab() {
-  const {
-    expandedFilter,
-    setExpandedFilter,
-    clearExpandedFilter,
-    clearActiveFilter,
-  } = filterStore();
+function MapsTab() {
+  const [expandedTab, setExpandedTab] = useState(false);
 
-  const handleFilterExpandClick = () => {
-    if (expandedFilter === 'maps') {
-      clearExpandedFilter();
-      return;
-    }
-    clearActiveFilter();
-    setExpandedFilter('maps');
+  const toggleExpandTab = () => {
+    setExpandedTab(!expandedTab);
   };
 
   return (
@@ -28,7 +18,7 @@ function MapTab() {
         <button
           type="button"
           className="flex flex-col w-full"
-          onClick={handleFilterExpandClick}
+          onClick={toggleExpandTab}
         >
           <div className="option_container h-10 flex justify-around w-full ">
             <div className="flex justify-start items-center w-1/2">
@@ -38,23 +28,19 @@ function MapTab() {
             </div>
             <div className="button_container relative flex items-center justify-end w-[40%]">
               <div className="relative ">
-                {expandedFilter === 'maps' ? (
-                  <MdOutlineKeyboardArrowUp className="z-10 w-4 h-4" />
+                {expandedTab ? (
+                  <MdOutlineKeyboardArrowUp className="z-10 w-4 h-4 relative " />
                 ) : (
-                  <MdOutlineKeyboardArrowDown className="z-10 w-4 h-4" />
+                  <MdOutlineKeyboardArrowDown className="z-10 w-4 h-4 relative " />
                 )}
               </div>
             </div>
           </div>
         </button>
       </div>
-      {expandedFilter === 'maps' && (
-        <div className="">
-          <MapsFiltersOptions />
-        </div>
-      )}
+      {expandedTab && <ExpandedTab />}
     </div>
   );
 }
 
-export default MapTab;
+export default MapsTab;

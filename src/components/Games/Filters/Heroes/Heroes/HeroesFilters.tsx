@@ -1,12 +1,17 @@
-import { gameDataStore } from '../../../../store/gameDataStore';
-import { filterStore } from '../../../../store/filterStore';
-import Heroes from '../../Game/Heroes/Heroes';
-import ClearHeroesFilters from './ClearHeroesFilters';
+import { gameDataStore } from '../../../../../store/gameDataStore';
+import { filterStore } from '../../../../../store/filterStore';
+import Heroes from '../../../Game/Heroes/Heroes';
+import ClearFilters from '../../ClearFilters';
 
 function HeroesFilters() {
   const { heroesData, rolesData } = gameDataStore();
-  const { activeFilter, filterHero, unfilterHero, filteredHeroes } =
-    filterStore();
+  const {
+    activeFilter,
+    filterHero,
+    unfilterHero,
+    filteredHeroes,
+    clearFilteredHeroes,
+  } = filterStore();
 
   const handleHeroClick = (hero: string) => {
     if (filteredHeroes.includes(hero)) {
@@ -17,8 +22,8 @@ function HeroesFilters() {
   };
 
   return (
-    <div className="HeroesFilters_container h-full">
-      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor  bg-mainColor h-full flexdiv">
+    <div className="HeroesFilters_container h-full border-l-[0.125rem] border-ringColor ">
+      <div className="heroesDropDown_container grid grid-cols-3 divide-x-2 divide-activeColor  bg-mainColor h-full flexdiv w-[24rem]">
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
             <div className="heroes_container">
@@ -50,7 +55,7 @@ function HeroesFilters() {
         ))}
       </div>
       {activeFilter === 'heroes' && filteredHeroes.length > 0 && (
-        <ClearHeroesFilters />
+        <ClearFilters clearFilteredArray={clearFilteredHeroes} />
       )}
     </div>
   );

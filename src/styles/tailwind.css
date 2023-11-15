@@ -331,12 +331,17 @@ sm:text-xl text-lg text-secondaryText;
 }
 
 .filter {
-  @apply w-1/2 h-6 shadow-md rounded-sm text-sm hover:scale-110;
+  @apply w-2/3 h-6 rounded-sm text-sm;
 }
 
 .filter.inactive {
-  @apply grayscale opacity-40 bg-mainColor 
+  @apply grayscale opacity-50 
 hover:opacity-100 hover:grayscale-0 hover:scale-110;
+}
+
+.filter.inactiveMapType {
+  @apply grayscale opacity-20 
+hover:opacity-100 hover:scale-110;
 }
 
 .filter.active {

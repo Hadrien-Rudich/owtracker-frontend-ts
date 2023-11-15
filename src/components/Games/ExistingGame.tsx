@@ -10,7 +10,7 @@ import Heroes from './Game/Heroes/Heroes';
 import Map from './Game/Map/Map';
 import EditMap from './Game/Map/Edit/EditMap';
 import EditHeroes from './Game/Heroes/Edit/EditHeroes';
-import New from './Game/NewLabel/New';
+// import New from './Game/NewLabel/New';
 
 function ExistingGame({ gameObj }: { gameObj: GameData }) {
   const {

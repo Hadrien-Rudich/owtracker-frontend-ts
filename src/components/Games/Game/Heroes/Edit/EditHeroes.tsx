@@ -6,7 +6,7 @@ import Heroes from '../Heroes';
 import HeroesDropDown from './HeroesDropDown';
 
 function EditHeroes({ gameObj }: { gameObj: GameData }) {
-  const { selectedGame, selectedGameHeroes } = gameStore();
+  const { selectedGame } = gameStore();
 
   const [isDropDownActive, setIsDropDownActive] = useState(false);
 
