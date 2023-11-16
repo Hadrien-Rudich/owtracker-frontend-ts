@@ -11,25 +11,6 @@ function FiltersTabs() {
       <ul className="tabs_container flex flex-col w-[12rem] divide-y-[0.125rem] divide-ringColor ">
         <li
           className={`${
-            expandedFilter === 'maps'
-              ? 'bg-activeColor'
-              : ' hover:bg-activeColor'
-          }`}
-        >
-          <MapsTab />
-        </li>
-
-        <li
-          className={`${
-            expandedFilter === 'heroes'
-              ? 'bg-activeColor'
-              : ' hover:bg-activeColor'
-          }`}
-        >
-          <HeroesTab />
-        </li>
-        <li
-          className={`${
             activeFilter === 'results'
               ? 'bg-activeColor'
               : ' hover:bg-activeColor'
@@ -45,6 +26,24 @@ function FiltersTabs() {
           }`}
         >
           <DatesTab />
+        </li>
+        <li
+          className={`${
+            expandedFilter === 'heroes'
+              ? 'bg-activeColor'
+              : ' hover:bg-activeColor'
+          }`}
+        >
+          <HeroesTab />
+        </li>
+        <li
+          className={`${
+            expandedFilter === 'maps'
+              ? 'bg-activeColor'
+              : ' hover:bg-activeColor'
+          }`}
+        >
+          <MapsTab />
         </li>
       </ul>
       <div className="relative">

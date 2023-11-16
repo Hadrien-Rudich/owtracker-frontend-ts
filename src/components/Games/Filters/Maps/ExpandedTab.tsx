@@ -31,6 +31,19 @@ function ExpandedTab() {
             filteredArray={filteredMaps}
           />
         </div>
+        <div
+          className={`subTab_container ${
+            activeFilter === 'combined'
+              ? 'bg-activeColor'
+              : 'hover:bg-activeColor '
+          }`}
+        >
+          <SubTab
+            tabName="Combined"
+            activeFilterProp="combined"
+            filteredArray={filteredMaps}
+          />
+        </div>
       </div>
     </div>
   );
