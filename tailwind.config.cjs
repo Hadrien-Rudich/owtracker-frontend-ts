@@ -36,6 +36,10 @@ export default {
       warning: '#D32F2F',
       validate: '#43A047',
       new: '#009e38',
+      neonGreen: ' #39FF14',
+      neonOrange: '#FF5F1F',
+      neonOrange2: '#FF6700',
+      neonPink: '#FF10F0',
       disabled: '#D6D6D6',
     },
     screens: {

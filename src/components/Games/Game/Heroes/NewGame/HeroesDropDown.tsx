@@ -99,14 +99,14 @@ function HeroesDropDown({ toggleDropDown }: HeroesDropDownProps) {
                     <div
                       className={`${
                         selectedGameHeroes.includes(h.slug)
-                          ? 'ring ring-thirdColor '
-                          : 'hover:scale-110 '
+                          ? 'ring-[0.1rem] ring-thirdColor '
+                          : 'grayscale opacity-60 hover:scale-110 hover:grayscale-0 hover:opacity-100'
                       }    heroes_container bg-activeColor rounded-sm h-9 shadow-md`}
                       key={h.slug}
                     >
                       <button
                         type="button"
-                        className="h-6"
+                        className="h-9"
                         onClick={() => selectHero(h.slug, h.imageUrl)}
                       >
                         <Heroes heroObj={h} imgHeight="h-9" />

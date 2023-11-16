@@ -2,11 +2,18 @@ import { ImCross } from 'react-icons/im';
 
 interface ClearFiltersProps {
   clearFilteredArray: () => void;
+  clearSecondFilteredArray?: () => void;
 }
 
-function ClearFilters({ clearFilteredArray }: ClearFiltersProps) {
+function ClearFilters({
+  clearFilteredArray,
+  clearSecondFilteredArray,
+}: ClearFiltersProps) {
   const handleClearClick = () => {
     clearFilteredArray();
+    if (clearSecondFilteredArray) {
+      clearSecondFilteredArray();
+    }
   };
 
   return (
