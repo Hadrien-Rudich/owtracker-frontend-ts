@@ -39,10 +39,13 @@ function MapsFilters() {
   };
 
   return (
-    <div className="Combined_container w-[72.75rem] h-full bg-mainColor border-l-[0.125rem] border-ringColor">
+    <div className="Combined_container w-[67.85rem] h-full bg-mainColor border-l-[0.125rem] border-ringColor">
       <div className=" grid grid-cols-4 ">
         {mapTypesData.map((mtype) => (
-          <div className={`order-${mtype.id} col_container col-span-1`}>
+          <div
+            className="col_container col-span-1"
+            key={(mtype.id, mtype.label)}
+          >
             <div className="mapType_container h-14 flexdiv" key={mtype.id}>
               <button
                 className="flexdiv"
@@ -58,7 +61,7 @@ function MapsFilters() {
                   )}`}`}
                   alt="map type icon"
                 />{' '}
-                {filteredMapTypes.includes(mtype.label) ? (
+                {!filteredMapTypes.includes(mtype.label) ? (
                   <MdOutlineKeyboardArrowUp className="w-5 h-5" />
                 ) : (
                   <MdOutlineKeyboardArrowDown className="w-5 h-5" />
@@ -66,23 +69,28 @@ function MapsFilters() {
               </button>
             </div>
             <div className="filteredMaps_container flexdiv divide-y-2 divide-activeColor pb-[0.15rem]">
-              {filteredMapTypes.includes(mtype.label) && (
-                <div className="w-11/12 ">
+              {!filteredMapTypes.includes(mtype.label) && (
+                <div className="w-11/12 ring-2 ring-activeColor">
                   {mapsData
                     .filter(
                       (map) => map.type === mtype.label.toLocaleLowerCase()
                     )
                     .map((map) => (
                       <div
-                        key={map.label}
-                        className="map_container h-8 relative"
+                        key={map.slug}
+                        className="map_container h-[2.05rem] relative"
                       >
                         <button
                           type="button"
-                          className="w-full h-8"
-                          onClick={() => handleMapFilter(map.label)}
+                          // className="w-full h-8"
+                          className={`${
+                            filteredMaps.includes(map.slug)
+                              ? ''
+                              : 'grayscale opacity-60 hover:grayscale-0 hover:opacity-100'
+                          }    maps_container h-8 w-full `}
+                          onClick={() => handleMapFilter(map.slug)}
                         >
-                          {filteredMaps.includes(map.label) && (
+                          {filteredMaps.includes(map.slug) && (
                             <FaCheck className="absolute top-0 right-0 h-6 w-6 z-20  text-neonGreen" />
                           )}
                           <Map mapObj={map} imgHeight="h-8" />

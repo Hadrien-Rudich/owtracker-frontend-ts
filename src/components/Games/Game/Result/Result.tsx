@@ -8,7 +8,7 @@ function Result({ gameObj }: { gameObj: GameData }) {
   // Create a className based on the screen size and other conditions
   const responsiveClasses = `${getResultClassNameFromGame(
     gameObj
-  )} result_container w-[75%] h-8 flexdiv xl:tracking-widest tracking-normal  ${
+  )} result_container w-[75%] h-8 flexdiv xl:tracking-widest tracking-normal rounded-sm shadow-md ${
     isLargeScreen ? '' : ''
   }`;
 

@@ -10,11 +10,20 @@
   font-style: normal;
 }
 
-@media (-webkit-device-pixel-ratio: 2.5) {
+/* @media (-webkit-device-pixel-ratio: 2.5) {
   * {
     zoom: 99%;
   }
-}
+} */
+
+/* Apply styles for high-density displays with a device pixel ratio of 2 or higher */
+/* 
+@media only screen and (min-resolution: 192dpi),
+  only screen and (min-device-pixel-ratio: 2) {
+  body {
+    font-size: 16px;
+  }
+} */
 
 .bg-image2 {
   position: fixed;

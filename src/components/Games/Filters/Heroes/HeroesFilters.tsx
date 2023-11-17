@@ -38,10 +38,13 @@ function HeroesFilters() {
   };
 
   return (
-    <div className="Combined_container w-[72.75rem] h-full bg-mainColor border-l-[0.125rem] border-ringColor">
+    <div
+      className="Combined_container w-[67.85rem]
+     h-full bg-mainColor border-l-[0.125rem] border-ringColor"
+    >
       <div className=" grid grid-cols-3">
         {rolesData.map((role) => (
-          <div className="col_container col-span-1">
+          <div className="col_container col-span-1" key={(role.id, role.label)}>
             <div className="heroRole_container h-14 flexdiv" key={role.id}>
               <button
                 className="flexdiv"
@@ -54,7 +57,7 @@ function HeroesFilters() {
                   src={`images/roles/${`${role.imageUrl}`}`}
                   alt="hero role icon"
                 />
-                {filteredHeroRoles.includes(role.label) ? (
+                {!filteredHeroRoles.includes(role.label) ? (
                   <MdOutlineKeyboardArrowUp className="w-5 h-5" />
                 ) : (
                   <MdOutlineKeyboardArrowDown className="w-5 h-5" />
@@ -62,25 +65,22 @@ function HeroesFilters() {
               </button>
             </div>
             <div className="filteredHeroes_container flexdiv divide-y-2  divide-activeColor pb-[0.15rem]">
-              {filteredHeroRoles.includes(role.label) && (
+              {!filteredHeroRoles.includes(role.label) && (
                 <div className="flexdiv flex-wrap w-2/3 gap-1">
                   {heroesData
                     .filter(
                       (hero) => hero.role === role.label.toLocaleLowerCase()
                     )
                     .map((h) => (
-                      <div
-                        key={h.label}
-                        className="hero_container h-9 relative"
-                      >
+                      <div key={h.slug} className="hero_container h-9 relative">
                         <button
                           type="button"
                           className={`${
-                            filteredHeroes.includes(h.label)
+                            filteredHeroes.includes(h.slug)
                               ? 'ring-[0.1rem] ring-thirdColor'
                               : 'grayscale opacity-60 hover:scale-110 hover:grayscale-0 hover:opacity-100'
                           }    hero_button bg-activeColor w-full rounded-sm h-9 shadow-md`}
-                          onClick={() => handleHeroFilter(h.label)}
+                          onClick={() => handleHeroFilter(h.slug)}
                         >
                           <Heroes heroObj={h} imgHeight="h-9" />
                         </button>

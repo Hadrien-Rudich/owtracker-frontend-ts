@@ -7,7 +7,7 @@ interface ClearFiltersProps {
 
 function ClearFilters({
   clearFilteredArray,
-  clearSecondFilteredArray,
+  clearSecondFilteredArray = () => {}, // Provide a default value
 }: ClearFiltersProps) {
   const handleClearClick = () => {
     clearFilteredArray();

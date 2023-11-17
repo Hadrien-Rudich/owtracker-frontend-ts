@@ -49,7 +49,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
       </div>
       <MdOutlineKeyboardArrowUp className="absolute h-8 w-8 top-0 right-0 pointer-events-none lg:block hidden" />
       <div className="mapsDropDown_container bg-mainColor">
-        <div className="MapTypes_container flexdiv h-16">
+        <div className="MapTypes_container sm:h-14 h-10 flexdiv">
           <MapTypes />
         </div>
         <div className="filteredMaps_container flex flex-col divide-y-2 divide-activeColor pb-[0.15rem]">
@@ -58,7 +58,7 @@ function MapsDropDown({ toggleDropDown }: MapsDropDownProps) {
             .map(
               (map) =>
                 map.label !== selectedGameMap && (
-                  <div key={map.label} className="map_container h-14">
+                  <div key={map.label} className="map_container h-[3.6rem]">
                     <button
                       type="button"
                       className="w-full h-14"

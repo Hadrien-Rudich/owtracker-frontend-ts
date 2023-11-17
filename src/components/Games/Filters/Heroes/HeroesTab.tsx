@@ -1,5 +1,6 @@
-import SubTab from '../SubTab.tsx';
-import filterStore from '../../../../store/filterStore.ts';
+import SubTab from '../SubTab';
+import { filterStore } from '../../../../store/filterStore';
+
 function HeroesTab() {
   const { filteredHeroes } = filterStore();
   return (

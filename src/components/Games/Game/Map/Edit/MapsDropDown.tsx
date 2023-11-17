@@ -71,7 +71,7 @@ function MapsDropDown({ gameObj, toggleDropDown }: MapsDropDownProps) {
                 map.label.toLowerCase() !== selectedGame.map.toLowerCase() && (
                   <div
                     key={(gameObj.id, map.label)}
-                    className="map_container h-14"
+                    className="map_container h-[3.6rem]"
                   >
                     <button
                       type="button"

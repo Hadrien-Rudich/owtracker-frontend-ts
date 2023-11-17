@@ -22,6 +22,41 @@ const months: Month[] = [
   { label: 'December', index: 12 },
 ];
 
+const filterGames = (
+  gameData: GameData[],
+  heroesFilter: string[],
+  mapsFilter: string[],
+  resultsFilter: string[]
+) => {
+  if (
+    heroesFilter.length === 0 &&
+    mapsFilter.length === 0 &&
+    resultsFilter.length === 0
+  ) {
+    // No filters applied, return original gameData
+    return gameData;
+  }
+
+  const heroesFilteredGames =
+    heroesFilter.length > 0
+      ? gameData.filter((game) =>
+          game.heroes.some((hero) => heroesFilter.includes(hero))
+        )
+      : gameData;
+
+  const mapsFilteredGames =
+    mapsFilter.length > 0
+      ? heroesFilteredGames.filter((game) => mapsFilter.includes(game.map))
+      : heroesFilteredGames;
+
+  const resultsFilteredGames =
+    resultsFilter.length > 0
+      ? mapsFilteredGames.filter((game) => resultsFilter.includes(game.result))
+      : mapsFilteredGames;
+
+  return resultsFilteredGames;
+};
+
 const filterGamesByMonth = (
   month: number,
   gameData: GameData[]
@@ -84,6 +119,7 @@ const verifyProfileLabelAvailability = (
 
 export {
   filterGamesByMonth,
+  filterGames,
   filterMapTypes,
   formatDateForGameEdit,
   convertDateToDatePickerFormat,

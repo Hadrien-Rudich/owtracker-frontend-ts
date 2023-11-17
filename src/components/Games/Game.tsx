@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { gameStore } from '../../store/gameStore';
 import { filterStore } from '../../store/filterStore';
-import { filterGamesByMonth } from '../../utils/utils';
+import { filterGames } from '../../utils/utils';
 import ExistingGame from './ExistingGame';
 import NewGameMode from './NewGame/NewGameMode';
 import NewGame from './NewGame';
@@ -9,6 +9,7 @@ import Filters from './Filters/Filters';
 import { useHeroesQueries } from '../../hooks/queries/useHeroesQueries';
 import { useMapsQueries } from '../../hooks/queries/useMapsQueries';
 import FiltersTabs from './Filters/FiltersTabs';
+import NotFound from '../NotFound';
 
 function Game() {
   useHeroesQueries();
@@ -16,7 +17,6 @@ function Game() {
 
   const {
     gamesData,
-    currentMonth,
     isCreatingGame,
     isUpdatingGame,
     setIsUpdatingGame,
@@ -24,7 +24,8 @@ function Game() {
     clearNewGame,
   } = gameStore();
 
-  const { filterDropDown } = filterStore();
+  const { filterDropDown, filteredHeroes, filteredMaps, filteredResults } =
+    filterStore();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -40,7 +41,12 @@ function Game() {
     };
   }, [setIsUpdatingGame, setIsCreatingGame, clearNewGame]);
 
-  const filteredGames = filterGamesByMonth(currentMonth, gamesData);
+  const filteredGames = filterGames(
+    gamesData,
+    filteredHeroes,
+    filteredMaps,
+    filteredResults
+  );
 
   return (
     <div className="games_container flexdiv col tracking-wider z-30 w-full">
@@ -52,16 +58,24 @@ function Game() {
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
       <div className="existingGames_container flexdiv col w-full relative">
-        {filteredGames.length !== 0 && (
+        {filteredGames.length !== 0 ? (
           <>
             <Filters />
             {filterDropDown && <FiltersTabs />}
+            {filteredGames.map((game) => (
+              <ExistingGame gameObj={game} key={game.id} />
+            ))}
+          </>
+        ) : (
+          <>
+            <Filters />
+            {filterDropDown && <FiltersTabs />}
+            <NotFound
+              propText="NO GAMES FOUND, ADJUST YOUR FILTERS"
+              topPosition="lg:top-[1rem] top-[-1.4rem]"
+            />
           </>
         )}
-
-        {filteredGames.map((game) => (
-          <ExistingGame gameObj={game} key={game.id} />
-        ))}
       </div>
     </div>
   );
