@@ -27,6 +27,10 @@
 // }
 
 interface FilterStore {
+  isFilteringGames: boolean;
+  setIsFilteringGames: (value: boolean) => void;
+  clearIsFilteringGames: () => void;
+
   filterDropDown: boolean;
   setFilterDropDown: (value: boolean) => void;
 
@@ -34,9 +38,9 @@ interface FilterStore {
   setExpandedFilter: (value: string) => void;
   clearExpandedFilter: () => void;
 
-  activeFilter: string;
-  setActiveFilter: (value: string) => void;
-  clearActiveFilter: () => void;
+  displayedFilter: string;
+  setDisplayedFilter: (value: string) => void;
+  clearDisplayedFilter: () => void;
 
   filteredHeroes: string[];
   filterHero: (hero: string) => void;

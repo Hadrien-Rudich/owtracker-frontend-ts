@@ -3,7 +3,7 @@ import { gameStore } from '../../../../store/gameStore';
 
 function ClearAllTab() {
   const {
-    clearActiveFilter,
+    clearDisplayedFilter,
     setFilterDropDown,
     clearExpandedFilter,
     clearFilteredHeroRole,
@@ -11,17 +11,19 @@ function ClearAllTab() {
     clearFilteredMapTypes,
     clearFilteredMaps,
     clearFilteredResults,
+    clearIsFilteringGames,
   } = filterStore();
   const { setIsUpdatingGame } = gameStore();
 
   const handleClick = () => {
-    clearActiveFilter();
+    clearDisplayedFilter();
     clearExpandedFilter();
     clearFilteredHeroRole();
     clearFilteredHeroes();
     clearFilteredMapTypes();
     clearFilteredMaps();
     clearFilteredResults();
+    clearIsFilteringGames();
     setFilterDropDown(false);
     setIsUpdatingGame(false);
   };

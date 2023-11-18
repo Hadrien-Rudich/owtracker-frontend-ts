@@ -114,7 +114,7 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
         {rolesData.map((r) => (
           <div key={r.label} className="heroesByRoles_container">
             <div className="heroes_container flexdiv">
-              <div className="flexdiv flex-wrap gap-1">
+              <div className="flexdiv flex-wrap lg:gap-1 gap-[0.1rem]">
                 {heroesData
                   .filter(
                     (hero) => hero.role.toLowerCase() === r.label.toLowerCase()
@@ -125,15 +125,15 @@ function HeroesDropDown({ gameObj, toggleDropDown }: HeroesDropDownProps) {
                         selectedGameHeroes.includes(h.slug)
                           ? 'ring-[0.1rem] ring-thirdColor '
                           : 'grayscale opacity-60 hover:scale-110 hover:grayscale-0 hover:opacity-100'
-                      }    heroes_container bg-activeColor rounded-sm h-9 shadow-md`}
+                      }    heroes_container bg-activeColor rounded-sm lg:h-8 sm:7 h-6 shadow-md`}
                       key={h.slug}
                     >
                       <button
                         type="button"
-                        className="h-9"
+                        className="lg:h-8 sm:7 h-6"
                         onClick={() => selectHero(h.slug, h.imageUrl)}
                       >
-                        <Heroes heroObj={h} imgHeight="h-9" />
+                        <Heroes heroObj={h} imgHeight="lg:h-8 sm:7 h-6" />
                       </button>
                     </div>
                   ))}

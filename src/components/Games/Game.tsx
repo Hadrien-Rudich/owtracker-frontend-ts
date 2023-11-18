@@ -24,8 +24,14 @@ function Game() {
     clearNewGame,
   } = gameStore();
 
-  const { filterDropDown, filteredHeroes, filteredMaps, filteredResults } =
-    filterStore();
+  const {
+    filterDropDown,
+    filteredHeroes,
+    filteredMaps,
+    filteredResults,
+    setIsFilteringGames,
+    isFilteringGames,
+  } = filterStore();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -40,6 +46,18 @@ function Game() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [setIsUpdatingGame, setIsCreatingGame, clearNewGame]);
+
+  useEffect(() => {
+    if (
+      filteredHeroes.length !== 0 ||
+      filteredMaps.length !== 0 ||
+      filteredResults.length !== 0
+    ) {
+      setIsFilteringGames(true);
+    } else {
+      setIsFilteringGames(false);
+    }
+  }, [filteredHeroes, filteredMaps, filteredResults, setIsFilteringGames]);
 
   const filteredGames = filterGames(
     gamesData,
@@ -58,21 +76,23 @@ function Game() {
         {!isCreatingGame ? <NewGameMode /> : <NewGame />}
       </div>
       <div className="existingGames_container flexdiv col w-full relative">
-        {filteredGames.length !== 0 ? (
+        {filteredGames.length !== 0 && (
           <>
-            <Filters />
+            <Filters filteredGamesNumber={filteredGames.length} />
             {filterDropDown && <FiltersTabs />}
             {filteredGames.map((game) => (
               <ExistingGame gameObj={game} key={game.id} />
             ))}
           </>
-        ) : (
+        )}
+
+        {filteredGames.length === 0 && isFilteringGames && (
           <>
-            <Filters />
+            <Filters filteredGamesNumber={filteredGames.length} />
             {filterDropDown && <FiltersTabs />}
             <NotFound
-              propText="NO GAMES FOUND, ADJUST YOUR FILTERS"
-              topPosition="lg:top-[1rem] top-[-1.4rem]"
+              propText="NO GAMES FOUND, ADJUST FILTERS"
+              topPosition="lg:top-[-11.5rem] top-[-9.4rem]"
             />
           </>
         )}

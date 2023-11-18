@@ -17,7 +17,7 @@ function ClearFilters({
   };
 
   return (
-    <div className="clearOptions_container flex justify-around  gap-2 absolute bottom-0 left-0 px-2 py-0.5">
+    <div className="clearOptions_container flex justify-around  gap-2 absolute bottom-0 right-0 px-2 py-0.5">
       <button
         type="button"
         className="flexdiv gap-2 text-warning sign"

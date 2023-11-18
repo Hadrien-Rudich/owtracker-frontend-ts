@@ -3,7 +3,7 @@ import ClearAllTab from './ClearAllTab';
 import { filterStore } from '../../../../store/filterStore';
 
 function Filters() {
-  const { activeFilter } = filterStore();
+  const { displayedFilter: activeFilter } = filterStore();
   return (
     <div className="filters_container w-full ">
       <div className="bg-fifthColor shadow-md rounded-sm flex ring-1 divide-x-[0.063rem] divide-ringColor absolute top-[-2.15rem] left-[0rem] w-[12rem]">

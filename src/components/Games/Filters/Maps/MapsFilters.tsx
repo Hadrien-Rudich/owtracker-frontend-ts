@@ -10,7 +10,7 @@ import ClearFilters from '../ClearFilters';
 
 function MapsFilters() {
   const {
-    activeFilter,
+    displayedFilter: activeFilter,
     clearFilteredMaps,
     clearFilteredMapTypes,
     filteredMapTypes,
@@ -39,8 +39,8 @@ function MapsFilters() {
   };
 
   return (
-    <div className="Combined_container w-[67.85rem] h-full bg-mainColor border-l-[0.125rem] border-ringColor">
-      <div className=" grid grid-cols-4 ">
+    <div className="MapsFilter_container xl:w-[68rem] lg:w-[52rem] md:w-[42.1rem] sm:w-[34.1rem] xs:w-[26.6rem] xxs:w-[20.95rem] w-[17.6rem] h-full bg-mainColor border-l-[0.125rem] border-ringColor">
+      <div className=" grid grid-cols-4">
         {mapTypesData.map((mtype) => (
           <div
             className="col_container col-span-1"
@@ -54,7 +54,7 @@ function MapsFilters() {
                 onClick={() => handleMapTypeFilter(mtype.label)}
               >
                 <img
-                  className="sm:h-8 sm:w-20 h-4 w-8 drop-shadow-md"
+                  className="lg:h-8 lg:w-16 sm:h-7 sm:w-12 h-5 w-8 drop-shadow-md"
                   src={`images/mapTypes/${`${mtype.imageUrl.replace(
                     '.svg',
                     '_black.svg'
@@ -70,7 +70,7 @@ function MapsFilters() {
             </div>
             <div className="filteredMaps_container flexdiv divide-y-2 divide-activeColor pb-[0.15rem]">
               {!filteredMapTypes.includes(mtype.label) && (
-                <div className="w-11/12 ring-2 ring-activeColor">
+                <div className="w-[90%] ring-2 ring-activeColor">
                   {mapsData
                     .filter(
                       (map) => map.type === mtype.label.toLocaleLowerCase()

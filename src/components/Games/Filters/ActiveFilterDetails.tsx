@@ -5,7 +5,7 @@ import MapsFilters from './Maps/MapsFilters';
 import DatesFilters from './Dates/DatesFilters';
 
 function ActiveFilterDetails() {
-  const { activeFilter } = filterStore();
+  const { displayedFilter: activeFilter } = filterStore();
 
   const activeTabComponent = () => {
     switch (activeFilter) {

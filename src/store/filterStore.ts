@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import type { FilterStore } from '../types/store/filterTypes';
 
 export const filterStore = create<FilterStore>()((set) => ({
+  isFilteringGames: false,
+  setIsFilteringGames: (boolean) => set(() => ({ isFilteringGames: boolean })),
+  clearIsFilteringGames: () => set(() => ({ isFilteringGames: false })),
+
   filterDropDown: false,
   setFilterDropDown: (boolean) => set(() => ({ filterDropDown: boolean })),
 
@@ -10,9 +14,10 @@ export const filterStore = create<FilterStore>()((set) => ({
     set(() => ({ expandedFilter: filterName })),
   clearExpandedFilter: () => set(() => ({ expandedFilter: '' })),
 
-  activeFilter: '',
-  setActiveFilter: (filterName) => set(() => ({ activeFilter: filterName })),
-  clearActiveFilter: () => set(() => ({ activeFilter: '' })),
+  displayedFilter: '',
+  setDisplayedFilter: (filterName) =>
+    set(() => ({ displayedFilter: filterName })),
+  clearDisplayedFilter: () => set(() => ({ displayedFilter: '' })),
 
   filteredHeroes: [],
   filterHero: (hero: string) =>

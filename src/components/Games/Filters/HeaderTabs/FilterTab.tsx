@@ -5,9 +5,14 @@ import {
 import { filterStore } from '../../../../store/filterStore';
 import { gameStore } from '../../../../store/gameStore';
 
-function FilterTab() {
+interface FilterTabProps {
+  filteredGamesNumber: number;
+}
+
+function FilterTab({ filteredGamesNumber }: FilterTabProps) {
   const { filterDropDown, setFilterDropDown } = filterStore();
-  const { isUpdatingGame, setIsUpdatingGame, unselectGame } = gameStore();
+  const { isUpdatingGame, setIsUpdatingGame, isFilteringGames, unselectGame } =
+    gameStore();
 
   const toggleFilterDropDown = () => {
     unselectGame();
@@ -31,7 +36,7 @@ function FilterTab() {
       >
         <div className="flexdiv relative ">
           <p className="sm:pl-2 pl-1 sm:text-base text-sm tracking-widest">
-            FILTER
+            FILTER ({filteredGamesNumber})
           </p>
           {filterDropDown ? (
             <MdOutlineKeyboardArrowUp className="w-4 h-4" />

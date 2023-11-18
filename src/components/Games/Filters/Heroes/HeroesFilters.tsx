@@ -9,7 +9,7 @@ import ClearFilters from '../ClearFilters';
 
 function HeroesFilters() {
   const {
-    activeFilter,
+    displayedFilter,
     clearFilteredHeroes,
     clearFilteredHeroRole,
     filteredHeroRoles,
@@ -38,10 +38,7 @@ function HeroesFilters() {
   };
 
   return (
-    <div
-      className="Combined_container w-[67.85rem]
-     h-full bg-mainColor border-l-[0.125rem] border-ringColor"
-    >
+    <div className="HeroesFilter_container xl:w-[68rem] lg:w-[52rem] md:w-[42.1rem] sm:w-[34.1rem] xs:w-[26.6rem] xxs:w-[20.95rem] w-[17.6rem] h-full bg-mainColor border-l-[0.125rem] border-ringColor">
       <div className=" grid grid-cols-3">
         {rolesData.map((role) => (
           <div className="col_container col-span-1" key={(role.id, role.label)}>
@@ -53,7 +50,7 @@ function HeroesFilters() {
                 onClick={() => handleHeroRoleFilter(role.label)}
               >
                 <img
-                  className="sm:h-8 sm:w-20 h-4 w-8 drop-shadow-md"
+                  className="lg:h-8 lg:w-16 sm:h-7 sm:w-12 h-5 w-8 drop-shadow-md"
                   src={`images/roles/${`${role.imageUrl}`}`}
                   alt="hero role icon"
                 />
@@ -66,23 +63,27 @@ function HeroesFilters() {
             </div>
             <div className="filteredHeroes_container flexdiv divide-y-2  divide-activeColor pb-[0.15rem]">
               {!filteredHeroRoles.includes(role.label) && (
-                <div className="flexdiv flex-wrap w-2/3 gap-1">
+                <div className="flexdiv flex-wrap lg:w-[66%] sm:w-[90%] w-[100%] lg:gap-1 gap-[0.1rem]">
                   {heroesData
                     .filter(
                       (hero) => hero.role === role.label.toLocaleLowerCase()
                     )
                     .map((h) => (
-                      <div key={h.slug} className="hero_container h-9 relative">
+                      <div
+                        key={h.slug}
+                        className="hero_container relative lg:h-8 h-6"
+                      >
                         <button
                           type="button"
                           className={`${
                             filteredHeroes.includes(h.slug)
                               ? 'ring-[0.1rem] ring-thirdColor'
                               : 'grayscale opacity-60 hover:scale-110 hover:grayscale-0 hover:opacity-100'
-                          }    hero_button bg-activeColor w-full rounded-sm h-9 shadow-md`}
+                          }    hero_button bg-activeColor w-full rounded-sm shadow-md 
+                          lg:h-8 h-6`}
                           onClick={() => handleHeroFilter(h.slug)}
                         >
-                          <Heroes heroObj={h} imgHeight="h-9" />
+                          <Heroes heroObj={h} imgHeight="lg:h-8 h-6" />
                         </button>
                       </div>
                     ))}
@@ -92,7 +93,7 @@ function HeroesFilters() {
           </div>
         ))}
       </div>{' '}
-      {activeFilter === 'heroes' && filteredHeroes.length > 0 && (
+      {displayedFilter === 'heroes' && filteredHeroes.length > 0 && (
         <ClearFilters
           clearFilteredArray={clearFilteredHeroes}
           clearSecondFilteredArray={clearFilteredHeroRole}

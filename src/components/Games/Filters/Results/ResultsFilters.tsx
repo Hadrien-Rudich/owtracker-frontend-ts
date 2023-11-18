@@ -4,7 +4,7 @@ import ClearFilters from '../ClearFilters';
 
 function ResultsFilters() {
   const {
-    activeFilter,
+    displayedFilter: activeFilter,
     filterResult,
     unfilterResult,
     filteredResults,

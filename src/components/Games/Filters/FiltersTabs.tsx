@@ -4,11 +4,12 @@ import ResultsTab from './Results/ResultsTab';
 import DatesTab from './Dates/DatesTab';
 import ActiveFilterDetails from './ActiveFilterDetails';
 import { filterStore } from '../../../store/filterStore';
+
 function FiltersTabs() {
-  const { expandedFilter, activeFilter } = filterStore();
+  const { expandedFilter, displayedFilter: activeFilter } = filterStore();
   return (
     <div className="FilterOptions_container flex z-20  absolute top-0 left-0 ring-2 shadow-md rounded-sm bg-fifthColor">
-      <ul className="tabs_container flex flex-col w-[12rem] divide-y-[0.125rem] divide-ringColor ">
+      <ul className="tabs_container flex flex-col lg:w-[12rem] w-[5.95rem] divide-y-[0.125rem] divide-ringColor ">
         <li
           className={`${
             activeFilter === 'results'

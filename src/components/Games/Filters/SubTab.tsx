@@ -8,7 +8,11 @@ interface SubTabProps {
 }
 
 function SubTab({ activeFilterProp, tabName, filteredArray }: SubTabProps) {
-  const { activeFilter, setActiveFilter, clearActiveFilter } = filterStore();
+  const {
+    displayedFilter: activeFilter,
+    setDisplayedFilter: setActiveFilter,
+    clearDisplayedFilter: clearActiveFilter,
+  } = filterStore();
 
   const handleTabClick = () => {
     if (activeFilter === activeFilterProp) {
