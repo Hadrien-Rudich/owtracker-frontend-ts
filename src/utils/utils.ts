@@ -28,15 +28,12 @@ const filterGames = (
   mapsFilter: string[],
   resultsFilter: string[]
 ) => {
-  console.log(gameData);
   // Sort the gameData array by date in ascending order
   const sortedGameData = gameData.slice().sort((a, b) => {
     const dateA = new Date(a.date.split('/').reverse().join('/'));
     const dateB = new Date(b.date.split('/').reverse().join('/'));
     return dateA.getTime() - dateB.getTime();
   });
-
-  console.log(sortedGameData);
 
   if (
     heroesFilter.length === 0 &&
